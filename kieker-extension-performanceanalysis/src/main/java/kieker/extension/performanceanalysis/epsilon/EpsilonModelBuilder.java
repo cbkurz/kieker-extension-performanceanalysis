@@ -9,13 +9,13 @@ import org.eclipse.epsilon.eol.models.Model;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 
 public class EpsilonModelBuilder {
-    private static final Path MODELS = Util.getResource("models");
     private final static Path META_MODELS = Util.getResource("metamodels");
 
     private ModelType modelType;
@@ -85,7 +85,7 @@ public class EpsilonModelBuilder {
         return this;
     }
     public EpsilonModelBuilder modelPath(final String model) {
-        this.properties.setProperty(EmfModel.PROPERTY_MODEL_URI, MODELS.resolve(model).toAbsolutePath().toUri().toString());
+        this.properties.setProperty(EmfModel.PROPERTY_MODEL_URI, Paths.get(model).toAbsolutePath().toUri().toString());
         return this;
     }
 
