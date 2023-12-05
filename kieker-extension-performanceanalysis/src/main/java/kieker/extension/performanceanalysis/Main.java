@@ -60,6 +60,7 @@ public class Main {
                 new Uml2Lqn(uml2LqnCli.getUmlPath(), uml2LqnCli.getLqnPath()).run();
                 break;
             default:
+                jc.usage();
                 throw new RuntimeException("Unknown command: " + parsedCommand);
         }
     }
