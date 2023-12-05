@@ -59,7 +59,7 @@ After the installation the command to run the lqns is:
 
 Powershell:
 ````powershell
-lqns -P cycles=yes lqn.xml
+lqns -P cycles=yes output/lqn.xml
 ````
 
 Bash (untestet):
