@@ -51,7 +51,7 @@ The meta-model is now installed and models can be created. The following is a de
 
 
 
-## lqns
+## Layered Queuing Network Solver (lqns)
 
 The result of the ``Uml2Lqn`` transformation is a ``lqn.xml`` to run the lqn solver please install it on your system from: https://www.sce.carleton.ca/rads/lqns/LQNSdownload/
 
