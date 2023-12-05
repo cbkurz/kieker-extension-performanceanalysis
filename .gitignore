@@ -4,5 +4,5 @@
 # Ignore Gradle build output directory
 build
 
-# Ignore the output created by the application
-/output
+# Ignore the output folder(s) created by the application
+output
