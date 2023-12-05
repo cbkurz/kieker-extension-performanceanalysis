@@ -22,7 +22,7 @@ public class Uml2UmlCli {
 
     @Parameter(names = {"--output", "-o"},
             description = "The path where the result shall be stored.")
-    private Path umlOutput = Paths.get("output", "model-output-transformed.uml");
+    private Path umlOutput = Paths.get("output", "output-transformed.uml");
 
     public Path getUmlPath() {
         return umlPath;

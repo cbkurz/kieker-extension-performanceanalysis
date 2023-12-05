@@ -22,7 +22,7 @@ public class Kieker2UmlCli {
     private Path modelPath = getDefaultModelPath();
 
     private static Path getDefaultModelPath() {
-        final String defaultModelPath = "output/model-output.uml";
+        final String defaultModelPath = "output/output.uml";
         new InputModelValidator().validate("default modelPath", defaultModelPath);
         return Paths.get(defaultModelPath);
     }
