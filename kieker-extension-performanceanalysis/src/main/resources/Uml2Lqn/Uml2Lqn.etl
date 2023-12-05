@@ -1,0 +1,243 @@
+import "Operations.eol";
+
+pre {
+	var gaexechost = "GaExecHost";
+	var gastep = "GaStep";
+	var gaworkload = "GaWorkloadEvent";
+	var entryCounter : Integer = 0;
+}
+
+post {}
+
+rule Model2Schema 
+	transform uml: UML!Model
+	to lqn: LQN!LqnModelType
+	{
+		guard: uml.name <> "PrimitiveTypes"
+		// "Convert nodes and actors to processors...".println();
+		var nodes = UML!Node.all.equivalent();
+		var actors = UML!Actor.all.equivalent("Actor2Processor");
+
+		lqn.name = uml.name;
+		lqn.processor.addAll(nodes);
+		lqn.processor.addAll(actors);
+		
+		UML!MessageOccurrenceSpecification.all.size().println();
+	}
+
+rule Node2Processor
+	transform node: UML!Node
+	to proc: LQN!ProcessorType 
+	{	
+		/* 
+		 * The guard filters the nodes:
+		 * - Nodes thet are not stereotyped with <<GaExecHost>>;
+		 * - A <<GaExecHost>> Node without deployments
+         * - A <<GaExecHost>> Node deploying elements that are not interacting
+		 */
+		guard {
+			/* 
+			 * Gets the artifacts deployed on this Node
+			 * Selects the artifacts that are interacting through their manifested component
+			 */
+			var components = node.getDeployed().select(i | i.isInteracting());
+			/* 
+			 * The transformation considers nodes stereotyped with 
+		     * <<GaExecHost>> and deploying interacting components
+             */
+			return node.isStereotypeApplied(gaexechost) 
+				and components.notEmpty();
+		}
+		// ("Create processor for node: " + node.name).println();
+		/* 
+		 * Retrieves the components deployed on the current node 
+		 * and interacting in a scenario
+		 */
+		var components = node.getDeployed().select(i | i.isInteracting());
+
+		proc.name = node.name;
+		proc.task ::= components;
+	}
+	
+rule Actor2Processor
+	transform actor: UML!Actor
+	to proc: LQN!ProcessorType
+	{
+		guard {
+			var lifelines = UML!Lifeline.all().select(i | i.represents.type = actor);			
+			// an actor is transformed if it interacts and has a single lifeline
+			return actor.isInteracting();// and lifelines.size() = 1;
+		}
+
+		// ("Create processor for actor: " + actor.name).println();
+	    var lifelines = UML!Lifeline.all.select(i | i.represents.type = actor);
+		
+		// ("Lifelines for actor '" + actor.name + "' found: " + lifelines.size()).println();
+		
+		proc.name = actor.name;
+		for(lf in lifelines){
+		    var interaction = lf.getInteraction();
+		    var task = interaction.equivalent("UseCase2Task");
+		    proc.task.add(task);
+		}
+	}
+
+
+
+rule UseCase2Task
+	transform interaction: UML!Interaction
+	to task: LQN!TaskType
+	{
+		guard {
+            var lifelines = UML!Lifeline.all->select(lf | lf.getInteraction() == interaction);
+
+            if(lifelines.isEmpty()) {
+                return false;
+            }
+            
+            return lifelines->atLeastNMatch(lf : UML!Lifeline | lf.isStereotypeApplied(gaworkload), 1 );
+
+		}
+		// ("Create task for interaction: " + interaction.name).println();
+		
+        // For each interaction there must be only one lifeline stereotyped with gaworkload
+        var lifeline = UML!Lifeline.all -> selectOne(lf | lf.isStereotypeApplied(gaworkload) and lf.getInteraction() == interaction);
+
+	    var beses = lifeline.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
+	    var workload = lifeline.getWorkload();
+	    task.name = interaction.getOwner().getName() + "_job_class_" ;
+	    task.entry ::= beses; // the ::= has the meaning of calling equivalent
+	    if(workload[0] = "closed"){
+	    	task.scheduling = LQN!TaskSchedulingType#ref;
+	    	task.multiplicity = workload[1];
+	    } else {
+	    	for(entry in task.entry) {
+	    		entry.openArrivalRate = workload[1];	    	
+	    	}
+	    }
+	}
+
+rule Component2Task
+	transform component: UML!Component
+	to task: LQN!TaskType
+	{
+		guard {
+			/**
+			 * The guard filters all the components not interacting and
+			 * not deployed on a Node
+			 **/
+			if(component.getArtifacts().isEmpty())
+				throw "Component " + component.name + 
+					" is not represented by any Artifact";
+			return component.isInteracting();
+		}
+		// ("Create task for component: " + component.name).println();
+	
+
+		var lifelines = component.getLifelines();
+		lifelines = lifelines.select(i | i.isInteracting());
+		
+		var beses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
+		
+		/*
+		 * multiplicity of a task is given by the number of artifacts
+		 * representing it
+		 */
+		var artifacts = component.getArtifacts();
+		var multiplicity = artifacts.size().asString();
+							
+		task.name = component.name;
+		task.entry ::= beses;
+		task.multiplicity = multiplicity.asBigInteger();
+	}
+	
+rule BES2Entry
+	transform bes: UML!BehaviorExecutionSpecification
+	to entry: LQN!EntryType
+	{	
+		guard {
+			/**
+			 * A BES is excluded from the transformation if:
+			 * It doesn't start with a UML!MessageOccurrenceSpecification;
+			 * It doesn't end with a UML!MessageOccurrenceSpecification;
+			 * It is not bound to a lifeline;
+			 */
+			 
+			if(not (bes.isWellFormed())) {
+				return false;
+			}
+			// A BES should belong to a single and existing Lifeline
+			return bes.covered.first.isDefined();
+		}
+		// ("Create Entry for BehaviorExecutionSpecification: " + bes.name).println();
+		
+		var messages = bes.getMessages();
+		// Gets only the messages that are sent
+		messages = messages.select(i | i.isSend() and i.message.messageSort <> UML!MessageSort#reply);	
+		// If msgs is empty, then the BES does not send requests
+		if(messages.isEmpty()) {
+			messages.add(bes.start);
+		}
+		
+		entry.name = bes.name;					
+		entry.entryPhaseActivities = new LQN!PhaseActivities;
+		entry.entryPhaseActivities.activity = messages.equivalent("Message2Activity");
+	}
+	
+@lazy
+rule Message2Activity
+	transform msgo: UML!MessageOccurrenceSpecification
+	to actv: LQN!ActivityPhasesType
+	{
+		// A message should be stereotyped with "GaStep"
+		guard {			
+			return msgo.message.isStereotypeApplied("GaStep");
+		}
+		// ("Create ActivityPhasesType for MessageOccurrenceSpecification: " + msgo.name).println();
+		var message = msgo.message;
+		var execTime = message.getValue(gastep, "execTime");
+		var rep = message.getValue(gastep, "rep");
+		var hostDemandMean = "1.0";
+
+		if(execTime.isDefined()) {
+			hostDemandMean = execTime.asDouble() * rep.asDouble();
+		}
+		
+		var call = msgo.equivalent("Message2Request");
+		if (call.isDefined()) {
+				actv.synchCall = Sequence{call};
+		} else {
+			"Undefined call for message: ".print();
+			msgo.name.println();
+		}
+	
+		actv.name = message.name;
+		actv.phase = "1".asBigInteger();
+		actv.hostDemandMean = hostDemandMean + "";
+	}
+	
+@lazy	
+rule Message2Request
+	transform msgo: UML!MessageOccurrenceSpecification
+	to call: LQN!ActivityMakingCallType
+	{
+		guard {
+			return msgo.isSend(); // this asks if the MOS is at the sending (lifeline) end of the message and not at the receiving (lifeline) end.
+		}
+		
+		("Create ActivityMakingCallType for MessageOccurrenceSpecification: " + msgo.name).println();
+		
+		var message = msgo.message;
+		var rep = message.getValue(gastep, "rep");
+
+		var lifeline = message.receiveEvent.covered;
+		// Gets the BES starting with the message
+		var bes = lifeline.first.getElements("BehaviorExecutionSpecification");
+		// Gets the target BES
+		var bes2 = bes.selectOne(i | i.start == message.receiveEvent and i.finish.isTypeOf(MessageOccurrenceSpecification));
+		
+		call.dest = bes2.name;
+		call.callsMean = rep;
+	}
+	
+	

@@ -1,0 +1,26 @@
+[% import "Operations.eol"; %]
+@startuml
+
+[%=getStandardInformation()%]
+
+[% var components = componentsView.getPackagedElements(); %]
+
+
+[% for (i : UML!Interface in components) { %]
+interface "[%=i.name%]" as [%=sanitize(i.name)%]
+[% } %]
+
+[% for (c : UML!Component in components) { %]
+[% for (ir : UML!InterfaceRealization in c.interfaceRealizations) { %]
+[[%=sanitize(c.name)%]] -down-> [%=sanitize(ir.contract.name)%] : provides
+[% } %]
+[% } %]
+
+[% for (u : UML!Usage in components) { %]
+[%=sanitize(u.clients.get(0).name)%] <-down- [%=sanitize(u.suppliers.get(0).name)%] : calls
+[% } %]
+
+
+
+
+@enduml

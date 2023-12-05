@@ -1,0 +1,245 @@
+/* 
+	Requires that the following are defined before:
+		* Package (structurally; name=dynamicView)
+	The Variables required (which means called by the chain of Rules are):
+*/
+
+@lazy
+rule UseCase
+    transform useCase1 : UML!UseCase
+    to useCase2 : FUML!UseCase {
+    
+    	guard : UmlTransformation!UseCase.all.first.umlUseCases.stream().filter(n|useCase1.name.contains(n)).findFirst().isPresent()
+    	
+    	useCase2.name = useCase1.name;
+    	
+		// spezific conversion
+		if ( not (useCase1.getRelationships().size() == 1)) {
+			throw "Unexpected amount of Associations for UseCase '" + useCase1.name + "': " + useCase1.getRelationships();
+		}
+		var actor2 = useCase1.getRelationships().get(0).getEndTypes().selectOne(t|t.isTypeOf(UML!Actor)).equivalent();
+		dynamicView2.getPackagedElements().add(actor2);
+		
+		for (ob1 in useCase1.getOwnedBehaviors()) {
+			var ob2 = ob1.equivalent();
+			useCase2.getOwnedBehaviors().add(ob2);
+		}
+		
+		applyStereotype(useCase1, useCase2);
+	}
+
+
+@lazy
+rule Actor
+    transform elem1 : UML!Actor
+    to elem2 : FUML!Actor {
+    	
+    	// generic conversion
+		elem1.convertToFutureModel(elem2);
+	}
+
+/* 
+	Requires that the following are defined before:
+		* UseCase (structurally)
+	The Variables required (which means called by the chain of Rules are):
+*/
+@lazy
+rule Interaction
+    transform interaction1 : UML!Interaction
+    to interaction2 : FUML!Interaction {
+    	
+		interaction2.name = interaction1.name;
+		applyStereotype(interaction1, interaction2);
+		
+		// specific conversion
+		for (ir1 : UML!InterfaceRealization in interaction1.getInterfaceRealizations()) {
+			var ifName = ir1.getSuppliers().first.name;
+			var if2 = getInterface(ifName);
+			var ir2 = interaction2.createInterfaceRealization(ir1.name, if2);
+		}
+		
+		for (lf1 in interaction1.lifelines) {
+			var lf2 = lf1.equivalent();
+			interaction2.getLifelines().add(lf2);		
+		}
+		
+		for (m1 in interaction1.messages) {
+			var m2 = m1.equivalent();
+		}
+		
+		var entryBes2 = interaction2.getLifeline("'Entry'").equivalent("BehaviorExecutionSpecificationForEntry");
+		if (not entryBes2.isDefined()) {
+			throw "Something went wrong while creating the BehaviorExecutionSpecification for the 'Entry' Lifeline.";
+		}
+		interaction2.getFragments().add(entryBes2);
+
+	}
+	
+
+/* 
+	Requires that the following are defined before:
+		* Interaction
+		* Actor
+		* Component
+	The Variables required (which means called by the chain of Rules are):
+		* interaction2
+*/
+@lazy
+rule Lifeline
+    transform lifeline1 : UML!Lifeline
+    to lifeline2 : FUML!Lifeline {
+		lifeline2.name = lifeline1.name;
+		
+		var rep1 = lifeline1.represents;
+		var type2 = getType(rep1.getType());
+		var rep2 = interaction2.getOwnedParameter(rep1.name, type2, false, true);
+		
+		lifeline2.setRepresents(rep2);
+		applyStereotype(lifeline1, lifeline2);
+		applyStereotype(rep1, rep2);
+		applyStereotype(rep1.getType(), type2);
+	}
+
+@lazy
+rule Message
+    transform message1 : UML!Message
+    to message2 : FUML!Message {
+		message2.name = message1.name;
+		message2.setMessageSort(message1.getMessageSort());
+		applyStereotype(message1, message2);
+		
+		var sendMos2 = message1.getSendEvent().equivalent();
+		var receiveMos2 = message1.getReceiveEvent().equivalent();
+		
+		message2.setSendEvent(sendMos2);
+		message2.setReceiveEvent(receiveMos2);
+		
+		interaction2.getFragments().add(sendMos2);
+		interaction2.getFragments().add(receiveMos2);
+		interaction2.getMessages().add(message2);
+		
+		
+		if (message1.getMessageSort().getName() == "synchCall") {
+			var besForMessage2 = interaction1.allOwnedElements().stream()
+				.filter(e | e.isTypeOf(UML!BehaviorExecutionSpecification))
+				.filter(e | e.getStart().equals(message1.getReceiveEvent()))
+				.findFirst()
+				.get()
+				.equivalent();
+			
+			besForMessage2.setStart(receiveMos2);
+			interaction2.getFragments().add(besForMessage2);
+			
+		} else if (message1.getMessageSort().getName() == "reply") {
+			var besForMessage2List = interaction2.getFragments().stream()
+                .filter(f | f.isTypeOf(FUML!BehaviorExecutionSpecification))
+                .filter(bes | not bes.getFinish().isDefined())
+                .collect(Native("java.util.stream.Collectors").toList());
+            
+            besForMessage2List.get(besForMessage2List.size() - 1).setFinish(sendMos2);
+		} else {
+			throw "Expected MessageSort types are 'synchCall' and 'reply'. Unexpected MessageSort type on Message '" + message1 + "' occured : " + message1.getMessageSort();
+		}
+	}
+
+@lazy
+rule MessageOccurrenceSpecification
+    transform mos1 : UML!MessageOccurrenceSpecification
+    to mos2 : FUML!MessageOccurrenceSpecification {
+		
+		var umlMessage2 = interaction2.getMessage(mos1.getMessage().name);		
+		
+		if (mos1.getCovereds().size() != 1) {
+			throw "The expected abouts of covered Fragments is not met.";
+		}
+		var umlLifeline2 = interaction2.getLifeline(mos1.getCovereds().get(0).name);
+				
+		mos2.name = mos1.name;
+		mos2.setMessage(message2);
+		mos2.getCovereds().add(umlLifeline2);
+		
+		applyStereotype(mos1, mos2);
+	}
+	
+
+@lazy
+rule BehaviorExecutionSpecification
+    transform bes1 : UML!BehaviorExecutionSpecification
+    to bes2 : FUML!BehaviorExecutionSpecification {
+		bes2.name = bes1.name;
+		
+		if (bes1.getCovereds().size() != 1) {
+			throw "The expected abouts of covered Fragments is not met.";
+		}
+		var umlLifeline2 = interaction2.getLifeline(bes1.getCovereds().get(0).name);
+		
+		bes2.getCovereds().add(umlLifeline2);		
+				
+		applyStereotype(bes1, bes2);
+	}
+	
+@lazy
+rule BehaviorExecutionSpecificationForEntry
+    transform lf2 : FUML!Lifeline
+    to bes2 : FUML!BehaviorExecutionSpecification {
+    	guard : lf2.name.equals("'Entry'") and interaction2.getLifelines().size() > 1
+    	
+		var umlLifelineList1 = interaction1.getLifelines().stream()
+			.filter(l|l.name.equals(lf2.name))
+			.collect(Native("java.util.stream.Collectors").toList());
+
+		if (umlLifelineList1.size() != 1) {
+			throw "The expected abouts of Lifelines is not met. Expected was exactly one for Lifeline with the name 'Entry' in the CurrentUml, received were: " + umlLifelineList1.size();
+		}
+		var lf1 = umlLifelineList1.first;
+
+		var bes1List = lf1.getCoveredBys().stream()
+			.filter(c|c.isTypeOf(UML!BehaviorExecutionSpecification))
+			.collect(Native("java.util.stream.Collectors").toList());
+			
+		var umlLifeline2List = interaction2.getLifelines().stream()
+			.filter(l|l.name.equals(lf2.name))
+			.collect(Native("java.util.stream.Collectors").toList());
+
+		// check bes & lifeline
+		if (bes1List.size() != 1) {
+			throw "The expected amounts of covered Fragments is not met. Expected was exactly one for Lifeline 'Entry', received were: " + bes1List.size();
+		}
+		if (umlLifeline2List.size() != 1) {
+			throw "The expected abouts of Lifelines is not met. Expected was exactly one for Lifeline with the name 'Entry' in the FutureUml, received were: " + umlLifeline2List.size();
+		}
+		
+		// setup
+		var bes1 = bes1List.first;
+		
+		var mosList2 = lf2.getCoveredBys().stream()
+                .filter(c | c.isTypeOf(FUML!MessageOccurrenceSpecification))
+                .collect(Native("java.util.stream.Collectors").toList());
+		
+		var startMos2 = mosList2.first;
+		var finishMos2 = mosList2.get(mosList2.size() - 1);
+		
+		// check startMos and finishMos
+		if (not startMos2.isDefined()) {
+			throw "The startMos for Lifeline 'Entry' is not defined.";
+		}
+		if (not finishMos2.isDefined()) {
+			throw "The finishMos for Lifeline 'Entry' is not defined.";
+		}
+		if (bes1.getStart().name != startMos2.name) {
+			throw "The expected name for the startMos is not met. Required: " + bes1.getStart().name + " -- Actual" + startMos2.name;
+		}
+		if (bes1.getFinish().name != finishMos2.name) {
+			throw "The expected name for the finishMos is not met. Required: " + bes1.getFinish().name + " -- Actual" + finishMos2.name;
+		}
+		
+		// create
+		bes2.name = bes1.name;
+		
+		bes2.getCovereds().add(lf2);		
+		bes2.setStart(startMos2);
+		bes2.setFinish(finishMos2);
+				
+		applyStereotype(bes1, bes2);
+	}
+	

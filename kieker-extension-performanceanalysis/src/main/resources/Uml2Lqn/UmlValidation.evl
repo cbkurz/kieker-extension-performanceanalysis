@@ -1,0 +1,278 @@
+import "Operations.eol";
+
+pre {
+	var lifelines = UML!Lifeline.all;
+	var dynamicViewName = "dynamicView";
+	var staticViewComponentsName = "staticView-components";
+	var staticViewClassesName = "staticView-classes";
+	var deploymentViewName = "deploymentView";
+	var validPackageNames = new Sequence();
+	validPackageNames.add(staticViewComponentsName);
+	validPackageNames.add(staticViewClassesName);
+	validPackageNames.add(dynamicViewName);
+	validPackageNames.add(deploymentViewName);
+	
+	// stereotypes
+	var gaScenario = "GaScenario";
+	var gaExecHost = "GaExecHost";
+	var gaWorkloadEvent = "GaWorkloadEvent";
+	var gaStep = "GaStep";
+	
+	
+	// other
+	var gaWorkloadEventPattern = "(closed|open):[0-9]+(.[0-9]+)?";
+}
+
+// model structure
+context UML!Model {
+	
+	constraint ExactlyOneModel {
+		check : UML!Model.all.size() == 1
+		message : "Exactly one model-element is allowed. The model element count is: " + UML!Model.all.size()
+	}
+	
+}
+
+context UML!Package {
+	
+	constraint HasValidName {
+		guard : not self.isTypeOf(UML!Model)
+		check : validPackageNames.contains(self.name)
+		message {
+			return "The valid Package-Names are: " + validPackageNames.concat(", ") + "\n"
+			 		+ " The given name is: " + self.name;
+		}
+	}
+	
+}
+
+
+// Dynamic View
+context UML!UseCase {
+
+	constraint OwnerIsPackge {
+		check : self.getOwner().isDefined() and self.getOwner().isTypeOf(UML!Package)
+		message: "Owner of UseCase '" + self.name + "' is not defined or not a package. Owner: " + self.getOwner()
+	}
+	
+	constraint IsInDynamicViewPackage {
+		check : self.getOwner().name == dynamicViewName
+		message: "Owner of UseCase '" + self.name + "' is not the " + dynamicViewName + "Package. Owner: " + self.getOwner()
+	}
+	
+	constraint HasInteraction {
+		check : self.hasInteraction()
+		message : "UseCase '" + self.name + "' has no interaction. Behaviours: " + self.getOwnedBehaviors()
+	}
+	
+	constraint GaScenarioStereotypeApplied {
+		check : self.isStereotypeApplied(gaScenario)
+		message : self.getMessageStereotypeNotApplied(gaScenario)
+	}
+	
+}
+
+context UML!Interaction {
+	
+/*
+Currently not supported since it is impossible to access the enum "AggregationKind" to create a fully correct association
+	constraint InteractionHasLifelineWithActor {
+		check : self.getLifelines().stream().filter(lf|lf.getRepresents().isTypeOf(UML!Actor)).count() == 1
+		message : "Exactly one lifeline was expected to be connected to an actor, found where the following: " + self.getLifelines().stream().filter(lf|lf.getRepresents().isTypeOf(UML!Actor)).collect(Native("java.util.stream.Collectors").toList())
+	}
+*/
+
+	constraint InteractionHasLifelineEntry {
+		check : self.getLifeline("'Entry'").isDefined()
+		message : "Lifeline with name 'Entry' was expected, but not found."
+	}
+	
+	constraint HasLifelines {
+		check : self.lifelines.isDefined() and self.lifelines.size() > 0
+	}
+	
+	constraint AtLeastOneGaWorkflowStereotypeOnLifeline {
+		check : self.lifelines.stream().filter(lf | lf.isStereotypeApplied(gaWorkloadEvent) ).findFirst().isPresent()
+		message : "No lifeline was found that applies the Stereotype '" + gaWorkloadEvent + "' on interaction: " + self
+	}	
+	
+}
+
+context UML!Lifeline {
+
+	constraint WorkloadMatchesPattern {
+		guard : self.getStereotypeValue(gaWorkloadEvent, "pattern").isDefined()
+		check : self.getStereotypeValue(gaWorkloadEvent, "pattern").matches(gaWorkloadEventPattern)
+		message : "The Stereotype '" + gaWorkloadEvent + "' on Lifeline '" + self + "' does not match the pattern '" + gaWorkloadEventPattern + "'. Actual Value: " + self.getStereotypeValue(gaWorkloadEvent, "pattern")
+	}
+
+	constraint NameIsSet {
+		check : self.name.isDefined()
+		message : "Name of lifeline is not defined: " + self
+	}
+	
+	constraint BehaviorExecutionSpecificationIsSet {
+		check  {
+			var covered = self.getCoveredBys();
+			for (c : UML!BehaviorExecutionSpecification in covered ) {
+				return true;
+			}
+			return false;
+		}
+		message : "The lifeline '" + self.name + "' has no BehaviorExecutionSpecification"
+	}
+	
+	constraint EntryHasThreeCoveredBy {
+		guard : self.name == "'Entry'"
+		check : self.getCoveredBys().size() == 3
+	}
+	
+	constraint EntryHasOneBehaviorExecutionSpecification {
+		guard : self.name == "'Entry'"
+		check : self.getCoveredBys().stream().filter(c|c.isTypeOf(UML!BehaviorExecutionSpecification)).count() == 1
+	}
+	
+}
+
+context UML!Message {
+	
+	constraint HasSendEvent {
+		check : self.getSendEvent().isDefined()
+	}
+
+	constraint HasReceiveEvent {
+		check : self.getReceiveEvent().isDefined()
+	}
+	
+	constraint HasMessageSort {
+		check : self.getMessageSort().isDefined()
+		message : "MessageSort is required for Message: " + self
+	}
+	
+	constraint MessageSortMachtesValue {
+		check : self.getMessageSort().getName() == "synchCall" or self.getMessageSort().getName() == "reply"
+		message : "Unsupported Type for MessageSort '" + self.getMessageSort().getName() + "' on message: " + self
+	}
+	
+
+	constraint GaStepStereotypeApplied {
+		guard : self.getMessageSort().getName() == "synchCall"
+		check : self.isStereotypeApplied(gaStep)
+		message : self.getMessageStereotypeNotApplied(gaStep)
+	}
+	
+}
+
+context UML!BehaviorExecutionSpecification {
+	
+	
+	constraint ExactlyOneCovered {
+		check : self.getCovereds().size() == 1
+	}
+	
+	constraint CoveredIsLifeline {
+		check : self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+	}
+	
+	constraint StartIsSet {
+		check : self.getStart().isDefined()
+	}
+
+	constraint FinishIsSet {
+		check : self.getFinish().isDefined()
+	}
+	
+}
+
+context UML!MessageOccurrenceSpecification {
+	
+	constraint NumberMustBeUnique {
+		guard : self.number.isDefined()
+		check : self.isDefined()
+		message {
+			return "Number attribute must be unique but is not.\n" 
+					+ "The number " + self.number + " was found " 
+					+ Node.all.select( n | n.number == self.number).size()
+					+ " times." ;
+			}
+	}
+	
+	constraint MessageIsDefined {
+		check : self.getMessage().isDefined()
+	}
+	
+	constraint ExactlyOneCovered {
+		check : self.getCovereds().size() == 1
+	}
+	
+	constraint CoveredIsLifeline {
+		check : self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+	}
+}
+
+// Static View
+
+context UML!Component {
+	
+	constraint ComponentIsManifestedInArtifact {
+		check : UML!Artifact.all.stream().flatMap(a|a.getManifestations().stream()).filter(m|m.getSupplier(self.name).isDefined()).findFirst().isPresent()
+		message: "Component is note manifested in any artifact: " + self
+	}
+	
+}
+
+context UML!Interface {
+	
+	constraint TODO {
+		check : self.isDefined()
+	}
+	
+}
+
+context UML!Usage {
+	constraint HasExactlyOneSupplier {
+		check : self.getSuppliers().size() == 1
+	}
+
+	constraint HasExactlyOneClient {
+		check : self.getClients().size() == 1
+	}
+
+}
+
+
+// Deployment View
+
+context UML!Node {
+	
+	constraint GaExecHostStereotypeApplied {
+		check : self.isStereotypeApplied(gaExecHost)
+		message : self.getMessageStereotypeNotApplied(gaExecHost)
+	}
+	
+	constraint NodeHasDeployedArtifacts {
+		check : self.getDeployments().notEmpty()
+		message : "No artifacts are deployed for node: " + self
+	}
+	
+}
+
+context UML!Artifact {
+	
+	constraint ArtifactIsDeployed {
+		check : UML!Node.all.stream().flatMap(n|n.getDeployments().stream()).filter(d|d.getDeployedArtifacts().contains(self)).findFirst().isPresent()
+		message : "There is no Node found that deploys this artifact: " + self
+	}
+
+	constraint ArtifactIsManifestedInComponent {
+		check : self.getManifestations().stream().filter(m|m.getSuppliers().stream().filter(s|s.isTypeOf(UML!Component)).findFirst().isPresent()).findFirst().isPresent()
+		message : "There was no manifestation found that is connected to a component for artifact: " + self + " -- manifestations: " + self.getManifestations()
+	}
+	
+}
+
+operation UML!NamedElement getMessageStereotypeNotApplied(stereotypeName : String) : String {
+	return "The Stereotype '" + stereotypeName + "' is not applied to '" + self + "'"; 
+}
+
+

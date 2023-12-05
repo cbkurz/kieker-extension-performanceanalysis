@@ -1,0 +1,25 @@
+"Changing LqnModelType tag name to lqn-model...".println();
+
+var currentRoot = PlainLQN.root;
+
+var subtree = currentRoot.children;
+
+var newTag = new `t_lqn-model`; // create xml tag <lqn-model>
+newTag.a_name = currentRoot.a_name;
+
+
+"Adding solver-params tag...".println(); // for details see: http://rads-svn.sce.carleton.ca:8080/bugzilla/show_bug.cgi?id=441
+var solverParams = new `t_solver-params`; // create xml tag <solver-params>
+solverParams.a_comment = ""; // set attribute "comment" at tag to comment=""
+newTag.appendChild(solverParams);
+
+"Adding childs from current to new tree...".println();
+for(child in subtree){
+	newTag.appendChild(child);
+}
+
+"setting the new tree as model...".println();
+PlainLQN.root = newTag;
+
+
+"Done!".println();

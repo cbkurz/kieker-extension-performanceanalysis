@@ -1,0 +1,34 @@
+import "../Uml2Lqn/StereotypeOperations.eol";
+// This Script contains the transformations that are applied based on the UmlTransfomrmation Language
+// Each Operation is tied to a TransformationRule
+// All operations have the same name "transformation" and accept the UmlTransformation!UseCase object
+
+operation UmlTransformation!NullTransformation transformation(useCase : UT!UseCase) {
+	// do nothing
+}
+
+// Increases the time of exactly one Message
+operation UmlTransformation!IncreaseMessageTime transformation(useCase : UT!UseCase) {
+	var messages = FUML!Message.all.select(m | self.messageName.contains(m.name));
+	if (messages.size() == 0) {
+		throw "0 Messages were received for Transformation: IncreaseMessageTime";
+	}
+	for (m in messages) {
+		if (not m.isStereotypeApplied("GaStep")) {
+			continue;
+		}
+		var time = m.getStereotypeValue("GaStep", "execTime");
+		var increasedTime = time.asBigDecimal().add(self.time.asBigDecimal());		
+		m.setValue("GaStep", "execTime", increasedTime.toString());
+	}
+}
+
+
+/**
+ * Converts an element to the native Java BigDecimal type
+ * @return a java.math.BigInteger
+ */
+operation Any asBigDecimal(): Native("java.math.BigDecimal") {
+	// Converts an element to the java native type BigDecimal
+	return new Native("java.math.BigDecimal")(self);
+}

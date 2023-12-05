@@ -8,4 +8,4 @@
  */
 
 rootProject.name = "kieker-extension-performanceanalysis"
-include("app")
+include("kieker-extension-performanceanalysis")

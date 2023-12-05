@@ -1,0 +1,29 @@
+rule Interaction transform i: UML!Interaction {
+    parameters : Map {"interaction" = i}
+    template: "Interactions.egl"
+    target : i.getOwner().name + "_" + i.name + ".txt"
+}
+
+rule Classes transform classesView: UML!Package {
+    guard : "staticView-classes".equals(classesView.name)
+    parameters : Map {"classesView" = classesView}
+    template: "StaticView-Classes.egl"
+    target : "StaticView-Classes.txt"
+}
+
+rule Components transform componentsView: UML!Package {
+    guard : "staticView-components".equals(componentsView.name)
+    parameters : Map {"componentsView" = componentsView}
+    template: "StaticView-Components.egl"
+    target : "StaticView-Components.txt"
+}
+
+rule Deployments transform deploymentView: UML!Package {
+    guard : "deploymentView".equals(deploymentView.name)
+    parameters : Map {
+        "deploymentView" = deploymentView,
+        "componentView" = UML!PackageableElement.all.selectOne(p|"staticView-components".equals(p.name))
+    }
+    template: "DeploymentView.egl"
+    target : "DeploymentView.txt"
+}

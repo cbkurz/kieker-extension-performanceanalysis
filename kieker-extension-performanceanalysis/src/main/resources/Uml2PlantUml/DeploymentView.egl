@@ -1,0 +1,41 @@
+[% import "Operations.eol"; %]
+@startuml
+
+[%=getStandardInformation()%]
+
+[% var deployments = deploymentView.getPackagedElements(); %]
+[% var components = componentView.getPackagedElements(); %]
+
+
+[% for (n : UML!Node in deployments) { %]
+[% if ("'Entry'".equals(n.name)) { continue; } %]
+node "[%=n.name%]" as [%=sanitize(n.name)%]
+[% } %]
+
+[% for (a : UML!Artifact in deployments) { %]
+[% if ("'Entry'".equals(a.name)) { continue; } %]
+artifact "[%=a.name%]" as [%=sanitize(a.name)%]
+[% } %]
+
+[% for (c : UML!Component in components) { %]
+[% if ("'Entry'".equals(c.name)) { continue; } %]
+component "[%=c.name%]" as [%=sanitize(c.name)%]
+[% } %]
+
+
+[% for (n : UML!Node in deployments) { %]
+[% if ("'Entry'".equals(n.name)) { continue; } %]
+[% for (da : UML!DeployedArtifact in n.getDeployments().get(0).getDeployedArtifacts()) { %]
+[%=sanitize(da.name)%] -up-> [%=sanitize(n.name)%] : deployed in
+[% } %]
+[% } %]
+
+[% for (a : UML!Artifact in deployments) { %]
+[% if ("'Entry'".equals(a.name)) { continue; } %]
+[% for (m : UML!Manifestation in a.getManifestations()) { %]
+[%=sanitize(m.getUtilizedElement().name)%] -up-> [%=sanitize(a.name)%] : manifested in
+[% } %]
+[% } %]
+
+
+@enduml

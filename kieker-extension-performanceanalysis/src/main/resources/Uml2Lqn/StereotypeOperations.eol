@@ -1,0 +1,69 @@
+operation UML!NamedElement isStereotypeApplied(name : String) : Boolean {
+	return self.getStereotype(name).isDefined();
+}
+
+operation UML!NamedElement getStereotype(name : String) {
+	
+	// fail fast: if any of the variables are not defined an Exception is thrown.
+	if (name.isUndefined()) {
+		throw "No name for the stereotype was given.";
+	}
+	
+	// work
+	var annotations = self.getEAnnotations();
+	if (annotations.size == 0) {
+		return null;
+	}
+	
+	for (anno in annotations) {
+		if (anno.source == name) {
+			var details = anno.getDetails();
+			if (not details.isDefined()) {
+				return new Map<String, String>();				
+			}
+			return details;
+		}
+	}
+	
+	return null;
+}
+
+operation UML!NamedElement getStereotypeValue(stereotypeName: String, key: String): String {
+	
+	// fail fast: if any of the variables are not defined an Exception is thrown.
+	if (stereotypeName.isUndefined() and key.isUndefined()) {
+		throw "Neither the StereotypeName nor the key are defined.";
+	}
+	if (stereotypeName.isUndefined()) {
+		throw "The Name of the Stereotype is not defined.\n Key: " + key;
+	}
+	if (key.isUndefined()) {
+		throw "The Name of the Key is not defined.\n Stereotype Name: " + stereotypeName;
+	}
+	
+	var details = self.getStereotype(stereotypeName);
+	if (not details.isDefined()) {
+		return null;
+	}
+	
+	return details.get(key);
+}
+
+operation UML!NamedElement getValue(stereotypeName: String, valueName: String) : String {
+	return self.getStereotypeValue(stereotypeName, valueName);
+}
+
+operation UML!NamedElement setValue(stereotypeName: String, valueName: String, value: String) {
+	var details = self.getStereotype(stereotypeName);
+	details.put(valueName, value);
+}
+
+operation UML!UseCase hasInteraction() : Boolean {
+	var bs = self.getOwnedBehaviors();
+	for (b in bs) {
+		if (b.isTypeOf(UML!Interaction)) {
+			return true;
+		}
+	}
+	return false;
+}

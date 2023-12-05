@@ -1,0 +1,21 @@
+[% import "Operations.eol"; %]
+@startuml
+
+[%=getStandardInformation()%]
+
+[% var classes = classesView.getPackagedElements(); %]
+[% for (c : UML!Class in classes) { %]
+class [%=sanitize(c.name)%] {
+[% for (op in c.getOwnedOperations()) { %]
+    {method} [%=op.name%]
+[% } %]
+}
+[% } %]
+
+[% for (a in UML!Association.all) { %]
+[% if (a.getMemberEnds().get(0).getClass_().isDefined()) { %]
+[%=sanitize(a.getMemberEnds().get(0).getClass_().name)%] -- [%=sanitize(a.getMemberEnds().get(1).getClass_().name)%]
+[% } %]
+[% } %]
+
+@enduml
