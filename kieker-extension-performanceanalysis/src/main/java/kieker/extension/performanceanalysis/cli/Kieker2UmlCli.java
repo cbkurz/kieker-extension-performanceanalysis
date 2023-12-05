@@ -19,7 +19,15 @@ public class Kieker2UmlCli {
             converter = PathConverter.class,
             validateWith = InputModelValidator.class
     )
-    private Path modelPath = Paths.get("model-output.uml");
+    private Path modelPath = getDefaultModelPath();
+
+    private static Path getDefaultModelPath() {
+        final String defaultModelPath = "model-output.uml";
+        new InputModelValidator().validate("default modelPath", defaultModelPath);
+        return Paths.get(defaultModelPath);
+    }
+
+    ;
 
     @Parameter(names = {"-uc", "--use-case"},
             description = "The Name of the use case under which the input files are added. " +
@@ -31,6 +39,7 @@ public class Kieker2UmlCli {
     @Parameter(names = {"-f", "--file"},
             variableArity = true,
             description = "A file or list of files to parse. " +
+                    "The files must be kieker traces. " +
                     "These files are converted to a UML model.",
             converter = PathConverter.class,
             validateWith = FileIsPresentValidator.class
@@ -40,6 +49,7 @@ public class Kieker2UmlCli {
     @Parameter(names = {"-d", "--directory"},
             variableArity = true,
             description = "A directory or list of directories in which all files will be converted. " +
+                    "The directories must contain kieker traces files. " +
                     "The name of the output is the same as the input but with the extension '.uml'",
             converter = PathConverter.class,
             validateWith = FileIsPresentValidator.class
@@ -59,9 +69,6 @@ public class Kieker2UmlCli {
     )
     private Path outputDirectory = Paths.get("");
 
-    @Parameter(names = "--help", help = true)
-    private boolean help = false;
-
     public List<Path> getInputFiles() {
         return inputFiles;
     }
@@ -79,7 +86,7 @@ public class Kieker2UmlCli {
     }
 
     public boolean isHelp() {
-        return help;
+        return false;
     }
 
     public Path getModelPath() {
