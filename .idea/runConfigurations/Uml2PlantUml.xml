@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Uml2PlantUml" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="kieker.extension.performanceanalysis.Main" />
+    <module name="kieker-extension-performanceanalysis.kieker-extension-performanceanalysis.main" />
+    <option name="PROGRAM_PARAMETERS" value="Uml2PlantUml -m output/model-output.uml" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
