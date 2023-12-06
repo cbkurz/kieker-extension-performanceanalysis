@@ -1,6 +1,6 @@
 # Developer Documentation
 
-This doku provides a short introduction to the most important concepts and packages in this repository
+This dokumentation provides a short introduction to the most important concepts and packages in this repository
 
 ## Java Version 11
 This is the last long term support (LTS) version that still allows reflective access to unnamed modules.
@@ -8,9 +8,9 @@ Later version enforce the module system and do not allow to use reflections free
 Reflections are a core feature of Epsilon and must be allowed, therefore version 11 is fixed.
 
 ## Main class
-The Starting point of the Project is the class ``kieker.extension.performanceanalysis.Main``.
+The starting point of the project is the class ``kieker.extension.performanceanalysis.Main``.
 It accepts the arguments and tries to interpret them with the CLI library [JCommander](https://jcommander.org/).
-If no matching command is given, or an error occurs while parsing `Main` will print the help to the consule and terminate.
+If no matching command is given, or an error occurs while parsing, `Main` will print the CLI help to the consule and terminate.
 The CLI interfaces are in the package `kieker.extension.performanceanalysis.cli`.
 Each of the four transformations has its own CLI-class.
 
@@ -43,14 +43,15 @@ but is not required to be used.
 
 #### UMLModel
 To access UML-Models the class `kieker.extension.performanceanalysis.epsilon.UmlModel` is implemented.
-This is inspired by `org.eclipse.epsilon.emc.uml.UmlModel`, however the `org.eclipse.epsilon.emc.uml` dependency requires also the UML dependency to be present.
-The UML dependency is notoriously hard to load with the correct version dependencies and was therefore downloaded by hand and provided in the **libs** folder.
-This manual loading hinders gradle from recognizing the library, and therefore the `UmlModel` class was implemented by hand.
+This is inspired by `org.eclipse.epsilon.emc.uml.UmlModel`, however the `org.eclipse.epsilon.emc.uml` dependency requires also the `org.eclipse.uml2.uml` dependency to be present.
+The `org.eclipse.uml2.uml` dependency is notoriously hard to load with the correct version and required version dependencies.
+Therefore, it was downloaded by hand and provided in the **libs** folder.
+This manual loading hinders gradle from recognizing the library as a provided dependency, and, as a consequence, the `UmlModel` class was implemented by hand.
 
 ### kieker.extension.performanceanalysis.kieker2uml
 Contains the required classes of the Kieker2Uml transformation.
 This is the only transformation that is fully implemented in Java.
-It leverages a TeeTime configuration that created Kieker-MessageTraces.
+It leverages a TeeTime configuration that created Kiekers MessageTraces.
 A `kieker.model.system.model.MessageTrace` is a class that holds the sequence of messages that kieker has recorded.
 With this sequence a UML-Model is created.
 `kieker.extension.performanceanalysis.kieker2uml.teetime.SequenceDiagrammFilter` orchestrates the creation.
