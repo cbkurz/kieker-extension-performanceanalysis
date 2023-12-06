@@ -17,7 +17,7 @@ interface "[%=i.name%]" as [%=sanitize(i.name)%]
 [% } %]
 
 [% for (u : UML!Usage in components) { %]
-[%=sanitize(u.clients.get(0).name)%] <-down- [%=sanitize(u.suppliers.get(0).name)%] : calls
+[%=sanitize(u.clients.get(0).name)%] --> [%=sanitize(u.suppliers.get(0).name)%] : calls
 [% } %]
 
 
