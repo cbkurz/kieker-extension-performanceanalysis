@@ -8,8 +8,6 @@ import kieker.tools.common.AbstractService;
 
 import java.nio.file.Path;
 
-import static java.lang.Boolean.FALSE;
-
 public class Kieker2UmlTeeTimeService extends AbstractService<TeeTimeConfiguration, Kieker2UmlCli> {
 
     private final Kieker2UmlCli kieker2UmlCli = new Kieker2UmlCli();
