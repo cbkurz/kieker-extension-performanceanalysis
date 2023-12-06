@@ -1,5 +1,7 @@
 # kieker-extension-performanceanalysis
-An extention to Kieker. It provides the possibility to transform the traces into a UML model and perform performance analysis actions on the UML model.
+An extension to Kieker. It provides the possibility to transform the traces into a UML model and perform performance analysis actions on the UML model.
+
+The [DeveloperDocumentation.md](documentation/DeveloperDocumentation.md) contains information on Packages and implemented technologies.
 
 ## Create Distribution Files
 
