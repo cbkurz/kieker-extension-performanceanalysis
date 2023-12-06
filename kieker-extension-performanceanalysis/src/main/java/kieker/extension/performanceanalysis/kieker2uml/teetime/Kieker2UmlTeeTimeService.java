@@ -1,7 +1,6 @@
 package kieker.extension.performanceanalysis.kieker2uml.teetime;
 
 import com.beust.jcommander.JCommander;
-import io.vavr.control.Try;
 import kieker.common.configuration.Configuration;
 import kieker.common.exception.ConfigurationException;
 import kieker.extension.performanceanalysis.cli.Kieker2UmlCli;
@@ -35,7 +34,6 @@ public class Kieker2UmlTeeTimeService extends AbstractService<TeeTimeConfigurati
      */
     @Override
     protected boolean checkParameters(final JCommander commander) throws ConfigurationException {
-        this.help = Try.ofSupplier(kieker2UmlCli::isHelp).getOrElseGet((t) -> FALSE);
         return true;
     }
 

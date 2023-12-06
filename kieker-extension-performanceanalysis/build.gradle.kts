@@ -33,10 +33,6 @@ dependencies {
     // kieker
     implementation ("net.kieker-monitoring:kieker:2.0.0-SNAPSHOT")
     implementation ("de.cau.cs.se.teetime:teetime:3.1.0")
-
-    // utility
-    implementation ("io.vavr", "vavr", "0.10.4")
-    implementation ("commons-io", "commons-io", "2.13.0")
 }
 
 application {
