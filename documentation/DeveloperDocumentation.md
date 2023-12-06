@@ -3,9 +3,9 @@
 This dokumentation provides a short introduction to the most important concepts and packages in this repository
 
 ## Java Version 11
-This is the last long term support (LTS) version that still allows reflective access to unnamed modules.
-Later version enforce the module system and do not allow to use reflections freely.
-Reflections are a core feature of Epsilon and must be allowed, therefore version 11 is fixed.
+This is the last long term support (LTS) version that still allows reflective access to any module.
+Later version enforce the module system and do not allow to access classes with reflections if not explicitly enabled.
+Reflections are a feature of Epsilon that is used in this project and must be allowed, therefore version 11 is fixed.
 
 ## Main class
 The starting point of the project is the class ``kieker.extension.performanceanalysis.Main``.
