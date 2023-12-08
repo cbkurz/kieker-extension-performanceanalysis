@@ -35,7 +35,7 @@ public class Kieker2UmlModel {
             MarteSupport.applyPerformanceStereotypesToInteraction(newInteraction, messageTrace);
             useCase.getOwnedBehaviors().add(newInteraction);
             UmlInteractions.connectEntryLifelineToActor(useCase);
-        } else if (Kieker2UmlUtil.isTraceApplied(interaction.get(), messageTrace.getTraceId())) { // update Interaction
+        } else if (!Kieker2UmlUtil.isTraceApplied(interaction.get(), messageTrace.getTraceId())) { // update Interaction
             LOGGER.info("Interaction was created before, performance information will now be added to Trace with id: " + messageTrace.getTraceId());
             MarteSupport.applyPerformanceStereotypesToInteraction(interaction.get(), messageTrace);
         } else {

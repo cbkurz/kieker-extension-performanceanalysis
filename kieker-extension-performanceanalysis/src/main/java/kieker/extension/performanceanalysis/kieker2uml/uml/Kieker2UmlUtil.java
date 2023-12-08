@@ -255,7 +255,7 @@ public class Kieker2UmlUtil {
     }
 
     static boolean isTraceApplied(final Interaction interaction, final long traceId) {
-        return nonNull(interaction.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().get(traceId + ""));
+        return interaction.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().containsKey(traceId + "");
     }
 
     static String getBESRepresentation(final String messageId) {
