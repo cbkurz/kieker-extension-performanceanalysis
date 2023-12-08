@@ -25,7 +25,7 @@ public class TeeTimeConfiguration extends Configuration {
     private TraceReconstructionStage traceReconstructionStage;
     private ExecutionRecordTransformationStage executionRecordTransformationStage;
 
-    private SequenceDiagrammFilter sequenceDiagramFilter;
+    private UmlModelFilter sequenceDiagramFilter;
 
 
     public TeeTimeConfiguration(final Kieker2UmlCli parameters) {
@@ -55,7 +55,7 @@ public class TeeTimeConfiguration extends Configuration {
         this.executionRecordTransformationStage = new ExecutionRecordTransformationStage(this.systemModelRepository);
         executionRecordTransformationStage.declareActive();
 
-        this.sequenceDiagramFilter = new SequenceDiagrammFilter(this.systemModelRepository, parameters.getModelPath(), parameters.getUseCaseName() );
+        this.sequenceDiagramFilter = new UmlModelFilter(this.systemModelRepository, parameters.getModelPath(), parameters.getUseCaseName() );
     }
 
 }

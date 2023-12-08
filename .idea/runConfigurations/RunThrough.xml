@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RunThrough" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="kieker.extension.performanceanalysis.Main" />
+    <module name="kieker-extension-performanceanalysis.kieker-extension-performanceanalysis.main" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="deleteOutputFolder" externalProjectPath="$PROJECT_DIR$/kieker-extension-performanceanalysis" vmOptions="" scriptParameters="" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Kieker2Uml" run_configuration_type="Application" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Uml2PlantUml" run_configuration_type="Application" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Uml2Uml" run_configuration_type="Application" />
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Uml2Lqn" run_configuration_type="Application" />
+    </method>
+  </configuration>
+</component>

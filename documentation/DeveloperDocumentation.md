@@ -54,7 +54,7 @@ This is the only transformation that is fully implemented in Java.
 It leverages a TeeTime configuration that created Kiekers MessageTraces.
 A `kieker.model.system.model.MessageTrace` is a class that holds the sequence of messages that kieker has recorded.
 With this sequence a UML-Model is created.
-`kieker.extension.performanceanalysis.kieker2uml.teetime.SequenceDiagrammFilter` orchestrates the creation.
+`kieker.extension.performanceanalysis.kieker2uml.teetime.UmlModelFilter` orchestrates the creation.
 The following views are important for this implementation:
 * Interactions - The interactions are contained within Use Cases. Each message in the `MessageTrace` represents a Message in the Interaction (also called a Sequence Diagram) 
 * Components - These represent the different classes of the application. They are represented by the Lifelines in the Interactions.

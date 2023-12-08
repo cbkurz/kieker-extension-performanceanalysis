@@ -15,21 +15,24 @@ import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlMode
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.loadModel;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.saveModel;
 
-public class SequenceDiagrammFilter extends AbstractMessageTraceProcessingFilter {
+public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SequenceDiagrammFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UmlModelFilter.class);
     private final Path modelPath;
     private final String useCaseName;
+    private final Model model;
 
     /**
      * @param repository model repository
      * @param modelPath  the path to the file to which the sequence diagramm is written.
      * @param useCaseName the name of the UML use case to which the interaction shall be added.
      */
-    public SequenceDiagrammFilter(final SystemModelRepository repository, final Path modelPath, final String useCaseName) {
+    public UmlModelFilter(final SystemModelRepository repository, final Path modelPath, final String useCaseName) {
         super(repository);
+        this.model = loadModel(modelPath);
         this.modelPath = modelPath;
         this.useCaseName = useCaseName;
+        LOGGER.info("Model loaded: " + modelPath);
     }
 
     @Override
@@ -42,15 +45,19 @@ public class SequenceDiagrammFilter extends AbstractMessageTraceProcessingFilter
         LOGGER.debug("Successfully received MessageTrace: " + mt.getTraceId());
 
         // UML
-        final Model model = loadModel(modelPath);
         addBehaviour(model, mt, useCaseName);
         addStaticView(model, mt);
-        saveModel(model, modelPath);
-
 
         // logging
         LOGGER.debug("TraceId: " + mt.getTraceId());
         LOGGER.debug(format("Total number of messages: %s", mt.getSequenceAsVector().size()));
         LOGGER.debug(format("Total elapsed time for Trace Id %s: %s ms", mt.getTraceId(), (mt.getEndTimestamp() - mt.getStartTimestamp()) / 1_000_000.0));
+    }
+
+    @Override
+    protected void onTerminating() {
+        saveModel(model, modelPath);
+        LOGGER.info("Model saved to: " + modelPath);
+        super.onTerminating();
     }
 }
