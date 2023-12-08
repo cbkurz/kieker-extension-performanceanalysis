@@ -2,7 +2,7 @@
   <configuration default="false" name="Kieker2Uml" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="kieker.extension.performanceanalysis.Main" />
     <module name="kieker-extension-performanceanalysis.kieker-extension-performanceanalysis.main" />
-    <option name="PROGRAM_PARAMETERS" value="Kieker2Uml -uc BookstoreUC -d sample-input/SimpleExample" />
+    <option name="PROGRAM_PARAMETERS" value="Kieker2Uml -uc BookstoreUC -d sample-input/Bookstore" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="kieker.extension.performanceanalysis.*" />
