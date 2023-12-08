@@ -13,11 +13,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
 
     // logging
-    implementation ("ch.qos.logback:logback-classic:1.2.9")
-    implementation ("org.slf4j:slf4j-api:1.7.30")
+    implementation("ch.qos.logback:logback-classic:1.2.9")
+    implementation("org.slf4j:slf4j-api:1.7.30")
 
     // cli - https://jcommander.org/
-    implementation ("com.beust", "jcommander", "1.82")
+    implementation("com.beust", "jcommander", "1.82")
 
     // emf / ecore / Uml2
     implementation(fileTree("../libs"))
@@ -31,8 +31,8 @@ dependencies {
     implementation("org.eclipse.epsilon:org.eclipse.epsilon.emc.plainxml:2.4.0")
 
     // kieker
-    implementation ("net.kieker-monitoring:kieker:2.0.0-SNAPSHOT")
-    implementation ("de.cau.cs.se.teetime:teetime:3.1.0")
+    implementation("net.kieker-monitoring:kieker:2.0.0-SNAPSHOT")
+    implementation("de.cau.cs.se.teetime:teetime:3.1.0")
 }
 
 application {
@@ -47,4 +47,14 @@ java {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.register("deleteOutputFolder") {
+    val folderToDelete = project.rootDir.resolve("output")
+    if (folderToDelete.exists()) {
+        folderToDelete.deleteRecursively()
+        println("Folder deleted: ${folderToDelete.absolutePath}")
+    } else {
+        println("Folder does not exist: ${folderToDelete.absolutePath}")
+    }
 }
