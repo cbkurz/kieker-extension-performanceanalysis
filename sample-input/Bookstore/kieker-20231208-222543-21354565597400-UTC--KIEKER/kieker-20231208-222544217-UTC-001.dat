@@ -1,0 +1,78 @@
+$0;1702074344233283100;1.15.2;KIEKER;Zenbook-Flip-14;1;false;0;NANOSECONDS;0
+$1;1702074344265962000;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538817;1702074344265529400;1702074344265547600;Zenbook-Flip-14;1;1
+$1;1702074344277175900;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538817;1702074344277155900;1702074344277170000;Zenbook-Flip-14;2;1
+$1;1702074344277208900;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538817;1702074344252875200;1702074344277206000;Zenbook-Flip-14;0;0
+$1;1702074344280685600;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538818;1702074344278418700;1702074344280678300;Zenbook-Flip-14;1;1
+$1;1702074344282779900;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538818;1702074344280803600;1702074344282773100;Zenbook-Flip-14;3;2
+$1;1702074344282801600;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538818;1702074344280754200;1702074344282797900;Zenbook-Flip-14;2;1
+$1;1702074344282814000;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538818;1702074344277277700;1702074344282811300;Zenbook-Flip-14;0;0
+$1;1702074345540402900;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538819;1702074345540387500;1702074345540395600;Zenbook-Flip-14;1;1
+$1;1702074345540523200;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538819;1702074345540511900;1702074345540519300;Zenbook-Flip-14;2;1
+$1;1702074345540539000;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538819;1702074345540364900;1702074345540536300;Zenbook-Flip-14;0;0
+$1;1702074345542027200;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538820;1702074345540570800;1702074345542020000;Zenbook-Flip-14;1;1
+$1;1702074345544320600;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538820;1702074345542104600;1702074345544313800;Zenbook-Flip-14;3;2
+$1;1702074345544353800;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538820;1702074345542050400;1702074345544349900;Zenbook-Flip-14;2;1
+$1;1702074345544369500;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538820;1702074345540561200;1702074345544367000;Zenbook-Flip-14;0;0
+$1;1702074347537235000;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538821;1702074347537217600;1702074347537226200;Zenbook-Flip-14;1;1
+$1;1702074347537291500;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538821;1702074347537279000;1702074347537287300;Zenbook-Flip-14;2;1
+$1;1702074347537317500;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538821;1702074347537193600;1702074347537314100;Zenbook-Flip-14;0;0
+$1;1702074347539360800;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538822;1702074347537365000;1702074347539353000;Zenbook-Flip-14;1;1
+$1;1702074347541971700;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538822;1702074347539406700;1702074347541964400;Zenbook-Flip-14;3;2
+$1;1702074347542008600;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538822;1702074347539393700;1702074347542005800;Zenbook-Flip-14;2;1
+$1;1702074347542020500;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538822;1702074347537350500;1702074347542018600;Zenbook-Flip-14;0;0
+$1;1702074349540931600;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538823;1702074349540905300;1702074349540914000;Zenbook-Flip-14;1;1
+$1;1702074349541027700;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538823;1702074349541019600;1702074349541025100;Zenbook-Flip-14;2;1
+$1;1702074349541039600;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538823;1702074349540890900;1702074349541037400;Zenbook-Flip-14;0;0
+$1;1702074349542704900;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538824;1702074349541069100;1702074349542697300;Zenbook-Flip-14;1;1
+$1;1702074349544650400;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538824;1702074349542750300;1702074349544633700;Zenbook-Flip-14;3;2
+$1;1702074349544688100;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538824;1702074349542739200;1702074349544685100;Zenbook-Flip-14;2;1
+$1;1702074349544699600;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538824;1702074349541059500;1702074349544697700;Zenbook-Flip-14;0;0
+$1;1702074351532491900;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538825;1702074351532471000;1702074351532482500;Zenbook-Flip-14;1;1
+$1;1702074351532555100;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538825;1702074351532543800;1702074351532551100;Zenbook-Flip-14;2;1
+$1;1702074351532572200;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538825;1702074351532450800;1702074351532569000;Zenbook-Flip-14;0;0
+$1;1702074351534034700;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538826;1702074351532614200;1702074351534027300;Zenbook-Flip-14;1;1
+$1;1702074351536290700;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538826;1702074351534085200;1702074351536276000;Zenbook-Flip-14;3;2
+$1;1702074351536343600;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538826;1702074351534068500;1702074351536340000;Zenbook-Flip-14;2;1
+$1;1702074351536366400;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538826;1702074351532601100;1702074351536354800;Zenbook-Flip-14;0;0
+$1;1702074353537346200;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538827;1702074353537323800;1702074353537336100;Zenbook-Flip-14;1;1
+$1;1702074353537405300;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538827;1702074353537392900;1702074353537401300;Zenbook-Flip-14;2;1
+$1;1702074353537422800;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538827;1702074353537281500;1702074353537419400;Zenbook-Flip-14;0;0
+$1;1702074353539222700;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538828;1702074353537465100;1702074353539214900;Zenbook-Flip-14;1;1
+$1;1702074353541636000;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538828;1702074353539289600;1702074353541627500;Zenbook-Flip-14;3;2
+$1;1702074353541694000;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538828;1702074353539276800;1702074353541690400;Zenbook-Flip-14;2;1
+$1;1702074353541709600;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538828;1702074353537451500;1702074353541706000;Zenbook-Flip-14;0;0
+$1;1702074355544258200;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538829;1702074355544241700;1702074355544250200;Zenbook-Flip-14;1;1
+$1;1702074355544301000;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538829;1702074355544292600;1702074355544298000;Zenbook-Flip-14;2;1
+$1;1702074355544312100;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538829;1702074355544227000;1702074355544310000;Zenbook-Flip-14;0;0
+$1;1702074355546243600;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538830;1702074355544363300;1702074355546235400;Zenbook-Flip-14;1;1
+$1;1702074355548819100;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538830;1702074355546287800;1702074355548796900;Zenbook-Flip-14;3;2
+$1;1702074355548892200;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538830;1702074355546275400;1702074355548888300;Zenbook-Flip-14;2;1
+$1;1702074355548905500;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538830;1702074355544354300;1702074355548903200;Zenbook-Flip-14;0;0
+$1;1702074357536915600;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538831;1702074357536899100;1702074357536908300;Zenbook-Flip-14;1;1
+$1;1702074357538941400;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538831;1702074357536963000;1702074357538932800;Zenbook-Flip-14;2;1
+$1;1702074357538968800;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538831;1702074357536882500;1702074357538966400;Zenbook-Flip-14;0;0
+$1;1702074357541146000;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538832;1702074357539000200;1702074357541139300;Zenbook-Flip-14;1;1
+$1;1702074357544007500;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538832;1702074357541180700;1702074357544001300;Zenbook-Flip-14;3;2
+$1;1702074357544038400;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538832;1702074357541171600;1702074357544034500;Zenbook-Flip-14;2;1
+$1;1702074357544050400;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538832;1702074357538989700;1702074357544048100;Zenbook-Flip-14;0;0
+$1;1702074359545362700;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538833;1702074359545345700;1702074359545355400;Zenbook-Flip-14;1;1
+$1;1702074359545403300;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538833;1702074359545395200;1702074359545400500;Zenbook-Flip-14;2;1
+$1;1702074359545414800;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538833;1702074359545323300;1702074359545412600;Zenbook-Flip-14;0;0
+$1;1702074359546685300;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538834;1702074359545443000;1702074359546678300;Zenbook-Flip-14;1;1
+$1;1702074359548699300;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538834;1702074359546723100;1702074359548693000;Zenbook-Flip-14;3;2
+$1;1702074359548744900;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538834;1702074359546713100;1702074359548741000;Zenbook-Flip-14;2;1
+$1;1702074359548759400;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538834;1702074359545433100;1702074359548756500;Zenbook-Flip-14;0;0
+$1;1702074361536123200;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538835;1702074361536100500;1702074361536113700;Zenbook-Flip-14;1;1
+$1;1702074361536179500;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538835;1702074361536168400;1702074361536175800;Zenbook-Flip-14;2;1
+$1;1702074361536193900;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538835;1702074361536047300;1702074361536191500;Zenbook-Flip-14;0;0
+$1;1702074361538041100;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538836;1702074361536222800;1702074361538019900;Zenbook-Flip-14;1;1
+$1;1702074361541077600;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538836;1702074361538075600;1702074361541061800;Zenbook-Flip-14;3;2
+$1;1702074361541156800;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538836;1702074361538064200;1702074361541125600;Zenbook-Flip-14;2;1
+$1;1702074361541177600;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538836;1702074361536213900;1702074361541174100;Zenbook-Flip-14;0;0
+$1;1702074363540611100;public kieker.examples.monitoring.application.Catalog.<init>();<no-session-id>;9108811721333538837;1702074363540593300;1702074363540602800;Zenbook-Flip-14;1;1
+$1;1702074363540656300;public kieker.examples.monitoring.application.CRM.<init>(kieker.examples.monitoring.application.Catalog);<no-session-id>;9108811721333538837;1702074363540646700;1702074363540653100;Zenbook-Flip-14;2;1
+$1;1702074363540668700;public kieker.examples.monitoring.application.Bookstore.<init>();<no-session-id>;9108811721333538837;1702074363540568900;1702074363540666400;Zenbook-Flip-14;0;0
+$1;1702074363543284100;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538838;1702074363540699500;1702074363543277900;Zenbook-Flip-14;1;1
+$1;1702074363545286500;public void kieker.examples.monitoring.application.Catalog.getBook(boolean);<no-session-id>;9108811721333538838;1702074363543338800;1702074363545267000;Zenbook-Flip-14;3;2
+$1;1702074363545316900;public void kieker.examples.monitoring.application.CRM.getOffers();<no-session-id>;9108811721333538838;1702074363543323400;1702074363545313200;Zenbook-Flip-14;2;1
+$1;1702074363545330900;public void kieker.examples.monitoring.application.Bookstore.searchBook();<no-session-id>;9108811721333538838;1702074363540688800;1702074363545328500;Zenbook-Flip-14;0;0
