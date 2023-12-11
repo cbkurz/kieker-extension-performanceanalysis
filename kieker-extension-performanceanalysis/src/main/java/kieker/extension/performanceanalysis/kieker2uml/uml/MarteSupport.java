@@ -133,8 +133,8 @@ public class MarteSupport {
                         .reduce(Long::sum)
                         .orElse(0L); // if no other executions are found this execution does not call others and the total time should be applied
                 final long totalExecTime = getExecTime(message.getReceivingExecution());
-//                final long execTime = totalExecTime - execTimeOtherExecutions;
-                final long execTime = totalExecTime;
+                // the execTime should be set to the time the message is actually working and not waiting for the execution of other messages
+                final long execTime = totalExecTime - execTimeOtherExecutions;
                 if (execTime < 0) {
                     throw new IllegalArgumentException("ExecTime cannot be less than zero. ExecTime value: " + execTime);
                 }
