@@ -1,7 +1,9 @@
 @namespace(uri="kieker.extension.umltransformation", prefix="umlTransform")
 package kieker.extension.umltransformation;
 
-class UseCase {
+datatype BigDecimal : java.math.BigDecimal;
+
+class Transformation {
 	attr String[1] name;
 	attr String[+] umlUseCases; // This requires the Names of the UML Use-Cases that are included in the transformation.
 	val TransformationRule[+] transformationRules; // This represents the rules that are applied to the elements in question
@@ -25,6 +27,13 @@ class IncreaseMessageTime extends TransformationRule { // This Transformation ad
 	attr Integer[1] time;
 }
 
+
+// The value for this rule is already in the model	and will be applied if this rule is modeled
 class ApplyOpenWorkload extends TransformationRule {
-	
+	attr String[*] useCases; // if no use-cases are given the rule is only applied to the all
+}
+
+class SetCustomWorkload extends ApplyOpenWorkload {
+	attr String workloadType; // open or closed
+	attr BigDecimal value; 
 }

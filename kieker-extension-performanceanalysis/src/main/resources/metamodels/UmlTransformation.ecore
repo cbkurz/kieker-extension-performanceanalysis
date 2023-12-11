@@ -2,7 +2,8 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kieker.extension.umltransformation" nsURI="kieker.extension.umltransformation"
     nsPrefix="umlTransform">
-  <eClassifiers xsi:type="ecore:EClass" name="UseCase">
+  <eClassifiers xsi:type="ecore:EDataType" name="BigDecimal" instanceClassName="java.math.BigDecimal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Transformation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="umlUseCases" lowerBound="1"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -23,5 +24,12 @@
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplyOpenWorkload" eSuperTypes="#//TransformationRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplyOpenWorkload" eSuperTypes="#//TransformationRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useCases" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SetCustomWorkload" eSuperTypes="#//ApplyOpenWorkload">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="workloadType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//BigDecimal"/>
+  </eClassifiers>
 </ecore:EPackage>

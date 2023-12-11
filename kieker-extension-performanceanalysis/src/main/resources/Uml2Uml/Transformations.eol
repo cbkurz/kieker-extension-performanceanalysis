@@ -1,14 +1,14 @@
 import "../Uml2Lqn/StereotypeOperations.eol";
 // This Script contains the transformations that are applied based on the UmlTransfomrmation Language
 // Each Operation is tied to a TransformationRule
-// All operations have the same name "transformation" and accept the UmlTransformation!UseCase object
+// All operations have the same name "transformation" and accept the UmlTransformation!Transformation object
 
-operation UmlTransformation!NullTransformation transformation(useCase : UT!UseCase) {
+operation UmlTransformation!NullTransformation transformation(useCase : UT!Transformation) {
 	// do nothing
 }
 
 // Increases the time of exactly one Message
-operation UmlTransformation!IncreaseMessageTime transformation(useCase : UT!UseCase) {
+operation UmlTransformation!IncreaseMessageTime transformation(useCase : UT!Transformation) {
 	var messages = FUML!Message.all.select(m | self.messageName.contains(m.name));
 	if (messages.size() == 0) {
 		throw "0 Messages were received for Transformation: IncreaseMessageTime";
@@ -24,7 +24,7 @@ operation UmlTransformation!IncreaseMessageTime transformation(useCase : UT!UseC
 }
 
 
-operation UmlTransformation!ApplyOpenWorkload transformation(useCase : UT!UseCase) {
+operation UmlTransformation!ApplyOpenWorkload transformation(useCase : UT!Transformation) { // TODO: only apply to the UML!UseCase that match the attribute.
 	"entering open workload transformation".println();
 	var lifelines = FUML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent"));
 	"lifelines found: ".print();
@@ -38,6 +38,12 @@ operation UmlTransformation!ApplyOpenWorkload transformation(useCase : UT!UseCas
 		lifeline.setValue("GaWorkloadEvent", "pattern", openWorkload);
 	}
 }
+
+operation UmlTransformation!SetCustomWorkload transformation(useCase : UT!Transformation) {
+	// TODO: must be implemented
+}
+
+
 
 /**
  * Converts an element to the native Java BigDecimal type

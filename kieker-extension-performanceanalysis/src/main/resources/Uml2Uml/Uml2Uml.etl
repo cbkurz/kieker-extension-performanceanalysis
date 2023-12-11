@@ -19,8 +19,8 @@ rule Model
     	"Model creation completed".println();
 
     	"Starting UseCase Transformation...".println();
-    	var uc = UT!UseCase.all.first;
-    	for (t in uc.transformationRules) {
+    	var transformation = UT!Transformation.all.first;
+    	for (t in transformation.transformationRules) {
     		t.transformation(uc);
     	}
     	
