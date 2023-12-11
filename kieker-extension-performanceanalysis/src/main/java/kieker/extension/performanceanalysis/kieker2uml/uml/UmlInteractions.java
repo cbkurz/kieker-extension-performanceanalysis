@@ -41,7 +41,9 @@ class UmlInteractions {
     public static final EClass MESSAGE_OCCURRENCE_E_CLASS = UMLPackage.Literals.MESSAGE_OCCURRENCE_SPECIFICATION;
     public static final EClass BEHAVIOUR_EXECUTION_E_CLASS = UMLPackage.Literals.BEHAVIOR_EXECUTION_SPECIFICATION;
     public static final String TRACE_IDS_SET_NAME = "AppliedTraceIds";
-    public static final String BES_PREFIX = "BehaviorExecutionSpecification-";
+    public static final String BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX = "BES-";
+    public static final String RECEIVE_MESSAGE_OCCURRENCE_SPECIFICATION = "ReceiveMOS-";
+    public static final String SEND_MESSAGE_OCCURRENCE_SPECIFICATION = "SendMOS-";
 
     static Interaction createInteraction(final String interactionName, final MessageTrace messageTrace) {
         final Interaction interaction = UMLFactory.eINSTANCE.createInteraction();
@@ -126,7 +128,7 @@ class UmlInteractions {
 
         // open BES
         final BehaviorExecutionSpecification startBes = startBehaviourSpecification(interaction, lifeline, startMos);
-        setRepresentation(startBes, Kieker2UmlUtil.getBESRepresentation(messageId));
+        setRepresentation(startBes, getBESRepresentation(messageId));
         setRepresentationCount(startBes, 0);
         setReferenceAnnotation(startBes, "OpenMessage", messageId);
 
@@ -155,7 +157,7 @@ class UmlInteractions {
 
         if (messageSort.equals(MessageSort.SYNCH_CALL_LITERAL)) {
             final BehaviorExecutionSpecification bes = startBehaviourSpecification(interaction, receiverLifeline, messageOccurrenceReceive);
-            setRepresentation(bes, Kieker2UmlUtil.getBESRepresentation(messageId));
+            setRepresentation(bes, getBESRepresentation(messageId));
             setRepresentationCount(bes, count);
             setReferenceAnnotation(bes, "OpenMessage", messageId);
         }
@@ -171,11 +173,11 @@ class UmlInteractions {
         setRepresentationCount(umlMessage, count);
         setReferenceAnnotations(umlMessage, message.getReceivingExecution());
         // message occurrence send
-        setRepresentation(messageOccurrenceSend, Kieker2UmlUtil.getSendMOSRepresentation(messageId));
+        setRepresentation(messageOccurrenceSend, getSendMOSRepresentation(messageId));
         setRepresentationCount(messageOccurrenceSend, count);
         setReferenceAnnotations(messageOccurrenceSend, message.getSendingExecution());
         // message occurrence receive
-        setRepresentation(messageOccurrenceReceive, Kieker2UmlUtil.getReceiveMOSRepresentation(messageId));
+        setRepresentation(messageOccurrenceReceive, getReceiveMOSRepresentation(messageId));
         setRepresentationCount(messageOccurrenceReceive, count);
         setReferenceAnnotations(messageOccurrenceReceive, message.getReceivingExecution());
     }
@@ -200,7 +202,7 @@ class UmlInteractions {
         final long amountOfBes = umlLifeline.getCoveredBys().stream()
                 .filter(c -> c instanceof BehaviorExecutionSpecification)
                 .count();
-        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(BES_PREFIX + umlLifeline.getLabel() + "-" + amountOfBes + "-" + UUID.randomUUID(), BEHAVIOUR_EXECUTION_E_CLASS);
+        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX + umlLifeline.getLabel() + "-" + amountOfBes + "-" + UUID.randomUUID(), BEHAVIOUR_EXECUTION_E_CLASS);
         behaviour.getCovereds().add(umlLifeline);
 
         behaviour.setStart(messageOccurrenceReceive);
@@ -231,5 +233,17 @@ class UmlInteractions {
                 });
 
 
+    }
+
+    static String getBESRepresentation(final String messageId) {
+        return BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX + messageId;
+    }
+
+    static String getReceiveMOSRepresentation(final String messageId) {
+        return RECEIVE_MESSAGE_OCCURRENCE_SPECIFICATION + messageId;
+    }
+
+    static String getSendMOSRepresentation(final String messageId) {
+        return SEND_MESSAGE_OCCURRENCE_SPECIFICATION + messageId;
     }
 }

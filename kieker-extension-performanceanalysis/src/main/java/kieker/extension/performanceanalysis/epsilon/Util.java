@@ -20,13 +20,6 @@ public class Util {
         }
     }
 
-    public static Path getEtlScript(final String path) {
-        return getResource("epsilon").resolve("etl").resolve(path);
-    }
-    public static Path getEolScript(final String path) {
-        return getResource("epsilon").resolve("eol").resolve(path);
-    }
-
     public static void validate(final EvlRunConfiguration validationConfig) {
         validationConfig.run();
         @SuppressWarnings("unchecked") final Set<UnsatisfiedConstraint> set = (Set<UnsatisfiedConstraint>) validationConfig.get();

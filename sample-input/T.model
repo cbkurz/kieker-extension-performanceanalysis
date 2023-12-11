@@ -2,4 +2,5 @@
 <umlTransform:UseCase xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlTransform="kieker.extension.umltransformation" xmi:id="_UbQSYJKHEe6_gN3QbIJ1FA" name="V2">
   <umlUseCases>BookstoreUC</umlUseCases>
   <transformationRules xsi:type="umlTransform:NullTransformation" xmi:id="_dAu6cJKHEe6_gN3QbIJ1FA" name="Do Nothing Transformation"/>
+  <transformationRules xsi:type="umlTransform:ApplyOpenWorkload" xmi:id="_j5BbEJZwEe6di8YH1mXYlA"/>
 </umlTransform:UseCase>

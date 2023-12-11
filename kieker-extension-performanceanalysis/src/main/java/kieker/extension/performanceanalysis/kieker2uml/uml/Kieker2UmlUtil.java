@@ -34,7 +34,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 
 public class Kieker2UmlUtil {
@@ -64,6 +63,14 @@ public class Kieker2UmlUtil {
         } else {
             details.put(key, value);
         }
+    }
+    static Optional<String> getAnnotationDetail(final Element element, final String annotationName, final String key) {
+        final EAnnotation eAnnotation = element.getEAnnotations().stream()
+                .filter(a -> a.getSource().equals(annotationName))
+                .findFirst()
+                .orElseGet(() -> element.createEAnnotation(annotationName));
+
+        return Optional.ofNullable(eAnnotation.getDetails().get(key));
     }
 
     public static Path saveModel(Model model, Path targetFile) {
@@ -253,21 +260,12 @@ public class Kieker2UmlUtil {
     static void addTraceId(final Interaction interaction, final MessageTrace messageTrace) {
         setAnnotationSetEntry(interaction, UmlInteractions.TRACE_IDS_SET_NAME, Long.toString(messageTrace.getTraceId()));
     }
+    static Optional<Set<String>> getTraceIds(final Interaction interaction) {
+        return getAnnotationSet(interaction, UmlInteractions.TRACE_IDS_SET_NAME);
+    }
 
     static boolean isTraceApplied(final Interaction interaction, final long traceId) {
-        return interaction.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().containsKey(traceId + "");
-    }
-
-    static String getBESRepresentation(final String messageId) {
-        return "BehaviorExecutionSpecification-" + messageId;
-    }
-
-    static String getReceiveMOSRepresentation(final String messageId) {
-        return "ReceiveMessageOccurrenceSpecification-" + messageId;
-    }
-
-    static String getSendMOSRepresentation(final String messageId) {
-        return "SendMessageOccurrenceSpecification-" + messageId;
+        return interaction.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().containsKey(Long.toString(traceId));
     }
 
     static Association createAssociation(final Type from, final Type to) {

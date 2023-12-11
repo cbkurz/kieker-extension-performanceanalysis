@@ -24,6 +24,21 @@ operation UmlTransformation!IncreaseMessageTime transformation(useCase : UT!UseC
 }
 
 
+operation UmlTransformation!ApplyOpenWorkload transformation(useCase : UT!UseCase) {
+	"entering open workload transformation".println();
+	var lifelines = FUML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent"));
+	"lifelines found: ".print();
+	lifelines.println();
+	for (lifeline in lifelines) {
+		var interaction = lifeline.getInteraction();
+		var openWorkload = interaction.getEAnnotation("PerformanceInformation").getDetails().get("openWorkload");
+		if (not openWorkload.isDefined()) {
+			throw "Could not find open Workload for: " + lifeline;
+		}
+		lifeline.setValue("GaWorkloadEvent", "pattern", openWorkload);
+	}
+}
+
 /**
  * Converts an element to the native Java BigDecimal type
  * @return a java.math.BigInteger

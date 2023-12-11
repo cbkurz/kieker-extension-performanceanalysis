@@ -15,6 +15,8 @@ import org.eclipse.uml2.uml.UseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,10 +24,13 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addTraceId;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getAnnotationDetail;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getMessageRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getRepresentationCount;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceIds;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setAnnotationDetail;
 
 public class MarteSupport {
 
@@ -36,6 +41,7 @@ public class MarteSupport {
     public static final String EXEC_TIME_ENTRIES_GA_STEP = "execTimeEntries";
     public static final String EXEC_TIME_GA_STEP = "execTime";
     public static final String REP_GA_STEP = "rep";
+    public static final String PERFORMANCE_INFORMATION = "PerformanceInformation";
 
     /**
      * By Default the rep Attribute (repetition) is set to 1
@@ -51,7 +57,7 @@ public class MarteSupport {
     }
 
     /**
-     * The repetition is determined by the amount of exeTimeEntries there are.
+     * The repetition remains "1" independent of the entries.
      * The execTime is determined by the mean value of the execTimeEntries.
      *
      * @param element The Element to which the GaStep shall be applied.
@@ -66,18 +72,17 @@ public class MarteSupport {
         final EMap<String, String> details = annotationDetailsOptional.get();
         final String currentExecTimeEntries = details.get(EXEC_TIME_ENTRIES_GA_STEP);
         final String execTimeString = Double.toString(execTime);
-        final String execTimeCSV = currentExecTimeEntries + "," + execTimeString;
+        final String execTimesCSV = currentExecTimeEntries + "," + execTimeString;
 
-        final String[] execTimeSplit = execTimeCSV.split(","); // the length of this is the amounts of repetitions
+        final String[] execTimeSplit = execTimesCSV.split(","); // the length of this is the amounts of repetitions
         final Double sum = Arrays.stream(execTimeSplit)
                 .map(Double::parseDouble)
                 .reduce(0D, Double::sum);
 
-        final double execTimeMean = sum / (execTimeSplit.length + 0.0D);
+        final double execTimeMean = sum / (double) execTimeSplit.length;
 
-        details.put(EXEC_TIME_ENTRIES_GA_STEP, execTimeCSV);
+        details.put(EXEC_TIME_ENTRIES_GA_STEP, execTimesCSV);
         details.put(EXEC_TIME_GA_STEP, Double.toString(execTimeMean));
-        details.put(REP_GA_STEP, Integer.toString(execTimeSplit.length));
     }
 
     static void setGaWorkloadEvent(final NamedElement element, final String pattern) {
@@ -93,7 +98,7 @@ public class MarteSupport {
 
     static void applyPerformanceStereotypesToInteraction(final Interaction interaction, final MessageTrace messageTrace) {
 
-        LOGGER.trace("Starting to apply performance stereotypes to interaction");
+        LOGGER.debug("Starting to apply performance stereotypes to interaction");
 
         // fail fast
         requireNonNull(interaction, "interaction");
@@ -108,6 +113,11 @@ public class MarteSupport {
         }
 
         // start working
+
+        // start and end times for open workload
+        MarteSupport.setOpenWorkloadInformation(interaction, messageTrace.getStartTimestamp(), messageTrace.getEndTimestamp());
+
+
         // GaStep
         List<AbstractMessage> sequenceAsVector = messageTrace.getSequenceAsVector();
         for (int count = 0; count < sequenceAsVector.size(); count++) { // The count was introduced to have an additional separation option for Messages that have the same representation
@@ -123,11 +133,12 @@ public class MarteSupport {
                         .reduce(Long::sum)
                         .orElse(0L); // if no other executions are found this execution does not call others and the total time should be applied
                 final long totalExecTime = getExecTime(message.getReceivingExecution());
-                final long execTime = totalExecTime - execTimeOtherExecutions;
+//                final long execTime = totalExecTime - execTimeOtherExecutions;
+                final long execTime = totalExecTime;
                 if (execTime < 0) {
                     throw new IllegalArgumentException("ExecTime cannot be less than zero. ExecTime value: " + execTime);
                 }
-                applyGaStep(umlMessage, execTime); // --> in the LQNS solver the default time is 10.000 time units, therefore one second should at least be possible
+                applyGaStep(umlMessage, execTime);
             }
         }
 
@@ -185,5 +196,28 @@ public class MarteSupport {
                 .filter(a -> GA_SCENARIO.equals(a.getSource()))
                 .findFirst()
                 .orElseGet(() -> useCase.createEAnnotation(GA_SCENARIO));
+    }
+
+    private static void setOpenWorkloadInformation(final Interaction interaction, final long startTimestamp, final long endTimestamp) {
+        final Long startTime = getAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime")
+                .map(Long::parseLong)
+                .map(v -> startTimestamp < v ? startTimestamp : v)
+                .orElse(startTimestamp);
+        final Long endTime = getAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime")
+                .map(Long::parseLong)
+                .map(v -> endTimestamp > v ? endTimestamp : v)
+                .orElse(endTimestamp);
+
+        LOGGER.debug("start timestamp received: " + startTimestamp);
+        LOGGER.debug("end timestamp received: " + endTimestamp);
+//        LOGGER.debug("start time: " + startTime);
+//        LOGGER.debug("end time: " + endTime);
+
+        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime", startTime.toString());
+        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime", endTime.toString());
+
+        final BigDecimal numberOfTraces = BigDecimal.valueOf(getTraceIds(interaction).map(s -> s.size() + 1 ).orElse(1));
+        final BigDecimal executionTime = BigDecimal.valueOf(endTime - startTime);
+        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "openWorkload", "open:" +  numberOfTraces.divide(executionTime, 20, RoundingMode.HALF_UP).toPlainString() );
     }
 }

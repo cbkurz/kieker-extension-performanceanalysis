@@ -1,0 +1,30 @@
+@namespace(uri="kieker.extension.umltransformation", prefix="umlTransform")
+package kieker.extension.umltransformation;
+
+class UseCase {
+	attr String[1] name;
+	attr String[+] umlUseCases; // This requires the Names of the UML Use-Cases that are included in the transformation.
+	val TransformationRule[+] transformationRules; // This represents the rules that are applied to the elements in question
+	val Requirement[*] requirement;
+}
+
+abstract class TransformationRule {
+	attr String[1] name;
+}
+
+abstract class Requirement {
+	attr String[1] name;
+}
+
+// Transformations
+class NullTransformation extends TransformationRule { // This Transformation does not change the model in any way.
+}
+
+class IncreaseMessageTime extends TransformationRule { // This Transformation adds time to a Message within an interaction
+	attr String[+] messageName;
+	attr Integer[1] time;
+}
+
+class ApplyOpenWorkload extends TransformationRule {
+	
+}

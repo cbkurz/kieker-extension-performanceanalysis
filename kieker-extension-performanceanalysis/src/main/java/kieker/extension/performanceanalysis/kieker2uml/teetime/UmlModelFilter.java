@@ -22,7 +22,6 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
     private final String useCaseName;
     private final Model model;
 
-    private int modelTraceCounter = 0;
 
     /**
      * @param repository model repository
@@ -41,7 +40,6 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
     protected void execute(final MessageTrace mt) throws Exception {
         createUmlModel(mt);
         this.reportSuccess(mt.getTraceId());
-        modelTraceCounter++;
     }
 
     private void createUmlModel(final MessageTrace mt) {
@@ -54,6 +52,8 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
         // logging
         LOGGER.debug("TraceId: " + mt.getTraceId());
         LOGGER.debug(format("Total number of messages: %s", mt.getSequenceAsVector().size()));
+        LOGGER.debug(format("start time: %s", mt.getStartTimestamp()));
+        LOGGER.debug(format("end time: %s", mt.getEndTimestamp()));
         LOGGER.debug(format("Total elapsed time for Trace Id %s: %s ms", mt.getTraceId(), (mt.getEndTimestamp() - mt.getStartTimestamp()) / 1_000_000.0));
     }
 
@@ -61,7 +61,6 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
     protected void onTerminating() {
         saveModel(model, modelPath);
         LOGGER.info("Model saved to: " + modelPath);
-        LOGGER.info("ModelTraceCounter: " + modelTraceCounter);
         super.onTerminating();
     }
 }
