@@ -5,10 +5,14 @@
 
 [% var components = componentsView.getPackagedElements(); %]
 
-
 [% for (i : UML!Interface in components) { %]
 interface "[%=i.name%]" as [%=sanitize(i.name)%]
 [% } %]
+
+[% for (c : UML!Component in components) { %]
+component "[%=c.name%]" as [%=sanitize(c.name)%]
+[% } %]
+
 
 [% for (c : UML!Component in components) { %]
 [% for (ir : UML!InterfaceRealization in c.interfaceRealizations) { %]
@@ -19,8 +23,5 @@ interface "[%=i.name%]" as [%=sanitize(i.name)%]
 [% for (u : UML!Usage in components) { %]
 [%=sanitize(u.clients.get(0).name)%] --> [%=sanitize(u.suppliers.get(0).name)%] : calls
 [% } %]
-
-
-
 
 @enduml

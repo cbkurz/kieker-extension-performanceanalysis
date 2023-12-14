@@ -18,10 +18,10 @@ rule Model
     	
     	"Model creation completed".println();
 
-    	"Starting UseCase Transformation...".println();
+    	"Starting Transformation...".println();
     	var transformation = UT!Transformation.all.first;
     	for (t in transformation.transformationRules) {
-    		t.transformation(uc);
+    		t.transformation(transformation);
     	}
     	
     	"Done".println();
