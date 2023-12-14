@@ -1,6 +1,7 @@
 package kieker.extension.performanceanalysis.kieker2uml.uml;
 
 import kieker.model.system.model.AbstractMessage;
+import kieker.model.system.model.Execution;
 import kieker.model.system.model.MessageTrace;
 import org.eclipse.uml2.uml.Artifact;
 import org.eclipse.uml2.uml.Component;
@@ -46,7 +47,7 @@ public class UmlComponents {
 
             // sender
             // names
-            final String senderInterfaceName = message.getSendingExecution().getOperation().getSignature().toString();
+            final String senderInterfaceName = getInterfaceName(message.getSendingExecution());
             final String senderComponentName = message.getSendingExecution().getAllocationComponent().getAssemblyComponent().getIdentifier();
             final String senderArtifactName = message.getSendingExecution().getAllocationComponent().getIdentifier();
             final String senderNodeName = message.getSendingExecution().getAllocationComponent().getExecutionContainer().getIdentifier();
@@ -62,7 +63,7 @@ public class UmlComponents {
 
             // receiver
             // names
-            final String receiverInterfaceName = message.getReceivingExecution().getOperation().getSignature().toString();
+            final String receiverInterfaceName = getInterfaceName(message.getReceivingExecution());
             final String receiverComponentName = message.getReceivingExecution().getAllocationComponent().getAssemblyComponent().getIdentifier();
             final String receiverArtifactName = message.getReceivingExecution().getAllocationComponent().getIdentifier();
             final String receiverNodeName = message.getReceivingExecution().getAllocationComponent().getExecutionContainer().getIdentifier();
@@ -80,6 +81,14 @@ public class UmlComponents {
             getUsage(staticView, senderInterface, receiverInterface);
 
         }
+    }
+
+    public static String getInterfaceName(final Execution execution) {
+        final String name = execution.getOperation().getSignature().toString();
+        if (name.contains("<init>")) {
+            return name.replaceAll("<init>", execution.getOperation().getComponentType().getTypeName()); // create constructor representation for Interface
+        }
+        return name;
     }
 
     private static Node getNode(final org.eclipse.uml2.uml.Package deploymentView, final String nodeName) {

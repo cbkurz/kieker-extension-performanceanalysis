@@ -35,6 +35,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlComponents.getInterfaceName;
 
 public class Kieker2UmlUtil {
     public static final EClass PACKAGE_E_CLASS = UMLFactory.eINSTANCE.createPackage().eClass();
@@ -113,9 +114,7 @@ public class Kieker2UmlUtil {
     }
 
     static String getMessageLabel(final Execution execution) {
-        final Signature sig = execution.getOperation().getSignature();
-        final String params = String.join(", ", sig.getParamTypeList());
-        return sig.getName() + '(' + params + ')';
+        return getInterfaceName(execution);
     }
 
     /**
