@@ -3,5 +3,4 @@
   <umlUseCases>BookstoreUC</umlUseCases>
   <transformationRules xsi:type="umlTransform:NullTransformation" xmi:id="_dAu6cJKHEe6_gN3QbIJ1FA" name="Do Nothing Transformation"/>
   <transformationRules xsi:type="umlTransform:ApplyOpenWorkload" xmi:id="_j5BbEJZwEe6di8YH1mXYlA"/>
-  <transformationRules xsi:type="umlTransform:SetCustomWorkload" xmi:id="_4p42cJgnEe6di8YH1mXYlA" name="Open WL2" workloadType="open" value="1E-12"/>
 </umlTransform:Transformation>
