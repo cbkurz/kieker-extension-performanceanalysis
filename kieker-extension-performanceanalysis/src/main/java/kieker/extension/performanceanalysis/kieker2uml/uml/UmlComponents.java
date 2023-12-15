@@ -119,7 +119,7 @@ public class UmlComponents {
 
     private static void doConnection(final Model model, final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
         component.getOwnedOperation(anInterface.getName(), null, null, false, true);
-        component.getInterfaceRealization("Realization-" + anInterface.getName(), anInterface, false, true);
+        component.getInterfaceRealization(anInterface.getName(), anInterface, false, true);
         final List<Lifeline> lifelines = model.allOwnedElements().stream()
                 .filter(e -> UMLPackage.Literals.LIFELINE.equals(e.eClass()))
                 .map(e -> (Lifeline) e)

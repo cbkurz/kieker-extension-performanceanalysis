@@ -1,5 +1,6 @@
 package kieker.extension.performanceanalysis.kieker2uml;
 
+import kieker.extension.performanceanalysis.epsilon.Util;
 import kieker.extension.performanceanalysis.kieker2uml.teetime.Kieker2UmlTeeTimeService;
 
 import java.util.Arrays;
@@ -21,6 +22,8 @@ public class Kieker2Uml implements Runnable {
     @Override
     public void run() {
         final Kieker2UmlTeeTimeService service = Kieker2UmlTeeTimeService.getInstance();
-        System.exit(service.run("Kieker2Uml", "kieker-2-uml", args, service.getParameters()));
+        final int kieker2Uml = service.run("Kieker2Uml", "kieker-2-uml", args, service.getParameters());
+        Util.validateUmlModel(service.getParameters().getModelPath());
+        System.exit(kieker2Uml);
     }
 }

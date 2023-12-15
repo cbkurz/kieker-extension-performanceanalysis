@@ -50,7 +50,12 @@ context UML!Package {
 // Dynamic View
 context UML!UseCase {
 
-	constraint OwnerIsPackge {
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of UseCase is not defined: " + self
+    }
+
+	constraint OwnerIsPackage {
 		check : self.getOwner().isDefined() and self.getOwner().isTypeOf(UML!Package)
 		message: "Owner of UseCase '" + self.name + "' is not defined or not a package. Owner: " + self.getOwner()
 	}
@@ -69,7 +74,6 @@ context UML!UseCase {
 		check : self.isStereotypeApplied(gaScenario)
 		message : self.getMessageStereotypeNotApplied(gaScenario)
 	}
-	
 }
 
 context UML!Interaction {
@@ -91,12 +95,17 @@ context UML!Interaction {
 	constraint AtLeastOneGaWorkflowStereotypeOnLifeline {
 		check : self.lifelines.stream().filter(lf | lf.isStereotypeApplied(gaWorkloadEvent) ).findFirst().isPresent()
 		message : "No lifeline was found that applies the Stereotype '" + gaWorkloadEvent + "' on interaction: " + self
-	}	
+	}
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of Interaction is not defined: " + self
+    }
+
 	
 }
 
 context UML!Lifeline {
-
 
     constraint OnlyActorLifelineIsGaWorkload {
         guard : self.isStereotypeApplied(gaWorkloadEvent)
@@ -109,7 +118,7 @@ context UML!Lifeline {
     }
 
 	constraint WorkloadMatchesPattern {
-		guard : self.isStereotypeApplied(gaWorkloadEvent) and self.getStereotypeValue(gaWorkloadEvent, "pattern").isDefined()
+		guard : self.isStereotypeApplied(gaWorkloadEvent)
 		check : self.getStereotypeValue(gaWorkloadEvent, "pattern").matches(gaWorkloadEventPattern)
 		message : "The Stereotype '" + gaWorkloadEvent + "' on Lifeline '" + self + "' does not match the pattern '" + gaWorkloadEventPattern + "'. Actual Value: " + self.getStereotypeValue(gaWorkloadEvent, "pattern")
 	}
@@ -143,6 +152,11 @@ context UML!Lifeline {
 }
 
 context UML!Message {
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of Message is not defined: " + self
+    }
 	
 	constraint HasSendEvent {
 		check : self.getSendEvent().isDefined()
@@ -157,12 +171,12 @@ context UML!Message {
 		message : "MessageSort is required for Message: " + self
 	}
 	
-	constraint MessageSortMachtesValue {
+	constraint MessageSortMatchesValue {
 		check : self.getMessageSort().getName() == "synchCall" or self.getMessageSort().getName() == "reply"
 		message : "Unsupported Type for MessageSort '" + self.getMessageSort().getName() + "' on message: " + self
 	}
-	
 
+// TODO: the message will not have the GaStep in the future
 	constraint GaStepStereotypeApplied {
 		guard : self.getMessageSort().getName() == "synchCall"
 		check : self.isStereotypeApplied(gaStep)
@@ -172,8 +186,14 @@ context UML!Message {
 }
 
 context UML!BehaviorExecutionSpecification {
-	
-	
+
+	// TODO: check if GaStep ist set
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of BehaviorExecutionSpecification is not defined: " + self
+    }
+
 	constraint ExactlyOneCovered {
 		check : self.getCovereds().size() == 1
 	}
@@ -193,18 +213,12 @@ context UML!BehaviorExecutionSpecification {
 }
 
 context UML!MessageOccurrenceSpecification {
-	
-	constraint NumberMustBeUnique {
-		guard : self.number.isDefined()
-		check : self.isDefined()
-		message {
-			return "Number attribute must be unique but is not.\n" 
-					+ "The number " + self.number + " was found " 
-					+ Node.all.select( n | n.number == self.number).size()
-					+ " times." ;
-			}
-	}
-	
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of MessageOccurrenceSpecification is not defined: " + self
+    }
+
 	constraint MessageIsDefined {
 		check : self.getMessage().isDefined()
 	}
@@ -221,18 +235,39 @@ context UML!MessageOccurrenceSpecification {
 // Static View
 
 context UML!Component {
-	
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of Component is not defined: " + self
+    }
+
 	constraint ComponentIsManifestedInArtifact {
 		check : UML!Artifact.all.stream().flatMap(a|a.getManifestations().stream()).filter(m|m.getSupplier(self.name).isDefined()).findFirst().isPresent()
-		message: "Component is note manifested in any artifact: " + self
+		message: "Component is not manifested in any artifact: " + self
+	}
+
+	constraint ComponentIsRepresentedAsLifeline {
+	    guard : not (self.name == "'Entry'")
+		check : UML!Lifeline.all.stream().filter(l | l.represents.type == self).findFirst().isPresent()
+		message: "Component is not represented in any Lifeline: " + self
+
+	}
+
+	constraint ComponentHasOperation {
+	    check : self.ownedOperations.isDefined() and self.ownedOperations.size() > 0
 	}
 	
 }
 
 context UML!Interface {
-	
-	constraint TODO {
-		check : self.isDefined()
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of Interface is not defined: " + self
+    }
+
+	constraint IsRealizedInComponent {
+		check : UML!Component.all.stream().filter(c | c.getInterfaceRealization(self.name, self).isDefined()).findFirst().isPresent()
 	}
 	
 }
@@ -252,7 +287,11 @@ context UML!Usage {
 // Deployment View
 
 context UML!Node {
-	
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of Node is not defined: " + self
+    }
+
 	constraint GaExecHostStereotypeApplied {
 		check : self.isStereotypeApplied(gaExecHost)
 		message : self.getMessageStereotypeNotApplied(gaExecHost)
@@ -266,7 +305,12 @@ context UML!Node {
 }
 
 context UML!Artifact {
-	
+
+    constraint NameIsSet {
+        check : self.name.isDefined()
+        message : "Name of Artifact is not defined: " + self
+    }
+
 	constraint ArtifactIsDeployed {
 		check : UML!Node.all.stream().flatMap(n|n.getDeployments().stream()).filter(d|d.getDeployedArtifacts().contains(self)).findFirst().isPresent()
 		message : "There is no Node found that deploys this artifact: " + self
@@ -276,7 +320,6 @@ context UML!Artifact {
 		check : self.getManifestations().stream().filter(m|m.getSuppliers().stream().filter(s|s.isTypeOf(UML!Component)).findFirst().isPresent()).findFirst().isPresent()
 		message : "There was no manifestation found that is connected to a component for artifact: " + self + " -- manifestations: " + self.getManifestations()
 	}
-	
 }
 
 operation UML!NamedElement getMessageStereotypeNotApplied(stereotypeName : String) : String {

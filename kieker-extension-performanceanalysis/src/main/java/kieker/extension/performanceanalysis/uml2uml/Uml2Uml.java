@@ -60,6 +60,7 @@ public class Uml2Uml implements Runnable {
                 .withModel(umlFutureModel)
                 .withProfiling()
                 .build();
+        Util.validateUmlModel(umlSourceModel);
         runConfiguration.run();
         umlFutureModel.dispose();
         Util.validateUmlModel(umlFutureModel);

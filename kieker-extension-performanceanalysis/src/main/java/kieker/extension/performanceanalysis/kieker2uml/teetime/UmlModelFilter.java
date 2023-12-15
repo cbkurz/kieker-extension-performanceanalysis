@@ -62,7 +62,6 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
     protected void onTerminating() {
         saveModel(model, modelPath);
         LOGGER.info("Model saved to: " + modelPath);
-        Util.validateUmlModel(modelPath);
         super.onTerminating();
     }
 }
