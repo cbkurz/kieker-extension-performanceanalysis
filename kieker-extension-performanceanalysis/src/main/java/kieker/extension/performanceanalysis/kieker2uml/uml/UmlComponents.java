@@ -99,33 +99,6 @@ public class UmlComponents {
         return (Artifact) deploymentView.getPackagedElement(artifactName, false, UMLPackage.Literals.ARTIFACT, true);
     }
 
-    private static void doConnection(final Model model, final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
-        component.getOwnedOperation(anInterface.getName(), null, null, false, true);
-        final Optional<Interface> first = component.allRealizedInterfaces().stream().filter(i -> i.equals(anInterface)).findFirst();
-        if (first.isEmpty()) {
-            component.createInterfaceRealization("Realization-" + anInterface.getName(), anInterface);
-        }
-        final List<Lifeline> lifelines = model.allOwnedElements().stream()
-                .filter(e -> UMLPackage.Literals.LIFELINE.equals(e.eClass()))
-                .map(e -> (Lifeline) e)
-                .filter(l -> l.getName().equals(component.getName()))
-                .filter(l -> !UmlUseCases.KIEKER_ENTRY_NAME.equals(l.getName()))
-                .collect(Collectors.toList());
-
-        lifelines.stream()
-                .map(Lifeline::getInteraction)
-                .distinct()
-                .forEach(i -> i.getInterfaceRealization("Realization-" + anInterface.getName(), anInterface, false, true));
-
-        lifelines.forEach(l -> l.setRepresents(l.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true)));
-
-        artifact.getManifestation("ArtifactManifestation-" + component.getName(), component, false, true);
-        final Deployment deployment = node.getDeployment("NodeDeployment-" + node.getName(), false, true);
-        if (!deployment.getDeployedArtifacts().contains(artifact)) {
-            deployment.getDeployedArtifacts().add(artifact);
-        }
-    }
-
     private static Component getComponent(final org.eclipse.uml2.uml.Package staticView, final String execution) {
         return (Component) staticView.getPackagedElement(execution, false, UMLPackage.Literals.COMPONENT, true);
     }
@@ -142,5 +115,24 @@ public class UmlComponents {
 
     private static Interface getInterface(final org.eclipse.uml2.uml.Package staticView, final String interfaceName) {
         return (Interface) staticView.getPackagedElement(interfaceName, false, UMLPackage.Literals.INTERFACE, true);
+    }
+
+    private static void doConnection(final Model model, final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
+        component.getOwnedOperation(anInterface.getName(), null, null, false, true);
+        component.getInterfaceRealization("Realization-" + anInterface.getName(), anInterface, false, true);
+        final List<Lifeline> lifelines = model.allOwnedElements().stream()
+                .filter(e -> UMLPackage.Literals.LIFELINE.equals(e.eClass()))
+                .map(e -> (Lifeline) e)
+                .filter(l -> l.getName().equals(component.getName()))
+                .filter(l -> !UmlUseCases.KIEKER_ENTRY_NAME.equals(l.getName()))
+                .collect(Collectors.toList());
+
+        lifelines.forEach(l -> l.setRepresents(l.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true)));
+
+        artifact.getManifestation("ArtifactManifestation-" + component.getName(), component, false, true);
+        final Deployment deployment = node.getDeployment("NodeDeployment-" + node.getName(), false, true);
+        if (!deployment.getDeployedArtifacts().contains(artifact)) {
+            deployment.getDeployedArtifacts().add(artifact);
+        }
     }
 }
