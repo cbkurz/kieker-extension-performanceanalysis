@@ -115,7 +115,7 @@ rule Association
     	}
     	// TODO: Associations are incomplete, it is as of now impossible to get a "AggregationKind" Enum
     	if (not (actorAss1.getEndTypes().size() == 2)) {
-    		throw "unnsuported amount '" + actorAss1.getEndTypes().size() + "' of types in association: " + actorAss1;
+    		throw "Unsupported amount '" + actorAss1.getEndTypes().size() + "' of types in association: " + actorAss1;
     	}
     	
     	actorAss2.name = actorAss1.name;
