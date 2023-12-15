@@ -64,7 +64,7 @@ rule Actor2Processor
 	to proc: LQN!ProcessorType
 	{
 		guard {
-			var lifelines = UML!Lifeline.all().select(i | i.represents.type = actor);			
+			var lifelines = UML!Lifeline.all().select(i | i.represents.type = actor);
 			// an actor is transformed if it interacts and has a single lifeline
 			return actor.isInteracting();// and lifelines.size() = 1;
 		}
@@ -89,7 +89,9 @@ rule UseCase2Task
 	to task: LQN!TaskType
 	{
 		guard {
-            var lifelines = UML!Lifeline.all->select(lf | lf.getInteraction() == interaction);
+		    // TODO: optimization with "interaction.getLifelines()"
+
+            var lifelines = interaction.getLifelines();
 
             if(lifelines.isEmpty()) {
                 return false;
@@ -98,7 +100,7 @@ rule UseCase2Task
             return lifelines->atLeastNMatch(lf : UML!Lifeline | lf.isStereotypeApplied(gaworkload), 1 );
 
 		}
-		// ("Create task for interaction: " + interaction.name).println();
+		("Create task for interaction: " + interaction.name).println();
 		
         // For each interaction there must be only one lifeline stereotyped with gaworkload
         var lifeline = UML!Lifeline.all -> selectOne(lf | lf.isStereotypeApplied(gaworkload) and lf.getInteraction() == interaction);
@@ -134,7 +136,7 @@ rule Component2Task
 		// ("Create task for component: " + component.name).println();
 	
 
-		var lifelines = component.getLifelines();
+		var lifelines = component.getRepresentedLifelines();
 		lifelines = lifelines.select(i | i.isInteracting());
 		
 		var beses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;

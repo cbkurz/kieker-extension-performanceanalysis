@@ -40,7 +40,7 @@ operation UML!NamedElement getArtifacts(): Collection {
 operation UML!NamedElement isInteracting(): Boolean {
 
 	// Gets all the lifelines involving the input 'element'
-	var lifelines = self.getLifelines();
+	var lifelines = self.getRepresentedLifelines();
 	
 	var interacting = lifelines.select(i | i.isInteracting());
 	var artifacts = self.getArtifacts().flatten;
@@ -64,7 +64,7 @@ operation UML!Lifeline getWorkload(): Sequence {
  * Gets all the lifelines representing self
  * @return a Collection of Lifelines 
  */
-operation UML!NamedElement getLifelines(): Collection {
+operation UML!NamedElement getRepresentedLifelines(): Collection {
 	// All the lifelines of the Model
 	var lifelines = UML!Lifeline.all();
 	// Get all the lifelines involving "element"
