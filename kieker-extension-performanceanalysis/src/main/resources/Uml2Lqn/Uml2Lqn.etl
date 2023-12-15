@@ -69,22 +69,27 @@ rule Actor2Processor
 			return actor.isInteracting();// and lifelines.size() = 1;
 		}
 
-		// ("Create processor for actor: " + actor.name).println();
-	    var lifelines = UML!Lifeline.all.select(i | i.represents.type = actor);
+//		("Create processor for actor: " + actor.name).println();
+	    var lifelines = UML!Lifeline.all.select(l | l.represents.type = actor);
 		
-		// ("Lifelines for actor '" + actor.name + "' found: " + lifelines.size()).println();
+//		("Lifelines for actor '" + actor.name + "' found: " + lifelines.size()).println();
 		
 		proc.name = actor.name;
 		for(lf in lifelines){
 		    var interaction = lf.getInteraction();
-		    var task = interaction.equivalent("UseCase2Task");
+		    var task = interaction.equivalent("Interaction2Task");
 		    proc.task.add(task);
 		}
 	}
 
 
-
-rule UseCase2Task
+/**
+  * This rule transforms an interaction to a task.
+  * The interaction is required to contain a lifeline that has the stereotype "GaWorkloadEvent"
+  * The "pattern" attribute needs to be applied to the lifeline to get the workload for the task.
+  * The BES of the Lifeline get transformed to an EntryType
+*/
+rule Interaction2Task
 	transform interaction: UML!Interaction
 	to task: LQN!TaskType
 	{
@@ -101,7 +106,7 @@ rule UseCase2Task
 		("Create task for interaction: " + interaction.name).println();
 		
         // For each interaction there must be only one lifeline stereotyped with gaworkload
-        var lifeline = UML!Lifeline.all -> selectOne(lf | lf.isStereotypeApplied(gaworkload) and lf.getInteraction() == interaction);
+        var lifeline = interaction.getLifelines() -> selectOne(lf | lf.isStereotypeApplied(gaworkload));
 
 	    var beses = lifeline.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
 	    var workload = lifeline.getWorkload();
