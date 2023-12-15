@@ -3,6 +3,7 @@ package kieker.extension.performanceanalysis.kieker2uml.uml;
 import kieker.model.system.model.AbstractMessage;
 import kieker.model.system.model.AssemblyComponent;
 import kieker.model.system.model.MessageTrace;
+import kieker.model.system.model.Operation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.uml2.uml.Actor;
 import org.eclipse.uml2.uml.BehaviorExecutionSpecification;
@@ -19,7 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.isNull;
@@ -127,7 +127,7 @@ class UmlInteractions {
         final MessageOccurrenceSpecification finishMos = mosList.get(mosList.size() - 1);
 
         // open BES
-        final BehaviorExecutionSpecification startBes = startBehaviourSpecification(interaction, lifeline, startMos);
+        final BehaviorExecutionSpecification startBes = startBehaviourSpecification(interaction, lifeline, startMos, getBesName(firstMessage.getSendingExecution().getOperation()));
         setRepresentation(startBes, getBESRepresentation(messageId));
         setRepresentationCount(startBes, 0);
         setReferenceAnnotation(startBes, "OpenMessage", messageId);
@@ -136,6 +136,10 @@ class UmlInteractions {
         final BehaviorExecutionSpecification finishBes = finishBehaviourSpecification(lifeline, finishMos);
         setReferenceAnnotation(finishBes, "CloseMessage", messageId);
         setReferenceAnnotation(finishBes, "CloseMessageCount",  finalCount + "");
+    }
+
+    private static String getBesName(final Operation operation) {
+        return BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX + operation.toString();
     }
 
     private static void createMessage(final Interaction interaction, final AbstractMessage message, final Lifeline senderLifeline, final Lifeline receiverLifeline, final String messageId, final int count) {
@@ -156,7 +160,7 @@ class UmlInteractions {
         umlMessage.setReceiveEvent(messageOccurrenceReceive);
 
         if (messageSort.equals(MessageSort.SYNCH_CALL_LITERAL)) {
-            final BehaviorExecutionSpecification bes = startBehaviourSpecification(interaction, receiverLifeline, messageOccurrenceReceive);
+            final BehaviorExecutionSpecification bes = startBehaviourSpecification(interaction, receiverLifeline, messageOccurrenceReceive, getBesName(message.getReceivingExecution().getOperation()));
             setRepresentation(bes, getBESRepresentation(messageId));
             setRepresentationCount(bes, count);
             setReferenceAnnotation(bes, "OpenMessage", messageId);
@@ -198,11 +202,8 @@ class UmlInteractions {
     }
 
 
-    private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction, final Lifeline umlLifeline, final MessageOccurrenceSpecification messageOccurrenceReceive) {
-        final long amountOfBes = umlLifeline.getCoveredBys().stream()
-                .filter(c -> c instanceof BehaviorExecutionSpecification)
-                .count();
-        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX + umlLifeline.getLabel() + "-" + amountOfBes + "-" + UUID.randomUUID(), BEHAVIOUR_EXECUTION_E_CLASS);
+    private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction, final Lifeline umlLifeline, final MessageOccurrenceSpecification messageOccurrenceReceive, final String besName) {
+        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(besName, BEHAVIOUR_EXECUTION_E_CLASS);
         behaviour.getCovereds().add(umlLifeline);
 
         behaviour.setStart(messageOccurrenceReceive);
@@ -231,8 +232,6 @@ class UmlInteractions {
                     lifeline.setRepresents(createAssociation(actor, i).getMemberEnd(actor.getName(), null));
                     MarteSupport.setGaWorkloadEvent(lifeline, "closed:1");
                 });
-
-
     }
 
     static String getBESRepresentation(final String messageId) {

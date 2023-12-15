@@ -132,8 +132,7 @@ public class Kieker2UmlUtil {
         if (message instanceof SynchronousReplyMessage) {
             return MessageSort.REPLY_LITERAL;
         }
-        throw new RuntimeException("Unexpected message type of: " + message.getClass());
-
+        throw new RuntimeException("Unexpected message type of: " + message);
     }
 
     static void setReferenceAnnotations(final Element element, final Execution execution) {
