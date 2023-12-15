@@ -74,13 +74,10 @@ context UML!UseCase {
 
 context UML!Interaction {
 	
-/*
-Currently not supported since it is impossible to access the enum "AggregationKind" to create a fully correct association
 	constraint InteractionHasLifelineWithActor {
-		check : self.getLifelines().stream().filter(lf|lf.getRepresents().isTypeOf(UML!Actor)).count() == 1
+		check : self.getLifelines().stream().filter(lf|lf.getRepresents().type.isTypeOf(UML!Actor)).count() == 1
 		message : "Exactly one lifeline was expected to be connected to an actor, found where the following: " + self.getLifelines().stream().filter(lf|lf.getRepresents().isTypeOf(UML!Actor)).collect(Native("java.util.stream.Collectors").toList())
 	}
-*/
 
 	constraint InteractionHasLifelineEntry {
 		check : self.getLifeline("'Entry'").isDefined()
@@ -100,8 +97,19 @@ Currently not supported since it is impossible to access the enum "AggregationKi
 
 context UML!Lifeline {
 
+
+    constraint OnlyActorLifelineIsGaWorkload {
+        guard : self.isStereotypeApplied(gaWorkloadEvent)
+        check : self.represents.type.isTypeOf(UML!Actor)
+    }
+
+    constraint RepresentsComponent {
+        guard : not self.isStereotypeApplied(gaWorkloadEvent)
+        check : self.represents.type.isTypeOf(UML!Component)
+    }
+
 	constraint WorkloadMatchesPattern {
-		guard : self.getStereotypeValue(gaWorkloadEvent, "pattern").isDefined()
+		guard : self.isStereotypeApplied(gaWorkloadEvent) and self.getStereotypeValue(gaWorkloadEvent, "pattern").isDefined()
 		check : self.getStereotypeValue(gaWorkloadEvent, "pattern").matches(gaWorkloadEventPattern)
 		message : "The Stereotype '" + gaWorkloadEvent + "' on Lifeline '" + self + "' does not match the pattern '" + gaWorkloadEventPattern + "'. Actual Value: " + self.getStereotypeValue(gaWorkloadEvent, "pattern")
 	}

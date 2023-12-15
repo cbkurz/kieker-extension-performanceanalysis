@@ -1,6 +1,7 @@
 package kieker.extension.performanceanalysis.kieker2uml.teetime;
 
 import kieker.analysis.plugin.trace.AbstractMessageTraceProcessingFilter;
+import kieker.extension.performanceanalysis.epsilon.Util;
 import kieker.model.repository.SystemModelRepository;
 import kieker.model.system.model.MessageTrace;
 import org.eclipse.uml2.uml.Model;
@@ -61,6 +62,7 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
     protected void onTerminating() {
         saveModel(model, modelPath);
         LOGGER.info("Model saved to: " + modelPath);
+        Util.validateUmlModel(modelPath);
         super.onTerminating();
     }
 }
