@@ -210,8 +210,8 @@ public class MarteSupport {
 
         LOGGER.debug("start timestamp received: " + startTimestamp);
         LOGGER.debug("end timestamp received: " + endTimestamp);
-//        LOGGER.debug("start time: " + startTime);
-//        LOGGER.debug("end time: " + endTime);
+        LOGGER.debug("start time: " + startTime);
+        LOGGER.debug("end time: " + endTime);
 
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime", startTime.toString());
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime", endTime.toString());

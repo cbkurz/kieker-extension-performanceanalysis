@@ -1,9 +1,9 @@
 package kieker.extension.performanceanalysis.kieker2uml.uml;
 
-import kieker.common.util.signature.Signature;
 import kieker.model.system.model.AbstractMessage;
 import kieker.model.system.model.Execution;
 import kieker.model.system.model.MessageTrace;
+import kieker.model.system.model.Operation;
 import kieker.model.system.model.SynchronousCallMessage;
 import kieker.model.system.model.SynchronousReplyMessage;
 import org.eclipse.emf.common.util.EMap;
@@ -113,8 +113,8 @@ public class Kieker2UmlUtil {
         return model;
     }
 
-    static String getMessageLabel(final Execution execution) {
-        return getInterfaceName(execution);
+    static String getMessageLabel(final Operation operation) {
+        return getInterfaceName(operation);
     }
 
     /**

@@ -2,7 +2,7 @@
   <configuration default="false" name="Kieker2Uml" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="kieker.extension.performanceanalysis.Main" />
     <module name="kieker-extension-performanceanalysis.kieker-extension-performanceanalysis.main" />
-    <option name="PROGRAM_PARAMETERS" value="Kieker2Uml -uc SimpleExample -d sample-input/SimpleExample-1" />
+    <option name="PROGRAM_PARAMETERS" value="Kieker2Uml -uc SimpleExample -d sample-input/SimpleExample-3" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="kieker.extension.performanceanalysis.*" />
@@ -11,6 +11,7 @@
     </extension>
     <method v="2">
       <option name="Make" enabled="true" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks="deleteOutputFolder" externalProjectPath="$PROJECT_DIR$/kieker-extension-performanceanalysis" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>

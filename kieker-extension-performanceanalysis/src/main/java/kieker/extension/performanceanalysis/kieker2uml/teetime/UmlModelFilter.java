@@ -47,8 +47,8 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
         LOGGER.debug("Successfully received MessageTrace: " + mt.getTraceId());
 
         // UML
-        addBehaviour(model, mt, useCaseName);
         addStaticView(model, mt);
+        addBehaviour(model, mt, useCaseName);
 
         // logging
         LOGGER.debug("TraceId: " + mt.getTraceId());

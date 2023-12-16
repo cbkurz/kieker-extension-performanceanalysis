@@ -103,8 +103,8 @@ class UmlInteractions {
             final AssemblyComponent receiverComponent = message.getReceivingExecution().getAllocationComponent().getAssemblyComponent();
 
             // getLifeline(name, ignoreCase, createOnDemand) <-- naming of the parameters
-            final org.eclipse.uml2.uml.Lifeline senderLifeline = interaction.getLifeline(senderComponent.getIdentifier(), false, true);
-            final org.eclipse.uml2.uml.Lifeline receiverLifeline = interaction.getLifeline(receiverComponent.getIdentifier(), false, true);
+            final org.eclipse.uml2.uml.Lifeline senderLifeline = getLifeline(interaction, senderComponent);
+            final org.eclipse.uml2.uml.Lifeline receiverLifeline = getLifeline(interaction, receiverComponent);
 
             setReferenceAnnotations(senderLifeline, message.getSendingExecution());
             setReferenceAnnotations(receiverLifeline, message.getReceivingExecution());
@@ -116,6 +116,10 @@ class UmlInteractions {
         setBehaviourSpecificationForActorLifeline(messages.get(0), interaction, count - 1);
     }
 
+    private static Lifeline getLifeline(final Interaction interaction, final AssemblyComponent senderComponent) {
+        return interaction.getLifeline(senderComponent.getIdentifier(), false, true);
+    }
+
     private static void setBehaviourSpecificationForActorLifeline(final AbstractMessage firstMessage, final Interaction interaction, final int finalCount) {
         final String messageId = Kieker2UmlUtil.getMessageRepresentation(firstMessage);
         final Lifeline lifeline = requireNonNull(interaction.getLifeline(firstMessage.getSendingExecution().getAllocationComponent().getAssemblyComponent().getIdentifier()));
@@ -123,11 +127,13 @@ class UmlInteractions {
                 .filter(c -> c instanceof MessageOccurrenceSpecification)
                 .map(c -> (MessageOccurrenceSpecification) c)
                 .collect(Collectors.toList());
+
+        // This assumes that the MOS are in order, which they should be if executed correctly
         final MessageOccurrenceSpecification startMos = mosList.get(0);
         final MessageOccurrenceSpecification finishMos = mosList.get(mosList.size() - 1);
 
         // open BES
-        final BehaviorExecutionSpecification startBes = startBehaviourSpecification(interaction, lifeline, startMos, getBesName(firstMessage.getSendingExecution().getOperation()));
+        final BehaviorExecutionSpecification startBes = startBehaviourSpecification(interaction, lifeline, startMos, firstMessage.getSendingExecution().getOperation());
         setRepresentation(startBes, getBESRepresentation(messageId));
         setRepresentationCount(startBes, 0);
         setReferenceAnnotation(startBes, "OpenMessage", messageId);
@@ -148,7 +154,7 @@ class UmlInteractions {
         requireNonNull(senderLifeline, "senderLifeline");
         requireNonNull(receiverLifeline, "receiverLifeline");
 
-        final String messageLabel = Kieker2UmlUtil.getMessageLabel(message.getReceivingExecution());
+        final String messageLabel = Kieker2UmlUtil.getMessageLabel(message.getReceivingExecution().getOperation());
         final org.eclipse.uml2.uml.Message umlMessage = interaction.createMessage(messageLabel);
         final MessageSort messageSort = Kieker2UmlUtil.getMessageSort(message);
         umlMessage.setMessageSort(messageSort);
@@ -160,7 +166,7 @@ class UmlInteractions {
         umlMessage.setReceiveEvent(messageOccurrenceReceive);
 
         if (messageSort.equals(MessageSort.SYNCH_CALL_LITERAL)) {
-            final BehaviorExecutionSpecification bes = startBehaviourSpecification(interaction, receiverLifeline, messageOccurrenceReceive, getBesName(message.getReceivingExecution().getOperation()));
+            final BehaviorExecutionSpecification bes = startBehaviourSpecification(interaction, receiverLifeline, messageOccurrenceReceive, message.getReceivingExecution().getOperation());
             setRepresentation(bes, getBESRepresentation(messageId));
             setRepresentationCount(bes, count);
             setReferenceAnnotation(bes, "OpenMessage", messageId);
@@ -202,8 +208,8 @@ class UmlInteractions {
     }
 
 
-    private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction, final Lifeline umlLifeline, final MessageOccurrenceSpecification messageOccurrenceReceive, final String besName) {
-        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(besName, BEHAVIOUR_EXECUTION_E_CLASS);
+    private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction, final Lifeline umlLifeline, final MessageOccurrenceSpecification messageOccurrenceReceive, final Operation operation) {
+        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(getBesName(operation), BEHAVIOUR_EXECUTION_E_CLASS);
         behaviour.getCovereds().add(umlLifeline);
 
         behaviour.setStart(messageOccurrenceReceive);
