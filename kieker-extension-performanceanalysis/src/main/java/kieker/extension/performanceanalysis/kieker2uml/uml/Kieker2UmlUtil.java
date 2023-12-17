@@ -263,7 +263,9 @@ public class Kieker2UmlUtil {
     }
 
     static boolean isIdApplied(final NamedElement element, final String id) {
-        return element.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().containsKey(id);
+        return Optional.ofNullable(element.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME))
+                .map(annotation -> annotation.getDetails().containsKey(id))
+                .orElse(false);
     }
 
     static Association createAssociation(final Type from, final Type to) {
