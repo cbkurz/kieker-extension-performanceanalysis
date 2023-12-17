@@ -51,7 +51,7 @@ operation EModelElement getStereotypeValue(stereotypeName: String, key: String):
 // This Operation will create a String that represents all applied Stereotypes (in this case that are assembled as Annotations)
 // for the Template Engine in the EGL language
 // This Operation will never throw an Exception
-// This Operation will always return a String, in case no Value was found, an empty String.
+// @return String - in case no Value was found, an empty String.
 operation EModelElement assembleStereotypeTemplateString(paddingLeft : Integer) : String {
 		var annotations : OrderedSet = self.getEAnnotations();
 	

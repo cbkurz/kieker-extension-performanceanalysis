@@ -9,6 +9,9 @@ title [%=interaction.name%]
 participant [%=sanitize(l.name)%] [
     =[%=l.name%]
     ----
+[% if ("'Entry'".equals(l.name)) { %]
+    << Actor >>
+[% } %]
 [%=l.assembleStereotypeTemplateString(4)%]
 ] 
 [% } %]

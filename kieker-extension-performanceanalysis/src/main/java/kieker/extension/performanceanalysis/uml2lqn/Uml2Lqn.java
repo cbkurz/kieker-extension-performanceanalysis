@@ -58,6 +58,7 @@ public class Uml2Lqn implements Runnable {
                 .build();
         Util.validateUmlModel(umlModel);
         uml2qn.run();
+        uml2qn.get();
         lqnModel.dispose();
 
         final PlainXmlModel plainLqnModel = getPlainLqnModel();
@@ -68,6 +69,7 @@ public class Uml2Lqn implements Runnable {
                 .withProfiling()
                 .build();
         changeRoot.run();
+        changeRoot.get();
         plainLqnModel.dispose();
     }
 

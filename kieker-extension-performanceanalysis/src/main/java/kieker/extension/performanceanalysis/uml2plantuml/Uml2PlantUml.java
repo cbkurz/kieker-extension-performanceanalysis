@@ -36,5 +36,6 @@ public class Uml2PlantUml implements Runnable {
                 .withProfiling()
                 .build();
         runConfiguration.run();
+        runConfiguration.get();
     }
 }
