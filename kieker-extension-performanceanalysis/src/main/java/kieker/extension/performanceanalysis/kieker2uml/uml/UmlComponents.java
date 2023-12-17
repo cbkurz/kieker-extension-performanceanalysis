@@ -11,7 +11,6 @@ import org.eclipse.uml2.uml.Artifact;
 import org.eclipse.uml2.uml.Component;
 import org.eclipse.uml2.uml.Deployment;
 import org.eclipse.uml2.uml.Interface;
-import org.eclipse.uml2.uml.Lifeline;
 import org.eclipse.uml2.uml.MessageSort;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Node;
@@ -20,10 +19,6 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.Usage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
@@ -56,7 +51,7 @@ public class UmlComponents {
             final Artifact senderArtifact = getArtifact(deploymentView, message.getSendingExecution().getAllocationComponent());
 
             // connection
-            doConnection(model, senderInterface, senderComponent, senderArtifact, senderNode);
+            doConnection(senderInterface, senderComponent, senderArtifact, senderNode);
 
             // receiver
             // uml elements
@@ -66,7 +61,7 @@ public class UmlComponents {
             final Artifact receiverArtifact = getArtifact(deploymentView, message.getReceivingExecution().getAllocationComponent());
 
             // connection
-            doConnection(model, receiverInterface, receiverComponent, receiverArtifact, receiverNode);
+            doConnection(receiverInterface, receiverComponent, receiverArtifact, receiverNode);
 
             // sender uses receiver
             getUsage(staticView, senderInterface, receiverInterface);
@@ -74,19 +69,19 @@ public class UmlComponents {
         }
     }
 
-    public static String getInterfaceName(final Operation operation) {
+    static String getInterfaceName(final Operation operation) {
         final String name = operation.getSignature().toString();
-        if (name.contains("<init>")) {
-            return name.replaceAll("<init>", operation.getComponentType().getTypeName()); // create constructor representation for Interface
+        if (name.contains("<init>")) { // "<init>" is the representation of calling a constructor
+            return name.replaceAll("<init>", operation.getComponentType().getTypeName()); // create constructor with name instead of "<init>"
         }
         return name;
     }
 
-    private static Node getNode(final Package deploymentView, final ExecutionContainer nodeName) {
+    static Node getNode(final Package deploymentView, final ExecutionContainer nodeName) {
         return (Node) deploymentView.getPackagedElement(nodeName.getIdentifier(), false, UMLPackage.Literals.NODE, true);
     }
 
-    private static Artifact getArtifact(final Package deploymentView, final AllocationComponent artifactName) {
+    static Artifact getArtifact(final Package deploymentView, final AllocationComponent artifactName) {
         return (Artifact) deploymentView.getPackagedElement(artifactName.getIdentifier(), false, UMLPackage.Literals.ARTIFACT, true);
     }
 
@@ -94,6 +89,10 @@ public class UmlComponents {
         return (Component) staticView.getPackagedElement(component.getIdentifier(), false, UMLPackage.Literals.COMPONENT, true);
     }
 
+    /**
+     * A Usage defines if one interface uses another.
+     * @return The Usage
+     */
     private static Usage getUsage(final org.eclipse.uml2.uml.Package staticView, final Interface sender, final Interface receiver) {
         return staticView.getPackagedElements().stream()
                 .filter(pe -> pe instanceof Usage)
@@ -108,7 +107,18 @@ public class UmlComponents {
         return (Interface) staticView.getPackagedElement(getInterfaceName(interfaceName.getOperation()), false, UMLPackage.Literals.INTERFACE, true);
     }
 
-    private static void doConnection(final Model model, final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
+    /**
+     * Creates the different connections required for the introduced Elements.
+     * Node -deploys-> Artifact
+     * Artifact -manifests-> Component
+     * Component -realizes-> Interface
+     * Additionally the interface is the provider for the name of the Operation set on the Component is also set.
+     * @param anInterface
+     * @param component
+     * @param artifact
+     * @param node
+     */
+    private static void doConnection(final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
         component.getOwnedOperation(anInterface.getName(), null, null, false, true);
         component.getInterfaceRealization(anInterface.getName(), anInterface, false, true);
 
