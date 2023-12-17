@@ -7,11 +7,14 @@ import kieker.model.system.model.Operation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.uml2.uml.Actor;
 import org.eclipse.uml2.uml.BehaviorExecutionSpecification;
+import org.eclipse.uml2.uml.Component;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Lifeline;
 import org.eclipse.uml2.uml.MessageOccurrenceSpecification;
 import org.eclipse.uml2.uml.MessageSort;
 import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.UseCase;
@@ -32,6 +35,7 @@ import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setReferenceAnnotations;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setRepresentationCount;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlComponents.STATIC_VIEW_COMPONENTS;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.KIEKER_ENTRY_NAME;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.getActor;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.getDynamicView;
@@ -49,7 +53,6 @@ class UmlInteractions {
         final Interaction interaction = UMLFactory.eINSTANCE.createInteraction();
 
         interaction.setName(interactionName);
-        addLifelines(interaction, messageTrace.getSequenceAsVector());
         Kieker2UmlUtil.addTraceId(interaction, messageTrace);
         setRepresentation(interaction, Kieker2UmlUtil.getTraceRepresentation(messageTrace));
 
@@ -84,7 +87,7 @@ class UmlInteractions {
     }
 
     /**
-     * Adds Lifelines and Messages
+     * Adds Lifelines, Messages and representations of the components
      * Note: The First Lifeline needs special treatment since no {@link org.eclipse.uml2.uml.BehaviorExecutionSpecification} will be created for it.
      * Creates the following Types in the UML2 Model:
      * * {@link org.eclipse.uml2.uml.Lifeline} - The Lifelines represent the different objects that are interaction within the Trace of the application
@@ -96,6 +99,8 @@ class UmlInteractions {
      * @param messages    - The Kieker Messages of the {@link MessageTrace}
      */
     static void addLifelines(final Interaction interaction, final List<AbstractMessage> messages) {
+        requireNonNull(getModel(interaction));
+        final Package staticView = Kieker2UmlUtil.getPackagedElement(getModel(interaction), STATIC_VIEW_COMPONENTS);
         // assumption: the messages are ordered
         int count = 0; // The count was introduced to have an additional separation option for Messages that have the same representation
         for (final AbstractMessage message : messages) {
@@ -106,7 +111,8 @@ class UmlInteractions {
             final org.eclipse.uml2.uml.Lifeline senderLifeline = getLifeline(interaction, senderComponent);
             final org.eclipse.uml2.uml.Lifeline receiverLifeline = getLifeline(interaction, receiverComponent);
 
-            setReferenceAnnotations(senderLifeline, message.getSendingExecution());
+            // note that every lifeline will be a receiver at one point
+            setRepresents(receiverLifeline, staticView, receiverComponent);
             setReferenceAnnotations(receiverLifeline, message.getReceivingExecution());
 
             final String messageId = Kieker2UmlUtil.getMessageRepresentation(message);
@@ -114,6 +120,14 @@ class UmlInteractions {
             count++;
         }
         setBehaviourSpecificationForActorLifeline(messages.get(0), interaction, count - 1);
+    }
+
+    private static void setRepresents(final Lifeline lifeline, final Package staticView, final AssemblyComponent assemblyComponent) {
+        if (isNull(lifeline.getRepresents())) {
+            final Component component = UmlComponents.getComponent(staticView, assemblyComponent);
+            final Parameter ownedParameter = lifeline.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true);
+            lifeline.setRepresents(ownedParameter);
+        }
     }
 
     private static Lifeline getLifeline(final Interaction interaction, final AssemblyComponent senderComponent) {

@@ -31,17 +31,16 @@ import static java.util.Objects.requireNonNull;
 public class UmlComponents {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UmlComponents.class);
-    private static List<MessageTrace> traces = new ArrayList<>();
+    public static final String DEPLOYMENT_VIEW = "deploymentView";
+    public static final String STATIC_VIEW_COMPONENTS = "staticView-components";
 
 
     static void addComponentsAndDeployment(final Model model, final MessageTrace messageTrace) {
         requireNonNull(model, "model");
         requireNonNull(messageTrace, "messageTrace");
 
-        traces.add(messageTrace);
-
-        final org.eclipse.uml2.uml.Package staticView = Kieker2UmlUtil.getPackagedElement(model, "staticView-components");
-        final org.eclipse.uml2.uml.Package deploymentView = Kieker2UmlUtil.getPackagedElement(model, "deploymentView");
+        final org.eclipse.uml2.uml.Package staticView = Kieker2UmlUtil.getPackagedElement(model, STATIC_VIEW_COMPONENTS);
+        final org.eclipse.uml2.uml.Package deploymentView = Kieker2UmlUtil.getPackagedElement(model, DEPLOYMENT_VIEW);
 
         for (final AbstractMessage message : messageTrace.getSequenceAsVector()) {
 
@@ -91,7 +90,7 @@ public class UmlComponents {
         return (Artifact) deploymentView.getPackagedElement(artifactName.getIdentifier(), false, UMLPackage.Literals.ARTIFACT, true);
     }
 
-    private static Component getComponent(final Package staticView, final AssemblyComponent component) {
+    static Component getComponent(final Package staticView, final AssemblyComponent component) {
         return (Component) staticView.getPackagedElement(component.getIdentifier(), false, UMLPackage.Literals.COMPONENT, true);
     }
 
@@ -112,14 +111,6 @@ public class UmlComponents {
     private static void doConnection(final Model model, final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
         component.getOwnedOperation(anInterface.getName(), null, null, false, true);
         component.getInterfaceRealization(anInterface.getName(), anInterface, false, true);
-        final List<Lifeline> lifelines = model.allOwnedElements().stream()
-                .filter(e -> UMLPackage.Literals.LIFELINE.equals(e.eClass()))
-                .map(e -> (Lifeline) e)
-                .filter(l -> l.getName().equals(component.getName()))
-                .filter(l -> !UmlUseCases.KIEKER_ENTRY_NAME.equals(l.getName()))
-                .collect(Collectors.toList());
-
-        lifelines.forEach(l -> l.setRepresents(l.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true)));
 
         artifact.getManifestation("ArtifactManifestation-" + component.getName(), component, false, true);
         final Deployment deployment = node.getDeployment("NodeDeployment-" + node.getName(), false, true);

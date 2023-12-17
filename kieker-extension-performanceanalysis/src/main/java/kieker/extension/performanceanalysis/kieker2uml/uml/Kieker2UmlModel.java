@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlInteractions.addLifelines;
+
 public class Kieker2UmlModel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Kieker2UmlModel.class);
@@ -31,9 +33,12 @@ public class Kieker2UmlModel {
         final Optional<Interaction> interaction = UmlInteractions.getInteraction(useCase, traceRepresentation);
         if (interaction.isEmpty()) { // create Interaction
             LOGGER.info("Creating interaction for Trace: " + messageTrace.getTraceId());
+
             final Interaction newInteraction = UmlInteractions.createInteraction(UmlInteractions.getInteractionName(useCase), messageTrace);
-            MarteSupport.applyPerformanceStereotypesToInteraction(newInteraction, messageTrace);
             useCase.getOwnedBehaviors().add(newInteraction);
+
+            addLifelines(newInteraction, messageTrace.getSequenceAsVector());
+            MarteSupport.applyPerformanceStereotypesToInteraction(newInteraction, messageTrace);
             UmlInteractions.connectEntryLifelineToActor(useCase);
         } else if (!Kieker2UmlUtil.isTraceApplied(interaction.get(), messageTrace.getTraceId())) { // update Interaction
             LOGGER.info("Interaction was created before, performance information will now be added to Trace with id: " + messageTrace.getTraceId());
