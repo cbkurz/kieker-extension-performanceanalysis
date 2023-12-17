@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Element;
-import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.MessageSort;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.NamedElement;
@@ -256,15 +255,15 @@ public class Kieker2UmlUtil {
                 .map(Integer::parseInt);
     }
 
-    static void addTraceId(final NamedElement element, final MessageTrace messageTrace) {
-        setAnnotationSetEntry(element, UmlInteractions.TRACE_IDS_SET_NAME, Long.toString(messageTrace.getTraceId()));
+    static void addId(final NamedElement element, final String id) {
+        setAnnotationSetEntry(element, UmlInteractions.TRACE_IDS_SET_NAME, id);
     }
-    static Optional<Set<String>> getTraceIds(final NamedElement element) {
+    static Optional<Set<String>> getIds(final NamedElement element) {
         return getAnnotationSet(element, UmlInteractions.TRACE_IDS_SET_NAME);
     }
 
-    static boolean isTraceApplied(final NamedElement element, final long traceId) {
-        return element.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().containsKey(Long.toString(traceId));
+    static boolean isIdApplied(final NamedElement element, final String id) {
+        return element.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME).getDetails().containsKey(id);
     }
 
     static Association createAssociation(final Type from, final Type to) {

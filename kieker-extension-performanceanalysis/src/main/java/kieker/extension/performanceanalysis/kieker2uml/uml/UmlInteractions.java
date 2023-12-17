@@ -53,7 +53,7 @@ class UmlInteractions {
         final Interaction interaction = UMLFactory.eINSTANCE.createInteraction();
 
         interaction.setName(interactionName);
-        Kieker2UmlUtil.addTraceId(interaction, messageTrace);
+        Kieker2UmlUtil.addId(interaction, Long.toString(messageTrace.getTraceId()));
         setRepresentation(interaction, Kieker2UmlUtil.getTraceRepresentation(messageTrace));
 
         return interaction;

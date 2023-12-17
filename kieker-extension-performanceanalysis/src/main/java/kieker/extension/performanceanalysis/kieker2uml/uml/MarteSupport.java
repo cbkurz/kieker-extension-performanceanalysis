@@ -23,12 +23,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addTraceId;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addId;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getAnnotationDetail;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getMessageRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getRepresentationCount;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceIds;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getIds;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setAnnotationDetail;
 
@@ -143,7 +143,7 @@ public class MarteSupport {
         }
 
         // finnish
-        addTraceId(interaction, messageTrace);
+        addId(interaction, Long.toString(messageTrace.getTraceId()));
     }
 
     private static long getExecTime(final Execution execution) {
@@ -216,7 +216,7 @@ public class MarteSupport {
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime", startTime.toString());
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime", endTime.toString());
 
-        final BigDecimal numberOfTraces = BigDecimal.valueOf(getTraceIds(interaction).map(s -> s.size() + 1 ).orElse(1));
+        final BigDecimal numberOfTraces = BigDecimal.valueOf(getIds(interaction).map(s -> s.size() + 1 ).orElse(1));
         final BigDecimal executionTime = BigDecimal.valueOf(endTime - startTime);
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "openWorkload", "open:" +  numberOfTraces.divide(executionTime, 20, RoundingMode.HALF_UP).toPlainString() );
     }

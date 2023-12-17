@@ -22,8 +22,10 @@ import org.slf4j.LoggerFactory;
 
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addTraceId;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.isTraceApplied;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addId;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getMessageRepresentation;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.isIdApplied;
 
 public class UmlComponents {
 
@@ -36,11 +38,13 @@ public class UmlComponents {
         requireNonNull(model, "model");
         requireNonNull(messageTrace, "messageTrace");
 
+        final String traceRepresentation = getTraceRepresentation(messageTrace);
         final org.eclipse.uml2.uml.Package staticView = Kieker2UmlUtil.getPackagedElement(model, STATIC_VIEW_COMPONENTS);
         final org.eclipse.uml2.uml.Package deploymentView = Kieker2UmlUtil.getPackagedElement(model, DEPLOYMENT_VIEW);
 
-        if (isTraceApplied(staticView, messageTrace.getTraceId()) && isTraceApplied(deploymentView, messageTrace.getTraceId())) {
-            LOGGER.info("Trace was already applied to the componentView and the deploymentView. TraceId: " + messageTrace.getTraceId());
+        // if the trace with the representation is already applied, no action is required
+        if (isIdApplied(staticView, traceRepresentation) && isIdApplied(deploymentView, traceRepresentation)) {
+            LOGGER.info("Trace was already applied to the componentView and the deploymentView. TraceId: " + traceRepresentation);
             return;
         }
 
@@ -76,8 +80,8 @@ public class UmlComponents {
         }
 
         // finnish
-        addTraceId(staticView, messageTrace);
-        addTraceId(deploymentView, messageTrace);
+        addId(staticView, traceRepresentation);
+        addId(deploymentView, traceRepresentation);
     }
 
     static String getInterfaceName(final Operation operation) {
