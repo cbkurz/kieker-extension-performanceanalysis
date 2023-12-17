@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addTraceId;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.isTraceApplied;
 
 public class UmlComponents {
 
@@ -37,6 +39,11 @@ public class UmlComponents {
         final org.eclipse.uml2.uml.Package staticView = Kieker2UmlUtil.getPackagedElement(model, STATIC_VIEW_COMPONENTS);
         final org.eclipse.uml2.uml.Package deploymentView = Kieker2UmlUtil.getPackagedElement(model, DEPLOYMENT_VIEW);
 
+        if (isTraceApplied(staticView, messageTrace.getTraceId()) && isTraceApplied(deploymentView, messageTrace.getTraceId())) {
+            LOGGER.info("Trace was already applied to the componentView and the deploymentView. TraceId: " + messageTrace.getTraceId());
+            return;
+        }
+
         for (final AbstractMessage message : messageTrace.getSequenceAsVector()) {
 
             if (Kieker2UmlUtil.getMessageSort(message).equals(MessageSort.REPLY_LITERAL)) {
@@ -51,7 +58,7 @@ public class UmlComponents {
             final Artifact senderArtifact = getArtifact(deploymentView, message.getSendingExecution().getAllocationComponent());
 
             // connection
-            doConnection(senderInterface, senderComponent, senderArtifact, senderNode);
+            doConnections(senderNode, senderArtifact, senderComponent, senderInterface);
 
             // receiver
             // uml elements
@@ -61,12 +68,16 @@ public class UmlComponents {
             final Artifact receiverArtifact = getArtifact(deploymentView, message.getReceivingExecution().getAllocationComponent());
 
             // connection
-            doConnection(receiverInterface, receiverComponent, receiverArtifact, receiverNode);
+            doConnections(receiverNode, receiverArtifact, receiverComponent, receiverInterface);
 
             // sender uses receiver
             getUsage(staticView, senderInterface, receiverInterface);
 
         }
+
+        // finnish
+        addTraceId(staticView, messageTrace);
+        addTraceId(deploymentView, messageTrace);
     }
 
     static String getInterfaceName(final Operation operation) {
@@ -112,13 +123,15 @@ public class UmlComponents {
      * Node -deploys-> Artifact
      * Artifact -manifests-> Component
      * Component -realizes-> Interface
-     * Additionally the interface is the provider for the name of the Operation set on the Component is also set.
-     * @param anInterface
-     * @param component
-     * @param artifact
+     *
+     * Additionally, an Operation on the Component is created.
+     *
      * @param node
+     * @param artifact
+     * @param component
+     * @param anInterface
      */
-    private static void doConnection(final Interface anInterface, final Component component, final Artifact artifact, final Node node) {
+    private static void doConnections(final Node node, final Artifact artifact, final Component component, final Interface anInterface) {
         component.getOwnedOperation(anInterface.getName(), null, null, false, true);
         component.getInterfaceRealization(anInterface.getName(), anInterface, false, true);
 
