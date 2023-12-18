@@ -20,10 +20,18 @@ autonumber
 
 [% for (m in interaction.messages) { %]
 [%=m.getSenderName()%] [%=m.getMessageType()%] [%=m.getReceiverName()%] : [%=m.name%]
-note over [%=m.getReceiverName()%]
-[%=m.assembleStereotypeTemplateString(4)%]
+[% for (bes : UML!BehaviorExecutionSpecification in interaction.fragments) { %]
+[% if (m.getReceiverName().equals(sanitize(bes.getCovereds().get(0).name))) { %]
+note over [%=sanitize(bes.getCovereds().get(0).name)%]
+[%=bes.assembleStereotypeTemplateString(4)%]
 end note
+[% break; %]
+[% } %]
+[% } %]
 [%=m.getActivation()%]
 [% } %]
+
+
+
 
 @enduml
