@@ -8,22 +8,39 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.MessageSort;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.UMLFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addId;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getMessageSort;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.isIdApplied;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setAnnotationDetail;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setReferenceAnnotations;
 
+/**
+ * This class allows to enrich the model with the class structure of the trace.
+ * Classes have no significance for the Uml2Lqn Transformation.
+ */
 public class UmlClasses {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UmlClasses.class);
 
     final static private EClass CLASS_E_CLASS = UMLFactory.eINSTANCE.createClass().eClass();
     static void addClasses(final Model model, final MessageTrace messageTrace) {
         requireNonNull(model, "model");
         requireNonNull(messageTrace, "messageTrace");
 
+        final String traceRepresentation = getTraceRepresentation(messageTrace);
         final org.eclipse.uml2.uml.Package staticView = Kieker2UmlUtil.getPackagedElement(model, "staticView-classes");
+
+        if (isIdApplied(staticView, traceRepresentation)) {
+            LOGGER.info("Trace was already applied to the componentView and the deploymentView. TraceId: " + traceRepresentation);
+            return;
+        }
 
         for (final AbstractMessage message : messageTrace.getSequenceAsVector()) {
 
@@ -41,6 +58,7 @@ public class UmlClasses {
 
             Kieker2UmlUtil.createAssociation(sender.getClass_(), receiver.getClass_());
         }
+        addId(staticView, traceRepresentation);
     }
 
     private static void addDependency(final org.eclipse.uml2.uml.Operation from, final Operation operation) {

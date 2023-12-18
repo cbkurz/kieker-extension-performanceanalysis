@@ -66,7 +66,6 @@ public class Util {
         final EvlRunConfiguration validationConfig = EvlRunConfiguration.Builder()
                 .withScript(UML_VALIDATION_SCRIPT)
                 .withModel(uml)
-                .withProfiling()
                 .build();
         validate(validationConfig);
         LOGGER.info("Model successfully validated.");

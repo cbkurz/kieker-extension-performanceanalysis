@@ -5,10 +5,10 @@ import kieker.model.system.model.Execution;
 import kieker.model.system.model.MessageTrace;
 import kieker.model.system.model.SynchronousCallMessage;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.uml2.uml.BehaviorExecutionSpecification;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Lifeline;
-import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Node;
 import org.eclipse.uml2.uml.UseCase;
@@ -25,13 +25,21 @@ import java.util.stream.Collectors;
 import static java.util.Objects.requireNonNull;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addId;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getAnnotationDetail;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getIds;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getMessageRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getRepresentationCount;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getIds;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setAnnotationDetail;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlInteractions.getBESRepresentation;
 
+/**
+ * This class applies the MARTE Stereotypes to the uml elements.
+ * To do this a workaround is used by applying stereotypes with EAnnotations.
+ * The Name of the Annotation is the name of the Stereotype.
+ * The details of the Annotation are the fields of the Stereotype.
+ * With the method {@link MarteSupport#applyPerformanceStereotypesToInteraction} performance information are provided in bulk.
+ */
 public class MarteSupport {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MarteSupport.class);
@@ -117,42 +125,72 @@ public class MarteSupport {
         // start and end times for open workload
         MarteSupport.setOpenWorkloadInformation(interaction, messageTrace.getStartTimestamp(), messageTrace.getEndTimestamp());
 
-
         // GaStep
-        List<AbstractMessage> sequenceAsVector = messageTrace.getSequenceAsVector();
-        for (int count = 0; count < sequenceAsVector.size(); count++) { // The count was introduced to have an additional separation option for Messages that have the same representation
-            final AbstractMessage message = sequenceAsVector.get(count);
-            if (message instanceof SynchronousCallMessage) {
-                final String messageRepresentation = getMessageRepresentation(message);
-                final Message umlMessage = getUmlMessage(interaction, messageRepresentation, count);
-                // Ess - execution stack size
-                final Long execTimeOtherExecutions = messageTrace.getSequenceAsVector().stream()
-                        .filter(m -> m instanceof SynchronousCallMessage)
-                        .filter(m -> message.getReceivingExecution().equals(m.getSendingExecution()))
-                        .map(m -> getExecTime(m.getReceivingExecution()))
-                        .reduce(Long::sum)
-                        .orElse(0L); // if no other executions are found this execution does not call others and the total time should be applied
-                final long totalExecTime = getExecTime(message.getReceivingExecution());
-                // the execTime should be set to the time the message is actually working and not waiting for the execution of other messages
-                final long execTime = totalExecTime - execTimeOtherExecutions;
-                if (execTime < 0) {
-                    throw new IllegalArgumentException("ExecTime cannot be less than zero. ExecTime value: " + execTime);
-                }
-                applyGaStep(umlMessage, execTime);
-            }
-        }
+        setGaStep(interaction, messageTrace);
 
         // finnish
         addId(interaction, Long.toString(messageTrace.getTraceId()));
     }
 
-    private static long getExecTime(final Execution execution) {
+    private static void setGaStep(final Interaction interaction, final MessageTrace messageTrace) {
+        List<AbstractMessage> sequenceAsVector = messageTrace.getSequenceAsVector();
+        for (int count = 0; count < sequenceAsVector.size(); count++) { // The count was introduced to have an additional separation option for Messages that have the same representation
+            final AbstractMessage message = sequenceAsVector.get(count);
+            if (!(message instanceof SynchronousCallMessage)) {
+                continue;
+            }
+
+            final String besRepresentation = getBESRepresentation(getMessageRepresentation(message));
+            final BehaviorExecutionSpecification bes = getBES(interaction, besRepresentation, count); // the count of 0 is the first lifeline after "'Entry'"
+            // We start at the first lifeline after "'Entry'" the net time must be calculated for the receivingExecution
+            // This happens since the first message in the vector is from "'Entry'" to "<next-Lifeline>"
+            final long execTime = getNetExecTime(messageTrace, message.getReceivingExecution());
+            updateGaStep(bes, (double) execTime);
+        }
+        // Entry Lifeline BES
+        final BehaviorExecutionSpecification entryBes = getBES(interaction, "'Entry'", -1);
+        final long otherTime = getTotalExecTime(messageTrace.getSequenceAsVector().get(0).getReceivingExecution()); // Entry-Lifeline only has one
+        final long execTime = (messageTrace.getEndTimestamp() - messageTrace.getStartTimestamp()) - otherTime;
+        updateGaStep(entryBes, (double) (execTime == 0 ? 1 : execTime));
+    }
+
+    /**
+     * This method calculated the net execution time.
+     *
+     * The net execution time is calculated by finding all messages that were sent from the execution,
+     * adding their total execution time and subcontracting it from the total execution time of the current execution
+     * @param messageTrace all messages
+     * @param receivingExecution the execution
+     * @return the net execution time
+     */
+    private static long getNetExecTime(final MessageTrace messageTrace, final Execution receivingExecution) {
+        final Long execTimeOtherExecutions = messageTrace.getSequenceAsVector().stream()
+                .filter(m -> m instanceof SynchronousCallMessage)
+                .filter(m -> receivingExecution.equals(m.getSendingExecution())) // this collects all messages that are send by the execution
+                .map(m -> getTotalExecTime(m.getReceivingExecution()))
+                .reduce(Long::sum)
+                .orElse(0L); // if no other executions are found this execution does not call others and the total time should be applied
+        final long totalExecTime = getTotalExecTime(receivingExecution);
+        // the execTime should be set to the time the message is actually working and not waiting for the execution of other messages
+        final long execTime = totalExecTime - execTimeOtherExecutions;
+        if (execTime < 0) {
+            throw new IllegalArgumentException("ExecTime cannot be less than zero. ExecTime value: " + execTime);
+        }
+        return execTime;
+    }
+
+    /**
+     * Calculates the total execution time with Tout - Tin
+     * @param execution the execution
+     * @return the time in nanos it took for the execution.
+     */
+    private static long getTotalExecTime(final Execution execution) {
+        // Ess - execution stack size
+        // Tin - time in nanos when the execution was entered
+        // Tout - time in nanos when the execution was left
         return execution.getTout() - execution.getTin();
     }
 
-    private static void applyGaStep(final Message umlMessage, final double execTime) {
-        updateGaStep(umlMessage, execTime);
-    }
 
     private static Lifeline getSenderLifeline(final Interaction interaction, final String identifier) {
         requireNonNull(interaction, "interaction");
@@ -171,14 +209,16 @@ public class MarteSupport {
         return list.get(0);
     }
 
-    private static Message getUmlMessage(final Interaction interaction, final String messageRepresentation, final int count) {
-        final List<Message> list = interaction.getMessages().stream()
-                .filter(m -> getRepresentation(m).map(rep -> rep.equals(messageRepresentation)).orElse(false))
-                .filter(m -> getRepresentationCount(m).map(messageCount -> messageCount == count).orElse(false))
-                .collect(Collectors.toList());
+    private static BehaviorExecutionSpecification getBES(final Interaction interaction, final String messageRepresentation, final int count) {
+        final List<BehaviorExecutionSpecification> list = interaction.getFragments().stream()
+                .filter(f -> f instanceof BehaviorExecutionSpecification)
+                .filter(f -> Kieker2UmlUtil.getRepresentation(f).map(r -> r.equals(messageRepresentation)).orElse(false))
+                .filter(f -> getRepresentationCount(f).map(c -> c == count).orElse(false))
+                .map(f -> (BehaviorExecutionSpecification) f)
+                .collect(Collectors.toList());;
 
         if (list.isEmpty()) {
-            throw new ModelNotComformantException("Message not found with representation: " + messageRepresentation);
+            throw new ModelNotComformantException("BES not found with representation: " + messageRepresentation);
         }
         if (list.size() > 1) {
             throw new ModelNotComformantException(String.format("To many Messages found for representation: %s\nList size: %s\nList: %s", messageRepresentation, list.size(), list));
@@ -216,8 +256,9 @@ public class MarteSupport {
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime", startTime.toString());
         setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime", endTime.toString());
 
-        final BigDecimal numberOfTraces = BigDecimal.valueOf(getIds(interaction).map(s -> s.size() + 1 ).orElse(1));
+        final BigDecimal numberOfTraces = BigDecimal.valueOf(getIds(interaction).map(s -> s.size() + 1).orElse(1));
         final BigDecimal executionTime = BigDecimal.valueOf(endTime - startTime);
-        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "openWorkload", "open:" +  numberOfTraces.divide(executionTime, 20, RoundingMode.HALF_UP).toPlainString() );
+        final String openWorkload = numberOfTraces.divide(executionTime, 20, RoundingMode.HALF_UP).toPlainString();
+        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "openWorkload", "open:" + openWorkload);
     }
 }

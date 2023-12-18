@@ -37,12 +37,18 @@ import java.util.stream.Collectors;
 import static java.util.Objects.requireNonNull;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlComponents.getInterfaceName;
 
+/**
+ * This class provides standard methods using uml models.
+ * In the model transformation Kieker2Uml a major factor is that information is not applied by stereotypes but with EAnnotations
+ * This class provides several methods to support this factor.
+ */
 public class Kieker2UmlUtil {
     public static final EClass PACKAGE_E_CLASS = UMLFactory.eINSTANCE.createPackage().eClass();
     public static final String REFERENCE_ANNOTATION_NAME = "Reference";
     public static final String REPRESENTATION_ANNOTATION_NAME = "Representation";
     public static final String REPRESENTATION_NAME = "representation";
     public static final String REPRESENTATION_COUNT = "count";
+    public static final String TRACE_IDS_SET_NAME = "AppliedIds";
 
     static org.eclipse.uml2.uml.Package getPackagedElement(final Model model, final String packageName) {
         return (org.eclipse.uml2.uml.Package) model.getPackagedElements().stream()
@@ -113,10 +119,6 @@ public class Kieker2UmlUtil {
         return model;
     }
 
-    static String getMessageLabel(final Operation operation) {
-        return getInterfaceName(operation);
-    }
-
     /**
      * {@link MessageSort} is an enumeration of different kinds of messages.
      * This enumeration determines if it is a call or a reply.
@@ -125,7 +127,7 @@ public class Kieker2UmlUtil {
      * @param message the kieker trace message, two types are considered {@link SynchronousCallMessage} and {@link SynchronousReplyMessage} if neither are matched an exception is thrown.
      * @return MessageSort Literal
      */
-    public static MessageSort getMessageSort(final AbstractMessage message) {
+    static MessageSort getMessageSort(final AbstractMessage message) {
         if (message instanceof SynchronousCallMessage) {
             return MessageSort.SYNCH_CALL_LITERAL;
         }
@@ -135,6 +137,12 @@ public class Kieker2UmlUtil {
         throw new RuntimeException("Unexpected message type of: " + message);
     }
 
+    /**
+     * References are there to enable a trace back where an element originated.
+     * This method sets some default values
+     * @param element the uml element
+     * @param execution the kieker execution the element relates to.
+     */
     static void setReferenceAnnotations(final Element element, final Execution execution) {
         setAnnotationDetail(element, REFERENCE_ANNOTATION_NAME, "package", execution.getOperation().getComponentType().getPackageName());
         setAnnotationDetail(element, REFERENCE_ANNOTATION_NAME, "class", execution.getOperation().getComponentType().getTypeName());
@@ -143,6 +151,12 @@ public class Kieker2UmlUtil {
         setAnnotationDetail(element, REFERENCE_ANNOTATION_NAME, "signature", execution.getOperation().getSignature().toString());
     }
 
+    /**
+     * References are there to enable a trace back where an element originated.
+     * @param element the uml element
+     * @param name the name of the reference
+     * @param value the value of the reference
+     */
     static void setReferenceAnnotation(final Element element, final String name, final String value) {
         setAnnotationDetail(element, REFERENCE_ANNOTATION_NAME, name, value);
     }
@@ -256,14 +270,14 @@ public class Kieker2UmlUtil {
     }
 
     static void addId(final NamedElement element, final String id) {
-        setAnnotationSetEntry(element, UmlInteractions.TRACE_IDS_SET_NAME, id);
+        setAnnotationSetEntry(element, TRACE_IDS_SET_NAME, id);
     }
     static Optional<Set<String>> getIds(final NamedElement element) {
-        return getAnnotationSet(element, UmlInteractions.TRACE_IDS_SET_NAME);
+        return getAnnotationSet(element, TRACE_IDS_SET_NAME);
     }
 
     static boolean isIdApplied(final NamedElement element, final String id) {
-        return Optional.ofNullable(element.getEAnnotation(UmlInteractions.TRACE_IDS_SET_NAME))
+        return Optional.ofNullable(element.getEAnnotation(TRACE_IDS_SET_NAME))
                 .map(annotation -> annotation.getDetails().containsKey(id))
                 .orElse(false);
     }

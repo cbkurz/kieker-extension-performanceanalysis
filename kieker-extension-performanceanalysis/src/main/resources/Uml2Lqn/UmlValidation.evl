@@ -61,7 +61,7 @@ context UML!UseCase {
 	}
 	
 	constraint IsInDynamicViewPackage {
-		check : self.getOwner().name == dynamicViewName
+		check : self.getOwner().isDefined() and self.getOwner().name == dynamicViewName
 		message: "Owner of UseCase '" + self.name + "' is not the " + dynamicViewName + "Package. Owner: " + self.getOwner()
 	}
 	
@@ -129,6 +129,7 @@ context UML!Lifeline {
 	}
 	
 	constraint BehaviorExecutionSpecificationIsSet {
+	    guard : not self.name.equals("'Entry'")
 		check  {
 			var covered = self.getCoveredBys();
 			for (c : UML!BehaviorExecutionSpecification in covered ) {
@@ -140,12 +141,12 @@ context UML!Lifeline {
 	}
 	
 	constraint EntryHasThreeCoveredBy {
-		guard : self.name == "'Entry'"
+		guard : false
 		check : self.getCoveredBys().size() == 3
 	}
 	
 	constraint EntryHasOneBehaviorExecutionSpecification {
-		guard : self.name == "'Entry'"
+		guard : false
 		check : self.getCoveredBys().stream().filter(c|c.isTypeOf(UML!BehaviorExecutionSpecification)).count() == 1
 	}
 	
@@ -175,19 +176,24 @@ context UML!Message {
 		check : self.getMessageSort().getName() == "synchCall" or self.getMessageSort().getName() == "reply"
 		message : "Unsupported Type for MessageSort '" + self.getMessageSort().getName() + "' on message: " + self
 	}
-
-// TODO: the message will not have the GaStep in the future
-	constraint GaStepStereotypeApplied {
-		guard : self.getMessageSort().getName() == "synchCall"
-		check : self.isStereotypeApplied(gaStep)
-		message : self.getMessageStereotypeNotApplied(gaStep)
-	}
-	
 }
 
 context UML!BehaviorExecutionSpecification {
 
-	// TODO: check if GaStep ist set
+    constraint GaStepStereotypeApplied {
+        check : self.isStereotypeApplied(gaStep)
+        message : self.getMessageStereotypeNotApplied(gaStep)
+    }
+
+    constraint GaStepAttributeRepetitionApplied {
+        check : self.isStereotypeApplied(gaStep) and self.getValue(gaStep, "rep").isDefined()
+        message : "The 'rep' attribute is not set for BES: " + self
+    }
+
+    constraint GaStepAttributeExecutionTimeApplied {
+        check : self.isStereotypeApplied(gaStep) and self.getValue(gaStep, "execTime").isDefined()
+        message : "The 'execTime' attribute is not set for BES: " + self
+    }
 
     constraint NameIsSet {
         check : self.name.isDefined()
@@ -199,7 +205,7 @@ context UML!BehaviorExecutionSpecification {
 	}
 	
 	constraint CoveredIsLifeline {
-		check : self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+		check : self.getCovereds().size() == 1 and self.getCovereds().get(0).isTypeOf(UML!Lifeline)
 	}
 	
 	constraint StartIsSet {
