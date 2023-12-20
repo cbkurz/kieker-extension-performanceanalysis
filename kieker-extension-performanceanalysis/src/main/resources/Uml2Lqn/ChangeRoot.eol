@@ -21,5 +21,4 @@ for(child in subtree){
 "setting the new tree as model...".println();
 PlainLQN.root = newTag;
 
-
 "Done!".println();

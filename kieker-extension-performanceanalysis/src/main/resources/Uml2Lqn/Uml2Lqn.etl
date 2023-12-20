@@ -55,6 +55,7 @@ rule Node2Processor
 		 */
 		var components = node.getDeployed().select(i | i.isInteracting());
 
+        proc.multiplicity = 1;
 		proc.name = node.name;
 		proc.task ::= components;
 	}
@@ -184,7 +185,8 @@ rule BES2Entry
 			messages.add(bes.start);
 		}
 		
-		entry.name = bes.name;					
+		entry.name = bes.name;
+		entry.type = LQN!TypeType#PH1PH2;
 		entry.entryPhaseActivities = new LQN!PhaseActivities;
 		entry.entryPhaseActivities.activity = messages.equivalent("Message2Activity");
 	}
@@ -194,20 +196,19 @@ rule Message2Activity
 	transform msgo: UML!MessageOccurrenceSpecification
 	to actv: LQN!ActivityPhasesType
 	{
-		// A message should be stereotyped with "GaStep"
-		guard {			
-			return msgo.message.isStereotypeApplied("GaStep");
+		guard {
+			return bes.isDefined() and bes.isStereotypeApplied("GaStep");
 		}
 		// ("Create ActivityPhasesType for MessageOccurrenceSpecification: " + msgo.name).println();
 		var message = msgo.message;
-		var execTime = message.getValue(gastep, "execTime");
-		var rep = message.getValue(gastep, "rep");
+		var execTime = bes.getValue(gastep, "execTime");
+		var rep = bes.getValue(gastep, "rep");
 		var hostDemandMean = "1.0";
 
 		if(execTime.isDefined()) {
 			hostDemandMean = execTime.asDouble() * rep.asDouble();
 		}
-		
+
 		var call = msgo.equivalent("Message2Request");
 		if (call.isDefined()) {
 				actv.synchCall = Sequence{call};
@@ -215,13 +216,13 @@ rule Message2Activity
 			"Undefined call for message: ".print();
 			msgo.name.println();
 		}
-	
+
 		actv.name = message.name;
 		actv.phase = "1".asBigInteger();
 		actv.hostDemandMean = hostDemandMean + "";
 	}
-	
-@lazy	
+
+@lazy
 rule Message2Request
 	transform msgo: UML!MessageOccurrenceSpecification
 	to call: LQN!ActivityMakingCallType
@@ -229,20 +230,20 @@ rule Message2Request
 		guard {
 			return msgo.isSend(); // this asks if the MOS is at the sending (lifeline) end of the message and not at the receiving (lifeline) end.
 		}
-		
+
 		("Create ActivityMakingCallType for MessageOccurrenceSpecification: " + msgo.name).println();
-		
+
 		var message = msgo.message;
-		var rep = message.getValue(gastep, "rep");
+		var rep = bes.getValue(gastep, "rep");
 
 		var lifeline = message.receiveEvent.covered;
 		// Gets the BES starting with the message
-		var bes = lifeline.first.getElements("BehaviorExecutionSpecification");
+		var lbes = lifeline.first.getElements("BehaviorExecutionSpecification");
 		// Gets the target BES
-		var bes2 = bes.selectOne(i | i.start == message.receiveEvent and i.finish.isTypeOf(MessageOccurrenceSpecification));
-		
-		call.dest = bes2.name;
-		call.callsMean = rep;
+		var lbes2 = lbes.selectOne(i | i.start == message.receiveEvent and i.finish.isTypeOf(MessageOccurrenceSpecification));
+
+		call.dest = lbes2.name;
+		call.callsMean = lbes2.getValue(gastep, "rep");
 	}
 	
 	
