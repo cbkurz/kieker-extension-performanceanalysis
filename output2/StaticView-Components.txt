@@ -1,0 +1,24 @@
+@startuml
+
+' This is a PlantUML diagram.
+' Information on the notation can be found here: https://plantuml.com
+' An Editor, that allows to create diagrams, is here: https://www.plantuml.com/plantuml/uml/ 
+
+
+interface "'Entry'():<>" as _Entry______
+interface "public static main(java.lang.String[]):void" as public_static_main_java.lang.String____void
+interface "public static work2():void" as public_static_work2___void
+
+component "'Entry'" as _Entry_
+component "kurz.ma.examples.simple.Main2" as kurz.ma.examples.simple.Main2
+component "kurz.ma.examples.simple.Worker" as kurz.ma.examples.simple.Worker
+
+
+[_Entry_] -down-> _Entry______ : provides
+[kurz.ma.examples.simple.Main2] -down-> public_static_main_java.lang.String____void : provides
+[kurz.ma.examples.simple.Worker] -down-> public_static_work2___void : provides
+
+_Entry______ --> public_static_main_java.lang.String____void : calls
+public_static_main_java.lang.String____void --> public_static_work2___void : calls
+
+@enduml

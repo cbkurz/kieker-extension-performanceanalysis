@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- lqns.exe -pragma=cycles=yes -->
+<lqn-model name="output1/lqn" description="lqns.exe 5.28.5 solution for model from: output1/lqn.xml." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/LQN Solvers/lqn.xsd">
+  <solver-params comment="" conv_val="1e-05" it_limit="50" underrelax_coeff="0.9" print_int="0">
+    <pragma param="cycles" value="yes"/>
+    <result-general solver-info="lqns.exe 5.28.5" valid="true" conv-val="0" iterations="2" platform-info="MESHIFY5800X570 WinNT 10.0" user-cpu-time=" 0:00:00.000" system-cpu-time=" 0:00:00.000" elapsed-time=" 0:00:00.000">
+      <mva-info submodels="3" core="4" step="22" step-squared="122" wait="305" wait-squared="24973" faults="0"/>
+    </result-general>
+  </solver-params>
+  <processor name="Meshify5800X570" scheduling="fcfs">
+    <result-processor utilization="0.725466"/>
+    <task name="kurz.ma.examples.simple.Main" scheduling="fcfs">
+      <result-task throughput="7.25305e-10" utilization="0.725466" phase1-utilization="0.725466" proc-utilization="0.725466"/>
+      <entry name="BES-kurz.ma.examples.simple.Main.public static main(java.lang.String[]):void" type="PH1PH2">
+        <result-entry utilization="0.725466" throughput="7.25305e-10" proc-utilization="0.725466" squared-coeff-variation="1" throughput-bound="9.99779e-10"/>
+        <entry-phase-activities>
+          <activity name="public static main(java.lang.String[]):void" phase="1" host-demand-mean="1.00022e+09">
+            <result-activity proc-waiting="0" service-time="1.00022e+09" utilization="0.725466" service-time-variance="1.00044e+18"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+  </processor>
+  <processor name="&apos;Entry&apos;-SimpleExample-0" scheduling="fcfs">
+    <result-processor utilization="7.25305e-10"/>
+    <task name="SimpleExample-0_job_class_" scheduling="fcfs">
+      <result-task throughput="7.25305e-10" utilization="0.725466" phase1-utilization="0.725466" proc-utilization="7.25305e-10"/>
+      <entry name="BES-&apos;Entry&apos;.&apos;Entry&apos;():&lt;&gt;" type="PH1PH2" open-arrival-rate="7.25305e-10">
+        <result-entry utilization="0.725466" throughput="7.25305e-10" proc-utilization="7.25305e-10" squared-coeff-variation="3" throughput-bound="9.99779e-10" open-wait-time="6.28646e+09"/>
+        <entry-phase-activities>
+          <activity name="public static main(java.lang.String[]):void" phase="1" host-demand-mean="1">
+            <result-activity proc-waiting="0" service-time="1.00022e+09" utilization="0.725466" service-time-variance="3.00133e+18"/>
+            <synch-call dest="BES-kurz.ma.examples.simple.Main.public static main(java.lang.String[]):void" calls-mean="1">
+              <result-call waiting="0"/>
+            </synch-call>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+  </processor>
+</lqn-model>

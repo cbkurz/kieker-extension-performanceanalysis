@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<lqn-model name="FutureModel">
+  <solver-params comment=""/>
+  <processor name="Meshify5800X570">
+        
+    <task multiplicity="1" name="kurz.ma.examples.simple.Main2">
+            
+      <entry name="BES-kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void">
+                
+        <entry-phase-activities>
+                    
+          <activity host-demand-mean="5.003333E8" name="public static work2():void" phase="1">
+                        
+            <synch-call calls-mean="1" dest="BES-kurz.ma.examples.simple.Worker.public static work2():void"/>
+                      
+          </activity>
+                  
+        </entry-phase-activities>
+              
+      </entry>
+          
+    </task>
+        
+    <task multiplicity="1" name="kurz.ma.examples.simple.Worker">
+            
+      <entry name="BES-kurz.ma.examples.simple.Worker.public static work2():void">
+                
+        <entry-phase-activities>
+                    
+          <activity host-demand-mean="5.003333E8" name="public static work2():void" phase="1"/>
+                  
+        </entry-phase-activities>
+              
+      </entry>
+          
+    </task>
+      
+  </processor>
+  <processor name="'Entry'-SimpleExample-0">
+        
+    <task name="SimpleExample-0_job_class_">
+            
+      <entry name="BES-'Entry'.'Entry'():&lt;&gt;" open-arrival-rate="0.00000000072487171868">
+                
+        <entry-phase-activities>
+                    
+          <activity host-demand-mean="5.009885E8" name="public static main(java.lang.String[]):void" phase="1">
+                        
+            <synch-call calls-mean="1" dest="BES-kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+                      
+          </activity>
+                  
+        </entry-phase-activities>
+              
+      </entry>
+          
+    </task>
+      
+  </processor>
+</lqn-model>

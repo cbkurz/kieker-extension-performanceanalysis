@@ -1,0 +1,56 @@
+@startuml
+
+' This is a PlantUML diagram.
+' Information on the notation can be found here: https://plantuml.com
+' An Editor, that allows to create diagrams, is here: https://www.plantuml.com/plantuml/uml/ 
+
+title Interaction-0
+
+participant _Entry_ [
+    ='Entry'
+    ----
+    << Actor >>
+    << GaWorkloadEvent >>
+    pattern: open:0.00000000072487171868
+] 
+participant kurz.ma.examples.simple.Main2 [
+    =kurz.ma.examples.simple.Main2
+    ----
+
+] 
+participant kurz.ma.examples.simple.Worker [
+    =kurz.ma.examples.simple.Worker
+    ----
+
+] 
+
+autonumber
+
+_Entry_ -> kurz.ma.examples.simple.Main2 : public static main(java.lang.String[]):void
+note over kurz.ma.examples.simple.Main2
+    << GaStep >>
+    execTimeEntries: 5.045354E8,5.000623E8,5.004948E8,5.002133E8,5.005341E8,5.0064E8,5.004396E8
+    execTime: 5.009885E8
+    rep: 1
+end note
+activate kurz.ma.examples.simple.Main2
+kurz.ma.examples.simple.Main2 -> kurz.ma.examples.simple.Worker : public static work2():void
+note over kurz.ma.examples.simple.Worker
+    << GaStep >>
+    execTimeEntries: 4.998635E8,5.009918E8,5.000427E8,4.99999E8,5.005473E8,5.00017E8,5.008718E8
+    execTime: 5.003333E8
+    rep: 1
+end note
+activate kurz.ma.examples.simple.Worker
+kurz.ma.examples.simple.Worker --> kurz.ma.examples.simple.Main2 : public static main(java.lang.String[]):void
+note over kurz.ma.examples.simple.Main2
+
+end note
+deactivate kurz.ma.examples.simple.Worker
+kurz.ma.examples.simple.Main2 --> _Entry_ : 'Entry'():<>
+note over _Entry_
+
+end note
+deactivate kurz.ma.examples.simple.Main2
+
+@enduml

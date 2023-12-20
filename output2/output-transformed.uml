@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_9bwHgJ1MEe6dGNHmZfBwsg" name="FutureModel">
+  <packagedElement xmi:type="uml:Package" xmi:id="_9bxVoJ1MEe6dGNHmZfBwsg" name="staticView-components">
+    <eAnnotations xmi:id="_9b4qYJ1MEe6dGNHmZfBwsg" source="AppliedTraceIds">
+      <details xmi:id="_9b5RcJ1MEe6dGNHmZfBwsg" key="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():voidSender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_9bx8sJ1MEe6dGNHmZfBwsg" name="'Entry'():&lt;>"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_9bzx4J1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):void"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_9b0Y8J1MEe6dGNHmZfBwsg" name="public static work2():void"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_9b0Y8Z1MEe6dGNHmZfBwsg" client="_9bx8sJ1MEe6dGNHmZfBwsg" supplier="_9bzx4J1MEe6dGNHmZfBwsg"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_9b1AAJ1MEe6dGNHmZfBwsg" client="_9bzx4J1MEe6dGNHmZfBwsg" supplier="_9b0Y8J1MEe6dGNHmZfBwsg"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_9b1nEJ1MEe6dGNHmZfBwsg" name="'Entry'">
+      <interfaceRealization xmi:id="_9b2OIJ1MEe6dGNHmZfBwsg" name="'Entry'():&lt;>" client="_9b1nEJ1MEe6dGNHmZfBwsg" supplier="_9bx8sJ1MEe6dGNHmZfBwsg" contract="_9bx8sJ1MEe6dGNHmZfBwsg"/>
+      <ownedOperation xmi:id="_9b1nEZ1MEe6dGNHmZfBwsg" name="'Entry'():&lt;>"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_9b21MJ1MEe6dGNHmZfBwsg" name="kurz.ma.examples.simple.Main2">
+      <interfaceRealization xmi:id="_9b3cQJ1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):void" client="_9b21MJ1MEe6dGNHmZfBwsg" supplier="_9bzx4J1MEe6dGNHmZfBwsg" contract="_9bzx4J1MEe6dGNHmZfBwsg"/>
+      <ownedOperation xmi:id="_9b21MZ1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):void"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_9b3cQZ1MEe6dGNHmZfBwsg" name="kurz.ma.examples.simple.Worker">
+      <interfaceRealization xmi:id="_9b4DUJ1MEe6dGNHmZfBwsg" name="public static work2():void" client="_9b3cQZ1MEe6dGNHmZfBwsg" supplier="_9b0Y8J1MEe6dGNHmZfBwsg" contract="_9b0Y8J1MEe6dGNHmZfBwsg"/>
+      <ownedOperation xmi:id="_9b3cQp1MEe6dGNHmZfBwsg" name="public static work2():void"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_9b54gJ1MEe6dGNHmZfBwsg" name="deploymentView">
+    <eAnnotations xmi:id="_9b-J8J1MEe6dGNHmZfBwsg" source="AppliedTraceIds">
+      <details xmi:id="_9b-J8Z1MEe6dGNHmZfBwsg" key="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():voidSender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_9b54gZ1MEe6dGNHmZfBwsg" name="'Entry'">
+      <manifestation xmi:id="_9b6fkJ1MEe6dGNHmZfBwsg" name="ArtifactManifestation-'Entry'" supplier="_9b1nEJ1MEe6dGNHmZfBwsg" utilizedElement="_9b1nEJ1MEe6dGNHmZfBwsg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_9b6fkZ1MEe6dGNHmZfBwsg" name="@2">
+      <manifestation xmi:id="_9b7GoJ1MEe6dGNHmZfBwsg" name="ArtifactManifestation-kurz.ma.examples.simple.Main2" supplier="_9b21MJ1MEe6dGNHmZfBwsg" utilizedElement="_9b21MJ1MEe6dGNHmZfBwsg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_9b7GoZ1MEe6dGNHmZfBwsg" name="@1">
+      <manifestation xmi:id="_9b7tsJ1MEe6dGNHmZfBwsg" name="ArtifactManifestation-kurz.ma.examples.simple.Worker" supplier="_9b3cQZ1MEe6dGNHmZfBwsg" utilizedElement="_9b3cQZ1MEe6dGNHmZfBwsg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Node" xmi:id="_9b7tsZ1MEe6dGNHmZfBwsg" name="'Entry'">
+      <eAnnotations xmi:id="_9b8UwZ1MEe6dGNHmZfBwsg" source="GaExecHost"/>
+      <deployment xmi:id="_9b8UwJ1MEe6dGNHmZfBwsg" name="NodeDeployment-'Entry'" client="_9b7tsZ1MEe6dGNHmZfBwsg" supplier="_9b54gZ1MEe6dGNHmZfBwsg" deployedArtifact="_9b54gZ1MEe6dGNHmZfBwsg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Node" xmi:id="_9b870J1MEe6dGNHmZfBwsg" name="Meshify5800X570">
+      <eAnnotations xmi:id="_9b9i4J1MEe6dGNHmZfBwsg" source="GaExecHost"/>
+      <deployment xmi:id="_9b870Z1MEe6dGNHmZfBwsg" name="NodeDeployment-Meshify5800X570" client="_9b870J1MEe6dGNHmZfBwsg" supplier="_9b6fkZ1MEe6dGNHmZfBwsg _9b7GoZ1MEe6dGNHmZfBwsg" deployedArtifact="_9b6fkZ1MEe6dGNHmZfBwsg _9b7GoZ1MEe6dGNHmZfBwsg"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_9b-xAJ1MEe6dGNHmZfBwsg" name="dynamicView">
+    <packagedElement xmi:type="uml:Actor" xmi:id="_9b__IJ1MEe6dGNHmZfBwsg" name="'Entry'-SimpleExample-0"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_9b_YEJ1MEe6dGNHmZfBwsg" name="SimpleExample-0">
+      <eAnnotations xmi:id="_9cXykJ1MEe6dGNHmZfBwsg" source="Representation">
+        <details xmi:id="_9cXykZ1MEe6dGNHmZfBwsg" key="representation" value="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():voidSender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+      </eAnnotations>
+      <eAnnotations xmi:id="_9cXykp1MEe6dGNHmZfBwsg" source="GaScenario"/>
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_9cAmMJ1MEe6dGNHmZfBwsg" name="Interaction-0">
+        <eAnnotations xmi:id="_9cAmMZ1MEe6dGNHmZfBwsg" source="AppliedTraceIds">
+          <details xmi:id="_9cAmMp1MEe6dGNHmZfBwsg" key="8958644821258403841"/>
+          <details xmi:id="_9cAmM51MEe6dGNHmZfBwsg" key="8958644821258403842"/>
+          <details xmi:id="_9cAmNJ1MEe6dGNHmZfBwsg" key="8958644821258403843"/>
+          <details xmi:id="_9cAmNZ1MEe6dGNHmZfBwsg" key="8958644821258403844"/>
+          <details xmi:id="_9cBNQJ1MEe6dGNHmZfBwsg" key="8958644821258403845"/>
+          <details xmi:id="_9cBNQZ1MEe6dGNHmZfBwsg" key="8958644821258403846"/>
+          <details xmi:id="_9cBNQp1MEe6dGNHmZfBwsg" key="8958644821258403847"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_9cBNQ51MEe6dGNHmZfBwsg" source="Representation">
+          <details xmi:id="_9cBNRJ1MEe6dGNHmZfBwsg" key="representation" value="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():voidSender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidSender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_9cBNRZ1MEe6dGNHmZfBwsg" source="PerformanceInformation">
+          <details xmi:id="_9cBNRp1MEe6dGNHmZfBwsg" key="startTime" value="1702580450337121400"/>
+          <details xmi:id="_9cBNR51MEe6dGNHmZfBwsg" key="endTime" value="1702580459994002500"/>
+          <details xmi:id="_9cB0UJ1MEe6dGNHmZfBwsg" key="openWorkload" value="open:0.00000000072487171868"/>
+        </eAnnotations>
+        <ownedParameter xmi:id="_9cCbYJ1MEe6dGNHmZfBwsg" name="'Entry'-SimpleExample-0" type="_9b__IJ1MEe6dGNHmZfBwsg"/>
+        <ownedParameter xmi:id="_9cEQkJ1MEe6dGNHmZfBwsg" name="Representation-kurz.ma.examples.simple.Main2" type="_9b21MJ1MEe6dGNHmZfBwsg"/>
+        <ownedParameter xmi:id="_9cFesZ1MEe6dGNHmZfBwsg" name="Representation-kurz.ma.examples.simple.Worker" type="_9b3cQZ1MEe6dGNHmZfBwsg"/>
+        <lifeline xmi:id="_9cB0UZ1MEe6dGNHmZfBwsg" name="'Entry'" represents="_9cCbYJ1MEe6dGNHmZfBwsg" coveredBy="_9cHT551MEe6dGNHmZfBwsg _9cUvQ51MEe6dGNHmZfBwsg _9cV9YJ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cDCcJ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cDCcZ1MEe6dGNHmZfBwsg" key="package" value=""/>
+            <details xmi:id="_9cDCcp1MEe6dGNHmZfBwsg" key="class" value="'Entry'"/>
+            <details xmi:id="_9cDCc51MEe6dGNHmZfBwsg" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_9cDCdJ1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_9cDCdZ1MEe6dGNHmZfBwsg" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cDCdp1MEe6dGNHmZfBwsg" source="GaWorkloadEvent">
+            <details xmi:id="_9cDpgJ1MEe6dGNHmZfBwsg" key="pattern" value="open:0.00000000072487171868"/>
+          </eAnnotations>
+        </lifeline>
+        <lifeline xmi:id="_9cDpgZ1MEe6dGNHmZfBwsg" name="kurz.ma.examples.simple.Main2" represents="_9cEQkJ1MEe6dGNHmZfBwsg" coveredBy="_9cIiBp1MEe6dGNHmZfBwsg _9cK-QJ1MEe6dGNHmZfBwsg _9cMMbJ1MEe6dGNHmZfBwsg _9cRr-J1MEe6dGNHmZfBwsg _9cUINJ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cE3oJ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cE3oZ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cE3op1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cE3o51MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cE3pJ1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cE3pZ1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </lifeline>
+        <lifeline xmi:id="_9cFesJ1MEe6dGNHmZfBwsg" name="kurz.ma.examples.simple.Worker" represents="_9cFesZ1MEe6dGNHmZfBwsg" coveredBy="_9cNagZ1MEe6dGNHmZfBwsg _9cPPsJ1MEe6dGNHmZfBwsg _9cQd1p1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cGFwJ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cGFwZ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cGFwp1MEe6dGNHmZfBwsg" key="class" value="Worker"/>
+            <details xmi:id="_9cGFw51MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Worker"/>
+            <details xmi:id="_9cGFxJ1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Worker.public static work2():void"/>
+            <details xmi:id="_9cGFxZ1MEe6dGNHmZfBwsg" key="signature" value="public static work2():void"/>
+          </eAnnotations>
+        </lifeline>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cHT551MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):voidSendEvent" covered="_9cB0UZ1MEe6dGNHmZfBwsg" message="_9cGs0J1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cH68J1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cH68Z1MEe6dGNHmZfBwsg" key="representation" value="SendMOS-Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cH68p1MEe6dGNHmZfBwsg" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cIiAJ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cIiAZ1MEe6dGNHmZfBwsg" key="package" value=""/>
+            <details xmi:id="_9cIiAp1MEe6dGNHmZfBwsg" key="class" value="'Entry'"/>
+            <details xmi:id="_9cIiA51MEe6dGNHmZfBwsg" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_9cIiBJ1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_9cIiBZ1MEe6dGNHmZfBwsg" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cIiBp1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):voidReceiveEvent" covered="_9cDpgZ1MEe6dGNHmZfBwsg" message="_9cGs0J1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cJJEJ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cJJEZ1MEe6dGNHmZfBwsg" key="representation" value="ReceiveMOS-Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cJJEp1MEe6dGNHmZfBwsg" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cJJE51MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cJJFJ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cJJFZ1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cJJFp1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cJJF51MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cJJGJ1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_9cK-QJ1MEe6dGNHmZfBwsg" name="BES-kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void" covered="_9cDpgZ1MEe6dGNHmZfBwsg" finish="_9cUINJ1MEe6dGNHmZfBwsg" start="_9cIiBp1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cK-QZ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cLlUJ1MEe6dGNHmZfBwsg" key="representation" value="BES-Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cLlUZ1MEe6dGNHmZfBwsg" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cLlUp1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cLlU51MEe6dGNHmZfBwsg" key="OpenMessage" value="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cLlVJ1MEe6dGNHmZfBwsg" key="CloseMessage" value="Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_9cLlVZ1MEe6dGNHmZfBwsg" key="CloseMessageCount" value="3"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cMMbJ1MEe6dGNHmZfBwsg" name="public static work2():voidSendEvent" covered="_9cDpgZ1MEe6dGNHmZfBwsg" message="_9cLlVp1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cMzcJ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cMzcZ1MEe6dGNHmZfBwsg" key="representation" value="SendMOS-Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():void"/>
+            <details xmi:id="_9cMzcp1MEe6dGNHmZfBwsg" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cMzc51MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cMzdJ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cMzdZ1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cMzdp1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cMzd51MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cNagJ1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cNagZ1MEe6dGNHmZfBwsg" name="public static work2():voidReceiveEvent" covered="_9cFesJ1MEe6dGNHmZfBwsg" message="_9cLlVp1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cOBkJ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cOBkZ1MEe6dGNHmZfBwsg" key="representation" value="ReceiveMOS-Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():void"/>
+            <details xmi:id="_9cOBkp1MEe6dGNHmZfBwsg" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cOBk51MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cOBlJ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cOBlZ1MEe6dGNHmZfBwsg" key="class" value="Worker"/>
+            <details xmi:id="_9cOBlp1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Worker"/>
+            <details xmi:id="_9cOBl51MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Worker.public static work2():void"/>
+            <details xmi:id="_9cOBmJ1MEe6dGNHmZfBwsg" key="signature" value="public static work2():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_9cPPsJ1MEe6dGNHmZfBwsg" name="BES-kurz.ma.examples.simple.Worker.public static work2():void" covered="_9cFesJ1MEe6dGNHmZfBwsg" finish="_9cQd1p1MEe6dGNHmZfBwsg" start="_9cNagZ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cPPsZ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cPPsp1MEe6dGNHmZfBwsg" key="representation" value="BES-Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():void"/>
+            <details xmi:id="_9cP2wJ1MEe6dGNHmZfBwsg" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cP2wZ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cP2wp1MEe6dGNHmZfBwsg" key="OpenMessage" value="Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():void"/>
+            <details xmi:id="_9cP2w51MEe6dGNHmZfBwsg" key="CloseMessage" value="Sender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cP2xJ1MEe6dGNHmZfBwsg" key="CloseMessageCount" value="2"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cQd1p1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):voidSendEvent" covered="_9cFesJ1MEe6dGNHmZfBwsg" message="_9cP2xZ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cQd151MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cRr8J1MEe6dGNHmZfBwsg" key="representation" value="SendMOS-Sender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cRr8Z1MEe6dGNHmZfBwsg" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cRr8p1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cRr851MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cRr9J1MEe6dGNHmZfBwsg" key="class" value="Worker"/>
+            <details xmi:id="_9cRr9Z1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Worker"/>
+            <details xmi:id="_9cRr9p1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Worker.public static work2():void"/>
+            <details xmi:id="_9cRr951MEe6dGNHmZfBwsg" key="signature" value="public static work2():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cRr-J1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):voidReceiveEvent" covered="_9cDpgZ1MEe6dGNHmZfBwsg" message="_9cP2xZ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cSTAJ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cSTAZ1MEe6dGNHmZfBwsg" key="representation" value="ReceiveMOS-Sender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cSTAp1MEe6dGNHmZfBwsg" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cSTA51MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cSTBJ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cSTBZ1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cSTBp1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cSTB51MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cSTCJ1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cUINJ1MEe6dGNHmZfBwsg" name="'Entry'():&lt;>SendEvent" covered="_9cDpgZ1MEe6dGNHmZfBwsg" message="_9cThIJ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cUINZ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cUINp1MEe6dGNHmZfBwsg" key="representation" value="SendMOS-Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_9cUIN51MEe6dGNHmZfBwsg" key="count" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cUIOJ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cUIOZ1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cUIOp1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cUvQJ1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cUvQZ1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cUvQp1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_9cUvQ51MEe6dGNHmZfBwsg" name="'Entry'():&lt;>ReceiveEvent" covered="_9cB0UZ1MEe6dGNHmZfBwsg" message="_9cThIJ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cUvRJ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cUvRZ1MEe6dGNHmZfBwsg" key="representation" value="ReceiveMOS-Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_9cUvRp1MEe6dGNHmZfBwsg" key="count" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cUvR51MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cUvSJ1MEe6dGNHmZfBwsg" key="package" value=""/>
+            <details xmi:id="_9cUvSZ1MEe6dGNHmZfBwsg" key="class" value="'Entry'"/>
+            <details xmi:id="_9cUvSp1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_9cUvS51MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_9cUvTJ1MEe6dGNHmZfBwsg" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_9cV9YJ1MEe6dGNHmZfBwsg" name="BES-'Entry'.'Entry'():&lt;>" covered="_9cB0UZ1MEe6dGNHmZfBwsg" finish="_9cUvQ51MEe6dGNHmZfBwsg" start="_9cHT551MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cWkcJ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cWkcZ1MEe6dGNHmZfBwsg" key="representation" value="BES-Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cWkcp1MEe6dGNHmZfBwsg" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cWkc51MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cXLgJ1MEe6dGNHmZfBwsg" key="OpenMessage" value="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cXLgZ1MEe6dGNHmZfBwsg" key="CloseMessage" value="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cXLgp1MEe6dGNHmZfBwsg" key="CloseMessageCount" value="3"/>
+          </eAnnotations>
+        </fragment>
+        <message xmi:id="_9cGs0J1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):void" receiveEvent="_9cIiBp1MEe6dGNHmZfBwsg" sendEvent="_9cHT551MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cGs0Z1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cGs0p1MEe6dGNHmZfBwsg" key="representation" value="Sender--'Entry''Entry'():&lt;>--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cGs051MEe6dGNHmZfBwsg" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cGs1J1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cGs1Z1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cGs1p1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cHT4J1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cHT4Z1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cHT4p1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cHT451MEe6dGNHmZfBwsg" source="GaStep">
+            <details xmi:id="_9cHT5J1MEe6dGNHmZfBwsg" key="execTimeEntries" value="5.045354E8,5.000623E8,5.004948E8,5.002133E8,5.005341E8,5.0064E8,5.004396E8"/>
+            <details xmi:id="_9cHT5Z1MEe6dGNHmZfBwsg" key="execTime" value="5.009885E8"/>
+            <details xmi:id="_9cHT5p1MEe6dGNHmZfBwsg" key="rep" value="1"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_9cLlVp1MEe6dGNHmZfBwsg" name="public static work2():void" receiveEvent="_9cNagZ1MEe6dGNHmZfBwsg" sendEvent="_9cMMbJ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cLlV51MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cMMYJ1MEe6dGNHmZfBwsg" key="representation" value="Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--kurz.ma.examples.simple.Workerpublic static work2():voidkurz.ma.examples.simple.Workerpublic static work2():void"/>
+            <details xmi:id="_9cMMYZ1MEe6dGNHmZfBwsg" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cMMYp1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cMMY51MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cMMZJ1MEe6dGNHmZfBwsg" key="class" value="Worker"/>
+            <details xmi:id="_9cMMZZ1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Worker"/>
+            <details xmi:id="_9cMMZp1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Worker.public static work2():void"/>
+            <details xmi:id="_9cMMZ51MEe6dGNHmZfBwsg" key="signature" value="public static work2():void"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cMMaJ1MEe6dGNHmZfBwsg" source="GaStep">
+            <details xmi:id="_9cMMaZ1MEe6dGNHmZfBwsg" key="execTimeEntries" value="4.998635E8,5.009918E8,5.000427E8,4.99999E8,5.005473E8,5.00017E8,5.008718E8"/>
+            <details xmi:id="_9cMMap1MEe6dGNHmZfBwsg" key="execTime" value="5.003333E8"/>
+            <details xmi:id="_9cMMa51MEe6dGNHmZfBwsg" key="rep" value="1"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_9cP2xZ1MEe6dGNHmZfBwsg" name="public static main(java.lang.String[]):void" messageSort="reply" receiveEvent="_9cRr-J1MEe6dGNHmZfBwsg" sendEvent="_9cQd1p1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cP2xp1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cP2x51MEe6dGNHmZfBwsg" key="representation" value="Sender--kurz.ma.examples.simple.Workerpublic static work2():void--Receiver--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):voidkurz.ma.examples.simple.Main2public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cP2yJ1MEe6dGNHmZfBwsg" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cQd0J1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cQd0Z1MEe6dGNHmZfBwsg" key="package" value="kurz.ma.examples.simple"/>
+            <details xmi:id="_9cQd0p1MEe6dGNHmZfBwsg" key="class" value="Main2"/>
+            <details xmi:id="_9cQd051MEe6dGNHmZfBwsg" key="fullQualifiedName" value="kurz.ma.examples.simple.Main2"/>
+            <details xmi:id="_9cQd1J1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="kurz.ma.examples.simple.Main2.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_9cQd1Z1MEe6dGNHmZfBwsg" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_9cThIJ1MEe6dGNHmZfBwsg" name="'Entry'():&lt;>" messageSort="reply" receiveEvent="_9cUvQ51MEe6dGNHmZfBwsg" sendEvent="_9cUINJ1MEe6dGNHmZfBwsg">
+          <eAnnotations xmi:id="_9cThIZ1MEe6dGNHmZfBwsg" source="Representation">
+            <details xmi:id="_9cThIp1MEe6dGNHmZfBwsg" key="representation" value="Sender--kurz.ma.examples.simple.Main2public static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_9cThI51MEe6dGNHmZfBwsg" key="count" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_9cThJJ1MEe6dGNHmZfBwsg" source="Reference">
+            <details xmi:id="_9cThJZ1MEe6dGNHmZfBwsg" key="package" value=""/>
+            <details xmi:id="_9cUIMJ1MEe6dGNHmZfBwsg" key="class" value="'Entry'"/>
+            <details xmi:id="_9cUIMZ1MEe6dGNHmZfBwsg" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_9cUIMp1MEe6dGNHmZfBwsg" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_9cUIM51MEe6dGNHmZfBwsg" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+        </message>
+      </ownedBehavior>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_9cqtgJ1MEe6dGNHmZfBwsg">
+      <name xsi:nil="true"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_9c26wJ1MEe6dGNHmZfBwsg">
+      <name xsi:nil="true"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
