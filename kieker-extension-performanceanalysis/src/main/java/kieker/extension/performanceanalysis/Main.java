@@ -3,6 +3,7 @@ package kieker.extension.performanceanalysis;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Strings;
 import kieker.extension.performanceanalysis.cli.Kieker2UmlCli;
+import kieker.extension.performanceanalysis.cli.RunAllTransformationsCli;
 import kieker.extension.performanceanalysis.cli.Uml2LqnCli;
 import kieker.extension.performanceanalysis.cli.Uml2PlantUmlCli;
 import kieker.extension.performanceanalysis.cli.Uml2UmlCli;
@@ -19,16 +20,18 @@ public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
 
-        final Uml2PlantUmlCli uml2PlantUmlCli = new Uml2PlantUmlCli();
-        final Uml2LqnCli uml2LqnCli = new Uml2LqnCli();
-        final Uml2UmlCli uml2UmlCli = new Uml2UmlCli();
+        final RunAllTransformationsCli runAllTransformationsCli = new RunAllTransformationsCli();
         final Kieker2UmlCli kieker2UmlCli = new Kieker2UmlCli();
+        final Uml2PlantUmlCli uml2PlantUmlCli = new Uml2PlantUmlCli();
+        final Uml2UmlCli uml2UmlCli = new Uml2UmlCli();
+        final Uml2LqnCli uml2LqnCli = new Uml2LqnCli();
 
         JCommander jc = JCommander.newBuilder()
-                .addCommand(uml2PlantUmlCli)
-                .addCommand(uml2LqnCli)
-                .addCommand(uml2UmlCli)
+                .addCommand(runAllTransformationsCli)
                 .addCommand(kieker2UmlCli)
+                .addCommand(uml2PlantUmlCli)
+                .addCommand(uml2UmlCli)
+                .addCommand(uml2LqnCli)
                 .build();
         try {
             jc.parse(args);
@@ -41,6 +44,7 @@ public class Main {
         String parsedCommand = jc.getParsedCommand();
 
         if (Strings.isStringEmpty(parsedCommand)) {
+            LOGGER.info("No command was given.");
             jc.usage();
             return;
         }
@@ -58,6 +62,9 @@ public class Main {
                 break;
             case "Uml2Lqn":
                 new Uml2Lqn(uml2LqnCli.getUmlPath(), uml2LqnCli.getLqnPath()).run();
+                break;
+            case "RunAllTransformations":
+                new RunAllTransformations(args, runAllTransformationsCli.getModelPath(), runAllTransformationsCli.getTransformationPath()).run();
                 break;
             default:
                 jc.usage();

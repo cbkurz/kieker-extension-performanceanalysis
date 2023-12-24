@@ -27,24 +27,12 @@ public class Kieker2UmlCli {
         return Paths.get(defaultModelPath);
     }
 
-    ;
-
     @Parameter(names = {"-uc", "--use-case"},
             description = "The Name of the use case under which the input files are added. " +
                     "The use-case is added irrespectively if the use-case is already present.",
             required = true
     )
     private String useCaseName;
-
-    @Parameter(names = {"-f", "--file"},
-            variableArity = true,
-            description = "A file or list of files to parse. " +
-                    "The files must be kieker traces. " +
-                    "These files are converted to a UML model.",
-            converter = PathConverter.class,
-            validateWith = FileIsPresentValidator.class
-    )
-    private List<Path> inputFiles = new ArrayList<>();
 
     @Parameter(names = {"-d", "--directory"},
             variableArity = true,
@@ -56,26 +44,9 @@ public class Kieker2UmlCli {
     )
     private List<Path> inputDirectories = new ArrayList<>();
 
-    @Parameter(names = {"-R", "--recursive"},
-            description = "If this flag is set the given input directories will be searched recursively."
-    )
-    private boolean recursive = false;
-
-
-    public List<Path> getInputFiles() {
-        return inputFiles;
-    }
 
     public List<Path> getInputDirectories() {
         return inputDirectories;
-    }
-
-    public boolean isRecursive() {
-        return recursive;
-    }
-
-    public boolean isHelp() {
-        return false;
     }
 
     public Path getModelPath() {

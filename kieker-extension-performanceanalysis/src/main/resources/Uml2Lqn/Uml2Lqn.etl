@@ -55,7 +55,7 @@ rule Node2Processor
 		 */
 		var components = node.getDeployed().select(i | i.isInteracting());
 
-        proc.multiplicity = 1;
+        proc.multiplicity = "1";
 		proc.name = node.name;
 		proc.task ::= components;
 	}
