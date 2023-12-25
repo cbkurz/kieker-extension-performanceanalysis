@@ -5,6 +5,7 @@ pre {
 	var gastep = "GaStep";
 	var gaworkload = "GaWorkloadEvent";
 	var entryCounter : Integer = 0;
+	var allBes = UML!BehaviorExecutionSpecification.all;
 }
 
 post {}
@@ -54,10 +55,11 @@ rule Node2Processor
 		 * and interacting in a scenario
 		 */
 		var components = node.getDeployed().select(i | i.isInteracting());
+		var operations = components.collect(c | c.getOperations()).flatten;
 
         proc.multiplicity = "1".asBigInteger();
 		proc.name = node.name;
-		proc.task = components.equivalent("Component2Task");
+		proc.task = operations.equivalent("Operation2Task");
 	}
 	
 rule Actor2Processor
@@ -124,36 +126,53 @@ rule Interaction2Task
 	    }
 	}
 
-rule Component2Task
-	transform component: UML!Component
+rule Operation2Task
+	transform op: UML!Operation
 	to task: LQN!TaskType
 	{
 		guard {
 			/**
-			 * The guard filters all the components not interacting and
+			 * The guard filters all the operations their 
+			 * components are not interacting and
 			 * not deployed on a Node
 			 **/
-			if(component.getArtifacts().isEmpty())
+			 var component = op.getOwner();
+			 if (not component.isDefined()) {
+			 	throw "There is no owning Component for Operation: " + op.name;
+			 }
+			 if(component.getArtifacts().isEmpty())
 				throw "Component " + component.name + 
 					" is not represented by any Artifact";
-			return component.isInteracting();
+			 return component.isInteracting();
 		}
 		// ("Create task for component: " + component.name).println();
 	
+		var component = op.getOwner();
+// 		var lifelines = component.getRepresentedLifelines();
+//		lifelines = lifelines.select(i | i.isInteracting());
+		
+//		var totalBeses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
 
-		var lifelines = component.getRepresentedLifelines();
-		lifelines = lifelines.select(i | i.isInteracting());
+//		var beses: Set = new Set();
+//		for (bes in totalBeses) {
+//			var isPresent = beses.stream().filter(b | b.name == bes.name).findFirst().isPresent();
+//			if (isPresent) {
+//				continue;
+//			}
+//			beses.add(bes);
+//		}
+//		var entries = beses.equivalent("BES2Entry");
+		var besName = op.getReference("BES");
+		var bes = allBes.selectOne(b | b.name == besName);
+		var entries = Sequence{bes.equivalent("BES2Entry")};
 		
-		var totalBeses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
 		
-		var beses: Set = new Set();
-		for (bes in totalBeses) {
-			var isPresent = beses.stream().filter(b | b.name == bes.name).findFirst().isPresent();
-			if (isPresent) {
-				continue;
-			}
-			beses.add(bes);
-		}
+		"besName: ".print();
+		besName.println();
+		"bes: ".print();
+		bes.println();
+		"entries: ".print();
+		entries.println();
 		
 		/*
 		 * multiplicity of a task is given by the number of artifacts
@@ -163,8 +182,8 @@ rule Component2Task
 		var artifacts = component.getArtifacts();
 		var multiplicity = artifacts.size().asString();
 							
-		task.name = component.name;
-		task.entry = beses.equivalent("BES2Entry");
+		task.name = op.name;
+		task.entry = entries;
 		task.multiplicity = multiplicity.asBigInteger();
 	}
 	

@@ -2,7 +2,7 @@
   <configuration default="false" name="AllTransformations" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="kieker.extension.performanceanalysis.Main" />
     <module name="kieker-extension-performanceanalysis.kieker-extension-performanceanalysis.main" />
-    <option name="PROGRAM_PARAMETERS" value="RunAllTransformations -uc SimpleExample -d sample-input/SimpleExample-3 -t sample-input/T.model" />
+    <option name="PROGRAM_PARAMETERS" value="RunAllTransformations -uc SimpleExample -d sample-input/SimpleExample-4 -t sample-input/T.model" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

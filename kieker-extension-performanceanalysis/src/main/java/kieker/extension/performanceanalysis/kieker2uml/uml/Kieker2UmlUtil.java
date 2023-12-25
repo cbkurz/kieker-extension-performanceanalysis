@@ -44,7 +44,7 @@ public class Kieker2UmlUtil {
     public static final EClass PACKAGE_E_CLASS = UMLFactory.eINSTANCE.createPackage().eClass();
     public static final String REFERENCE_ANNOTATION_NAME = "Reference";
     public static final String REPRESENTATION_ANNOTATION_NAME = "Representation";
-    public static final String REPRESENTATION_NAME = "representation";
+    public static final String REPRESENTATION_FIELD_NAME = "representation";
     public static final String REPRESENTATION_COUNT = "count";
     public static final String TRACE_IDS_SET_NAME = "AppliedIds";
 
@@ -247,7 +247,7 @@ public class Kieker2UmlUtil {
     static void setRepresentation(final Element element, final String representation) {
         EAnnotation idAnnotation = Optional.ofNullable(element.getEAnnotation(REPRESENTATION_ANNOTATION_NAME))
                 .orElseGet(() -> element.createEAnnotation(REPRESENTATION_ANNOTATION_NAME));
-        idAnnotation.getDetails().put(REPRESENTATION_NAME, representation);
+        idAnnotation.getDetails().put(REPRESENTATION_FIELD_NAME, representation);
     }
 
     static void setRepresentationCount(final Element element, final Integer count) {
@@ -258,7 +258,7 @@ public class Kieker2UmlUtil {
     }
     static Optional<String> getRepresentation(final Element element) {
         return Optional.ofNullable(element.getEAnnotation(REPRESENTATION_ANNOTATION_NAME))
-                .map(a -> a.getDetails().get(REPRESENTATION_NAME));
+                .map(a -> a.getDetails().get(REPRESENTATION_FIELD_NAME));
     }
 
     static Optional<Integer> getRepresentationCount(final Element element) {
@@ -330,5 +330,9 @@ public class Kieker2UmlUtil {
                 .filter(r -> r instanceof Association)
                 .map(r -> (Association) r)
                 .anyMatch(a -> a.getEndTypes().contains(to));
+    }
+
+    String getRepresentationAnnotationName() {
+        return REPRESENTATION_ANNOTATION_NAME;
     }
 }

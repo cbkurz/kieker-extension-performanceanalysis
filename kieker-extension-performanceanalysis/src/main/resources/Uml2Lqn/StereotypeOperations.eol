@@ -67,3 +67,18 @@ operation UML!UseCase hasInteraction() : Boolean {
 	}
 	return false;
 }
+
+operation UML!NamedElement getReference(name: String): String {
+	// TODO: get this by using the "Native" construct from:
+	//   kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil#REFERENCE_ANNOTATION_NAME
+	var util = Native("kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil");
+	var referenceName = "Reference";
+	if (not self.isStereotypeApplied(referenceName)) {
+		throw "Stereotype '" + referenceName + "' not found."; 
+	}
+	var value = self.getValue(referenceName, name);
+	if (not value.isDefined()) {
+		throw "Value '" + name + "' not found.";
+	}
+	return value;
+}
