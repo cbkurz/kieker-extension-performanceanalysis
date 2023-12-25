@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
-<!-- lqns.exe -pragma=cycles=yes -->
+<!-- lqns.exe -->
 <lqn-model name="output1/lqn" description="lqns.exe 5.28.5 solution for model from: output1/lqn.xml." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/LQN Solvers/lqn.xsd">
   <solver-params comment="" conv_val="1e-05" it_limit="50" underrelax_coeff="0.9" print_int="0">
-    <pragma param="cycles" value="yes"/>
-    <result-general solver-info="lqns.exe 5.28.5" valid="true" conv-val="0" iterations="2" platform-info="MESHIFY5800X570 WinNT 10.0" user-cpu-time=" 0:00:00.000" system-cpu-time=" 0:00:00.000" elapsed-time=" 0:00:00.000">
+    <result-general solver-info="lqns.exe 5.28.5" valid="true" conv-val="0" iterations="2" platform-info="ZENBOOK-FLIP-14 WinNT 10.0" user-cpu-time=" 0:00:00.000" system-cpu-time=" 0:00:00.000" elapsed-time=" 0:00:00.000">
       <mva-info submodels="3" core="4" step="22" step-squared="122" wait="305" wait-squared="24973" faults="0"/>
     </result-general>
   </solver-params>

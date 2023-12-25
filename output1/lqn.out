@@ -3,18 +3,15 @@ Copyright the Real-Time and Distributed Systems Group,
 Department of Systems and Computer Engineering
 Carleton University, Ottawa, Ontario, Canada. K1S 5B6
 
-Invoked as: lqns.exe --pragma=cycles=yes output1/lqn.xml
+Invoked as: lqns.exe output1/lqn.xml
 Input:  output1/lqn.xml
-Mon Dec 18 19:34:05 2023
+Mon Dec 25 03:12:22 2023
 
 
 Convergence test value: 0
 Number of iterations:   2
 
-Pragma:
-    cycles=yes
-
-Solver: MESHIFY5800X570 WinNT 10.0
+Solver: ZENBOOK-FLIP-14 WinNT 10.0
     Elapsed:     0:00:00.000
 
 

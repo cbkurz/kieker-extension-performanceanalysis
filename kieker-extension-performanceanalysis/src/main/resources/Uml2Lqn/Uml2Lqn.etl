@@ -55,9 +55,9 @@ rule Node2Processor
 		 */
 		var components = node.getDeployed().select(i | i.isInteracting());
 
-        proc.multiplicity = "1";
+        proc.multiplicity = "1".asBigInteger();
 		proc.name = node.name;
-		proc.task ::= components;
+		proc.task = components.equivalent("Component2Task");
 	}
 	
 rule Actor2Processor
@@ -112,7 +112,8 @@ rule Interaction2Task
 	    var beses = lifeline.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
 	    var workload = lifeline.getWorkload();
 	    task.name = interaction.getOwner().getName() + "_job_class_" ;
-	    task.entry ::= beses; // the ::= has the meaning of calling equivalent
+	    task.entry = beses.equivalent("BES2Entry");
+	    	    
 	    if(workload[0] = "closed"){
 	    	task.scheduling = LQN!TaskSchedulingType#ref;
 	    	task.multiplicity = workload[1];
@@ -143,17 +144,27 @@ rule Component2Task
 		var lifelines = component.getRepresentedLifelines();
 		lifelines = lifelines.select(i | i.isInteracting());
 		
-		var beses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
+		var totalBeses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
+		
+		var beses: Set = new Set();
+		for (bes in totalBeses) {
+			var isPresent = beses.stream().filter(b | b.name == bes.name).findFirst().isPresent();
+			if (isPresent) {
+				continue;
+			}
+			beses.add(bes);
+		}
 		
 		/*
 		 * multiplicity of a task is given by the number of artifacts
 		 * representing it
+		 * TODO: Why? --> does this mean that more processors are available for the queue?
 		 */
 		var artifacts = component.getArtifacts();
 		var multiplicity = artifacts.size().asString();
 							
 		task.name = component.name;
-		task.entry ::= beses;
+		task.entry = beses.equivalent("BES2Entry");
 		task.multiplicity = multiplicity.asBigInteger();
 	}
 	
@@ -177,30 +188,22 @@ rule BES2Entry
 		}
 		// ("Create Entry for BehaviorExecutionSpecification: " + bes.name).println();
 		
-		var messages = bes.getMessages();
-		// Gets only the messages that are sent
-		messages = messages.select(i | i.isSend() and i.message.messageSort <> UML!MessageSort#reply);	
-		// If msgs is empty, then the BES does not send requests
-		if(messages.isEmpty()) {
-			messages.add(bes.start);
-		}
-		
+			
 		entry.name = bes.name;
 		entry.type = LQN!TypeType#PH1PH2;
 		entry.entryPhaseActivities = new LQN!PhaseActivities;
-		entry.entryPhaseActivities.activity = messages.equivalent("Message2Activity");
+ 		entry.entryPhaseActivities.activity = Sequence{bes.equivalent("Bes2Activity")};
 	}
 	
 @lazy
-rule Message2Activity
-	transform msgo: UML!MessageOccurrenceSpecification
-	to actv: LQN!ActivityPhasesType
+rule Bes2Activity
+	transform bes: UML!BehaviorExecutionSpecification
+	to act: LQN!ActivityPhasesType 
 	{
-		guard {
-			return bes.isDefined() and bes.isStereotypeApplied("GaStep");
-		}
-		// ("Create ActivityPhasesType for MessageOccurrenceSpecification: " + msgo.name).println();
-		var message = msgo.message;
+		act.name = bes.name;
+		act.phase = "1".asBigInteger();
+		
+		// Activity host-demand-mean
 		var execTime = bes.getValue(gastep, "execTime");
 		var rep = bes.getValue(gastep, "rep");
 		var hostDemandMean = "1.0";
@@ -208,23 +211,27 @@ rule Message2Activity
 		if(execTime.isDefined()) {
 			hostDemandMean = execTime.asDouble() * rep.asDouble();
 		}
+		act.hostDemandMean = hostDemandMean + "";
+		
+		var messages = bes.getMessages();
+		// Gets only the messages that are sent
+		messages = messages.select(i | i.isSend() and i.message.messageSort <> UML!MessageSort#reply);
 
-		var call = msgo.equivalent("Message2Request");
-		if (call.isDefined()) {
-				actv.synchCall = Sequence{call};
-		} else {
-			"Undefined call for message: ".print();
-			msgo.name.println();
+		"messages: ".print();
+		messages.println();
+		
+		// Calls from the Activity
+		// TODO: separate between synch and asynch
+		if (not messages.isEmpty()) {
+			var calls = messages.equivalent("Message2Request");
+			act.synchCall = calls;
 		}
-
-		actv.name = message.name;
-		actv.phase = "1".asBigInteger();
-		actv.hostDemandMean = hostDemandMean + "";
 	}
+	
 
 @lazy
 rule Message2Request
-	transform msgo: UML!MessageOccurrenceSpecification
+	transform msgo: UML!MessageOccurrenceSpecification // MOS
 	to call: LQN!ActivityMakingCallType
 	{
 		guard {
@@ -236,10 +243,14 @@ rule Message2Request
 		var message = msgo.message;
 		var rep = bes.getValue(gastep, "rep");
 
+		// This is the sequence of steps that is followed to find the BES that is started by the message associated with the msgo (or MOS):
+		//    Message ---MessageEnd--> Lifeline --find all--> BESes --filter with Message--> BES (that is started by the Message)
+		
+		// get lifeline that the message targets
 		var lifeline = message.receiveEvent.covered;
-		// Gets the BES starting with the message
+		// Gets the BESes from the lifeline that is covered by the message
 		var lbes = lifeline.first.getElements("BehaviorExecutionSpecification");
-		// Gets the target BES
+		// Gets the BES that is the one that the message targets
 		var lbes2 = lbes.selectOne(i | i.start == message.receiveEvent and i.finish.isTypeOf(MessageOccurrenceSpecification));
 
 		call.dest = lbes2.name;
