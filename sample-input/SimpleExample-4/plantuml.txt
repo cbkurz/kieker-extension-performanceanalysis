@@ -1,0 +1,24 @@
+@startuml
+
+Actor Entry
+
+Entry -> Main4: main()
+activate Main4
+Main4 -> Loop: Loop()
+activate Loop
+Loop --> Main4: Loop()
+deactivate
+Main4 -> Loop: loop()
+activate Loop
+    loop 10 times
+        Loop -> Loop: workLoop()
+        activate Loop
+        Loop --> Loop: workLoop()
+        deactivate
+    end
+Loop --> Main4: loop()
+deactivate
+Main4 --> Entry : main()
+deactivate
+
+@enduml
