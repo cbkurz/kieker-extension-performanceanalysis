@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * This class handels the creation of UML UseCases and Actors.
+ * This creates part of the dynamicView package.
+ */
 public class UmlUseCases {
 
     public static final EClass USE_CASE_E_CLASS = UMLFactory.eINSTANCE.createUseCase().eClass();

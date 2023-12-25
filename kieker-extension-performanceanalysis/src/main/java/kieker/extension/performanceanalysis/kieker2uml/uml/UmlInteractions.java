@@ -35,8 +35,8 @@ import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setReferenceAnnotations;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setRepresentationCount;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlComponents.STATIC_VIEW_COMPONENTS;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlComponents.getInterfaceName;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlStaticViews.STATIC_VIEW_COMPONENTS;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlStaticViews.getInterfaceName;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.KIEKER_ENTRY_NAME;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.getActor;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.getDynamicView;
@@ -130,7 +130,7 @@ class UmlInteractions {
 
     private static void setRepresents(final Lifeline lifeline, final Package staticView, final AssemblyComponent assemblyComponent) {
         if (isNull(lifeline.getRepresents())) {
-            final Component component = UmlComponents.getComponent(staticView, assemblyComponent);
+            final Component component = UmlStaticViews.getComponent(staticView, assemblyComponent);
             final Parameter ownedParameter = lifeline.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true);
             lifeline.setRepresents(ownedParameter);
         }
@@ -168,7 +168,7 @@ class UmlInteractions {
         setReferenceAnnotation(finishBes, "CloseMessageCount",  finalCount + "");
     }
 
-    private static String getBesName(final Operation operation) {
+    static String getBesName(final Operation operation) {
         return BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX + operation.toString();
     }
 

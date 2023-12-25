@@ -3,7 +3,6 @@ package kieker.extension.performanceanalysis.kieker2uml.uml;
 import kieker.model.system.model.AbstractMessage;
 import kieker.model.system.model.Execution;
 import kieker.model.system.model.MessageTrace;
-import kieker.model.system.model.Operation;
 import kieker.model.system.model.SynchronousCallMessage;
 import kieker.model.system.model.SynchronousReplyMessage;
 import org.eclipse.emf.common.util.EMap;
@@ -35,7 +34,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlComponents.getInterfaceName;
 
 /**
  * This class provides standard methods using uml models.

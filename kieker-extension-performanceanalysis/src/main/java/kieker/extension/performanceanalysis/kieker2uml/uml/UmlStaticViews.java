@@ -23,13 +23,30 @@ import org.slf4j.LoggerFactory;
 import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addId;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getMessageRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.isIdApplied;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setReferenceAnnotation;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setReferenceAnnotations;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlInteractions.getBesName;
 
-public class UmlComponents {
+/**
+ * This class adds the static Views to the UML model:
+ *  - staticView-Components
+ *  - deploymentView
+ * The staticView-Components contains:
+ *  - Component - each component is manifested in an artifact
+ *  - Operation - each operation is part of a Component and corresponds to an Interface
+ *  - Interface - is the representation for an Execution in the Kieker-Trace
+ *  - Usage - Is the representation of a Message in the Kieker-Trace, it shows that one interface requires another.
+ * The deploymentView contains:
+ *  - Node - the server the application runs on, it is mapped to the Kieker ExecutionContainer
+ *  - Artifact - this is deployed in the node and is a manifestation of a Component, it is mapped to a Kieker AllocationComponent
+ *
+ * This Class is also responsible to create the connections (manifestation, deployment, interface realization) between the different Elements.
+ */
+public class UmlStaticViews {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UmlComponents.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UmlStaticViews.class);
     public static final String DEPLOYMENT_VIEW = "deploymentView";
     public static final String STATIC_VIEW_COMPONENTS = "staticView-components";
 
@@ -60,6 +77,7 @@ public class UmlComponents {
             final Interface senderInterface = getInterface(staticView, message.getSendingExecution());
             final Node senderNode = getNode(deploymentView, message.getSendingExecution().getAllocationComponent().getExecutionContainer());
             final Artifact senderArtifact = getArtifact(deploymentView, message.getSendingExecution().getAllocationComponent());
+            createOperation(senderComponent, message.getSendingExecution().getOperation());
 
             // connection
             doConnections(senderNode, senderArtifact, senderComponent, senderInterface);
@@ -70,6 +88,7 @@ public class UmlComponents {
             final Interface receiverInterface = getInterface(staticView, message.getReceivingExecution());
             final Node receiverNode = getNode(deploymentView, message.getReceivingExecution().getAllocationComponent().getExecutionContainer());
             final Artifact receiverArtifact = getArtifact(deploymentView, message.getReceivingExecution().getAllocationComponent());
+            createOperation(receiverComponent, message.getReceivingExecution().getOperation());
 
             // connection
             doConnections(receiverNode, receiverArtifact, receiverComponent, receiverInterface);
@@ -82,6 +101,20 @@ public class UmlComponents {
         // finnish
         addId(staticView, traceRepresentation);
         addId(deploymentView, traceRepresentation);
+    }
+
+    /**
+     * Creates an operation of the component.
+     * The Operation holds a reference to the BES that represent it, this is for easier lookup in the Uml2Lqn transformation
+     * @param component
+     * @param operation
+     * @return
+     */
+    private static org.eclipse.uml2.uml.Operation createOperation(final Component component, final Operation operation) {
+        final org.eclipse.uml2.uml.Operation ownedOperation = component.getOwnedOperation(getInterfaceName(operation), null, null, false, true);
+        final String besName = getBesName(operation);
+        setReferenceAnnotation(ownedOperation, "BES", besName);
+        return ownedOperation;
     }
 
     static String getInterfaceName(final Operation operation) {
@@ -118,8 +151,8 @@ public class UmlComponents {
                 .orElseGet(() -> sender.createUsage(receiver));
     }
 
-    private static Interface getInterface(final Package staticView, final Execution interfaceName) {
-        return (Interface) staticView.getPackagedElement(getInterfaceName(interfaceName.getOperation()), false, UMLPackage.Literals.INTERFACE, true);
+    private static Interface getInterface(final Package staticView, final Execution execution) {
+        return (Interface) staticView.getPackagedElement(getInterfaceName(execution.getOperation()), false, UMLPackage.Literals.INTERFACE, true);
     }
 
     /**
@@ -136,7 +169,6 @@ public class UmlComponents {
      * @param anInterface
      */
     private static void doConnections(final Node node, final Artifact artifact, final Component component, final Interface anInterface) {
-        component.getOwnedOperation(anInterface.getName(), null, null, false, true);
         component.getInterfaceRealization(anInterface.getName(), anInterface, false, true);
 
         artifact.getManifestation("ArtifactManifestation-" + component.getName(), component, false, true);

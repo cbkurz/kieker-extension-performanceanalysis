@@ -50,7 +50,7 @@ public class Kieker2UmlModel {
 
     public static void addStaticView(final Model model, final MessageTrace trace) {
         UmlClasses.addClasses(model, trace);
-        UmlComponents.addComponentsAndDeployment(model, trace);
+        UmlStaticViews.addComponentsAndDeployment(model, trace);
         final List<Node> nodeList = model.allOwnedElements().stream()
                 .filter(pe -> pe instanceof Node).map(pe -> (Node) pe)
                 .collect(Collectors.toList());
