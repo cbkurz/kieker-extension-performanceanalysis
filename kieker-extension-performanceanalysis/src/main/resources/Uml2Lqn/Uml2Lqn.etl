@@ -8,7 +8,9 @@ pre {
 	var allBes = UML!BehaviorExecutionSpecification.all;
 }
 
-post {}
+post {
+
+}
 
 rule Model2Schema 
 	transform uml: UML!Model
@@ -148,20 +150,6 @@ rule Operation2Task
 		// ("Create task for component: " + component.name).println();
 	
 		var component = op.getOwner();
-// 		var lifelines = component.getRepresentedLifelines();
-//		lifelines = lifelines.select(i | i.isInteracting());
-		
-//		var totalBeses = lifelines.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
-
-//		var beses: Set = new Set();
-//		for (bes in totalBeses) {
-//			var isPresent = beses.stream().filter(b | b.name == bes.name).findFirst().isPresent();
-//			if (isPresent) {
-//				continue;
-//			}
-//			beses.add(bes);
-//		}
-//		var entries = beses.equivalent("BES2Entry");
 		var besName = op.getReference("BES");
 		var bes = allBes.selectOne(b | b.name == besName);
 		var entries = Sequence{bes.equivalent("BES2Entry")};
@@ -188,7 +176,7 @@ rule Operation2Task
 	}
 	
 rule BES2Entry
-	transform bes: UML!BehaviorExecutionSpecification
+	transform bes: UML!BehaviorExecutionSpecification // BES
 	to entry: LQN!EntryType
 	{	
 		guard {
@@ -216,7 +204,7 @@ rule BES2Entry
 	
 @lazy
 rule Bes2Activity
-	transform bes: UML!BehaviorExecutionSpecification
+	transform bes: UML!BehaviorExecutionSpecification // BES
 	to act: LQN!ActivityPhasesType 
 	{
 		act.name = bes.name;
@@ -243,7 +231,22 @@ rule Bes2Activity
 		// TODO: separate between synch and asynch
 		if (not messages.isEmpty()) {
 			var calls = messages.equivalent("Message2Request");
-			act.synchCall = calls;
+			var callsFiltered = new Sequence();
+			// this is the loop recognition for the calls
+			// For each call that has a dublicate the repetition is increased
+			for (c in calls) {
+				var cfList = callsFiltered.select(cf | c.dest == cf.dest);
+				if (cfList.size() > 1) {
+					throw "There should be only one of a kind in the list 'cfList' found: " + cfList;
+				}
+				if (cfList.size() == 0) {
+					callsFiltered.add(c);
+					continue;
+				}
+				var cf = cfList.first();
+				cf.callsMean = (cf.callsMean.asBigInteger() + c.callsMean.asBigInteger()) + "";
+			}
+			act.synchCall = callsFiltered;
 		}
 	}
 	
