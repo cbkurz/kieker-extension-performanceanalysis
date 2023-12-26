@@ -20,7 +20,7 @@ rule UseCase
 		var actor2 = useCase1.getRelationships().get(0).getEndTypes().selectOne(t|t.isTypeOf(UML!Actor)).equivalent();
 		dynamicView2.getPackagedElements().add(actor2);
 		
-		for (ob1 in useCase1.getOwnedBehaviors()) {
+		for (ob1 in useCase1.getOwnedBehaviors()) { // Interactions
 			var ob2 = ob1.equivalent();
 			useCase2.getOwnedBehaviors().add(ob2);
 		}
@@ -118,15 +118,15 @@ rule Message
 		interaction2.getFragments().add(receiveMos2);
 		interaction2.getMessages().add(message2);
 		
-		
+		// TODO: support asynchCall Messages
 		if (message1.getMessageSort().getName() == "synchCall") {
 			var besForMessage2 = interaction1.allOwnedElements().stream()
 				.filter(e | e.isTypeOf(UML!BehaviorExecutionSpecification))
 				.filter(e | e.getStart().equals(message1.getReceiveEvent()))
 				.findFirst()
 				.get()
-				.equivalent();
-			
+				.equivalent("BehaviorExecutionSpecification");
+						
 			besForMessage2.setStart(receiveMos2);
 			interaction2.getFragments().add(besForMessage2);
 			

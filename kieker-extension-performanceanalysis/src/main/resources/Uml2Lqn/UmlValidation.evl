@@ -236,8 +236,33 @@ context UML!MessageOccurrenceSpecification {
 	constraint CoveredIsLifeline {
 		check : self.getCovereds().get(0).isTypeOf(UML!Lifeline)
 	}
+	
+	constraint IsSendOrIsReceive {
+		check : self.isSend() or self.isReceive()
+	}
 }
 
+/* TODO: alternative way to calculate the BES that are created by the current execution.
+context UML!Dependency {
+	
+	constraint ClientIsMOS {
+		check : self.getClients().get(0).isTypeOf(UML!MessageOccurrenceSpecification)
+	}
+
+	constraint ExactlyOneClient {
+		check : self.getClients().size() == 1
+	}
+
+	constraint SupplierIsBES {
+		check : self.getSuppliers().isTypeOf(UML!BehaviorExecutionSpecification)
+	}
+
+	constraint ExactlyOneSupplier {
+		check : self.getSuppliers().size() == 1
+	}
+
+}
+*/
 // Static View
 
 context UML!Component {
@@ -263,6 +288,15 @@ context UML!Component {
 	    check : self.ownedOperations.isDefined() and self.ownedOperations.size() > 0
 	}
 	
+}
+
+context UML!Operation {
+	constraint BESIsSetInEAnnotation {
+		guard : self.getOwner().isTypeOf(UML!Component)
+	// TODO: make reference to kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil#REFERENCE_ANNOTATION_NAME
+		check : self.getReference("BES").isDefined()
+	}
+			
 }
 
 context UML!Interface {

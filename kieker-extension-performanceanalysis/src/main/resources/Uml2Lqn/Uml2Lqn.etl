@@ -220,17 +220,14 @@ rule Bes2Activity
 		}
 		act.hostDemandMean = hostDemandMean + "";
 		
-		var messages = bes.getMessages();
+		var moses = bes.getMosesSendFromLifeline(); 
 		// Gets only the messages that are sent
-		messages = messages.select(i | i.isSend() and i.message.messageSort <> UML!MessageSort#reply);
-
-		"messages: ".print();
-		messages.println();
+		moses = moses.select(i | i.isSend() and i.message.messageSort <> UML!MessageSort#reply);
 		
 		// Calls from the Activity
 		// TODO: separate between synch and asynch
-		if (not messages.isEmpty()) {
-			var calls = messages.equivalent("Message2Request");
+		if (not moses.isEmpty()) {
+			var calls = moses.equivalent("Message2Request");
 			var callsFiltered = new Sequence();
 			// this is the loop recognition for the calls
 			// For each call that has a dublicate the repetition is increased

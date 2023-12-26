@@ -163,7 +163,8 @@ class UmlInteractions {
         setReferenceAnnotation(startBes, "OpenMessageCount", -1 + "");
 
         // close BES
-        final BehaviorExecutionSpecification finishBes = finishBehaviourSpecification(lifeline, finishMos);
+        final BehaviorExecutionSpecification finishBes = getCurrentOpenBES(lifeline);
+        finishBes.setFinish(finishMos);
         setReferenceAnnotation(finishBes, "CloseMessage", messageId);
         setReferenceAnnotation(finishBes, "CloseMessageCount",  finalCount + "");
     }
@@ -183,41 +184,43 @@ class UmlInteractions {
         final MessageSort messageSort = Kieker2UmlUtil.getMessageSort(message);
         umlMessage.setMessageSort(messageSort);
 
-        final MessageOccurrenceSpecification messageOccurrenceSend = createMessageOccurrence(interaction, umlMessage, senderLifeline, messageLabel + "SendEvent");
-        final MessageOccurrenceSpecification messageOccurrenceReceive = createMessageOccurrence(interaction, umlMessage, receiverLifeline, messageLabel + "ReceiveEvent");
+        final MessageOccurrenceSpecification mosSend = createMessageOccurrence(interaction, umlMessage, senderLifeline, messageLabel + "SendEvent");
+        final MessageOccurrenceSpecification mosReceive = createMessageOccurrence(interaction, umlMessage, receiverLifeline, messageLabel + "ReceiveEvent");
 
-        umlMessage.setSendEvent(messageOccurrenceSend);
-        umlMessage.setReceiveEvent(messageOccurrenceReceive);
+        umlMessage.setSendEvent(mosSend);
+        umlMessage.setReceiveEvent(mosReceive);
 
+        final BehaviorExecutionSpecification bes;
         if (messageSort.equals(MessageSort.SYNCH_CALL_LITERAL)) {
-            final BehaviorExecutionSpecification bes = startBehaviourSpecification(interaction, receiverLifeline, messageOccurrenceReceive, message.getReceivingExecution().getOperation());
+            bes = startBehaviourSpecification(interaction, receiverLifeline, mosReceive, message.getReceivingExecution().getOperation());
+
             setRepresentation(bes, getBESRepresentation(messageId));
             setRepresentationCount(bes, count);
             setReferenceAnnotation(bes, "OpenMessage", messageId);
             setReferenceAnnotation(bes, "OpenMessageCount", count + "");
-        }
-        if (messageSort.equals(MessageSort.REPLY_LITERAL)) {
-            final BehaviorExecutionSpecification bes = finishBehaviourSpecification(senderLifeline, messageOccurrenceSend);
+        } else if (messageSort.equals(MessageSort.REPLY_LITERAL)) {
+            bes = getCurrentOpenBES(senderLifeline);
+            bes.setFinish(mosSend); // the current mos will now the next BES
+
             setReferenceAnnotation(bes, "CloseMessage", messageId);
             setReferenceAnnotation(bes, "CloseMessageCount", count + "");
         }
-
         // set Metadata
         // uml message
         setRepresentation(umlMessage, messageId);
         setRepresentationCount(umlMessage, count);
         setReferenceAnnotations(umlMessage, message.getReceivingExecution());
         // message occurrence send
-        setRepresentation(messageOccurrenceSend, getSendMOSRepresentation(messageId));
-        setRepresentationCount(messageOccurrenceSend, count);
-        setReferenceAnnotations(messageOccurrenceSend, message.getSendingExecution());
+        setRepresentation(mosSend, getSendMOSRepresentation(messageId));
+        setRepresentationCount(mosSend, count);
+        setReferenceAnnotations(mosSend, message.getSendingExecution());
         // message occurrence receive
-        setRepresentation(messageOccurrenceReceive, getReceiveMOSRepresentation(messageId));
-        setRepresentationCount(messageOccurrenceReceive, count);
-        setReferenceAnnotations(messageOccurrenceReceive, message.getReceivingExecution());
+        setRepresentation(mosReceive, getReceiveMOSRepresentation(messageId));
+        setRepresentationCount(mosReceive, count);
+        setReferenceAnnotations(mosReceive, message.getReceivingExecution());
     }
 
-    private static BehaviorExecutionSpecification finishBehaviourSpecification(final Lifeline senderLifeline, final MessageOccurrenceSpecification messageOccurrenceSend) {
+    private static BehaviorExecutionSpecification getCurrentOpenBES(final Lifeline senderLifeline) {
         final List<BehaviorExecutionSpecification> list = senderLifeline.getCoveredBys().stream()
                 .filter(cb -> cb instanceof BehaviorExecutionSpecification)
                 .map(cb -> (BehaviorExecutionSpecification) cb)
@@ -226,12 +229,10 @@ class UmlInteractions {
         if (list.isEmpty()) {
             throw new RuntimeException("There is no open BehaviorExecutionSpecification. At least one was expected.");
         }
-        // get last opened BehaviorExecutionSpecification on lifeline and "close" it.
+        // get last opened BehaviorExecutionSpecification on lifeline.
         // this is possible since a single kieker-trace is sequential.
-        list.get(list.size() - 1).setFinish(messageOccurrenceSend);
         return list.get(list.size() - 1);
     }
-
 
     private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction, final Lifeline umlLifeline, final MessageOccurrenceSpecification messageOccurrenceReceive, final Operation operation) {
         final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(getBesName(operation), BEHAVIOUR_EXECUTION_E_CLASS);

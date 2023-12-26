@@ -127,22 +127,30 @@ operation UML!BehaviorExecutionSpecification isWellFormed() : Boolean {
 }
 
 /**
- * Builds an ordered data structure cointaining the MessageOccurenceSpecification
- * of 'self' (BES) 
+ * It is not possible in UML to set a starting BES for a Message
+ * Therefore it is hard to calculate the target BES, this is a workaround.
+ * The Assumption is that the InteractionsFragments or rather the MOS are in order
+ * Now all MOS of the lifeline are collected that are between the start and end MOS.
  * @return a collection of MessageOccurenceSpecification
  */
-operation UML!BehaviorExecutionSpecification getMessages(): Collection {	
+operation UML!BehaviorExecutionSpecification getMosesSendFromLifeline(): Collection {	
 
-	var modelMessages = UML!MessageOccurrenceSpecification.all();
 	var lifeline = self.covered.first;
-	var elements = lifeline.getElements("MessageOccurrenceSpecification");
-	elements = modelMessages.select(i | elements.includes(i));
+	var elements = lifeline.getElements("MessageOccurrenceSpecification"); // all MOS-elements of the lifeline!
 	
 	var start = elements.indexOf(self.start);
 	var end = elements.indexOf(self.finish);
 	
-	return modelMessages.select(i | elements.indexOf(i) >= start 
-		and elements.indexOf(i) <= end);
+	var result = new Sequence();
+	for (i in Sequence{start..end}) {
+		var e = elements.at(i);
+		if (e.isSend() and e.message.messageSort <> UML!MessageSort#reply) {
+			result.add(e);
+		}
+		
+	}
+	
+	return result;
 }
 
 operation UML!Artifact getDeployments() : Sequence {

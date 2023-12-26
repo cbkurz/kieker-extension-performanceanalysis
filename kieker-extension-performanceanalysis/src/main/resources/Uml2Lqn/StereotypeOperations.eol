@@ -71,7 +71,6 @@ operation UML!UseCase hasInteraction() : Boolean {
 operation UML!NamedElement getReference(name: String): String {
 	// TODO: get this by using the "Native" construct from:
 	//   kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil#REFERENCE_ANNOTATION_NAME
-	var util = Native("kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil");
 	var referenceName = "Reference";
 	if (not self.isStereotypeApplied(referenceName)) {
 		throw "Stereotype '" + referenceName + "' not found."; 
