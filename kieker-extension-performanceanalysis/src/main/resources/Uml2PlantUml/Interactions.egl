@@ -20,14 +20,25 @@ autonumber
 
 [% for (m in interaction.messages) { %]
 [%=m.getSenderName()%] [%=m.getMessageType()%] [%=m.getReceiverName()%] : [%=m.name%]
-[% for (bes : UML!BehaviorExecutionSpecification in interaction.fragments) { %]
-[% if (m.getReceiverName().equals(sanitize(bes.getCovereds().get(0).name))) { %]
-note over [%=sanitize(bes.getCovereds().get(0).name)%]
+[% 
+    if (m.getMessageSort() == UML!MessageSort#synchCall) {
+        // get receiver lifeline
+        var lifeline = m.receiveEvent.covered.first;
+        "lifeline: ".print();
+        lifeline.println();
+        // Gets the BESes from the lifeline that is covered by the message
+        var targetBeses = lifeline.getElements("BehaviorExecutionSpecification");
+        // Gets the BES that is the one that the message targets
+        "targetBeses: ".print();
+        targetBeses.println();
+        "message receiveEnd: ".print();
+        m.getReceiveEvent().println();
+        var bes = targetBeses.selectOne(b | b.getStart().equals(m.getReceiveEvent()));
+%]
+note over [%=sanitize(lifeline.name)%]
 [%=bes.assembleStereotypeTemplateString(4)%]
 end note
-[% break; %]
-[% } %]
-[% } %]
+[%  } %]
 [%=m.getActivation()%]
 [% } %]
 

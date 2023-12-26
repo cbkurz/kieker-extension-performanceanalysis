@@ -172,3 +172,13 @@ operation Message getBes() : BehaviorExecutionSpecification {
 		return f; 
 	}
 }
+
+/**
+ * Returns the elements, inside a lifeline, having 'type' as type
+ * @returns a OrderedSet of elements with type 'type'
+ */
+operation UML!Lifeline getElements(type: String): OrderedSet {
+	var elements = self.coveredBy.asOrderedSet();
+	return elements.select(i | i.eClass.name == type);
+}
+
