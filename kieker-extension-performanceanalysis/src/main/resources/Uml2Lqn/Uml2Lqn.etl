@@ -220,6 +220,7 @@ rule Bes2Activity
 		}
 		act.hostDemandMean = hostDemandMean + "";
 		
+		
 		var moses = bes.getMosesSendFromLifeline(); 
 		// Gets only the messages that are sent
 		moses = moses.select(i | i.isSend() and i.message.messageSort <> UML!MessageSort#reply);
@@ -228,22 +229,31 @@ rule Bes2Activity
 		// TODO: separate between synch and asynch
 		if (not moses.isEmpty()) {
 			var calls = moses.equivalent("Message2Request");
-			var callsFiltered = new Sequence();
+			
 			// this is the loop recognition for the calls
 			// For each call that has a dublicate the repetition is increased
+			// calls that are recursive are excluded
+			var filteredCalls = new Sequence();
+			var recursiveCalls = new Sequence();
 			for (c in calls) {
-				var cfList = callsFiltered.select(cf | c.dest == cf.dest);
+				var cfList = filteredCalls.select(cf | c.dest == cf.dest);
 				if (cfList.size() > 1) {
 					throw "There should be only one of a kind in the list 'cfList' found: " + cfList;
 				}
+				if (c.dest == bes.name) {
+					recursiveCalls.add(c);
+					continue;
+				}
 				if (cfList.size() == 0) {
-					callsFiltered.add(c);
+					filteredCalls.add(c);
 					continue;
 				}
 				var cf = cfList.first();
 				cf.callsMean = (cf.callsMean.asBigInteger() + c.callsMean.asBigInteger()) + "";
 			}
-			act.synchCall = callsFiltered;
+			act.synchCall = filteredCalls;
+			hostDemandMean = hostDemandMean.asDouble() * (recursiveCalls.size() + 1).asDouble();
+			act.hostDemandMean = hostDemandMean + "";
 		}
 	}
 	
