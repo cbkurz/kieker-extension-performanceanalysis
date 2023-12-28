@@ -216,6 +216,10 @@ context UML!BehaviorExecutionSpecification {
 		check : self.getFinish().isDefined()
 	}
 	
+	constraint OwnerIsInteractions {
+		check : self.getOwner().isTypeOf(UML!Interaction)
+	}
+	
 }
 
 context UML!MessageOccurrenceSpecification {
@@ -293,7 +297,6 @@ context UML!Component {
 context UML!Operation {
 	constraint BESIsSetInEAnnotation {
 		guard : self.getOwner().isTypeOf(UML!Component)
-	// TODO: make reference to kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil#REFERENCE_ANNOTATION_NAME
 		check : self.getReference("BES").isDefined()
 	}
 			

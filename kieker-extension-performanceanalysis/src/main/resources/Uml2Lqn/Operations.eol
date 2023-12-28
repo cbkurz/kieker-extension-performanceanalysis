@@ -153,8 +153,28 @@ operation UML!BehaviorExecutionSpecification getMosesSendFromLifeline(): Collect
 	return result;
 }
 
+operation UML!BehaviorExecutionSpecification getStartFinnishIndex(): Sequence {
+	var lifeline = self.covered.first;
+	var elements = lifeline.getElements("MessageOccurrenceSpecification"); // all MOS-elements of the lifeline!
+	
+	var start = elements.indexOf(self.start);
+	var end = elements.indexOf(self.finish);
+	return Sequence{start, end};
+}
+
+operation UML!BehaviorExecutionSpecification isRecursive(recursiveMap: Map) {
+	if (recursiveMap.containsKey(self.name)) {
+		return true;
+	}
+	return self.getMosesSendFromLifeline().exists(m | m.name == self.name);
+}
+
 operation UML!Artifact getDeployments() : Sequence {
 	return UML!Deployment.all.select(i | i.supplier.contains(self)).flatten;
+}
+
+operation UML!BehaviorExecutionSpecification getEntryName() {
+	return self.getOwner().name + "_" + self.name;
 }
 
 
