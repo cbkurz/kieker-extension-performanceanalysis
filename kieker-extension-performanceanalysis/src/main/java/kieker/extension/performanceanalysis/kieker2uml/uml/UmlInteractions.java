@@ -262,7 +262,6 @@ class UmlInteractions {
                 .forEach(i -> {
                     final Lifeline lifeline = i.getLifeline(KIEKER_ENTRY_NAME);
                     lifeline.setRepresents(createAssociation(actor, i).getMemberEnd(actor.getName(), null));
-                    MarteSupport.setGaWorkloadEvent(lifeline, "closed:1");
                 });
     }
 

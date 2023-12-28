@@ -36,6 +36,7 @@ autonumber
         var bes = targetBeses.selectOne(b | b.getStart().equals(m.getReceiveEvent()));
 %]
 note over [%=sanitize(lifeline.name)%]
+[%="Start message name: " + m.name%]
 [%=bes.assembleStereotypeTemplateString(4)%]
 end note
 [%  } %]

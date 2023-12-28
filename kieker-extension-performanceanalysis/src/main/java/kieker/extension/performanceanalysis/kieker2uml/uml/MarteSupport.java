@@ -32,6 +32,7 @@ import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getTraceRepresentation;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.setAnnotationDetail;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlInteractions.getBESRepresentation;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.UmlUseCases.KIEKER_ENTRY_NAME;
 
 /**
  * This class applies the MARTE Stereotypes to the uml elements.
@@ -259,6 +260,7 @@ public class MarteSupport {
         final BigDecimal numberOfTraces = BigDecimal.valueOf(getIds(interaction).map(s -> s.size() + 1).orElse(1));
         final BigDecimal executionTime = BigDecimal.valueOf(endTime - startTime);
         final String openWorkload = numberOfTraces.divide(executionTime, 20, RoundingMode.HALF_UP).toPlainString();
-        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "openWorkload", "open:" + openWorkload);
+        final Lifeline lifeline = interaction.getLifeline(KIEKER_ENTRY_NAME);
+        MarteSupport.setGaWorkloadEvent(lifeline, "open:" + openWorkload);
     }
 }

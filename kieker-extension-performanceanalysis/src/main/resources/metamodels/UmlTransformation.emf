@@ -5,35 +5,52 @@ datatype BigDecimal : java.math.BigDecimal;
 
 class Transformation {
 	attr String[1] name;
-	attr String[+] umlUseCases; // This requires the Names of the UML Use-Cases that are included in the transformation.
+	attr String[1] umlUseCase; // This requires the Names of the UML Use-Cases that are included in the transformation.
 	val TransformationRule[+] transformationRules; // This represents the rules that are applied to the elements in question
-	val Requirement[*] requirement;
 }
 
 abstract class TransformationRule {
 	attr String[1] name;
 }
 
-abstract class Requirement {
-	attr String[1] name;
+// --- Transformations ---
+
+// This Transformation does not change the model in any way.
+class NullTransformation extends TransformationRule { // implemented
 }
 
-// Transformations
-class NullTransformation extends TransformationRule { // This Transformation does not change the model in any way.
-}
-
-class IncreaseMessageTime extends TransformationRule { // This Transformation adds time to a Message within an interaction
-	attr String[+] messageName;
+// This Transformation adds time to all BES that correspond to an operation within an interaction
+class IncreaseExectuionTime extends TransformationRule { // to be implemented
+	attr String componentName;
+	attr String operationName;
 	attr Integer[1] time;
+	attr TimeUnit unit;
 }
 
-
-// The value for this rule is already in the model	and will be applied if this rule is modeled
-class ApplyOpenWorkload extends TransformationRule {
-	attr String[*] useCases; // if no use-cases are given the rule is only applied to the all
+// Calculates a new arrival rate based on the observation time and 
+// the events that did arrive at the intercation.
+// The arrival rate is newly calculated for each interaction.
+class SetWorkloadByObservationTime extends TransformationRule { // implemented
+	attr Integer time;
+	attr TimeUnit unit;	
 }
 
-class SetCustomWorkload extends ApplyOpenWorkload {
-	attr String workloadType; // open or closed
-	attr BigDecimal value; 
+// Sets a specific workload for each matching interaction
+// If no interaction is given the workload is set for all interactions
+class SetWorkload extends TransformationRule {
+	attr String[*] interactions;
+	attr WorkloadType workloadType;
+	attr BigDecimal value;
+}
+
+enum WorkloadType {
+	OPEN;
+	CLOSE;
+}
+
+enum TimeUnit {
+	NANOS;
+	MICROS;
+	MILLIS;
+	SECONDS;
 }

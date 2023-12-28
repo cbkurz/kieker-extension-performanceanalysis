@@ -9,7 +9,7 @@ rule UseCase
     transform useCase1 : UML!UseCase
     to useCase2 : FUML!UseCase {
     
-    	guard : UmlTransformation!Transformation.all.first.umlUseCases.stream().filter(n|useCase1.name.contains(n)).findFirst().isPresent()
+    	guard : UT!Transformation.all.first.umlUseCase == useCase1.name
     	
     	useCase2.name = useCase1.name;
     	

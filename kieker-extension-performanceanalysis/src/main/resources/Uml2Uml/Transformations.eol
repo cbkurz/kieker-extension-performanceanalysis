@@ -3,47 +3,81 @@ import "../Uml2Lqn/StereotypeOperations.eol";
 // Each Operation is tied to a TransformationRule
 // All operations have the same name "transformation" and accept the UmlTransformation!Transformation object
 
-operation UmlTransformation!NullTransformation transformation(useCase : UT!Transformation) {
+operation UT!NullTransformation transformation(useCase : UT!Transformation) {
 	// do nothing
 }
 
-// Increases the time of exactly one Message
-operation UmlTransformation!IncreaseMessageTime transformation(useCase : UT!Transformation) {
-	var messages = FUML!Message.all.select(m | self.messageName.contains(m.name));
-	if (messages.size() == 0) {
-		throw "0 Messages were received for Transformation: IncreaseMessageTime";
+// Increases the of all BES found for the operation in the component
+operation UT!IncreaseExectuionTime transformation(useCase : UT!Transformation) {
+	var operations = FUML!Operation.all.select(o | self.operationName.equals(o.name) and o.getOwner().name == self.componentName);
+	if (operations.size() == 0) {
+		throw "0 Operations were received for Transformation: IncreaseMessageTime";
 	}
-	for (m in messages) {
-		if (not m.isStereotypeApplied("GaStep")) {
+	
+	// get all BES for the operation
+	var beses = new Sequence();
+	for (o in operations) {
+		"operation: ".print();
+		o.println();
+		var besName = o.getReference("BES");
+		var bs = FUML!BehaviorExecutionSpecification.all.select(b | b.name == besName);
+		beses.addAll(bs);
+	}
+	
+	// increase time for all BES
+	for (bes in beses) {
+		"BES: ".print();
+		bes.println();
+		if (not bes.isStereotypeApplied("GaStep")) {
+			"Stereotype not applied.".println();
 			continue;
 		}
-		var time = m.getStereotypeValue("GaStep", "execTime");
-		var increasedTime = time.asBigDecimal().add(self.time.asBigDecimal());		
-		m.setValue("GaStep", "execTime", increasedTime.toString());
-	}
+		var time = bes.getStereotypeValue("GaStep", "execTime");
+		var timeToAdd = toNanos(self.time, self.unit);
+		var increasedTime = time.asBigDecimal().add(timeToAdd.asBigDecimal());		
+		bes.setValue("GaStep", "execTime", increasedTime.toString());	
+	}	
 }
 
 
-operation UmlTransformation!ApplyOpenWorkload transformation(useCase : UT!Transformation) { // TODO: only apply to the UML!UseCase that match the attribute.
-	"entering open workload transformation".println();
+operation UT!SetWorkloadByObservationTime transformation(useCase : UT!Transformation) {
+	
+	var nanosTimes = toNanos(self.time, self.unit);
+	
 	var lifelines = FUML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent"));
 	"lifelines found: ".print();
 	lifelines.println();
 	for (lifeline in lifelines) {
-		var interaction = lifeline.getInteraction();
-		var openWorkload = interaction.getEAnnotation("PerformanceInformation").getDetails().get("openWorkload");
-		if (not openWorkload.isDefined()) {
-			throw "Could not find open Workload for: " + lifeline;
-		}
+		var bes = lifeline.coveredBy.selectOne(c | c.isTypeOf(FUML!BehaviorExecutionSpecification));
+		var entries = bes.getStereotypeValue("GaStep", "execTimeEntries").split(",").size();
+		var workload = getOpenWorkload(entries, nanosTimes);
+		var openWorkload = "open:" + workload;
 		lifeline.setValue("GaWorkloadEvent", "pattern", openWorkload);
 	}
 }
 
-operation UmlTransformation!SetCustomWorkload transformation(useCase : UT!Transformation) {
+operation UT!SetWorkload transformation(useCase : UT!Transformation) {
 	// TODO: must be implemented
 }
 
+operation getOpenWorkload(calls, observedTime): String {
+	var RoundingMode = Native("java.math.RoundingMode");
+	calls = calls.asBigDecimal();
+	observedTime = observedTime.asBigDecimal();
+	return calls.divide(observedTime, 20, RoundingMode.HALF_UP).toPlainString();
+}
 
+operation toNanos(time, unit) {
+// 	var Duration = Native("java.time.Duration");
+//	var ChronoUnit = Native("java.time.temporal.ChronoUnit");
+	switch (unit) {
+		case UT!TimeUnit#NANOS:   return time;
+		case UT!TimeUnit#MICROS:  return time * 1000l; // <- this is an L not a "one"
+		case UT!TimeUnit#MILLIS:  return time * 1000000l;
+		case UT!TimeUnit#SECONDS: return time * 1000000000l;
+		default : throw "Unsupported Time Unit: " + self;
+	}
+}
 
 /**
  * Converts an element to the native Java BigDecimal type
