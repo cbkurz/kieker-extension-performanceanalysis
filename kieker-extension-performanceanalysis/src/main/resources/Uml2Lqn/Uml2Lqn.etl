@@ -28,12 +28,10 @@ rule Model2Schema
 		lqn.name = uml.name;
 		lqn.processor.addAll(nodes);
 		lqn.processor.addAll(actors);
-		
-		UML!MessageOccurrenceSpecification.all.size().println();
 	}
 
 rule Node2Processor
-	transform node: UML!Node
+	transform currentNode: UML!Node
 	to proc: LQN!ProcessorType 
 	{	
 		/* 
@@ -47,12 +45,12 @@ rule Node2Processor
 			 * Gets the artifacts deployed on this Node
 			 * Selects the artifacts that are interacting through their manifested component
 			 */
-			var components = node.getDeployed().select(i | i.isInteracting());
+			var components = currentNode.getDeployed().select(i | i.isInteracting());
 			/* 
 			 * The transformation considers nodes stereotyped with 
 		     * <<GaExecHost>> and deploying interacting components
              */
-			return node.isStereotypeApplied(gaexechost) 
+			return currentNode.isStereotypeApplied(gaexechost) 
 				and components.notEmpty();
 		}
 		// ("Create processor for node: " + node.name).println();
@@ -60,12 +58,15 @@ rule Node2Processor
 		 * Retrieves the components deployed on the current node 
 		 * and interacting in a scenario
 		 */
-		var components = node.getDeployed().select(i | i.isInteracting());
+		var components = currentNode.getDeployed().select(i | i.isInteracting());
 		var operations = components.collect(c | c.getOperations()).flatten;
 
+        var allTasksForProc = new Sequence(); // note this variable is used as a fall through in the rule "Operation2Task"
+        var opTasks = operations.equivalent("Operation2Task");
+        allTasksForProc.addAll(opTasks);
         proc.multiplicity = "1".asBigInteger();
-		proc.name = node.name;
-		proc.task = operations.equivalent("Operation2Task");
+		proc.name = currentNode.name;
+		proc.task = allTasksForProc;
 	}
 	
 rule Actor2Processor
@@ -180,14 +181,7 @@ rule Operation2Task
 			var newEntry = es.first();
 			var total = es.size();
 			
-			// print
-			for (e in es) {
-				"Entry: ".print;
-				e.name.print();
-				" --> activity: ".print();
-				e.entryPhaseActivities.println();
-			}
-			
+
 			var calls = es.collect(entr | entr.entryPhaseActivities.activity.first?.synchCall).flatten;
 			var newCalls = new Sequence();
 			
@@ -204,11 +198,21 @@ rule Operation2Task
 				nCall.callsMean = nCall.callsMean.asDouble() + c.callsMean.asDouble();
 			}
 			
+			// normalize
 			for (nc in newCalls) {
 				nc.callsMean = nc.callsMean.asDouble / total;
 			}
 			
+			// host-demand-mean calculation for the cumulated entry
+			var hostDemandMean = 0;
+			for (e in es) {
+				hostDemandMean = hostDemandMean + e.entryPhaseActivities.activity.first.hostDemandMean.asDouble();
+			}
+			hostDemandMean = hostDemandMean / es.size();
+			
+			
 			newEntry.entryPhaseActivities.activity.first.synchCall = newCalls;
+			newEntry.entryPhaseActivities.activity.first.hostDemandMean = hostDemandMean + "";
 			newEntries.add(newEntry);
 		}
 				
@@ -218,10 +222,25 @@ rule Operation2Task
 		 */
 		var artifacts = component.getArtifacts();
 		var multiplicity = artifacts.size().asString();
-							
-		task.name = op.name;
-		task.entry = newEntries;
+
+
+        var currentEntry = newEntries.first();
+
+		task.name = currentEntry.name;
+		task.entry = Sequence{currentEntry};
 		task.multiplicity = multiplicity.asBigInteger();
+
+		if (newEntries.size > 1) {
+		    var last = newEntries.size - 1;
+		    for (i in Sequence{1..last}) { // ignore first entry, it is handled beforehand
+		        var e = newEntries.get(i);
+		        var next = new LQN!TaskType;
+		        next.name = e.name;
+		        next.entry = Sequence{e};
+		        task.multiplicity = multiplicity;
+                allTasksForProc.add(next);
+		    }
+		}
 	}
 	
 rule BES2Entry

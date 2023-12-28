@@ -174,7 +174,12 @@ operation UML!Artifact getDeployments() : Sequence {
 }
 
 operation UML!BehaviorExecutionSpecification getEntryName() {
-	return self.getOwner().name + "_" + self.name;
+	var interaction = self.getOwner();
+	var useCase = interaction.getOwner();
+	return useCase.name + "_" + interaction.name + "_" + self.name;
 }
 
 
+operation UML!Operation isDeployedOnNode(node: UML!Node) {
+	var component = self.getOwner();
+}
