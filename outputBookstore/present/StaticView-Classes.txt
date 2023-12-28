@@ -1,0 +1,32 @@
+@startuml
+
+' This is a PlantUML diagram.
+' Information on the notation can be found here: https://plantuml.com
+' An Editor, that allows to create diagrams, is here: https://www.plantuml.com/plantuml/uml/ 
+
+class _Entry_ {
+    {method} 'Entry'():<>
+}
+class kieker.examples.monitoring.application.Main {
+    {method} public static main(java.lang.String[]):void
+}
+class kieker.examples.monitoring.application.Bookstore {
+    {method} public <init>()
+    {method} public searchBook():void
+}
+class kieker.examples.monitoring.application.Catalog {
+    {method} public <init>()
+    {method} public getBook(boolean):void
+}
+class kieker.examples.monitoring.application.CRM {
+    {method} public <init>(kieker.examples.monitoring.application.Catalog)
+    {method} public getOffers():void
+}
+
+_Entry_ -- kieker.examples.monitoring.application.Main
+kieker.examples.monitoring.application.Main -- kieker.examples.monitoring.application.Bookstore
+kieker.examples.monitoring.application.Bookstore -- kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.Bookstore -- kieker.examples.monitoring.application.CRM
+kieker.examples.monitoring.application.CRM -- kieker.examples.monitoring.application.Catalog
+
+@enduml

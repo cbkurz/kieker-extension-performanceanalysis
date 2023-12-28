@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_GOzWcKUtEe6s_b6jMK0kgw" name="output.uml">
+  <packagedElement xmi:type="uml:Package" xmi:id="_GQUZYKUtEe6s_b6jMK0kgw" name="staticView-classes">
+    <eAnnotations xmi:id="_GRBkAqUtEe6s_b6jMK0kgw" source="AppliedIds">
+      <details xmi:id="_GRBkA6UtEe6s_b6jMK0kgw" key="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GQgmoKUtEe6s_b6jMK0kgw" name="'Entry'">
+      <ownedAttribute xmi:id="_GQxFUKUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Main" type="_GQjp8aUtEe6s_b6jMK0kgw" association="_GQoicKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ0vsKUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ1WwKUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_GQjp8KUtEe6s_b6jMK0kgw" name="'Entry'():&lt;>">
+        <eAnnotations xmi:id="_GQkRAKUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GQlfIKUtEe6s_b6jMK0kgw" key="package" value=""/>
+          <details xmi:id="_GQlfIaUtEe6s_b6jMK0kgw" key="class" value="'Entry'"/>
+          <details xmi:id="_GQlfIqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="'Entry'"/>
+          <details xmi:id="_GQlfI6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+          <details xmi:id="_GQlfJKUtEe6s_b6jMK0kgw" key="signature" value="'Entry'():&lt;>"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GQmGMaUtEe6s_b6jMK0kgw" source="CallsToQualifiedNames">
+          <details xmi:id="_GQmGMqUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GQjp8aUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Main">
+      <ownedAttribute xmi:id="_GQ190KUtEe6s_b6jMK0kgw" name="'Entry'" type="_GQgmoKUtEe6s_b6jMK0kgw" association="_GQoicKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ190aUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ190qUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GQ62UaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Bookstore" type="_GQ3zAKUtEe6s_b6jMK0kgw" association="_GQ62UKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ62UqUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ7dYKUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_GQjp8qUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void">
+        <eAnnotations xmi:id="_GQlfJaUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GQ95oaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GQ95oqUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+          <details xmi:id="_GQ95o6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+          <details xmi:id="_GQ95pKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+          <details xmi:id="_GQ95paUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GQ5BIKUtEe6s_b6jMK0kgw" source="CallsToQualifiedNames">
+          <details xmi:id="_GQ5BIaUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+          <details xmi:id="_GQ-gsKUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GQoicKUtEe6s_b6jMK0kgw" memberEnd="_GQxFUKUtEe6s_b6jMK0kgw _GQ190KUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GQ3zAKUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Bookstore">
+      <ownedAttribute xmi:id="_GQ7dYaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Main" type="_GQjp8aUtEe6s_b6jMK0kgw" association="_GQ62UKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ7dYqUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ7dY6UtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GQ8EfaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Catalog" type="_GQ7dZKUtEe6s_b6jMK0kgw" association="_GQ8EfKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ8EfqUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ8Ef6UtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GQ9SlKUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.CRM" type="_GQ8rgaUtEe6s_b6jMK0kgw" association="_GQ9Sk6UtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ9SlaUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ9SlqUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_GQ4aEKUtEe6s_b6jMK0kgw" name="public &lt;init>()">
+        <eAnnotations xmi:id="_GQ4aFqUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GQ8rg6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GQ8rhKUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+          <details xmi:id="_GQ8rhaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+          <details xmi:id="_GQ8rhqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+          <details xmi:id="_GQ8rh6UtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GQ8EeqUtEe6s_b6jMK0kgw" source="CallsToQualifiedNames">
+          <details xmi:id="_GQ8Ee6UtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.Catalog.public &lt;init>()"/>
+          <details xmi:id="_GQ9SkqUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_GQ95oKUtEe6s_b6jMK0kgw" name="public searchBook():void">
+        <eAnnotations xmi:id="_GQ95pqUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GQ_u0aUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GQ_u0qUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+          <details xmi:id="_GQ_u06UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+          <details xmi:id="_GQ_u1KUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+          <details xmi:id="_GQ_u1aUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GQ-gvaUtEe6s_b6jMK0kgw" source="CallsToQualifiedNames">
+          <details xmi:id="_GQ-gvqUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+          <details xmi:id="_GQ_u3KUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GQ62UKUtEe6s_b6jMK0kgw" memberEnd="_GQ62UaUtEe6s_b6jMK0kgw _GQ7dYaUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GQ7dZKUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Catalog">
+      <ownedAttribute xmi:id="_GQ8EgKUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Bookstore" type="_GQ3zAKUtEe6s_b6jMK0kgw" association="_GQ8EfKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ8EgaUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ8rgKUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GRA8-6UtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.CRM" type="_GQ8rgaUtEe6s_b6jMK0kgw" association="_GRA896UtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GRBkAKUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GRBkAaUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_GQ7dZaUtEe6s_b6jMK0kgw" name="public &lt;init>()">
+        <eAnnotations xmi:id="_GQ8EdKUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GQ8EdaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GQ8EdqUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+          <details xmi:id="_GQ8Ed6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+          <details xmi:id="_GQ8EeKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public &lt;init>()"/>
+          <details xmi:id="_GQ8EeaUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_GQ-gsaUtEe6s_b6jMK0kgw" name="public getBook(boolean):void">
+        <eAnnotations xmi:id="_GQ-gt6UtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRA88KUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GRA88aUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+          <details xmi:id="_GRA88qUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+          <details xmi:id="_GRA886UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+          <details xmi:id="_GRA89KUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GQ8EfKUtEe6s_b6jMK0kgw" memberEnd="_GQ8EfaUtEe6s_b6jMK0kgw _GQ8EgKUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GQ8rgaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.CRM">
+      <ownedAttribute xmi:id="_GQ9Sl6UtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Bookstore" type="_GQ3zAKUtEe6s_b6jMK0kgw" association="_GQ9Sk6UtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GQ9SmKUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GQ9SmaUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_GRA8-KUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Catalog" type="_GQ7dZKUtEe6s_b6jMK0kgw" association="_GRA896UtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GRA8-aUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GRA8-qUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_GQ8rgqUtEe6s_b6jMK0kgw" name="public &lt;init>(kieker.examples.monitoring.application.Catalog)">
+        <eAnnotations xmi:id="_GQ8riKUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GQ8riaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GQ8riqUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+          <details xmi:id="_GQ8ri6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+          <details xmi:id="_GQ9SkKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+          <details xmi:id="_GQ9SkaUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_GQ_u0KUtEe6s_b6jMK0kgw" name="public getOffers():void">
+        <eAnnotations xmi:id="_GQ_u1qUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRAV4KUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+          <details xmi:id="_GRAV4aUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+          <details xmi:id="_GRAV4qUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+          <details xmi:id="_GRAV46UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+          <details xmi:id="_GRAV5KUtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GRA89aUtEe6s_b6jMK0kgw" source="CallsToQualifiedNames">
+          <details xmi:id="_GRA89qUtEe6s_b6jMK0kgw" key="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GQ9Sk6UtEe6s_b6jMK0kgw" memberEnd="_GQ9SlKUtEe6s_b6jMK0kgw _GQ9Sl6UtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GRA896UtEe6s_b6jMK0kgw" memberEnd="_GRA8-KUtEe6s_b6jMK0kgw _GRA8-6UtEe6s_b6jMK0kgw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_GRCLEKUtEe6s_b6jMK0kgw" name="staticView-components">
+    <eAnnotations xmi:id="_GRT36aUtEe6s_b6jMK0kgw" source="AppliedIds">
+      <details xmi:id="_GRT36qUtEe6s_b6jMK0kgw" key="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GREnUKUtEe6s_b6jMK0kgw" name="'Entry'">
+      <interfaceRealization xmi:id="_GRNKMKUtEe6s_b6jMK0kgw" name="'Entry'():&lt;>" client="_GREnUKUtEe6s_b6jMK0kgw" supplier="_GRGcgKUtEe6s_b6jMK0kgw" contract="_GRGcgKUtEe6s_b6jMK0kgw"/>
+      <ownedOperation xmi:id="_GRKG4KUtEe6s_b6jMK0kgw" name="'Entry'():&lt;>">
+        <eAnnotations xmi:id="_GRLVAKUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRLVAaUtEe6s_b6jMK0kgw" key="BES" value="BES-'Entry'.'Entry'():&lt;>"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRGcgKUtEe6s_b6jMK0kgw" name="'Entry'():&lt;>"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GRO_YaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Main">
+      <interfaceRealization xmi:id="_GRPmdKUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void" client="_GRO_YaUtEe6s_b6jMK0kgw" supplier="_GRO_YqUtEe6s_b6jMK0kgw" contract="_GRO_YqUtEe6s_b6jMK0kgw"/>
+      <ownedOperation xmi:id="_GRPmcaUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void">
+        <eAnnotations xmi:id="_GRPmcqUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRSCu6UtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRO_YqUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRQNgKUtEe6s_b6jMK0kgw" client="_GRGcgKUtEe6s_b6jMK0kgw" supplier="_GRO_YqUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GRQ0kaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Bookstore">
+      <interfaceRealization xmi:id="_GRQ0l6UtEe6s_b6jMK0kgw" name="public Bookstore()" client="_GRQ0kaUtEe6s_b6jMK0kgw" supplier="_GRQ0kqUtEe6s_b6jMK0kgw" contract="_GRQ0kqUtEe6s_b6jMK0kgw"/>
+      <interfaceRealization xmi:id="_GRSCwKUtEe6s_b6jMK0kgw" name="public searchBook():void" client="_GRQ0kaUtEe6s_b6jMK0kgw" supplier="_GRSCvKUtEe6s_b6jMK0kgw" contract="_GRSCvKUtEe6s_b6jMK0kgw"/>
+      <ownedOperation xmi:id="_GRQ0lKUtEe6s_b6jMK0kgw" name="public Bookstore()">
+        <eAnnotations xmi:id="_GRQ0laUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRSCsaUtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_GRSCvaUtEe6s_b6jMK0kgw" name="public searchBook():void">
+        <eAnnotations xmi:id="_GRSCvqUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRTQ2KUtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRQ0kqUtEe6s_b6jMK0kgw" name="public Bookstore()"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRQ0maUtEe6s_b6jMK0kgw" client="_GRO_YqUtEe6s_b6jMK0kgw" supplier="_GRQ0kqUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GRRboaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Catalog">
+      <interfaceRealization xmi:id="_GRRbp6UtEe6s_b6jMK0kgw" name="public Catalog()" client="_GRRboaUtEe6s_b6jMK0kgw" supplier="_GRRboqUtEe6s_b6jMK0kgw" contract="_GRRboqUtEe6s_b6jMK0kgw"/>
+      <interfaceRealization xmi:id="_GRTQ1qUtEe6s_b6jMK0kgw" name="public getBook(boolean):void" client="_GRRboaUtEe6s_b6jMK0kgw" supplier="_GRTQ0qUtEe6s_b6jMK0kgw" contract="_GRTQ0qUtEe6s_b6jMK0kgw"/>
+      <ownedOperation xmi:id="_GRRbpKUtEe6s_b6jMK0kgw" name="public Catalog()">
+        <eAnnotations xmi:id="_GRRbpaUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRRbpqUtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.Catalog.public &lt;init>()"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_GRTQ06UtEe6s_b6jMK0kgw" name="public getBook(boolean):void">
+        <eAnnotations xmi:id="_GRTQ1KUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRT356UtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRRboqUtEe6s_b6jMK0kgw" name="public Catalog()"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRSCsKUtEe6s_b6jMK0kgw" client="_GRQ0kqUtEe6s_b6jMK0kgw" supplier="_GRRboqUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Component" xmi:id="_GRSCsqUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.CRM">
+      <interfaceRealization xmi:id="_GRSCuKUtEe6s_b6jMK0kgw" name="public CRM(kieker.examples.monitoring.application.Catalog)" client="_GRSCsqUtEe6s_b6jMK0kgw" supplier="_GRSCs6UtEe6s_b6jMK0kgw" contract="_GRSCs6UtEe6s_b6jMK0kgw"/>
+      <interfaceRealization xmi:id="_GRT35KUtEe6s_b6jMK0kgw" name="public getOffers():void" client="_GRSCsqUtEe6s_b6jMK0kgw" supplier="_GRT34KUtEe6s_b6jMK0kgw" contract="_GRT34KUtEe6s_b6jMK0kgw"/>
+      <ownedOperation xmi:id="_GRSCtaUtEe6s_b6jMK0kgw" name="public CRM(kieker.examples.monitoring.application.Catalog)">
+        <eAnnotations xmi:id="_GRSCtqUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRSCt6UtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+        </eAnnotations>
+      </ownedOperation>
+      <ownedOperation xmi:id="_GRT34aUtEe6s_b6jMK0kgw" name="public getOffers():void">
+        <eAnnotations xmi:id="_GRT34qUtEe6s_b6jMK0kgw" source="Reference">
+          <details xmi:id="_GRT35qUtEe6s_b6jMK0kgw" key="BES" value="BES-kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+        </eAnnotations>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRSCs6UtEe6s_b6jMK0kgw" name="public CRM(kieker.examples.monitoring.application.Catalog)"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRSCuqUtEe6s_b6jMK0kgw" client="_GRQ0kqUtEe6s_b6jMK0kgw" supplier="_GRSCs6UtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRSCvKUtEe6s_b6jMK0kgw" name="public searchBook():void"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRTQ0KUtEe6s_b6jMK0kgw" client="_GRO_YqUtEe6s_b6jMK0kgw" supplier="_GRSCvKUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRTQ0qUtEe6s_b6jMK0kgw" name="public getBook(boolean):void"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRTQ16UtEe6s_b6jMK0kgw" client="_GRSCvKUtEe6s_b6jMK0kgw" supplier="_GRTQ0qUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_GRT34KUtEe6s_b6jMK0kgw" name="public getOffers():void"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRT35aUtEe6s_b6jMK0kgw" client="_GRSCvKUtEe6s_b6jMK0kgw" supplier="_GRT34KUtEe6s_b6jMK0kgw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_GRT36KUtEe6s_b6jMK0kgw" client="_GRT34KUtEe6s_b6jMK0kgw" supplier="_GRTQ0qUtEe6s_b6jMK0kgw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_GRCyIKUtEe6s_b6jMK0kgw" name="deploymentView">
+    <eAnnotations xmi:id="_GRVGAKUtEe6s_b6jMK0kgw" source="AppliedIds">
+      <details xmi:id="_GRVGAaUtEe6s_b6jMK0kgw" key="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+    </eAnnotations>
+    <packagedElement xmi:type="uml:Node" xmi:id="_GRIRsKUtEe6s_b6jMK0kgw" name="'Entry'">
+      <eAnnotations xmi:id="_GRXiQKUtEe6s_b6jMK0kgw" source="GaExecHost"/>
+      <deployment xmi:id="_GRO_YKUtEe6s_b6jMK0kgw" name="NodeDeployment-'Entry'" client="_GRIRsKUtEe6s_b6jMK0kgw" supplier="_GRJf0KUtEe6s_b6jMK0kgw" deployedArtifact="_GRJf0KUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_GRJf0KUtEe6s_b6jMK0kgw" name="'Entry'">
+      <manifestation xmi:id="_GROYUKUtEe6s_b6jMK0kgw" name="ArtifactManifestation-'Entry'" supplier="_GREnUKUtEe6s_b6jMK0kgw" utilizedElement="_GREnUKUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Node" xmi:id="_GRO_Y6UtEe6s_b6jMK0kgw" name="Meshify5800X570">
+      <eAnnotations xmi:id="_GRXiQaUtEe6s_b6jMK0kgw" source="GaExecHost"/>
+      <deployment xmi:id="_GRPmdqUtEe6s_b6jMK0kgw" name="NodeDeployment-Meshify5800X570" client="_GRO_Y6UtEe6s_b6jMK0kgw" supplier="_GRPmcKUtEe6s_b6jMK0kgw _GRQ0k6UtEe6s_b6jMK0kgw _GRRbo6UtEe6s_b6jMK0kgw _GRSCtKUtEe6s_b6jMK0kgw" deployedArtifact="_GRPmcKUtEe6s_b6jMK0kgw _GRQ0k6UtEe6s_b6jMK0kgw _GRRbo6UtEe6s_b6jMK0kgw _GRSCtKUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_GRPmcKUtEe6s_b6jMK0kgw" name="@4">
+      <manifestation xmi:id="_GRPmdaUtEe6s_b6jMK0kgw" name="ArtifactManifestation-kieker.examples.monitoring.application.Main" supplier="_GRO_YaUtEe6s_b6jMK0kgw" utilizedElement="_GRO_YaUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_GRQ0k6UtEe6s_b6jMK0kgw" name="@3">
+      <manifestation xmi:id="_GRQ0mKUtEe6s_b6jMK0kgw" name="ArtifactManifestation-kieker.examples.monitoring.application.Bookstore" supplier="_GRQ0kaUtEe6s_b6jMK0kgw" utilizedElement="_GRQ0kaUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_GRRbo6UtEe6s_b6jMK0kgw" name="@1">
+      <manifestation xmi:id="_GRRbqKUtEe6s_b6jMK0kgw" name="ArtifactManifestation-kieker.examples.monitoring.application.Catalog" supplier="_GRRboaUtEe6s_b6jMK0kgw" utilizedElement="_GRRboaUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Artifact" xmi:id="_GRSCtKUtEe6s_b6jMK0kgw" name="@2">
+      <manifestation xmi:id="_GRSCuaUtEe6s_b6jMK0kgw" name="ArtifactManifestation-kieker.examples.monitoring.application.CRM" supplier="_GRSCsqUtEe6s_b6jMK0kgw" utilizedElement="_GRSCsqUtEe6s_b6jMK0kgw"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_GRalkKUtEe6s_b6jMK0kgw" name="dynamicView">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_GReP8KUtEe6s_b6jMK0kgw" name="SimpleExample-0">
+      <eAnnotations xmi:id="_GRe3AKUtEe6s_b6jMK0kgw" source="Representation">
+        <details xmi:id="_GRe3AaUtEe6s_b6jMK0kgw" key="representation" value="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+      </eAnnotations>
+      <eAnnotations xmi:id="_GRihYKUtEe6s_b6jMK0kgw" source="GaScenario"/>
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_GRoA8KUtEe6s_b6jMK0kgw" name="Interaction-0">
+        <eAnnotations xmi:id="_GRooAKUtEe6s_b6jMK0kgw" source="AppliedIds">
+          <details xmi:id="_GSEs-KUtEe6s_b6jMK0kgw" key="676947318989127681"/>
+          <details xmi:id="_GSNPwKUtEe6s_b6jMK0kgw" key="676947318989127682"/>
+          <details xmi:id="_GSPsAKUtEe6s_b6jMK0kgw" key="676947318989127683"/>
+          <details xmi:id="_GSSIQKUtEe6s_b6jMK0kgw" key="676947318989127684"/>
+          <details xmi:id="_GSVLkKUtEe6s_b6jMK0kgw" key="676947318989127685"/>
+          <details xmi:id="_GSXn0KUtEe6s_b6jMK0kgw" key="676947318989127686"/>
+          <details xmi:id="_GSaEEKUtEe6s_b6jMK0kgw" key="676947318989127687"/>
+          <details xmi:id="_GScgUKUtEe6s_b6jMK0kgw" key="676947318989127688"/>
+          <details xmi:id="_GSe8kKUtEe6s_b6jMK0kgw" key="676947318989127689"/>
+          <details xmi:id="_GShY0KUtEe6s_b6jMK0kgw" key="676947318989127690"/>
+          <details xmi:id="_GSj1EKUtEe6s_b6jMK0kgw" key="676947318989127691"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GRooAqUtEe6s_b6jMK0kgw" source="Representation">
+          <details xmi:id="_GRooA6UtEe6s_b6jMK0kgw" key="representation" value="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidSender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():voidSender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():voidSender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidSender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+        </eAnnotations>
+        <eAnnotations xmi:id="_GR9_MKUtEe6s_b6jMK0kgw" source="PerformanceInformation">
+          <details xmi:id="_GSjOAKUtEe6s_b6jMK0kgw" key="startTime" value="1702083421073864300"/>
+          <details xmi:id="_GSjOAaUtEe6s_b6jMK0kgw" key="endTime" value="1702083440700569200"/>
+          <details xmi:id="_GSjOAqUtEe6s_b6jMK0kgw" key="openWorkload" value="open:0.00000000056046086473"/>
+        </eAnnotations>
+        <ownedAttribute xmi:id="_GSGiE6UtEe6s_b6jMK0kgw" name="'Entry'-SimpleExample-0" type="_GRgsMKUtEe6s_b6jMK0kgw" association="_GSF7AKUtEe6s_b6jMK0kgw">
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GSGiFKUtEe6s_b6jMK0kgw" value="1"/>
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GSGiFaUtEe6s_b6jMK0kgw" value="1"/>
+        </ownedAttribute>
+        <ownedParameter xmi:id="_GRsSYKUtEe6s_b6jMK0kgw" name="Representation-kieker.examples.monitoring.application.Main" type="_GRO_YaUtEe6s_b6jMK0kgw"/>
+        <ownedParameter xmi:id="_GRznPaUtEe6s_b6jMK0kgw" name="Representation-kieker.examples.monitoring.application.Bookstore" type="_GRQ0kaUtEe6s_b6jMK0kgw"/>
+        <ownedParameter xmi:id="_GR01Q6UtEe6s_b6jMK0kgw" name="Representation-kieker.examples.monitoring.application.Catalog" type="_GRRboaUtEe6s_b6jMK0kgw"/>
+        <ownedParameter xmi:id="_GR2qjqUtEe6s_b6jMK0kgw" name="Representation-kieker.examples.monitoring.application.CRM" type="_GRSCsqUtEe6s_b6jMK0kgw"/>
+        <ownedParameter xmi:id="_GR8KHqUtEe6s_b6jMK0kgw" name="Representation-'Entry'" type="_GREnUKUtEe6s_b6jMK0kgw"/>
+        <lifeline xmi:id="_GRp2IKUtEe6s_b6jMK0kgw" name="'Entry'" represents="_GSGiE6UtEe6s_b6jMK0kgw" coveredBy="_GRuuoKUtEe6s_b6jMK0kgw _GR8KJ6UtEe6s_b6jMK0kgw _GR8xIqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8KH6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8KIKUtEe6s_b6jMK0kgw" key="package" value=""/>
+            <details xmi:id="_GR8KIaUtEe6s_b6jMK0kgw" key="class" value="'Entry'"/>
+            <details xmi:id="_GR8KIqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_GR8KI6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_GR8KJKUtEe6s_b6jMK0kgw" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSGiFqUtEe6s_b6jMK0kgw" source="GaWorkloadEvent">
+            <details xmi:id="_GSGiF6UtEe6s_b6jMK0kgw" key="pattern" value="closed:1"/>
+          </eAnnotations>
+        </lifeline>
+        <lifeline xmi:id="_GRp2IaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Main" represents="_GRsSYKUtEe6s_b6jMK0kgw" coveredBy="_GRv8wKUtEe6s_b6jMK0kgw _GRwj0KUtEe6s_b6jMK0kgw _GR0ON6UtEe6s_b6jMK0kgw _GR4fxaUtEe6s_b6jMK0kgw _GR5GyKUtEe6s_b6jMK0kgw _GR8KAKUtEe6s_b6jMK0kgw _GR8KJqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GRsSYaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jTaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jTqUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR7jT6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR7jUKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR7jUaUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </lifeline>
+        <lifeline xmi:id="_GRznPKUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Bookstore" represents="_GRznPaUtEe6s_b6jMK0kgw" coveredBy="_GR0OOKUtEe6s_b6jMK0kgw _GR0OOaUtEe6s_b6jMK0kgw _GR01S6UtEe6s_b6jMK0kgw _GR1cXKUtEe6s_b6jMK0kgw _GR2qlqUtEe6s_b6jMK0kgw _GR4foKUtEe6s_b6jMK0kgw _GR4fxKUtEe6s_b6jMK0kgw _GR5GyaUtEe6s_b6jMK0kgw _GR5GyqUtEe6s_b6jMK0kgw _GR5t5aUtEe6s_b6jMK0kgw _GR6U9aUtEe6s_b6jMK0kgw _GR679aUtEe6s_b6jMK0kgw _GR7jL6UtEe6s_b6jMK0kgw _GR7jU6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR0OMKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jKKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jKaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR7jKqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR7jK6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR7jLKUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </lifeline>
+        <lifeline xmi:id="_GR01QqUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.Catalog" represents="_GR01Q6UtEe6s_b6jMK0kgw" coveredBy="_GR01TKUtEe6s_b6jMK0kgw _GR01TaUtEe6s_b6jMK0kgw _GR1cW6UtEe6s_b6jMK0kgw _GR5t5qUtEe6s_b6jMK0kgw _GR5t56UtEe6s_b6jMK0kgw _GR6U9KUtEe6s_b6jMK0kgw _GR68IKUtEe6s_b6jMK0kgw _GR68IaUtEe6s_b6jMK0kgw _GR7jCaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR01RKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR68GaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR68GqUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR68G6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR68HKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR68HaUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </lifeline>
+        <lifeline xmi:id="_GR2qjaUtEe6s_b6jMK0kgw" name="kieker.examples.monitoring.application.CRM" represents="_GR2qjqUtEe6s_b6jMK0kgw" coveredBy="_GR2ql6UtEe6s_b6jMK0kgw _GR34kKUtEe6s_b6jMK0kgw _GR34uKUtEe6s_b6jMK0kgw _GR679qUtEe6s_b6jMK0kgw _GR6796UtEe6s_b6jMK0kgw _GR68H6UtEe6s_b6jMK0kgw _GR7jCqUtEe6s_b6jMK0kgw _GR7jLqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR2qj6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jA6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jBKUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR7jBaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR7jBqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR7jB6UtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </lifeline>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GRuuoKUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):voidSendEvent" covered="_GRp2IKUtEe6s_b6jMK0kgw" message="_GRtggKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GRznKqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GRznK6UtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRznLKUtEe6s_b6jMK0kgw" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GRznLaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GRznLqUtEe6s_b6jMK0kgw" key="package" value=""/>
+            <details xmi:id="_GRznL6UtEe6s_b6jMK0kgw" key="class" value="'Entry'"/>
+            <details xmi:id="_GRznMKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_GRznMaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_GRznMqUtEe6s_b6jMK0kgw" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GRv8wKUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):voidReceiveEvent" covered="_GRp2IaUtEe6s_b6jMK0kgw" message="_GRtggKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GRznM6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GRznNKUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRznNaUtEe6s_b6jMK0kgw" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GRznNqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GRznN6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GRznOKUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GRznOaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GRznOqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRznO6UtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GRwj0KUtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void" covered="_GRp2IaUtEe6s_b6jMK0kgw" finish="_GR8KJqUtEe6s_b6jMK0kgw" start="_GRv8wKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GRwj0aUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GRwj0qUtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRzAEKUtEe6s_b6jMK0kgw" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GRzAEaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GRzAEqUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRznIKUtEe6s_b6jMK0kgw" key="OpenMessageCount" value="0"/>
+            <details xmi:id="_GR8KKKUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_GR8KKaUtEe6s_b6jMK0kgw" key="CloseMessageCount" value="15"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEF0KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEF0aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="3308500.0,34700.0,23000.0,19500.0,18300.0,28500.0,24200.0,23100.0,28100.0,19500.0,20600.0"/>
+            <details xmi:id="_GSEF0qUtEe6s_b6jMK0kgw" key="execTime" value="322545.45454545453"/>
+            <details xmi:id="_GSEF06UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR0ON6UtEe6s_b6jMK0kgw" name="public Bookstore()SendEvent" covered="_GRp2IaUtEe6s_b6jMK0kgw" message="_GR0ONqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR0OSaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR0OSqUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR0OS6UtEe6s_b6jMK0kgw" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR0OTKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR0OTaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR0OTqUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR0OT6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR0OUKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR0OUaUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR0OOKUtEe6s_b6jMK0kgw" name="public Bookstore()ReceiveEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR0ONqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR0OUqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR0OU6UtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR0OVKUtEe6s_b6jMK0kgw" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR0OVaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR0OVqUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR0OV6UtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR0OWKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR01QKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR01QaUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR0OOaUtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.Bookstore.public &lt;init>()" covered="_GRznPKUtEe6s_b6jMK0kgw" finish="_GR4fxKUtEe6s_b6jMK0kgw" start="_GR0OOKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR0OOqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR0OO6UtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR0OPKUtEe6s_b6jMK0kgw" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR0OPaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR0OPqUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR0OP6UtEe6s_b6jMK0kgw" key="OpenMessageCount" value="1"/>
+            <details xmi:id="_GR4fxqUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR4fx6UtEe6s_b6jMK0kgw" key="CloseMessageCount" value="6"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEF1KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEF1aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="5481400.0,51300.0,34600.0,43500.0,34800.0,40500.0,32200.0,30300.0,30200.0,42800.0,31200.0"/>
+            <details xmi:id="_GSEF1qUtEe6s_b6jMK0kgw" key="execTime" value="532072.7272727273"/>
+            <details xmi:id="_GSEF16UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR01S6UtEe6s_b6jMK0kgw" name="public Catalog()SendEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR01SqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR01XaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR01XqUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()"/>
+            <details xmi:id="_GR01X6UtEe6s_b6jMK0kgw" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR01YKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR01YaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR01YqUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR01Y6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR01ZKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR01ZaUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR01TKUtEe6s_b6jMK0kgw" name="public Catalog()ReceiveEvent" covered="_GR01QqUtEe6s_b6jMK0kgw" message="_GR01SqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR01ZqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR01Z6UtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()"/>
+            <details xmi:id="_GR01aKUtEe6s_b6jMK0kgw" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR01aaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR1cUKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR1cUaUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR1cUqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR1cU6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public &lt;init>()"/>
+            <details xmi:id="_GR1cVKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR01TaUtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.Catalog.public &lt;init>()" covered="_GR01QqUtEe6s_b6jMK0kgw" finish="_GR1cW6UtEe6s_b6jMK0kgw" start="_GR01TKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR01TqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR01T6UtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()"/>
+            <details xmi:id="_GR01UKUtEe6s_b6jMK0kgw" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR01UaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR01UqUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()"/>
+            <details xmi:id="_GR01U6UtEe6s_b6jMK0kgw" key="OpenMessageCount" value="2"/>
+            <details xmi:id="_GR2qcKUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR2qcaUtEe6s_b6jMK0kgw" key="CloseMessageCount" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEF2KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEF2aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="5400.0,5600.0,4600.0,4300.0,4400.0,7100.0,4700.0,4700.0,4300.0,5900.0,4600.0"/>
+            <details xmi:id="_GSEF2qUtEe6s_b6jMK0kgw" key="execTime" value="5054.545454545455"/>
+            <details xmi:id="_GSEF26UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR1cW6UtEe6s_b6jMK0kgw" name="public Bookstore()SendEvent" covered="_GR01QqUtEe6s_b6jMK0kgw" message="_GR1cWqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR2qe6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR2qfKUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR2qfaUtEe6s_b6jMK0kgw" key="count" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR2qfqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR2qf6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR2qgKUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR2qgaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR2qgqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public &lt;init>()"/>
+            <details xmi:id="_GR2qg6UtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR1cXKUtEe6s_b6jMK0kgw" name="public Bookstore()ReceiveEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR1cWqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR2qhKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR2qhaUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR2qhqUtEe6s_b6jMK0kgw" key="count" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR2qh6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR2qiKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR2qiaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR2qiqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR2qi6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR2qjKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR2qlqUtEe6s_b6jMK0kgw" name="public CRM(kieker.examples.monitoring.application.Catalog)SendEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR2qlaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR34oKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR34oaUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34oqUtEe6s_b6jMK0kgw" key="count" value="4"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR34o6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR34pKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR34paUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR34pqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR34p6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR34qKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR2ql6UtEe6s_b6jMK0kgw" name="public CRM(kieker.examples.monitoring.application.Catalog)ReceiveEvent" covered="_GR2qjaUtEe6s_b6jMK0kgw" message="_GR2qlaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR34qaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR34qqUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34q6UtEe6s_b6jMK0kgw" key="count" value="4"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR34rKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR34raUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR34rqUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR34r6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR34sKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34saUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR34kKUtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)" covered="_GR2qjaUtEe6s_b6jMK0kgw" finish="_GR34uKUtEe6s_b6jMK0kgw" start="_GR2ql6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR34kaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR34kqUtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34k6UtEe6s_b6jMK0kgw" key="count" value="4"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR34lKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR34laUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34lqUtEe6s_b6jMK0kgw" key="OpenMessageCount" value="4"/>
+            <details xmi:id="_GR4foaUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR4foqUtEe6s_b6jMK0kgw" key="CloseMessageCount" value="5"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEs4KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEs4aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="4100.0,3200.0,3000.0,2100.0,2100.0,2900.0,1900.0,1900.0,2100.0,2300.0,1700.0"/>
+            <details xmi:id="_GSEs4qUtEe6s_b6jMK0kgw" key="execTime" value="2481.818181818182"/>
+            <details xmi:id="_GSEs46UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR34uKUtEe6s_b6jMK0kgw" name="public Bookstore()SendEvent" covered="_GR2qjaUtEe6s_b6jMK0kgw" message="_GR34t6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR4frKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR4fraUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR4frqUtEe6s_b6jMK0kgw" key="count" value="5"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR4fr6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR4fsKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR4fsaUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR4fsqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR4fs6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR4ftKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR4foKUtEe6s_b6jMK0kgw" name="public Bookstore()ReceiveEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR34t6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR4ftaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR4ftqUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR4ft6UtEe6s_b6jMK0kgw" key="count" value="5"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR4fuKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR4fuaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR4fuqUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR4fu6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR4fvKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR4fvaUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR4fxKUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):voidSendEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR4fw6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5GsKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5GsaUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR5GsqUtEe6s_b6jMK0kgw" key="count" value="6"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR5Gs6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR5GtKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR5GtaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR5GtqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR5Gt6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR5GuKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR4fxaUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):voidReceiveEvent" covered="_GRp2IaUtEe6s_b6jMK0kgw" message="_GR4fw6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5GuaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5GuqUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR5Gu6UtEe6s_b6jMK0kgw" key="count" value="6"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR5GvKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR5GvaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR5GvqUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR5Gv6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR5GwKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR5GwaUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR5GyKUtEe6s_b6jMK0kgw" name="public searchBook():voidSendEvent" covered="_GRp2IaUtEe6s_b6jMK0kgw" message="_GR5Gx6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5tzaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5tzqUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR5tz6UtEe6s_b6jMK0kgw" key="count" value="7"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR5t0KUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR5t0aUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR5t0qUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR5t06UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR5t1KUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR5t1aUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR5GyaUtEe6s_b6jMK0kgw" name="public searchBook():voidReceiveEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR5Gx6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5t1qUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5t16UtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR5t2KUtEe6s_b6jMK0kgw" key="count" value="7"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR5t2aUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR5t2qUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR5t26UtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR5t3KUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR5t3aUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR5t3qUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR5GyqUtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.Bookstore.public searchBook():void" covered="_GRznPKUtEe6s_b6jMK0kgw" finish="_GR7jU6UtEe6s_b6jMK0kgw" start="_GR5GyaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5Gy6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5GzKUtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR5twKUtEe6s_b6jMK0kgw" key="count" value="7"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR5twaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR5twqUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR5tw6UtEe6s_b6jMK0kgw" key="OpenMessageCount" value="7"/>
+            <details xmi:id="_GR8KAaUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8KAqUtEe6s_b6jMK0kgw" key="CloseMessageCount" value="14"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEs5KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEs5aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="476400.0,30300.0,28900.0,25100.0,26700.0,20900.0,384200.0,26200.0,48200.0,28600.0,21100.0"/>
+            <details xmi:id="_GSEs5qUtEe6s_b6jMK0kgw" key="execTime" value="101509.09090909091"/>
+            <details xmi:id="_GSEs56UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR5t5aUtEe6s_b6jMK0kgw" name="public getBook(boolean):voidSendEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR5t5KUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR6U3KUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR6U3aUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR6U3qUtEe6s_b6jMK0kgw" key="count" value="8"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR6U36UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR6U4KUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR6U4aUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR6U4qUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR6U46UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR6U5KUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR5t5qUtEe6s_b6jMK0kgw" name="public getBook(boolean):voidReceiveEvent" covered="_GR01QqUtEe6s_b6jMK0kgw" message="_GR5t5KUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR6U5aUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR6U5qUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR6U56UtEe6s_b6jMK0kgw" key="count" value="8"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR6U6KUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR6U6aUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR6U6qUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR6U66UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR6U7KUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR6U7aUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR5t56UtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.Catalog.public getBook(boolean):void" covered="_GR01QqUtEe6s_b6jMK0kgw" finish="_GR6U9KUtEe6s_b6jMK0kgw" start="_GR5t5qUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5t6KUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5t6aUtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR5t6qUtEe6s_b6jMK0kgw" key="count" value="8"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR6U0KUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR6U0aUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR6U0qUtEe6s_b6jMK0kgw" key="OpenMessageCount" value="8"/>
+            <details xmi:id="_GR6U9qUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR6U96UtEe6s_b6jMK0kgw" key="CloseMessageCount" value="9"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEs6KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEs6aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="2605900.0,2656300.0,1738200.0,1715800.0,2744900.0,1767200.0,2716400.0,2714200.0,1709100.0,2280800.0,1751400.0"/>
+            <details xmi:id="_GSEs6qUtEe6s_b6jMK0kgw" key="execTime" value="2218200.0"/>
+            <details xmi:id="_GSEs66UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR6U9KUtEe6s_b6jMK0kgw" name="public searchBook():voidSendEvent" covered="_GR01QqUtEe6s_b6jMK0kgw" message="_GR6U86UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR6VAaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR6VAqUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR6VA6UtEe6s_b6jMK0kgw" key="count" value="9"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR674KUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR674aUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR674qUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR6746UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR675KUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR675aUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR6U9aUtEe6s_b6jMK0kgw" name="public searchBook():voidReceiveEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR6U86UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR675qUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR6756UtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR676KUtEe6s_b6jMK0kgw" key="count" value="9"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR676aUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR676qUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR6766UtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR677KUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR677aUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR677qUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR679aUtEe6s_b6jMK0kgw" name="public getOffers():voidSendEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR679KUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR68B6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR68CKUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR68CaUtEe6s_b6jMK0kgw" key="count" value="10"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR68CqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR68C6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR68DKUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR68DaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR68DqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR68D6UtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR679qUtEe6s_b6jMK0kgw" name="public getOffers():voidReceiveEvent" covered="_GR2qjaUtEe6s_b6jMK0kgw" message="_GR679KUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR68EKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR68EaUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR68EqUtEe6s_b6jMK0kgw" key="count" value="10"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR68E6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR68FKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR68FaUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR68FqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR68F6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR68GKUtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR6796UtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.CRM.public getOffers():void" covered="_GR2qjaUtEe6s_b6jMK0kgw" finish="_GR7jLqUtEe6s_b6jMK0kgw" start="_GR679qUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR67-KUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR67-aUtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR67-qUtEe6s_b6jMK0kgw" key="count" value="10"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR67-6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR67_KUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR67_aUtEe6s_b6jMK0kgw" key="OpenMessageCount" value="10"/>
+            <details xmi:id="_GR7jMKUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR7jMaUtEe6s_b6jMK0kgw" key="CloseMessageCount" value="13"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEs7KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEs7aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="19200.0,21400.0,20700.0,21500.0,33100.0,17900.0,17200.0,16100.0,118000.0,28500.0,13200.0"/>
+            <details xmi:id="_GSEs7qUtEe6s_b6jMK0kgw" key="execTime" value="29709.090909090908"/>
+            <details xmi:id="_GSEs76UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR68H6UtEe6s_b6jMK0kgw" name="public getBook(boolean):voidSendEvent" covered="_GR2qjaUtEe6s_b6jMK0kgw" message="_GR68HqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7i8aUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7i8qUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR7i86UtEe6s_b6jMK0kgw" key="count" value="11"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7i9KUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7i9aUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7i9qUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR7i96UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR7i-KUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR7i-aUtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR68IKUtEe6s_b6jMK0kgw" name="public getBook(boolean):voidReceiveEvent" covered="_GR01QqUtEe6s_b6jMK0kgw" message="_GR68HqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7i-qUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7i-6UtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR7i_KUtEe6s_b6jMK0kgw" key="count" value="11"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7i_aUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7i_qUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7i_6UtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR7jAKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR7jAaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR7jAqUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR68IaUtEe6s_b6jMK0kgw" name="BES-kieker.examples.monitoring.application.Catalog.public getBook(boolean):void" covered="_GR01QqUtEe6s_b6jMK0kgw" finish="_GR7jCaUtEe6s_b6jMK0kgw" start="_GR68IKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR68IqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR68I6UtEe6s_b6jMK0kgw" key="representation" value="BES-Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR68JKUtEe6s_b6jMK0kgw" key="count" value="11"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR68JaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR68JqUtEe6s_b6jMK0kgw" key="OpenMessage" value="Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR68J6UtEe6s_b6jMK0kgw" key="OpenMessageCount" value="11"/>
+            <details xmi:id="_GR7jC6UtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR7jDKUtEe6s_b6jMK0kgw" key="CloseMessageCount" value="12"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEs8KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEs8aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="2938600.0,1974600.0,1979800.0,2993700.0,1959600.0,2504300.0,2001400.0,2977900.0,2958900.0,1973400.0,1979000.0"/>
+            <details xmi:id="_GSEs8qUtEe6s_b6jMK0kgw" key="execTime" value="2385563.6363636362"/>
+            <details xmi:id="_GSEs86UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR7jCaUtEe6s_b6jMK0kgw" name="public getOffers():voidSendEvent" covered="_GR01QqUtEe6s_b6jMK0kgw" message="_GR7jCKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7jFqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7jF6UtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR7jGKUtEe6s_b6jMK0kgw" key="count" value="12"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7jGaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jGqUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jG6UtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR7jHKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR7jHaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR7jHqUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR7jCqUtEe6s_b6jMK0kgw" name="public getOffers():voidReceiveEvent" covered="_GR2qjaUtEe6s_b6jMK0kgw" message="_GR7jCKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7jH6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7jIKUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR7jIaUtEe6s_b6jMK0kgw" key="count" value="12"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7jIqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jI6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jJKUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR7jJaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR7jJqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR7jJ6UtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR7jLqUtEe6s_b6jMK0kgw" name="public searchBook():voidSendEvent" covered="_GR2qjaUtEe6s_b6jMK0kgw" message="_GR7jLaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7jO6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7jPKUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR7jPaUtEe6s_b6jMK0kgw" key="count" value="13"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7jPqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jP6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jQKUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR7jQaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR7jQqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR7jQ6UtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR7jL6UtEe6s_b6jMK0kgw" name="public searchBook():voidReceiveEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR7jLaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7jRKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7jRaUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR7jRqUtEe6s_b6jMK0kgw" key="count" value="13"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7jR6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jSKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jSaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR7jSqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR7jS6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR7jTKUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR7jU6UtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):voidSendEvent" covered="_GRznPKUtEe6s_b6jMK0kgw" message="_GR7jUqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8KDKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR8KDaUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8KDqUtEe6s_b6jMK0kgw" key="count" value="14"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR8KD6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8KEKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR8KEaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR8KEqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR8KE6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR8KFKUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR8KAKUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):voidReceiveEvent" covered="_GRp2IaUtEe6s_b6jMK0kgw" message="_GR7jUqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8KFaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR8KFqUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8KF6UtEe6s_b6jMK0kgw" key="count" value="14"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR8KGKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8KGaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR8KGqUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR8KG6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR8KHKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8KHaUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR8KJqUtEe6s_b6jMK0kgw" name="'Entry'():&lt;>SendEvent" covered="_GRp2IaUtEe6s_b6jMK0kgw" message="_GR8KJaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8xEKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR8xEaUtEe6s_b6jMK0kgw" key="representation" value="SendMOS-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_GR8xEqUtEe6s_b6jMK0kgw" key="count" value="15"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR8xE6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8xFKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR8xFaUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR8xFqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR8xF6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8xGKUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GR8KJ6UtEe6s_b6jMK0kgw" name="'Entry'():&lt;>ReceiveEvent" covered="_GRp2IKUtEe6s_b6jMK0kgw" message="_GR8KJaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8xGaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR8xGqUtEe6s_b6jMK0kgw" key="representation" value="ReceiveMOS-Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_GR8xG6UtEe6s_b6jMK0kgw" key="count" value="15"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR8xHKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8xHaUtEe6s_b6jMK0kgw" key="package" value=""/>
+            <details xmi:id="_GR8xHqUtEe6s_b6jMK0kgw" key="class" value="'Entry'"/>
+            <details xmi:id="_GR8xH6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_GR8xIKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_GR8xIaUtEe6s_b6jMK0kgw" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+        </fragment>
+        <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_GR8xIqUtEe6s_b6jMK0kgw" name="BES-'Entry'.'Entry'():&lt;>" covered="_GRp2IKUtEe6s_b6jMK0kgw" finish="_GR8KJ6UtEe6s_b6jMK0kgw" start="_GRuuoKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR9YIKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR9YIaUtEe6s_b6jMK0kgw" key="representation" value="'Entry'"/>
+            <details xmi:id="_GR9YIqUtEe6s_b6jMK0kgw" key="count" value="-1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR9YI6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR9YJKUtEe6s_b6jMK0kgw" key="OpenMessage" value="'Entry'"/>
+            <details xmi:id="_GR9YJaUtEe6s_b6jMK0kgw" key="OpenMessageCount" value="-1"/>
+            <details xmi:id="_GR9YJqUtEe6s_b6jMK0kgw" key="CloseMessage" value="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR9YJ6UtEe6s_b6jMK0kgw" key="CloseMessageCount" value="15"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GSEs9KUtEe6s_b6jMK0kgw" source="GaStep">
+            <details xmi:id="_GSEs9aUtEe6s_b6jMK0kgw" key="execTimeEntries" value="1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0"/>
+            <details xmi:id="_GSEs9qUtEe6s_b6jMK0kgw" key="execTime" value="1.0"/>
+            <details xmi:id="_GSEs96UtEe6s_b6jMK0kgw" key="rep" value="1"/>
+          </eAnnotations>
+        </fragment>
+        <message xmi:id="_GRtggKUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void" receiveEvent="_GRv8wKUtEe6s_b6jMK0kgw" sendEvent="_GRuuoKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GRznIaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GRznIqUtEe6s_b6jMK0kgw" key="representation" value="Sender--'Entry''Entry'():&lt;>--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRznI6UtEe6s_b6jMK0kgw" key="count" value="0"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GRznJKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GRznJaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GRznJqUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GRznJ6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GRznKKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GRznKaUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR0ONqUtEe6s_b6jMK0kgw" name="public Bookstore()" receiveEvent="_GR0OOKUtEe6s_b6jMK0kgw" sendEvent="_GR0ON6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR0OQKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR0OQaUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR0OQqUtEe6s_b6jMK0kgw" key="count" value="1"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR0OQ6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR0ORKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR0ORaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR0ORqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR0OR6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR0OSKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR01SqUtEe6s_b6jMK0kgw" name="public Catalog()" receiveEvent="_GR01TKUtEe6s_b6jMK0kgw" sendEvent="_GR01S6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR01VKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR01VaUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Catalogpublic &lt;init>()kieker.examples.monitoring.application.Catalogpublic &lt;init>()"/>
+            <details xmi:id="_GR01VqUtEe6s_b6jMK0kgw" key="count" value="2"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR01V6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR01WKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR01WaUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR01WqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR01W6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public &lt;init>()"/>
+            <details xmi:id="_GR01XKUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR1cWqUtEe6s_b6jMK0kgw" name="public Bookstore()" messageSort="reply" receiveEvent="_GR1cXKUtEe6s_b6jMK0kgw" sendEvent="_GR1cW6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR2qcqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR2qc6UtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Catalogpublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR2qdKUtEe6s_b6jMK0kgw" key="count" value="3"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR2qdaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR2qdqUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR2qd6UtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR2qeKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR2qeaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR2qeqUtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR2qlaUtEe6s_b6jMK0kgw" name="public CRM(kieker.examples.monitoring.application.Catalog)" receiveEvent="_GR2ql6UtEe6s_b6jMK0kgw" sendEvent="_GR2qlqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR34l6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR34mKUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34maUtEe6s_b6jMK0kgw" key="count" value="4"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR34mqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR34m6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR34nKUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR34naUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR34nqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+            <details xmi:id="_GR34n6UtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>(kieker.examples.monitoring.application.Catalog)"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR34t6UtEe6s_b6jMK0kgw" name="public Bookstore()" messageSort="reply" receiveEvent="_GR4foKUtEe6s_b6jMK0kgw" sendEvent="_GR34uKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR4fo6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR4fpKUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.CRMpublic &lt;init>(kieker.examples.monitoring.application.Catalog)--Receiver--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()kieker.examples.monitoring.application.Bookstorepublic &lt;init>()"/>
+            <details xmi:id="_GR4fpaUtEe6s_b6jMK0kgw" key="count" value="5"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR4fpqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR4fp6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR4fqKUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR4fqaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR4fqqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public &lt;init>()"/>
+            <details xmi:id="_GR4fq6UtEe6s_b6jMK0kgw" key="signature" value="public &lt;init>()"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR4fw6UtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void" messageSort="reply" receiveEvent="_GR4fxaUtEe6s_b6jMK0kgw" sendEvent="_GR4fxKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR4fyKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR4fyaUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Bookstorepublic &lt;init>()--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR4fyqUtEe6s_b6jMK0kgw" key="count" value="6"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR4fy6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR4fzKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR4fzaUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR4fzqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR4fz6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR4f0KUtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR5Gx6UtEe6s_b6jMK0kgw" name="public searchBook():void" receiveEvent="_GR5GyaUtEe6s_b6jMK0kgw" sendEvent="_GR5GyKUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR5txKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR5txaUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR5txqUtEe6s_b6jMK0kgw" key="count" value="7"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR5tx6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR5tyKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR5tyaUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR5tyqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR5ty6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR5tzKUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR5t5KUtEe6s_b6jMK0kgw" name="public getBook(boolean):void" receiveEvent="_GR5t5qUtEe6s_b6jMK0kgw" sendEvent="_GR5t5aUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR6U06UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR6U1KUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR6U1aUtEe6s_b6jMK0kgw" key="count" value="8"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR6U1qUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR6U16UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR6U2KUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR6U2aUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR6U2qUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR6U26UtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR6U86UtEe6s_b6jMK0kgw" name="public searchBook():void" messageSort="reply" receiveEvent="_GR6U9aUtEe6s_b6jMK0kgw" sendEvent="_GR6U9KUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR6U-KUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR6U-aUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR6U-qUtEe6s_b6jMK0kgw" key="count" value="9"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR6U-6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR6U_KUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR6U_aUtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR6U_qUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR6U_6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR6VAKUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR679KUtEe6s_b6jMK0kgw" name="public getOffers():void" receiveEvent="_GR679qUtEe6s_b6jMK0kgw" sendEvent="_GR679aUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR67_qUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR67_6UtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR68AKUtEe6s_b6jMK0kgw" key="count" value="10"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR68AaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR68AqUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR68A6UtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR68BKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR68BaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR68BqUtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR68HqUtEe6s_b6jMK0kgw" name="public getBook(boolean):void" receiveEvent="_GR68IKUtEe6s_b6jMK0kgw" sendEvent="_GR68H6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR68KKUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR68KaUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):voidkieker.examples.monitoring.application.Catalogpublic getBook(boolean):void"/>
+            <details xmi:id="_GR68KqUtEe6s_b6jMK0kgw" key="count" value="11"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR68K6UtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR68LKUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR68LaUtEe6s_b6jMK0kgw" key="class" value="Catalog"/>
+            <details xmi:id="_GR68LqUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Catalog"/>
+            <details xmi:id="_GR68L6UtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Catalog.public getBook(boolean):void"/>
+            <details xmi:id="_GR7i8KUtEe6s_b6jMK0kgw" key="signature" value="public getBook(boolean):void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR7jCKUtEe6s_b6jMK0kgw" name="public getOffers():void" messageSort="reply" receiveEvent="_GR7jCqUtEe6s_b6jMK0kgw" sendEvent="_GR7jCaUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7jDaUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7jDqUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Catalogpublic getBook(boolean):void--Receiver--kieker.examples.monitoring.application.CRMpublic getOffers():voidkieker.examples.monitoring.application.CRMpublic getOffers():void"/>
+            <details xmi:id="_GR7jD6UtEe6s_b6jMK0kgw" key="count" value="12"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7jEKUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jEaUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jEqUtEe6s_b6jMK0kgw" key="class" value="CRM"/>
+            <details xmi:id="_GR7jE6UtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.CRM"/>
+            <details xmi:id="_GR7jFKUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.CRM.public getOffers():void"/>
+            <details xmi:id="_GR7jFaUtEe6s_b6jMK0kgw" key="signature" value="public getOffers():void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR7jLaUtEe6s_b6jMK0kgw" name="public searchBook():void" messageSort="reply" receiveEvent="_GR7jL6UtEe6s_b6jMK0kgw" sendEvent="_GR7jLqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR7jMqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR7jM6UtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.CRMpublic getOffers():void--Receiver--kieker.examples.monitoring.application.Bookstorepublic searchBook():voidkieker.examples.monitoring.application.Bookstorepublic searchBook():void"/>
+            <details xmi:id="_GR7jNKUtEe6s_b6jMK0kgw" key="count" value="13"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR7jNaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR7jNqUtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR7jN6UtEe6s_b6jMK0kgw" key="class" value="Bookstore"/>
+            <details xmi:id="_GR7jOKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Bookstore"/>
+            <details xmi:id="_GR7jOaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Bookstore.public searchBook():void"/>
+            <details xmi:id="_GR7jOqUtEe6s_b6jMK0kgw" key="signature" value="public searchBook():void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR7jUqUtEe6s_b6jMK0kgw" name="public static main(java.lang.String[]):void" messageSort="reply" receiveEvent="_GR8KAKUtEe6s_b6jMK0kgw" sendEvent="_GR7jU6UtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8KA6UtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR8KBKUtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Bookstorepublic searchBook():void--Receiver--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):voidkieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8KBaUtEe6s_b6jMK0kgw" key="count" value="14"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR8KBqUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8KB6UtEe6s_b6jMK0kgw" key="package" value="kieker.examples.monitoring.application"/>
+            <details xmi:id="_GR8KCKUtEe6s_b6jMK0kgw" key="class" value="Main"/>
+            <details xmi:id="_GR8KCaUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="kieker.examples.monitoring.application.Main"/>
+            <details xmi:id="_GR8KCqUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="kieker.examples.monitoring.application.Main.public static main(java.lang.String[]):void"/>
+            <details xmi:id="_GR8KC6UtEe6s_b6jMK0kgw" key="signature" value="public static main(java.lang.String[]):void"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_GR8KJaUtEe6s_b6jMK0kgw" name="'Entry'():&lt;>" messageSort="reply" receiveEvent="_GR8KJ6UtEe6s_b6jMK0kgw" sendEvent="_GR8KJqUtEe6s_b6jMK0kgw">
+          <eAnnotations xmi:id="_GR8KKqUtEe6s_b6jMK0kgw" source="Representation">
+            <details xmi:id="_GR8KK6UtEe6s_b6jMK0kgw" key="representation" value="Sender--kieker.examples.monitoring.application.Mainpublic static main(java.lang.String[]):void--Receiver--'Entry''Entry'():&lt;>'Entry''Entry'():&lt;>"/>
+            <details xmi:id="_GR8KLKUtEe6s_b6jMK0kgw" key="count" value="15"/>
+          </eAnnotations>
+          <eAnnotations xmi:id="_GR8KLaUtEe6s_b6jMK0kgw" source="Reference">
+            <details xmi:id="_GR8KLqUtEe6s_b6jMK0kgw" key="package" value=""/>
+            <details xmi:id="_GR8KL6UtEe6s_b6jMK0kgw" key="class" value="'Entry'"/>
+            <details xmi:id="_GR8KMKUtEe6s_b6jMK0kgw" key="fullQualifiedName" value="'Entry'"/>
+            <details xmi:id="_GR8KMaUtEe6s_b6jMK0kgw" key="fullQualifiedNameSignature" value="'Entry'.'Entry'():&lt;>"/>
+            <details xmi:id="_GR8KMqUtEe6s_b6jMK0kgw" key="signature" value="'Entry'():&lt;>"/>
+          </eAnnotations>
+        </message>
+      </ownedBehavior>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Actor" xmi:id="_GRgsMKUtEe6s_b6jMK0kgw" name="'Entry'-SimpleExample-0"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GRgsMaUtEe6s_b6jMK0kgw" memberEnd="_GRh6UKUtEe6s_b6jMK0kgw _GRh6U6UtEe6s_b6jMK0kgw" navigableOwnedEnd="_GRh6UKUtEe6s_b6jMK0kgw _GRh6U6UtEe6s_b6jMK0kgw">
+      <ownedEnd xmi:id="_GRh6UKUtEe6s_b6jMK0kgw" name="'Entry'-SimpleExample-0" type="_GRgsMKUtEe6s_b6jMK0kgw" association="_GRgsMaUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GRh6UaUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GRh6UqUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_GRh6U6UtEe6s_b6jMK0kgw" name="SimpleExample-0" type="_GReP8KUtEe6s_b6jMK0kgw" association="_GRgsMaUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GRh6VKUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GRh6VaUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_GSF7AKUtEe6s_b6jMK0kgw" memberEnd="_GSGiEKUtEe6s_b6jMK0kgw _GSGiE6UtEe6s_b6jMK0kgw" navigableOwnedEnd="_GSGiEKUtEe6s_b6jMK0kgw">
+      <ownedEnd xmi:id="_GSGiEKUtEe6s_b6jMK0kgw" name="Interaction-0" type="_GRoA8KUtEe6s_b6jMK0kgw" association="_GSF7AKUtEe6s_b6jMK0kgw">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GSGiEaUtEe6s_b6jMK0kgw" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GSGiEqUtEe6s_b6jMK0kgw" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

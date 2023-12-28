@@ -1,0 +1,123 @@
+@startuml
+
+' This is a PlantUML diagram.
+' Information on the notation can be found here: https://plantuml.com
+' An Editor, that allows to create diagrams, is here: https://www.plantuml.com/plantuml/uml/ 
+
+title Interaction-0
+
+participant _Entry_ [
+    ='Entry'
+    ----
+    << Actor >>
+    << GaWorkloadEvent >>
+    pattern: closed:1
+] 
+participant kieker.examples.monitoring.application.Main [
+    =kieker.examples.monitoring.application.Main
+    ----
+
+] 
+participant kieker.examples.monitoring.application.Bookstore [
+    =kieker.examples.monitoring.application.Bookstore
+    ----
+
+] 
+participant kieker.examples.monitoring.application.Catalog [
+    =kieker.examples.monitoring.application.Catalog
+    ----
+
+] 
+participant kieker.examples.monitoring.application.CRM [
+    =kieker.examples.monitoring.application.CRM
+    ----
+
+] 
+
+autonumber
+
+_Entry_ -> kieker.examples.monitoring.application.Main : public static main(java.lang.String[]):void
+note over kieker.examples.monitoring.application.Main
+    << GaStep >>
+    execTimeEntries: 3308500.0,34700.0,23000.0,19500.0,18300.0,28500.0,24200.0,23100.0,28100.0,19500.0,20600.0
+    execTime: 322545.45454545453
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.Main
+kieker.examples.monitoring.application.Main -> kieker.examples.monitoring.application.Bookstore : public Bookstore()
+note over kieker.examples.monitoring.application.Bookstore
+    << GaStep >>
+    execTimeEntries: 5481400.0,51300.0,34600.0,43500.0,34800.0,40500.0,32200.0,30300.0,30200.0,42800.0,31200.0
+    execTime: 532072.7272727273
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.Bookstore
+kieker.examples.monitoring.application.Bookstore -> kieker.examples.monitoring.application.Catalog : public Catalog()
+note over kieker.examples.monitoring.application.Catalog
+    << GaStep >>
+    execTimeEntries: 5400.0,5600.0,4600.0,4300.0,4400.0,7100.0,4700.0,4700.0,4300.0,5900.0,4600.0
+    execTime: 5054.545454545455
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.Catalog --> kieker.examples.monitoring.application.Bookstore : public Bookstore()
+deactivate kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.Bookstore -> kieker.examples.monitoring.application.CRM : public CRM(kieker.examples.monitoring.application.Catalog)
+note over kieker.examples.monitoring.application.CRM
+    << GaStep >>
+    execTimeEntries: 4100.0,3200.0,3000.0,2100.0,2100.0,2900.0,1900.0,1900.0,2100.0,2300.0,1700.0
+    execTime: 2481.818181818182
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.CRM
+kieker.examples.monitoring.application.CRM --> kieker.examples.monitoring.application.Bookstore : public Bookstore()
+deactivate kieker.examples.monitoring.application.CRM
+kieker.examples.monitoring.application.Bookstore --> kieker.examples.monitoring.application.Main : public static main(java.lang.String[]):void
+deactivate kieker.examples.monitoring.application.Bookstore
+kieker.examples.monitoring.application.Main -> kieker.examples.monitoring.application.Bookstore : public searchBook():void
+note over kieker.examples.monitoring.application.Bookstore
+    << GaStep >>
+    execTimeEntries: 476400.0,30300.0,28900.0,25100.0,26700.0,20900.0,384200.0,26200.0,48200.0,28600.0,21100.0
+    execTime: 101509.09090909091
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.Bookstore
+kieker.examples.monitoring.application.Bookstore -> kieker.examples.monitoring.application.Catalog : public getBook(boolean):void
+note over kieker.examples.monitoring.application.Catalog
+    << GaStep >>
+    execTimeEntries: 2605900.0,2656300.0,1738200.0,1715800.0,2744900.0,1767200.0,2716400.0,2714200.0,1709100.0,2280800.0,1751400.0
+    execTime: 2218200.0
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.Catalog --> kieker.examples.monitoring.application.Bookstore : public searchBook():void
+deactivate kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.Bookstore -> kieker.examples.monitoring.application.CRM : public getOffers():void
+note over kieker.examples.monitoring.application.CRM
+    << GaStep >>
+    execTimeEntries: 19200.0,21400.0,20700.0,21500.0,33100.0,17900.0,17200.0,16100.0,118000.0,28500.0,13200.0
+    execTime: 29709.090909090908
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.CRM
+kieker.examples.monitoring.application.CRM -> kieker.examples.monitoring.application.Catalog : public getBook(boolean):void
+note over kieker.examples.monitoring.application.Catalog
+    << GaStep >>
+    execTimeEntries: 2938600.0,1974600.0,1979800.0,2993700.0,1959600.0,2504300.0,2001400.0,2977900.0,2958900.0,1973400.0,1979000.0
+    execTime: 2385563.6363636362
+    rep: 1
+end note
+activate kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.Catalog --> kieker.examples.monitoring.application.CRM : public getOffers():void
+deactivate kieker.examples.monitoring.application.Catalog
+kieker.examples.monitoring.application.CRM --> kieker.examples.monitoring.application.Bookstore : public searchBook():void
+deactivate kieker.examples.monitoring.application.CRM
+kieker.examples.monitoring.application.Bookstore --> kieker.examples.monitoring.application.Main : public static main(java.lang.String[]):void
+deactivate kieker.examples.monitoring.application.Bookstore
+kieker.examples.monitoring.application.Main --> _Entry_ : 'Entry'():<>
+deactivate kieker.examples.monitoring.application.Main
+
+
+
+
+@enduml

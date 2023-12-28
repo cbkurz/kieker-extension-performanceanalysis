@@ -1,0 +1,42 @@
+@startuml
+
+' This is a PlantUML diagram.
+' Information on the notation can be found here: https://plantuml.com
+' An Editor, that allows to create diagrams, is here: https://www.plantuml.com/plantuml/uml/ 
+
+
+interface "'Entry'():<>" as _Entry______
+interface "public static main(java.lang.String[]):void" as public_static_main_java.lang.String____void
+interface "public Bookstore()" as public_Bookstore__
+interface "public Catalog()" as public_Catalog__
+interface "public CRM(kieker.examples.monitoring.application.Catalog)" as public_CRM_kieker.examples.monitoring.application.Catalog_
+interface "public searchBook():void" as public_searchBook___void
+interface "public getBook(boolean):void" as public_getBook_boolean__void
+interface "public getOffers():void" as public_getOffers___void
+
+component "'Entry'" as _Entry_
+component "kieker.examples.monitoring.application.Main" as kieker.examples.monitoring.application.Main
+component "kieker.examples.monitoring.application.Bookstore" as kieker.examples.monitoring.application.Bookstore
+component "kieker.examples.monitoring.application.Catalog" as kieker.examples.monitoring.application.Catalog
+component "kieker.examples.monitoring.application.CRM" as kieker.examples.monitoring.application.CRM
+
+
+[_Entry_] -down-> _Entry______ : provides
+[kieker.examples.monitoring.application.Main] -down-> public_static_main_java.lang.String____void : provides
+[kieker.examples.monitoring.application.Bookstore] -down-> public_Bookstore__ : provides
+[kieker.examples.monitoring.application.Bookstore] -down-> public_searchBook___void : provides
+[kieker.examples.monitoring.application.Catalog] -down-> public_Catalog__ : provides
+[kieker.examples.monitoring.application.Catalog] -down-> public_getBook_boolean__void : provides
+[kieker.examples.monitoring.application.CRM] -down-> public_CRM_kieker.examples.monitoring.application.Catalog_ : provides
+[kieker.examples.monitoring.application.CRM] -down-> public_getOffers___void : provides
+
+_Entry______ --> public_static_main_java.lang.String____void : calls
+public_static_main_java.lang.String____void --> public_Bookstore__ : calls
+public_Bookstore__ --> public_Catalog__ : calls
+public_Bookstore__ --> public_CRM_kieker.examples.monitoring.application.Catalog_ : calls
+public_static_main_java.lang.String____void --> public_searchBook___void : calls
+public_searchBook___void --> public_getBook_boolean__void : calls
+public_searchBook___void --> public_getOffers___void : calls
+public_getOffers___void --> public_getBook_boolean__void : calls
+
+@enduml

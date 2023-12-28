@@ -1,0 +1,32 @@
+@startuml
+
+' This is a PlantUML diagram.
+' Information on the notation can be found here: https://plantuml.com
+' An Editor, that allows to create diagrams, is here: https://www.plantuml.com/plantuml/uml/ 
+
+class _Entry_ {
+    {method} 'Entry'():<>
+}
+class kurz.ma.examples.simple.Main6Full {
+    {method} public static main(java.lang.String[]):void
+}
+class kurz.ma.examples.simple.Loop {
+    {method} public <init>()
+    {method} public loop6(int,int):void
+    {method} private waitIfElse(int):void
+    {method} public loop(int,int):void
+}
+class kurz.ma.examples.simple.Recursion {
+    {method} public <init>()
+    {method} public recursion(int,int):void
+}
+class kurz.ma.examples.simple.Worker {
+    {method} public static work6(int):void
+}
+
+_Entry_ -- kurz.ma.examples.simple.Main6Full
+kurz.ma.examples.simple.Main6Full -- kurz.ma.examples.simple.Loop
+kurz.ma.examples.simple.Main6Full -- kurz.ma.examples.simple.Recursion
+kurz.ma.examples.simple.Main6Full -- kurz.ma.examples.simple.Worker
+
+@enduml

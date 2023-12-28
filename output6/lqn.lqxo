@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!-- lqns.exe -->
+<lqn-model name="output/lqn" description="lqns.exe 5.28.5 solution for model from: output/lqn.xml." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:///C:/Program Files/LQN Solvers/lqn.xsd">
+  <solver-params comment="" conv_val="1e-05" it_limit="50" underrelax_coeff="0.9" print_int="0">
+    <result-general solver-info="lqns.exe 5.28.5" valid="true" conv-val="0" iterations="2" platform-info="ZENBOOK-FLIP-14 WinNT 10.0" user-cpu-time=" 0:00:00.003" system-cpu-time=" 0:00:00.000" elapsed-time=" 0:00:00.000">
+      <mva-info submodels="5" core="8" step="89" step-squared="1913" wait="125292" wait-squared="1.80142e+09" faults="0"/>
+    </result-general>
+  </solver-params>
+  <processor name="Zenbook-Flip-14" scheduling="fcfs">
+    <result-processor utilization="0.738108"/>
+    <task name="public static main(java.lang.String[]):void" scheduling="fcfs">
+      <result-task throughput="7.29335e-10" utilization="0.738108" phase1-utilization="0.738108" proc-utilization="0.00199852"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Main6Full.public static main(java.lang.String[]):void" type="PH1PH2">
+        <result-entry utilization="0.738108" throughput="7.29335e-10" proc-utilization="0.00199852" squared-coeff-variation="0.562852" throughput-bound="9.88115e-10"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Main6Full.public static main(java.lang.String[]):void" phase="1" host-demand-mean="2.7402e+06">
+            <result-activity proc-waiting="0" service-time="1.01203e+09" utilization="0.738108" service-time-variance="5.76474e+17"/>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Loop.public &lt;init&gt;()" calls-mean="1">
+              <result-call waiting="0"/>
+            </synch-call>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Loop.public loop6(int,int):void" calls-mean="2">
+              <result-call waiting="0"/>
+            </synch-call>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Recursion.public &lt;init&gt;()" calls-mean="1">
+              <result-call waiting="0"/>
+            </synch-call>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Recursion.public recursion(int,int):void" calls-mean="3">
+              <result-call waiting="0"/>
+            </synch-call>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Worker.public static work6(int):void" calls-mean="2">
+              <result-call waiting="0"/>
+            </synch-call>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Loop.public loop(int,int):void" calls-mean="1">
+              <result-call waiting="0"/>
+            </synch-call>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="public Loop()" scheduling="fcfs">
+      <result-task throughput="7.29335e-10" utilization="4.39685e-06" phase1-utilization="4.39685e-06" proc-utilization="4.39685e-06"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Loop.public &lt;init&gt;()" type="PH1PH2">
+        <result-entry utilization="4.39685e-06" throughput="7.29335e-10" proc-utilization="4.39685e-06" squared-coeff-variation="1" throughput-bound="0.000165877"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Loop.public &lt;init&gt;()" phase="1" host-demand-mean="6028.57">
+            <result-activity proc-waiting="0" service-time="6028.57" utilization="4.39685e-06" service-time-variance="3.63437e+07"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="public loop6(int,int):void" scheduling="fcfs">
+      <result-task throughput="1.45867e-09" utilization="0.190176" phase1-utilization="0.190176" proc-utilization="0.000318324"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Loop.public loop6(int,int):void" type="PH1PH2">
+        <result-entry utilization="0.190176" throughput="1.45867e-09" proc-utilization="0.000318324" squared-coeff-variation="1.39866" throughput-bound="7.67009e-09"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Loop.public loop6(int,int):void" phase="1" host-demand-mean="218229">
+            <result-activity proc-waiting="0" service-time="1.30376e+08" utilization="0.190176" service-time-variance="2.37745e+16"/>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Loop.private waitIfElse(int):void" calls-mean="5">
+              <result-call waiting="0"/>
+            </synch-call>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="private waitIfElse(int):void" scheduling="fcfs">
+      <result-task throughput="7.29335e-09" utilization="0.189858" phase1-utilization="0.189858" proc-utilization="0.189858"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Loop.private waitIfElse(int):void" type="PH1PH2">
+        <result-entry utilization="0.189858" throughput="7.29335e-09" proc-utilization="0.189858" squared-coeff-variation="1" throughput-bound="3.84148e-08"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Loop.private waitIfElse(int):void" phase="1" host-demand-mean="2.60317e+07">
+            <result-activity proc-waiting="0" service-time="2.60317e+07" utilization="0.189858" service-time-variance="6.77647e+14"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="public loop(int,int):void" scheduling="fcfs">
+      <result-task throughput="7.29335e-10" utilization="0.0748721" phase1-utilization="0.0748721" proc-utilization="0.0748721"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Loop.public loop(int,int):void" type="PH1PH2">
+        <result-entry utilization="0.0748721" throughput="7.29335e-10" proc-utilization="0.0748721" squared-coeff-variation="1" throughput-bound="9.74108e-09"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Loop.public loop(int,int):void" phase="1" host-demand-mean="1.02658e+08">
+            <result-activity proc-waiting="0" service-time="1.02658e+08" utilization="0.0748721" service-time-variance="1.05387e+16"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="public Recursion()" scheduling="fcfs">
+      <result-task throughput="7.29335e-10" utilization="2.32345e-06" phase1-utilization="2.32345e-06" proc-utilization="2.32345e-06"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Recursion.public &lt;init&gt;()" type="PH1PH2">
+        <result-entry utilization="2.32345e-06" throughput="7.29335e-10" proc-utilization="2.32345e-06" squared-coeff-variation="1" throughput-bound="0.000313901"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Recursion.public &lt;init&gt;()" phase="1" host-demand-mean="3185.71">
+            <result-activity proc-waiting="0" service-time="3185.71" utilization="2.32345e-06" service-time-variance="1.01488e+07"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="public recursion(int,int):void" scheduling="fcfs">
+      <result-task throughput="2.18801e-09" utilization="0.302694" phase1-utilization="0.302694" proc-utilization="0.302694"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Recursion.public recursion(int,int):void" type="PH1PH2">
+        <result-entry utilization="0.302694" throughput="2.18801e-09" proc-utilization="0.302694" squared-coeff-variation="1" throughput-bound="7.22844e-09"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Recursion.public recursion(int,int):void" phase="1" host-demand-mean="1.38342e+08">
+            <result-activity proc-waiting="0" service-time="1.38342e+08" utilization="0.302694" service-time-variance="1.91386e+16"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+    <task name="public static work6(int):void" scheduling="fcfs">
+      <result-task throughput="1.45867e-09" utilization="0.16836" phase1-utilization="0.16836" proc-utilization="0.16836"/>
+      <entry name="Interaction-0_BES-kurz.ma.examples.simple.Worker.public static work6(int):void" type="PH1PH2">
+        <result-entry utilization="0.16836" throughput="1.45867e-09" proc-utilization="0.16836" squared-coeff-variation="1" throughput-bound="8.66399e-09"/>
+        <entry-phase-activities>
+          <activity name="BES-kurz.ma.examples.simple.Worker.public static work6(int):void" phase="1" host-demand-mean="1.1542e+08">
+            <result-activity proc-waiting="0" service-time="1.1542e+08" utilization="0.16836" service-time-variance="1.33218e+16"/>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+  </processor>
+  <processor name="&apos;Entry&apos;-SimpleExample-0" scheduling="fcfs">
+    <result-processor utilization="7.29335e-10"/>
+    <task name="SimpleExample-0_job_class_" scheduling="fcfs">
+      <result-task throughput="7.29335e-10" utilization="0.738108" phase1-utilization="0.738108" proc-utilization="7.29335e-10"/>
+      <entry name="Interaction-0_BES-&apos;Entry&apos;.&apos;Entry&apos;():&lt;&gt;" type="PH1PH2" open-arrival-rate="7.29335e-10">
+        <result-entry utilization="0.738108" throughput="7.29335e-10" proc-utilization="7.29335e-10" squared-coeff-variation="2.56285" throughput-bound="9.88115e-10" open-wait-time="6.09313e+09"/>
+        <entry-phase-activities>
+          <activity name="BES-&apos;Entry&apos;.&apos;Entry&apos;():&lt;&gt;" phase="1" host-demand-mean="1">
+            <result-activity proc-waiting="0" service-time="1.01203e+09" utilization="0.738108" service-time-variance="2.62488e+18"/>
+            <synch-call dest="Interaction-0_BES-kurz.ma.examples.simple.Main6Full.public static main(java.lang.String[]):void" calls-mean="1">
+              <result-call waiting="0"/>
+            </synch-call>
+          </activity>
+        </entry-phase-activities>
+      </entry>
+    </task>
+  </processor>
+</lqn-model>
