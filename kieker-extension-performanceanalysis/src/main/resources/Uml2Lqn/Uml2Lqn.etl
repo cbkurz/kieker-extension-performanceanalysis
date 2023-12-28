@@ -69,6 +69,7 @@ rule Node2Processor
 		proc.task = allTasksForProc;
 	}
 	
+	
 rule Actor2Processor
 	transform actor: UML!Actor
 	to proc: LQN!ProcessorType
@@ -80,18 +81,64 @@ rule Actor2Processor
 		}
 
 //		("Create processor for actor: " + actor.name).println();
-	    var lifelines = UML!Lifeline.all.select(l | l.represents.type = actor);
+	    var lifelines = UML!Lifeline.all.select(l | l.represents.type = actor and l.isStereotypeApplied(gaworkload));
 		
 //		("Lifelines for actor '" + actor.name + "' found: " + lifelines.size()).println();
 		
-		proc.name = actor.name;
+		proc.name = actor.getOwner().name;
+	    var task = new LQN!TaskType;
+	    
+ 		var closedActivityCalls = new Sequence(); // currently only synch-calls are expected
+	    
+	    task.name = actor.getOwner().name + "_job_class_"; // the owner of the actor is a use case
 		for(lf in lifelines){
-		    var interaction = lf.getInteraction();
-		    var task = interaction.equivalent("Interaction2Task");
-		    proc.task.add(task);
+		    var entry = lf.equivalent();
+		    task.entry.add(entry);
 		}
+		if (closedActivityCalls.size() > 0) {
+			var closedEntry = LQN!EntryType;
+			closedEntry.name = "closed-workload";
+	    	closedEntry.type = LQN!TypeType#PH1PH2;
+			closedEntry.entryPhaseActivities = new LQN!PhaseActivities;
+ 			closedEntry.entryPhaseActivities.activity = closedActivityCalls;
+			task.add(task);
+			task.scheduling = LQN!TaskSchedulingType#ref;
+	    	task.multiplicity = "1"; // the multiplicity is handled within the synccalls to the different interactions
+		}
+		proc.task.add(task);
 	}
 
+rule ClosedWorkloadLifeline2Entry
+	transform lifeline: UML!Lifeline
+	to entry: LQN!EntryType
+	{
+		guard {
+			if (not lifeline.isEntryWellFormed()) {
+				return false;
+			}
+            return lifeline.getWorkload().get(0) == "closed";
+		}
+		
+		("ClosedWorkloadLifeline2Entry - Create entry for Lifeline: " + lifeline.name).println();
+		
+		
+		var beses = lifeline.collect(l | l.getElements("BehaviorExecutionSpecification")).flatten;
+	    
+	    if (beses.size() != 1) {
+	    	throw "Unexpected amount of BES for lifeline: " + lifeline.getOwner().name + "_" + lifeline.name;
+	    }
+	    
+	    
+	    // currently it is assumed that only one use case is processed at the time.
+	    entry = beses.equivalent("BES2Entry");
+	    var calls = entry.entryPhaseActivities.activity; // currently only synch-calls are expected.
+	    
+	    var repetitions = lifeline.getWorkload().get(1);
+	    for (c in calls) {
+	    	c.callsMean = repetitions;
+	    }
+	    closedActivityCalls.addAll(calls);
+	}
 
 /**
   * This rule transforms an interaction to a task.
@@ -99,38 +146,32 @@ rule Actor2Processor
   * The "pattern" attribute needs to be applied to the lifeline to get the workload for the task.
   * The BES of the Lifeline get transformed to an EntryType
 */
-rule Interaction2Task
-	transform interaction: UML!Interaction
-	to task: LQN!TaskType
+rule OpenWorkloadLifeline2Entry
+	transform lifeline: UML!Lifeline
+	to entry: LQN!EntryType 
 	{
 		guard {
-            var lifelines = interaction.getLifelines();
-
-            if(lifelines.isEmpty()) {
-                return false;
-            }
-            
-            return lifelines->atLeastNMatch(lf : UML!Lifeline | lf.isStereotypeApplied(gaworkload), 1 );
-
+			if (not lifeline.isEntryWellFormed()) {
+				return false;
+			}
+            return lifeline.getWorkload().get(0) == "open";
 		}
-		("Create task for interaction: " + interaction.name).println();
+		("OpenWorkloadLifeline2Entry - Create entry for Lifeline: " + lifeline.name).println();
 		
-        // For each interaction there must be only one lifeline stereotyped with gaworkload
-        var lifeline = interaction.getLifelines() -> selectOne(lf | lf.isStereotypeApplied(gaworkload));
-
-	    var beses = lifeline.collect(i | i.getElements("BehaviorExecutionSpecification")).flatten;
-	    var workload = lifeline.getWorkload();
-	    task.name = interaction.getOwner().getName() + "_job_class_" ;
-	    task.entry = beses.equivalent("BES2Entry");
-	    	    
-	    if(workload[0] = "closed"){
-	    	task.scheduling = LQN!TaskSchedulingType#ref;
-	    	task.multiplicity = workload[1];
-	    } else {
-	    	for(entry in task.entry) {
-	    		entry.openArrivalRate = workload[1];	    	
-	    	}
+	    var beses = lifeline.collect(l | l.getElements("BehaviorExecutionSpecification")).flatten;
+	    
+	    if (beses.size() != 1) {
+	    	throw "Unexpected amount of BES for lifeline: " + lifeline.getOwner().name + "_" + lifeline.name;
 	    }
+		
+		var newEntry = beses[0].equivalent("BES2Entry");
+		
+	    entry.name = lifeline.getOwner().name + "_job_class_" ; 
+	    entry.type = LQN!TypeType#PH1PH2;
+	    entry.entryPhaseActivities = newEntry.entryPhaseActivities;
+	    
+	    var workload = lifeline.getWorkload();
+		entry.openArrivalRate = workload[1]; // workload is open since it is in this rule 		
 	}
 
 rule Operation2Task
@@ -335,6 +376,12 @@ rule Bes2Activity
 		}
 	}
 	
+
+/*
+ * requires the rule "Bes2Activity" to be called before
+ * required outside variables:
+ *  - bes
+*/
 
 @lazy
 rule Message2Request

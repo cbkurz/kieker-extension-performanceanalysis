@@ -183,3 +183,16 @@ operation UML!BehaviorExecutionSpecification getEntryName() {
 operation UML!Operation isDeployedOnNode(node: UML!Node) {
 	var component = self.getOwner();
 }
+
+operation UML!Lifeline isEntryWellFormed(): Boolean {
+	var bes = self.coveredBy.select(c | c.isTypeOf(UML!BehaviorExecutionSpecification));
+	if (not (bes.size() == 1)) {
+		"The amount of BES for Lifeline '" + self.getOwner().name + "_" + self.name + "' is not as expected. Expected was one. Current amount: " + bes.size();		
+		return false;
+	}
+	if (not self.isStereotypeApplied(gaworkload)) {
+		"The stereotype '" + gaworkload + "' is not applied to lifeline " + self.name;
+		return false;
+	}
+	return true;
+}
