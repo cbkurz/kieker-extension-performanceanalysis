@@ -14,8 +14,8 @@ rule Classes transform classesView: UML!Package {
 rule Components transform componentsView: UML!Package {
     guard : "staticView-components".equals(componentsView.name)
     parameters : Map {"componentsView" = componentsView}
-    template: "StaticView-Components.egl"
-    target : "StaticView-Components.txt"
+    template: "ComponentView.egl"
+    target : "ComponentView.txt"
 }
 
 rule Deployments transform deploymentView: UML!Package {

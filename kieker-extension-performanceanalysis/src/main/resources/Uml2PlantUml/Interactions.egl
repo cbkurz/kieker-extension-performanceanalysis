@@ -3,7 +3,7 @@
 
 [%=getStandardInformation()%]
 
-title [%=interaction.name%]
+title [%="Use case: " + interaction.getOwner().name + " - " + interaction.name%]
 
 [% for (l in interaction.lifelines) { %]
 participant [%=sanitize(l.name)%] [

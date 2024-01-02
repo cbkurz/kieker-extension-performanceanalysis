@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.addId;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.getAnnotationDetail;
@@ -123,9 +124,8 @@ public class MarteSupport {
 
         // start working
 
-        // start and end times for open workload
-        MarteSupport.setOpenWorkloadInformation(interaction, messageTrace.getStartTimestamp(), messageTrace.getEndTimestamp());
-
+        // calculate the open workload
+        setOpenWorkloadInformation(interaction, messageTrace.getStartTimestamp(), messageTrace.getEndTimestamp());
         // GaStep
         setGaStep(interaction, messageTrace);
 
@@ -133,23 +133,36 @@ public class MarteSupport {
         addId(interaction, Long.toString(messageTrace.getTraceId()));
     }
 
+    /**
+     * <p>
+     *     This method calculates all GaStep Stereotypes for the {@link Interaction}.
+     *     This is done by iterating over all {@link AbstractMessage} in the {@link MessageTrace}.
+     *     Only {@link SynchronousCallMessage} are processed.
+     *     For the GaStep the net time is set as the execution time.
+     *     This method works together with the method {@link UmlInteractions#addLifelines(Interaction, List)}.
+     * </p>
+     * @param interaction - The {@link Interaction} to which the performance information shall be applied.
+     * @param messageTrace - The {@link MessageTrace} that holds the performance information.
+     */
     private static void setGaStep(final Interaction interaction, final MessageTrace messageTrace) {
         List<AbstractMessage> sequenceAsVector = messageTrace.getSequenceAsVector();
-        for (int count = 0; count < sequenceAsVector.size(); count++) { // The count was introduced to have an additional separation option for Messages that have the same representation
+        // the count of 0 is the first lifeline after "'Entry'"
+        // The count was introduced to have an additional separation option for Messages that have the same representation
+        for (int count = 0; count < sequenceAsVector.size(); count++) {
             final AbstractMessage message = sequenceAsVector.get(count);
             if (!(message instanceof SynchronousCallMessage)) {
                 continue;
             }
 
             final String besRepresentation = getBESRepresentation(getMessageRepresentation(message));
-            final BehaviorExecutionSpecification bes = getBES(interaction, besRepresentation, count); // the count of 0 is the first lifeline after "'Entry'"
+            final BehaviorExecutionSpecification bes = getBES(interaction, besRepresentation, count);
             // We start at the first lifeline after "'Entry'" the net time must be calculated for the receivingExecution
-            // This happens since the first message in the vector is from "'Entry'" to "<next-Lifeline>"
+            // This happens since the first message in the vector is from "'Entry'" to the next Lifeline
             final long execTime = getNetExecTime(messageTrace, message.getReceivingExecution());
             updateGaStep(bes, (double) execTime);
         }
         // Entry Lifeline BES
-        final BehaviorExecutionSpecification entryBes = getBES(interaction, "'Entry'", -1);
+        final BehaviorExecutionSpecification entryBes = getBES(interaction, "'Entry'", -1); // this is set
         final long otherTime = getTotalExecTime(messageTrace.getSequenceAsVector().get(0).getReceivingExecution()); // Entry-Lifeline only has one
         final long execTime = (messageTrace.getEndTimestamp() - messageTrace.getStartTimestamp()) - otherTime;
         updateGaStep(entryBes, (double) (execTime == 0 ? 1 : execTime));
@@ -193,23 +206,6 @@ public class MarteSupport {
     }
 
 
-    private static Lifeline getSenderLifeline(final Interaction interaction, final String identifier) {
-        requireNonNull(interaction, "interaction");
-        requireNonNull(identifier, "identifier");
-        final List<Lifeline> list = interaction.getLifelines().stream()
-                .filter(l -> identifier.equals(l.getName()))
-                .collect(Collectors.toList());
-
-        if (list.isEmpty()) {
-            throw new ModelNotComformantException("Lifeline not found with identifier: " + identifier);
-        }
-        if (list.size() > 1) {
-            throw new ModelNotComformantException(String.format("To many Lifelines found for identifier: %s\nList size: %s\nList: %s", identifier, list.size(), list));
-        }
-
-        return list.get(0);
-    }
-
     private static BehaviorExecutionSpecification getBES(final Interaction interaction, final String messageRepresentation, final int count) {
         final List<BehaviorExecutionSpecification> list = interaction.getFragments().stream()
                 .filter(f -> f instanceof BehaviorExecutionSpecification)
@@ -239,12 +235,41 @@ public class MarteSupport {
                 .orElseGet(() -> useCase.createEAnnotation(GA_SCENARIO));
     }
 
+    /**
+     * <p>
+     *     This method calculated the open arrival rate and sets it on the lifeline as the stereotype GaWorkloadEvent.
+     *     For the arrival rate to be calculated three values are required:
+     * </p>
+     * <ul>
+     *     <li>the earliest start time</li>
+     *     <li>the latest end time</li>
+     *     <li>the amounts of recorded MessageTraces for the {@link Interaction}</li>
+     * </ul>
+     *
+     * <p>
+     *     First the number of traces is received (N), the the execution time (T) is calculated by subtracting the start
+     *     time from the end time. Thereafter the open arrival rate is calculated by: N / T
+     * </p>
+     *
+     * @param interaction                   the interaction in question
+     * @param startTimestamp                the start timestamp for the <b>current</b> {@link MessageTrace}
+     * @param endTimestamp                  the end timestamp for the <b>current</b> {@link MessageTrace}
+     * @throws ModelNotComformantException  if the {@link Interaction} is not owned by a {@link UseCase}
+     */
+    @SuppressWarnings("SimplifyOptionalCallChains")
     private static void setOpenWorkloadInformation(final Interaction interaction, final long startTimestamp, final long endTimestamp) {
-        final Long startTime = getAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime")
+        final Element useCase = interaction.getOwner();
+        // fail fast
+        if (isNull(useCase) || !(useCase instanceof UseCase)) {
+            throw new ModelNotComformantException("An Interaction must be owned by a UseCase, this requirement was not met. Interaction: " + interaction);
+        }
+        // work
+        // get start and end times
+        final Long startTime = getAnnotationDetail(useCase, PERFORMANCE_INFORMATION, "startTime")
                 .map(Long::parseLong)
                 .map(v -> startTimestamp < v ? startTimestamp : v)
                 .orElse(startTimestamp);
-        final Long endTime = getAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime")
+        final Long endTime = getAnnotationDetail(useCase, PERFORMANCE_INFORMATION, "endTime")
                 .map(Long::parseLong)
                 .map(v -> endTimestamp > v ? endTimestamp : v)
                 .orElse(endTimestamp);
@@ -254,13 +279,17 @@ public class MarteSupport {
         LOGGER.debug("start time: " + startTime);
         LOGGER.debug("end time: " + endTime);
 
-        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "startTime", startTime.toString());
-        setAnnotationDetail(interaction, PERFORMANCE_INFORMATION, "endTime", endTime.toString());
+        // write current values back
+        setAnnotationDetail(useCase, PERFORMANCE_INFORMATION, "startTime", startTime.toString());
+        setAnnotationDetail(useCase, PERFORMANCE_INFORMATION, "endTime", endTime.toString());
 
+        // calculate open arrival rate
         final BigDecimal numberOfTraces = BigDecimal.valueOf(getIds(interaction).map(s -> s.size() + 1).orElse(1));
         final BigDecimal executionTime = BigDecimal.valueOf(endTime - startTime);
         final String openWorkload = numberOfTraces.divide(executionTime, 20, RoundingMode.HALF_UP).toPlainString();
+
+        // set GaWorkloadEvent with open arrival rate
         final Lifeline lifeline = interaction.getLifeline(KIEKER_ENTRY_NAME);
-        MarteSupport.setGaWorkloadEvent(lifeline, "open:" + openWorkload);
+        MarteSupport.setGaWorkloadEvent(lifeline, "open:" + openWorkload); // this follows the pattern required by the Uml2Lqn transformation
     }
 }

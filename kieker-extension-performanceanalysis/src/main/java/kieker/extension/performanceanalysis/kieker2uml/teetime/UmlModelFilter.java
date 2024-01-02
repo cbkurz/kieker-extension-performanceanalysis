@@ -1,7 +1,6 @@
 package kieker.extension.performanceanalysis.kieker2uml.teetime;
 
 import kieker.analysis.plugin.trace.AbstractMessageTraceProcessingFilter;
-import kieker.extension.performanceanalysis.epsilon.Util;
 import kieker.model.repository.SystemModelRepository;
 import kieker.model.system.model.MessageTrace;
 import org.eclipse.uml2.uml.Model;
@@ -11,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.Path;
 
 import static java.lang.String.format;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlModel.addBehaviour;
-import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlModel.addStaticView;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlModel.addBehaviourToDynamicPackage;
+import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlModel.addStaticAndDeploymentPackage;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.loadModel;
 import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil.saveModel;
 
@@ -47,8 +46,8 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
         LOGGER.debug("Successfully received MessageTrace: " + mt.getTraceId());
 
         // UML
-        addStaticView(model, mt);
-        addBehaviour(model, mt, useCaseName);
+        addStaticAndDeploymentPackage(model, mt);
+        addBehaviourToDynamicPackage(model, mt, useCaseName);
 
         // logging
         LOGGER.debug("TraceId: " + mt.getTraceId());

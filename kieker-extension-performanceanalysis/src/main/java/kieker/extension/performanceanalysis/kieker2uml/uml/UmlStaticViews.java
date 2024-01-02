@@ -106,9 +106,9 @@ public class UmlStaticViews {
     /**
      * Creates an operation of the component.
      * The Operation holds a reference to the BES that represent it, this is for easier lookup in the Uml2Lqn transformation
-     * @param component
-     * @param operation
-     * @return
+     * @param component the {@link Component} that is the owner of the {@link org.eclipse.uml2.uml.Operation}
+     * @param operation the Kieker {@link Operation} that is the provider for the {@link org.eclipse.uml2.uml.Operation}
+     * @return the uml {@link org.eclipse.uml2.uml.Operation} created
      */
     private static org.eclipse.uml2.uml.Operation createOperation(final Component component, final Operation operation) {
         final org.eclipse.uml2.uml.Operation ownedOperation = component.getOwnedOperation(getInterfaceName(operation), null, null, false, true);
@@ -134,6 +134,7 @@ public class UmlStaticViews {
     }
 
     static Component getComponent(final Package staticView, final AssemblyComponent component) {
+        // getPackagedElement(String name, boolean ignoreCase, EClass eClass, boolean createOnDemand) <-- names of the parameters
         return (Component) staticView.getPackagedElement(component.getIdentifier(), false, UMLPackage.Literals.COMPONENT, true);
     }
 

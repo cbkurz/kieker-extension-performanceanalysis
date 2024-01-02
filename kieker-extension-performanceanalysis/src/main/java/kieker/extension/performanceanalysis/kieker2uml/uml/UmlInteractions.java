@@ -82,27 +82,28 @@ class UmlInteractions {
     }
 
     /**
-     * The Name is used as File-Name later in the process and simply is "Interaction-" + the count of the interaction.
-     * count starts with zero.
-     *
      * @param useCase The MessageTrace that is used to create the name.
-     * @return The Name of the Trace beginning with "Interaction-" + COUNT
+     * @return The Name "Interaction-" + COUNT, where COUNT is the number of Interactions in {@link UseCase} +1
      */
     static String getInteractionName(final UseCase useCase) {
         return "Interaction-" + useCase.getOwnedBehaviors().size();
     }
 
     /**
-     * Adds Lifelines, Messages and representations of the components
-     * Note: The First Lifeline needs special treatment since no {@link org.eclipse.uml2.uml.BehaviorExecutionSpecification} will be created for it.
-     * Creates the following Types in the UML2 Model:
-     * * {@link org.eclipse.uml2.uml.Lifeline} - The Lifelines represent the different objects that are interaction within the Trace of the application
-     * * {@link org.eclipse.uml2.uml.Message} - The Messages represent the calls that the objects in the application are making to each other
-     * * {@link org.eclipse.uml2.uml.MessageOccurrenceSpecification} - This is required by UML2 and connects the Message with the lifeline
-     * * {@link org.eclipse.uml2.uml.BehaviorExecutionSpecification} - This is required by UML2 and represents when an object of the application is active
-     *
-     * @param interaction - Representing the whole interaction all other Types are enclosed by this Type.
-     * @param messages    - The Kieker Messages of the {@link MessageTrace}
+     * <p>Adds Lifelines, Messages and representations of the components</p>
+     * <p>
+     *     Note: The First Lifeline needs special treatment since no
+     *     {@link org.eclipse.uml2.uml.BehaviorExecutionSpecification} will be created for it.
+     * </p>
+     * <p>Creates the following Types in the UML2 Model:</p>
+     * <ul>
+     *     <li>{@link org.eclipse.uml2.uml.Lifeline} - The Lifelines represent the different objects that are interaction within the Trace of the application</li>
+     *     <li>{@link org.eclipse.uml2.uml.Message} - The Messages represent the calls that the objects in the application are making to each other</li>
+     *     <li>{@link org.eclipse.uml2.uml.MessageOccurrenceSpecification} - This is required by UML2 and connects the Message with the lifeline</li>
+     *     <li>{@link org.eclipse.uml2.uml.BehaviorExecutionSpecification} - This is required by UML2 and represents when an object of the application is active</li>
+     * </ul>
+     * @param interaction Representing the whole interaction all other Types are enclosed by this Type.
+     * @param messages    The Kieker Messages of the {@link MessageTrace}
      */
     static void addLifelines(final Interaction interaction, final List<AbstractMessage> messages) {
         requireNonNull(getModel(interaction));
@@ -113,7 +114,6 @@ class UmlInteractions {
             final AssemblyComponent senderComponent = message.getSendingExecution().getAllocationComponent().getAssemblyComponent();
             final AssemblyComponent receiverComponent = message.getReceivingExecution().getAllocationComponent().getAssemblyComponent();
 
-            // getLifeline(name, ignoreCase, createOnDemand) <-- naming of the parameters
             final org.eclipse.uml2.uml.Lifeline senderLifeline = getLifeline(interaction, senderComponent);
             final org.eclipse.uml2.uml.Lifeline receiverLifeline = getLifeline(interaction, receiverComponent);
 
@@ -128,15 +128,37 @@ class UmlInteractions {
         setBehaviourSpecificationForFirstLifeline(messages.get(0), interaction, count - 1);
     }
 
+    /**
+     * Sets the {@link Lifeline} as a representation of the {@link Component}.
+     * The representation is only set if there is no current representation.
+     *
+     * @param lifeline          - The {@link Lifeline} that represents the Component
+     * @param staticView        - The Package that contains the {@link Component}s
+     * @param assemblyComponent - The object that is mapped to the {@link Component}
+     *                          (see {@link UmlStaticViews#getComponent(Package, AssemblyComponent)}).
+     */
     private static void setRepresents(final Lifeline lifeline, final Package staticView, final AssemblyComponent assemblyComponent) {
-        if (isNull(lifeline.getRepresents())) {
-            final Component component = UmlStaticViews.getComponent(staticView, assemblyComponent);
-            final Parameter ownedParameter = lifeline.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true);
-            lifeline.setRepresents(ownedParameter);
+        final boolean isNotRepresented = isNull(lifeline.getRepresents());
+        // fail fast
+        if (!isNotRepresented) { // is not null therefore return
+            return;
         }
+
+        // set component as representation
+        final Component component = UmlStaticViews.getComponent(staticView, assemblyComponent);
+        final Parameter ownedParameter = lifeline.getInteraction().getOwnedParameter("Representation-" + component.getName(), component, false, true);
+        lifeline.setRepresents(ownedParameter);
     }
 
+    /**
+     * Gets the Lifeline from the {@link Interaction}, if the {@link Lifeline} is not present it is created.
+     *
+     * @param interaction     - the {@link Interaction} that might hold the {@link Lifeline}
+     * @param senderComponent - The identifier of the component is used as Name of the {@link Lifeline}
+     * @return {@link Lifeline}
+     */
     private static Lifeline getLifeline(final Interaction interaction, final AssemblyComponent senderComponent) {
+        // getLifeline(name, ignoreCase, createOnDemand) <-- naming of the parameters
         return interaction.getLifeline(senderComponent.getIdentifier(), false, true);
     }
 
@@ -166,14 +188,53 @@ class UmlInteractions {
         final BehaviorExecutionSpecification finishBes = getCurrentOpenBES(lifeline);
         finishBes.setFinish(finishMos);
         setReferenceAnnotation(finishBes, "CloseMessage", messageId);
-        setReferenceAnnotation(finishBes, "CloseMessageCount",  finalCount + "");
+        setReferenceAnnotation(finishBes, "CloseMessageCount", finalCount + "");
     }
 
     static String getBesName(final Operation operation) {
         return BEHAVIOUR_EXECUTION_SPECIFICATION_PREFIX + operation.toString();
     }
 
-    private static void createMessage(final Interaction interaction, final AbstractMessage message, final Lifeline senderLifeline, final Lifeline receiverLifeline, final String messageId, final int count) {
+    /**
+     * <p>
+     * Creates a {@link org.eclipse.uml2.uml.Message} from the sender to the receiver.
+     * Each end of the {@link org.eclipse.uml2.uml.Message} is represented by a {@link MessageOccurrenceSpecification} (MOS).
+     * The MOS also covers the {@link Lifeline} of the respective end.
+     * An {@link BehaviorExecutionSpecification} (BES) covers a {@link Lifeline} and
+     * is the representation that there is an execution happening by the {@link Lifeline}
+     * At the start and end of the BES a MOS must be set.
+     * Two cases are possible:
+     * </p>
+     * <ul>
+     *     <li>The {@link org.eclipse.uml2.uml.Message} is of the type {@link MessageSort#SYNCH_CALL_LITERAL}</li>
+     *     <li>The {@link org.eclipse.uml2.uml.Message} is of the type {@link MessageSort#REPLY_LITERAL}</li>
+     * </ul>
+     *
+     * <p>
+     *     <b>First case: {@link MessageSort#SYNCH_CALL_LITERAL}</b><br />
+     *     A new BES is created and the end of the {@link org.eclipse.uml2.uml.Message} is set as start.
+     * </p>
+     *
+     * <p>
+     *     <b>Second case: {@link MessageSort#REPLY_LITERAL}</b><br />
+     *     The BES of the current Lifeline is discovered and the start of the
+     *     {@link org.eclipse.uml2.uml.Message} is set as end.
+     * </p>
+     *
+     * @param interaction - The {@link Interaction} in which the elements are created.
+     * @param message - The Kieker {@link AbstractMessage} from which the uml Message is created.
+     * @param senderLifeline - The {@link Lifeline} from which the Message originates
+     * @param receiverLifeline - The {@link Lifeline} that is the destination of the Message
+     * @param messageRepresentation - The string representation of the Message.
+     * @param count - A count was introduced to find the correct messages when adding the performance information
+     *              in {@link MarteSupport#applyPerformanceStereotypesToInteraction(Interaction, MessageTrace)}
+     */
+    private static void createMessage(final Interaction interaction,
+                                      final AbstractMessage message,
+                                      final Lifeline senderLifeline,
+                                      final Lifeline receiverLifeline,
+                                      final String messageRepresentation,
+                                      final int count) {
         requireNonNull(interaction, "interaction");
         requireNonNull(message, "message");
         requireNonNull(senderLifeline, "senderLifeline");
@@ -193,33 +254,43 @@ class UmlInteractions {
         final BehaviorExecutionSpecification bes;
         if (messageSort.equals(MessageSort.SYNCH_CALL_LITERAL)) {
             bes = startBehaviourSpecification(interaction, receiverLifeline, mosReceive, message.getReceivingExecution().getOperation());
-
-            setRepresentation(bes, getBESRepresentation(messageId));
+            setRepresentation(bes, getBESRepresentation(messageRepresentation));
             setRepresentationCount(bes, count);
-            setReferenceAnnotation(bes, "OpenMessage", messageId);
+            setReferenceAnnotation(bes, "OpenMessage", messageRepresentation);
             setReferenceAnnotation(bes, "OpenMessageCount", count + "");
         } else if (messageSort.equals(MessageSort.REPLY_LITERAL)) {
             bes = getCurrentOpenBES(senderLifeline);
             bes.setFinish(mosSend); // the current mos will now the next BES
 
-            setReferenceAnnotation(bes, "CloseMessage", messageId);
+            setReferenceAnnotation(bes, "CloseMessage", messageRepresentation);
             setReferenceAnnotation(bes, "CloseMessageCount", count + "");
         }
         // set Metadata
         // uml message
-        setRepresentation(umlMessage, messageId);
+        setRepresentation(umlMessage, messageRepresentation);
         setRepresentationCount(umlMessage, count);
         setReferenceAnnotations(umlMessage, message.getReceivingExecution());
         // message occurrence send
-        setRepresentation(mosSend, getSendMOSRepresentation(messageId));
+        setRepresentation(mosSend, getSendMOSRepresentation(messageRepresentation));
         setRepresentationCount(mosSend, count);
         setReferenceAnnotations(mosSend, message.getSendingExecution());
         // message occurrence receive
-        setRepresentation(mosReceive, getReceiveMOSRepresentation(messageId));
+        setRepresentation(mosReceive, getReceiveMOSRepresentation(messageRepresentation));
         setRepresentationCount(mosReceive, count);
         setReferenceAnnotations(mosReceive, message.getReceivingExecution());
     }
 
+    /**
+     * Gets the current open BES for the Lifeline.
+     * This method assumes that all BES are in order.
+     * All BES of the lifeline are collected that not jet have an end set.
+     * The last BES in the list is the curren open BES,
+     * as it is the last that has been created on the Lifeline and
+     * represents the most current execution of the Lifeline.
+     * @param senderLifeline - {@link Lifeline}
+     * @return the most current open BES
+     * @throws RuntimeException - In case no open BES was found.
+     */
     private static BehaviorExecutionSpecification getCurrentOpenBES(final Lifeline senderLifeline) {
         final List<BehaviorExecutionSpecification> list = senderLifeline.getCoveredBys().stream()
                 .filter(cb -> cb instanceof BehaviorExecutionSpecification)
