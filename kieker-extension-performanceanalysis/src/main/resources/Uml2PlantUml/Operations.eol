@@ -88,10 +88,6 @@ operation Message getMessageType() : String {
 	if (type == "synchCall") {
 		return "->"; // normal arrow
 	}
-	
-	if (type == "asynchCall") {
-		return "->";
-	}
 	if (type == "reply") {
 		return "-->"; // dotted arrow
 	}
@@ -103,9 +99,6 @@ operation Message getActivation() : String {
 		var type = self.getMessageSort().name;
 	if (type == "synchCall") {
 		return "activate " + self.getReceiverName(); 
-	}
-		if (type == "asynchCall") {
-		return "->";
 	}
 	if (type == "reply") {
 		return "deactivate " + self.getSenderName(); 
@@ -126,20 +119,8 @@ operation Message getReceiverName() : String {
 // This is a sanitization for PlantUML
 // ' - Tickmarks are removed in order to not create accidental Comments that may be malformed
 operation sanitize(s : String) : String {
-	
-	return s.replace("'", "_")
-				.replace("<", "_")
-				.replace(">", "_")
-				.replace("-", "_")
-				.replace("\\[", "_")
-				.replace("]", "_")
-				.replace(":", "_")
-				.replace(" ", "_")
-				.replace(",", "_")
-				.replace("@", "_")
-				.replace("\\$", "_")
-				.replace("\\(", "_")
-				.replace("\\)", "_");
+	// regex without additional escape sequences: ['<>\[\]: ,@$()\\]
+	return s.replace("['<>\\[\\]: ,@$()#\\\\]", "_");
 }
 
 operation EModelElement getStereotypeNames() : String {
@@ -156,7 +137,7 @@ operation EModelElement getStereotypeNames() : String {
 			break; // the last one should not add a comma
 		}
 		text += anno.source;
-		text += ",";
+		text += ", ";
 	}
 	text += " >>";
 	return text;

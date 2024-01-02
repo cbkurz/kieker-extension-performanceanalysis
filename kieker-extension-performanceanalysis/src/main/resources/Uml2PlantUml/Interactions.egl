@@ -3,7 +3,9 @@
 
 [%=getStandardInformation()%]
 
-title [%="Use case: " + interaction.getOwner().name + " - " + interaction.name%]
+title
+[%="    Use case: " + interaction.getOwner().name + " - " + interaction.name%]
+end title
 
 [% for (l in interaction.lifelines) { %]
 participant [%=sanitize(l.name)%] [
@@ -17,6 +19,15 @@ participant [%=sanitize(l.name)%] [
 [% } %]
 
 autonumber
+[%
+    var entryLf = interaction.getLifeline("'Entry'");
+    var entryBes = entryLf.coveredBy.selectOne(f | f.isTypeOf(UML!BehaviorExecutionSpecification));
+%]
+activate [%=sanitize(entryLf.name)%]
+note over [%=sanitize(entryLf.name)%]
+[%=entryBes.assembleStereotypeTemplateString(4)%]
+end note
+
 
 [% for (m in interaction.messages) { %]
 [%=m.getSenderName()%] [%=m.getMessageType()%] [%=m.getReceiverName()%] : [%=m.name%]
@@ -24,26 +35,17 @@ autonumber
     if (m.getMessageSort() == UML!MessageSort#synchCall) {
         // get receiver lifeline
         var lifeline = m.receiveEvent.covered.first;
-        "lifeline: ".print();
-        lifeline.println();
         // Gets the BESes from the lifeline that is covered by the message
         var targetBeses = lifeline.getElements("BehaviorExecutionSpecification");
         // Gets the BES that is the one that the message targets
-        "targetBeses: ".print();
-        targetBeses.println();
-        "message receiveEnd: ".print();
-        m.getReceiveEvent().println();
         var bes = targetBeses.selectOne(b | b.getStart().equals(m.getReceiveEvent()));
 %]
 note over [%=sanitize(lifeline.name)%]
-[%="Start message name: " + m.name%]
 [%=bes.assembleStereotypeTemplateString(4)%]
 end note
 [%  } %]
 [%=m.getActivation()%]
 [% } %]
-
-
-
+deactivate [%=sanitize("'Entry'")%]
 
 @enduml

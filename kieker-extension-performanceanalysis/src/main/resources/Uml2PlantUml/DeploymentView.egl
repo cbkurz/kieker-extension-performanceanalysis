@@ -9,7 +9,7 @@
 
 [% for (n : UML!Node in deployments) { %]
 [% if ("'Entry'".equals(n.name)) { continue; } %]
-node "[%=n.name%]" as [%=sanitize(n.name)%]
+node "[%=n.name%]" as [%=sanitize(n.name)%] [%=n.getStereotypeNames()%]
 [% } %]
 
 [% for (a : UML!Artifact in deployments) { %]

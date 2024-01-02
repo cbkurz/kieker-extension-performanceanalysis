@@ -128,6 +128,11 @@ class UmlInteractions {
         setBehaviourSpecificationForFirstLifeline(messages.get(0), interaction, count - 1);
     }
 
+    private static BehaviorExecutionSpecification getBES(final Interaction interaction, final Operation message) {
+        final BehaviorExecutionSpecification entryBes = (BehaviorExecutionSpecification) interaction.createFragment(getBesName(message), BEHAVIOUR_EXECUTION_E_CLASS);
+        return entryBes;
+    }
+
     /**
      * Sets the {@link Lifeline} as a representation of the {@link Component}.
      * The representation is only set if there is no current representation.
@@ -305,8 +310,11 @@ class UmlInteractions {
         return list.get(list.size() - 1);
     }
 
-    private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction, final Lifeline umlLifeline, final MessageOccurrenceSpecification messageOccurrenceReceive, final Operation operation) {
-        final BehaviorExecutionSpecification behaviour = (BehaviorExecutionSpecification) interaction.createFragment(getBesName(operation), BEHAVIOUR_EXECUTION_E_CLASS);
+    private static BehaviorExecutionSpecification startBehaviourSpecification(final Interaction interaction,
+                                                                              final Lifeline umlLifeline,
+                                                                              final MessageOccurrenceSpecification messageOccurrenceReceive,
+                                                                              final Operation operation) {
+        final BehaviorExecutionSpecification behaviour = getBES(interaction, operation);
         behaviour.getCovereds().add(umlLifeline);
 
         behaviour.setStart(messageOccurrenceReceive);
