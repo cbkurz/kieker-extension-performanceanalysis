@@ -7,18 +7,18 @@ import org.eclipse.epsilon.etl.launch.EtlRunConfiguration;
 
 import java.nio.file.Path;
 
-public class Uml2Uml implements Runnable {
+public class UmlCopyAndFilter implements Runnable {
 
-    private final Model umlSourceModel;
-    private final Model transformationModel;
-    private final Model umlFutureModel;
     private final Path script;
+    private final Model transformationModel;
+    private final Model umlSourceModel;
+    private final Model umlTargetModel;
 
-    public Uml2Uml(final Path umlSourceModel, final Path transformationModel, final Path umlFutureModel) {
+    public UmlCopyAndFilter(final Path transformationModel, final Path umlSourceModel, final Path umlTargetPath) {
         this.script = Util.getResource("Uml2Uml/Uml2Uml.etl");
         this.umlSourceModel = getSourceUml(umlSourceModel);
         this.transformationModel = getTransformationModel(transformationModel);
-        this.umlFutureModel = getFuml(umlFutureModel);
+        this.umlTargetModel = getTargetModel(umlTargetPath);
     }
 
     private static Model getSourceUml(final Path umlSourceModel) {
@@ -30,17 +30,17 @@ public class Uml2Uml implements Runnable {
                 .build();
     }
 
-    private static Model getFuml(final Path umlFutureModel) {
+    private static Model getTargetModel(final Path targetPath) {
         return EpsilonModelBuilder.getInstance()
                 .umlModel()
                 .modelName("FUML")
-                .modelPath(umlFutureModel)
+                .modelPath(targetPath)
                 .readOnLoad(false)
                 .storeOnDisposal(true)
                 .build();
     }
 
-    private static Model getTransformationModel(final Path transformationModel) {
+    static Model getTransformationModel(final Path transformationModel) {
         return EpsilonModelBuilder.getInstance()
                 .emfModel()
                 .modelName("UmlTransformation")
@@ -57,13 +57,12 @@ public class Uml2Uml implements Runnable {
                 .withScript(script)
                 .withModel(umlSourceModel)
                 .withModel(transformationModel)
-                .withModel(umlFutureModel)
+                .withModel(umlTargetModel)
                 .withProfiling()
                 .build();
         Util.validateUmlModel(umlSourceModel);
-        runConfiguration.run();
         runConfiguration.get();
-        umlFutureModel.dispose();
-        Util.validateUmlModel(umlFutureModel);
+        Util.validateUmlModel(umlTargetModel);
+        umlTargetModel.dispose();
     }
 }

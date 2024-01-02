@@ -1,0 +1,20 @@
+var t = UT!Transformation.all.first;
+
+var clazzPackage = UML!Package.all.selectOne(p | p.name == "staticView-classes");
+if (clazzPackage.isDefined()) {
+    clazzPackage.destroy();
+}
+
+var ucs = UML!UseCase.all.select(uc | not (uc.name == t.umlUseCase));
+
+if (ucs.size() == 0) {
+    return;
+}
+
+var iter = ucs.size() - 1;
+for (i in Sequence{0..iter}) {
+    // TODO: delete associated Actor and Associations first
+    // TODO: delete all Component/Artifact/Node s after they are no more interacting
+    var uc = ucs.get(i);
+    uc.destroy();
+}

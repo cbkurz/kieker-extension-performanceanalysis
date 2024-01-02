@@ -25,9 +25,9 @@ operation UML!NamedElement getArtifacts(): Collection {
 		}
 		
 	}
-	
-	// ("Searched artifacts for element: " + self.name).println();
-	// ("Number of artifacts found: " + output.size()).println();
+	("Searched Artifacts for element: " + self).println();
+	("Searched artifacts for element with name: " + self.name).println();
+	("Number of artifacts found: " + output.size()).println();
 		
 	return output;	
 }

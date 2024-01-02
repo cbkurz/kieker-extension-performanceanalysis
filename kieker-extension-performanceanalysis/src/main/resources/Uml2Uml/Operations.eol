@@ -141,3 +141,12 @@ operation getMos(mos1: UML!MessageOccurrenceSpecification) : UML!MessageOccurren
 	
 	return mos2List.get(mos2List.size() - 1);	
 }
+
+/**
+ * Converts an element to the native Java BigDecimal type
+ * @return a java.math.BigInteger
+ */
+operation Any asBigDecimal(): Native("java.math.BigDecimal") {
+	// Converts an element to the java native type BigDecimal
+	return new Native("java.math.BigDecimal")(self);
+}

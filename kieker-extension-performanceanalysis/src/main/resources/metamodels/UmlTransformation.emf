@@ -20,7 +20,7 @@ class NullTransformation extends TransformationRule { // implemented
 }
 
 // This Transformation adds time to all BES that correspond to an operation within an interaction
-class IncreaseExectuionTime extends TransformationRule { // to be implemented
+class IncreaseExecutionTime extends TransformationRule { // to be implemented
 	attr String componentName;
 	attr String operationName;
 	attr Integer[1] time;
@@ -45,7 +45,7 @@ class SetWorkload extends TransformationRule {
 
 enum WorkloadType {
 	OPEN;
-	CLOSE;
+	CLOSED;
 }
 
 enum TimeUnit {

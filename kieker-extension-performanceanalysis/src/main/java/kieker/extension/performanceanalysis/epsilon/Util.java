@@ -26,9 +26,7 @@ public class Util {
     }
 
     public static void validate(final EvlRunConfiguration validationConfig) {
-        validationConfig.run();
         @SuppressWarnings("unchecked") final Set<UnsatisfiedConstraint> set = (Set<UnsatisfiedConstraint>) validationConfig.get();
-
 
         if (set.isEmpty()) {
             return; // no constrains met
@@ -64,6 +62,7 @@ public class Util {
     public static void validateUmlModel(final Model uml) {
         uml.setName("UML");
         final EvlRunConfiguration validationConfig = EvlRunConfiguration.Builder()
+                .withParallelism()
                 .withScript(UML_VALIDATION_SCRIPT)
                 .withModel(uml)
                 .build();

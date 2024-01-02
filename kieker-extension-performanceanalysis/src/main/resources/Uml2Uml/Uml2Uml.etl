@@ -1,5 +1,4 @@
 import "Operations.eol";
-import "Transformations.eol";
 import "DynamicView.etl";
 import "StaticView.etl";
 import "DeploymentView.etl";
@@ -7,8 +6,14 @@ import "DeploymentView.etl";
 rule Model
     transform model1 : UML!Model
     to model2 : FUML!Model {
+        var t = UT!Transformation.all.first;
+        var matchingUcPresent = UML!UseCase.all.one(uc | uc.name == t.umlUseCase);
 
-    	model2.name = "FutureModel";
+        if (not matchingUcPresent) {
+            throw "No UseCase found for: " + t.umlUseCase;
+        }
+
+    	model2.name = t.name == "" ? "FutureModel" : t.name;
     	
     	doPackage("staticView-components", "StaticViewPackage", model1, model2);
     	doPackage("deploymentView", "DeploymentViewPackage", model1, model2);
@@ -17,15 +22,6 @@ rule Model
     	
     	
     	"Model creation completed".println();
-
-    	"Starting Transformation...".println();
-    	var transformation = UT!Transformation.all.first;
-    	for (t in transformation.transformationRules) {
-    		t.transformation(transformation);
-    	}
-    	
-    	"Done".println();
-    	
 	}
 
 @lazy

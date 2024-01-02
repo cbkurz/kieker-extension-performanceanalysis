@@ -281,13 +281,14 @@ context UML!Component {
 		message: "Component is not manifested in any artifact: " + self
 	}
 
+/*
 	constraint ComponentIsRepresentedAsLifeline {
 	    guard : not (self.name == "'Entry'")
 		check : UML!Lifeline.all.stream().filter(l | l.represents.type == self).findFirst().isPresent()
 		message: "Component is not represented in any Lifeline: " + self
 
 	}
-
+*/
 	constraint ComponentHasOperation {
 	    check : self.ownedOperations.isDefined() and self.ownedOperations.size() > 0
 	}

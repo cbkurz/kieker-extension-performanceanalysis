@@ -1,5 +1,17 @@
 import "../Uml2Lqn/StereotypeOperations.eol";
-// This Script contains the transformations that are applied based on the UmlTransfomrmation Language
+
+"Starting Transformation...".println();
+
+var transformation = UT!Transformation.all.first;
+for (t in transformation.transformationRules) {
+    t.println();
+    t.transformation(transformation);
+}
+
+"Done".println();
+
+
+// This Script contains the transformations that are applied based on the UmlTransformation Language
 // Each Operation is tied to a TransformationRule
 // All operations have the same name "transformation" and accept the UmlTransformation!Transformation object
 
@@ -8,10 +20,10 @@ operation UT!NullTransformation transformation(useCase : UT!Transformation) {
 }
 
 // Increases the of all BES found for the operation in the component
-operation UT!IncreaseExectuionTime transformation(useCase : UT!Transformation) {
-	var operations = FUML!Operation.all.select(o | self.operationName.equals(o.name) and o.getOwner().name == self.componentName);
+operation UT!IncreaseExecutionTime transformation(useCase : UT!Transformation) {
+	var operations = UML!Operation.all.select(o | self.operationName.equals(o.name) and o.getOwner().name == self.componentName);
 	if (operations.size() == 0) {
-		throw "0 Operations were received for Transformation: IncreaseMessageTime";
+		throw "0 Operations were received for Transformation: IncreaseExecutionTime";
 	}
 	
 	// get all BES for the operation
@@ -20,7 +32,7 @@ operation UT!IncreaseExectuionTime transformation(useCase : UT!Transformation) {
 		"operation: ".print();
 		o.println();
 		var besName = o.getReference("BES");
-		var bs = FUML!BehaviorExecutionSpecification.all.select(b | b.name == besName);
+		var bs = UML!BehaviorExecutionSpecification.all.select(b | b.name == besName);
 		beses.addAll(bs);
 	}
 	
@@ -33,22 +45,22 @@ operation UT!IncreaseExectuionTime transformation(useCase : UT!Transformation) {
 			continue;
 		}
 		var time = bes.getStereotypeValue("GaStep", "execTime");
-		var timeToAdd = toNanos(self.time, self.unit);
-		var increasedTime = time.asBigDecimal().add(timeToAdd.asBigDecimal());		
-		bes.setValue("GaStep", "execTime", increasedTime.toString());	
-	}	
+		var timeToAdd = self.unit.toNanos(self.time);
+		var increasedTime = time.asBigDecimal().add(timeToAdd.asBigDecimal());
+		bes.setValue("GaStep", "execTime", increasedTime.toString());
+	}
 }
 
 
 operation UT!SetWorkloadByObservationTime transformation(useCase : UT!Transformation) {
 	
-	var nanosTimes = toNanos(self.time, self.unit);
+	var nanosTimes = self.unit.toNanos(self.time);
 	
-	var lifelines = FUML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent"));
+	var lifelines = UML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent"));
 	"lifelines found: ".print();
 	lifelines.println();
 	for (lifeline in lifelines) {
-		var bes = lifeline.coveredBy.selectOne(c | c.isTypeOf(FUML!BehaviorExecutionSpecification));
+		var bes = lifeline.coveredBy.selectOne(c | c.isTypeOf(UML!BehaviorExecutionSpecification));
 		var entries = bes.getStereotypeValue("GaStep", "execTimeEntries").split(",").size();
 		var workload = getOpenWorkload(entries, nanosTimes);
 		var openWorkload = "open:" + workload;
@@ -57,7 +69,14 @@ operation UT!SetWorkloadByObservationTime transformation(useCase : UT!Transforma
 }
 
 operation UT!SetWorkload transformation(useCase : UT!Transformation) {
-	// TODO: must be implemented
+    var lifelines = UML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent") );
+    if (self.interactions.size() > 0) {
+        lifelines = lifelines.select(l | self.interactions.contains(l.getInteraction().name));
+    }
+    for (l in lifelines) {
+        var openWorkload = self.workloadType.getString() + ":" + self.value.toPlainString();
+        l.setValue("GaWorkloadEvent", "pattern", openWorkload);
+    }
 }
 
 operation getOpenWorkload(calls, observedTime): String {
@@ -67,12 +86,12 @@ operation getOpenWorkload(calls, observedTime): String {
 	return calls.divide(observedTime, 20, RoundingMode.HALF_UP).toPlainString();
 }
 
-operation toNanos(time, unit) {
+operation Any toNanos(time) {
 // 	var Duration = Native("java.time.Duration");
 //	var ChronoUnit = Native("java.time.temporal.ChronoUnit");
-	switch (unit) {
+	switch (self) {
 		case UT!TimeUnit#NANOS:   return time;
-		case UT!TimeUnit#MICROS:  return time * 1000l; // <- this is an L not a "one"
+		case UT!TimeUnit#MICROS:  return time * 1000l;
 		case UT!TimeUnit#MILLIS:  return time * 1000000l;
 		case UT!TimeUnit#SECONDS: return time * 1000000000l;
 		default : throw "Unsupported Time Unit: " + self;
@@ -86,4 +105,12 @@ operation toNanos(time, unit) {
 operation Any asBigDecimal(): Native("java.math.BigDecimal") {
 	// Converts an element to the java native type BigDecimal
 	return new Native("java.math.BigDecimal")(self);
+}
+
+operation Any getString() {
+    switch (self) {
+        case UT!WorkloadType#OPEN:   return "open";
+        case UT!WorkloadType#CLOSED:  return "closed";
+        default : throw "Unsupported Workload Type: " + self;
+    }
 }
