@@ -1,4 +1,4 @@
-package kieker.extension.performanceanalysis.cli;
+package kieker.extension.performanceanalysis.cli.validators;
 
 import com.beust.jcommander.IParameterValidator;
 import com.beust.jcommander.ParameterException;

@@ -1,4 +1,4 @@
-package kieker.extension.performanceanalysis.cli;
+package kieker.extension.performanceanalysis.cli.converters;
 
 import com.beust.jcommander.IStringConverter;
 
