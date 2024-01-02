@@ -30,12 +30,12 @@ public class Uml2PlantUml implements Runnable {
     @Override
     public void run() {
         final EgxRunConfiguration runConfiguration = EgxRunConfiguration.Builder()
+                .parallel()
                 .withScript(driver)
                 .withModel(umlModel)
                 .withOutputRoot(output)
                 .withProfiling()
                 .build();
-        runConfiguration.run();
         runConfiguration.get();
     }
 }
