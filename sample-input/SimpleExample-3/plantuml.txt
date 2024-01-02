@@ -1,0 +1,22 @@
+@startuml
+
+Actor Entry
+
+Entry -> Main: main()
+activate Main
+Main -> Recursion: recursion()
+activate Recursion
+Recursion -> Recursion: recursion()
+activate Recursion
+Recursion -> Recursion: recursion()
+activate Recursion
+Recursion --> Recursion: recursion()
+deactivate
+Recursion --> Recursion: recursion()
+deactivate
+Recursion --> Main: recursion()
+deactivate
+Main --> Entry: main()
+deactivate
+
+@enduml
