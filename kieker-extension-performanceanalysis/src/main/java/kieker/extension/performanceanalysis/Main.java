@@ -68,7 +68,7 @@ public class Main {
                 new Uml2Lqn(uml2LqnCli.getUmlPath(), uml2LqnCli.getLqnPath()).run();
                 break;
             case "RunAllTransformations":
-                new RunAllTransformations(args, runAllTransformationsCli.getModelPath(), runAllTransformationsCli.getTransformationPath()).run();
+                new RunAllTransformations(args, runAllTransformationsCli).run();
                 break;
             default:
                 jc.usage();

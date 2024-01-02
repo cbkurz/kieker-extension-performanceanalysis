@@ -15,7 +15,15 @@ public class RunAllTransformationsCli extends Kieker2UmlCli{
             description = "The path to the transformation model file.")
     private Path transformationPath;
 
+    @Parameter(names = {"--omit-plantuml"},
+            description = "Flag to omit the transformation of the uml into the PlantUml Syntax")
+    private boolean omitUml2PlantUml = false;
+
     public Path getTransformationPath() {
         return transformationPath;
+    }
+
+    public boolean isOmitUml2PlantUml() {
+        return omitUml2PlantUml;
     }
 }

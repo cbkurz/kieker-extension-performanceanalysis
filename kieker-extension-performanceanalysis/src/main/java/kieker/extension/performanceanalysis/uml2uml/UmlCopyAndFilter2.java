@@ -41,7 +41,12 @@ public class UmlCopyAndFilter2 implements Runnable {
                 .storeOnDisposal(true)
                 .build();
 
-        final EolRunConfiguration transformation = EolRunConfiguration.Builder().withProfiling().withScript(script).withModel(targetModel).withModel(transformationModel).build();
+        final EolRunConfiguration transformation = EolRunConfiguration.Builder()
+                .withProfiling()
+                .withScript(script)
+                .withModel(targetModel)
+                .withModel(transformationModel)
+                .build();
         transformation.get();
         Util.validateUmlModel(targetModel);
         targetModel.dispose();

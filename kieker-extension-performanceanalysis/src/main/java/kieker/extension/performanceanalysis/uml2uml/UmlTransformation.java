@@ -25,8 +25,7 @@ public class UmlTransformation implements Runnable {
     private static Model getUml(final Path path) {
         return EpsilonModelBuilder.getInstance()
                 .umlModel()
-                .modelName("FUML")
-                .modelAlias("UML")
+                .modelName("UML")
                 .modelPath(path)
                 .readOnLoad(true)
                 .storeOnDisposal(true)

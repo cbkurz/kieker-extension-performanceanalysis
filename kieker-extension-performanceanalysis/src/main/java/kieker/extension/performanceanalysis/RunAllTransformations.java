@@ -26,12 +26,14 @@ public class RunAllTransformations implements Runnable {
     private final Path modelPath;
     private final Path transformationModelPath;
     private final boolean deleteOutputFolder;
+    private final RunAllTransformationsCli cli;
 
-    public RunAllTransformations(final String[] args, final Path modelPath, final Path transformationPath) {
+    public RunAllTransformations(final String[] args, RunAllTransformationsCli cli) {
         LOGGER.debug("Creating RunAllTransformations Object");
+        this.cli = cli;
         this.args = args;
-        this.modelPath = modelPath;
-        this.transformationModelPath = transformationPath;
+        this.modelPath = cli.getModelPath();
+        this.transformationModelPath = cli.getTransformationPath();
         this.deleteOutputFolder = true;
     }
 
@@ -65,21 +67,25 @@ public class RunAllTransformations implements Runnable {
         LOGGER.debug("Successfully run Kieker2Uml transformation.");
 
         // Uml2PlantUml
-        LOGGER.debug("Running Uml2PlantUml transformation for present UML...");
-        final Uml2PlantUml uml2PlantPresent = new Uml2PlantUml(modelPath, uml2PlantUmlCli.getOutputPath().resolve("present"));
-        uml2PlantPresent.run();
+        if (!cli.isOmitUml2PlantUml()) {
+            LOGGER.debug("Running Uml2PlantUml transformation for present UML...");
+            final Uml2PlantUml uml2PlantPresent = new Uml2PlantUml(modelPath, uml2PlantUmlCli.getOutputPath().resolve("present"));
+            uml2PlantPresent.run();
+        }
 
         // Uml2Uml
         LOGGER.debug("Running Uml2Uml transformation...");
         final UmlCopyAndFilter2 umlCopyAndFilter = new UmlCopyAndFilter2(transformationModelPath, modelPath, futureUmlModel);
-        final UmlTransformation umlTransformation = new UmlTransformation(futureUmlModel, transformationModelPath);
         umlCopyAndFilter.run();
+        final UmlTransformation umlTransformation = new UmlTransformation(futureUmlModel, transformationModelPath);
         umlTransformation.run();
 
         // Transform the future Uml2PlantUml
-        LOGGER.debug("Running Uml2PlantUml transformation for future UML...");
-        final Uml2PlantUml uml2PlantTransformed = new Uml2PlantUml(futureUmlModel, uml2PlantUmlCli.getOutputPath().resolve("transformed"));
-        uml2PlantTransformed.run();
+        if (!cli.isOmitUml2PlantUml()) {
+            LOGGER.debug("Running Uml2PlantUml transformation for future UML...");
+            final Uml2PlantUml uml2PlantTransformed = new Uml2PlantUml(futureUmlModel, uml2PlantUmlCli.getOutputPath().resolve("transformed"));
+            uml2PlantTransformed.run();
+        }
 
         // Uml2Lqn
         LOGGER.debug("Running Uml2Lqn transformation...");
