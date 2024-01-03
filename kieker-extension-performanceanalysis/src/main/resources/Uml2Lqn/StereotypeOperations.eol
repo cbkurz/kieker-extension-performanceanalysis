@@ -54,18 +54,16 @@ operation UML!NamedElement getValue(stereotypeName: String, valueName: String) :
 }
 
 operation UML!NamedElement setValue(stereotypeName: String, valueName: String, value: String) {
+    if (not self.isStereotypeApplied(stereotypeName)) {
+	    self.createStereotype(stereotypeName);
+    }
 	var details = self.getStereotype(stereotypeName);
 	details.put(valueName, value);
 }
 
-operation UML!UseCase hasInteraction() : Boolean {
-	var bs = self.getOwnedBehaviors();
-	for (b in bs) {
-		if (b.isTypeOf(UML!Interaction)) {
-			return true;
-		}
-	}
-	return false;
+operation UML!NamedElement createStereotype(stereotypeName: String) {
+    var anno = self.createEAnnotation(stereotypeName);
+    return anno.getDetails();
 }
 
 operation UML!NamedElement getReference(name: String): String {
@@ -80,4 +78,18 @@ operation UML!NamedElement getReference(name: String): String {
 		throw "Value '" + name + "' not found.";
 	}
 	return value;
+}
+
+// copies all EAnnotations and the details from elem1 to elem2
+operation copyStereotypeToElement(elem1, elem2) {
+	for (anno1 in elem1.getEAnnotations()) {
+		var anno2 = elem2.getEAnnotation(anno1.source);
+		if (not anno2.isDefined()) {
+			anno2 = elem2.createEAnnotation(anno1.source);
+		}
+		var anno2 = elem2.getEAnnotation(anno1.source);
+		for (entry1 in anno1.details) {
+			anno2.getDetails().put(entry1.key, entry1.value);
+		}
+	}
 }

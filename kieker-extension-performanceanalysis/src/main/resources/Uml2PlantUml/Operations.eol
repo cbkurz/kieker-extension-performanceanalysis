@@ -120,7 +120,7 @@ operation Message getReceiverName() : String {
 // ' - Tickmarks are removed in order to not create accidental Comments that may be malformed
 operation sanitize(s : String) : String {
 	// regex without additional escape sequences: ['<>\[\]: ,@$()\\]
-	return s.replace("['<>\\[\\]: ,@$()#\\\\]", "_");
+	return s.replace("[-'<>\\[\\]: ,@$()#\\\\]", "_");
 }
 
 operation EModelElement getStereotypeNames() : String {

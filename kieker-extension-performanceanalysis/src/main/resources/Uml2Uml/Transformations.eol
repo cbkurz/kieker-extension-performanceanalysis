@@ -1,19 +1,36 @@
 import "../Uml2Lqn/StereotypeOperations.eol";
-
-"Starting Transformation...".println();
-
-var transformation = UT!Transformation.all.first;
-for (t in transformation.transformationRules) {
-    t.println();
-    t.transformation(transformation);
-}
-
-"Done".println();
-
+import "../Uml2Lqn/Operations.eol";
+import "Cleanup.eol";
+import "TransformationOperations.eol";
 
 // This Script contains the transformations that are applied based on the UmlTransformation Language
 // Each Operation is tied to a TransformationRule
 // All operations have the same name "transformation" and accept the UmlTransformation!Transformation object
+
+"Starting Transformation...".println();
+
+// convenience
+var nodes = UML!Node.all;
+var components = UML!Component.all;
+var artifacts = UML!Artifact.all;
+var lifelines = UML!Lifeline.all;
+
+// stereotypes
+var gaexechost = "GaExecHost";
+var gastep = "GaStep";
+var gaworkload = "GaWorkloadEvent";
+
+// start working
+var transformation = UT!Transformation.all.first;
+for (t in transformation.transformationRules) {
+    var log = "Processing rule: " + t.eClass.name + (t.info.isDefined() ? (" - " + t.info) : "");
+    log.println();
+    t.transformation(transformation);
+}
+
+"Done".println();
+return;
+
 
 operation UT!NullTransformation transformation(useCase : UT!Transformation) {
 	// do nothing
@@ -29,8 +46,8 @@ operation UT!IncreaseExecutionTime transformation(useCase : UT!Transformation) {
 	// get all BES for the operation
 	var beses = new Sequence();
 	for (o in operations) {
-		"operation: ".print();
-		o.println();
+		// "operation: ".print();
+		// o.println();
 		var besName = o.getReference("BES");
 		var bs = UML!BehaviorExecutionSpecification.all.select(b | b.name == besName);
 		beses.addAll(bs);
@@ -38,10 +55,10 @@ operation UT!IncreaseExecutionTime transformation(useCase : UT!Transformation) {
 	
 	// increase time for all BES
 	for (bes in beses) {
-		"BES: ".print();
-		bes.println();
+		// "BES: ".print();
+		// bes.println();
 		if (not bes.isStereotypeApplied("GaStep")) {
-			"Stereotype not applied.".println();
+			// "Stereotype not applied.".println();
 			continue;
 		}
 		var time = bes.getStereotypeValue("GaStep", "execTime");
@@ -57,8 +74,8 @@ operation UT!SetWorkloadByObservationTime transformation(useCase : UT!Transforma
 	var nanosTimes = self.unit.toNanos(self.time);
 	
 	var lifelines = UML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent"));
-	"lifelines found: ".print();
-	lifelines.println();
+	// "lifelines found: ".print();
+	// lifelines.println();
 	for (lifeline in lifelines) {
 		var bes = lifeline.coveredBy.selectOne(c | c.isTypeOf(UML!BehaviorExecutionSpecification));
 		var entries = bes.getStereotypeValue("GaStep", "execTimeEntries").split(",").size();
@@ -79,38 +96,120 @@ operation UT!SetWorkload transformation(useCase : UT!Transformation) {
     }
 }
 
-operation getOpenWorkload(calls, observedTime): String {
-	var RoundingMode = Native("java.math.RoundingMode");
-	calls = calls.asBigDecimal();
-	observedTime = observedTime.asBigDecimal();
-	return calls.divide(observedTime, 20, RoundingMode.HALF_UP).toPlainString();
-}
+operation UT!MoveOperation transformation(useCase : UT!Transformation) {
+    // setup
+    var op = getOperation(self.operationName, self.sourceComponentName);
+    var source = getComponent(self.sourceComponentName, false);
+    var target = getComponent(self.targetComponentName, false);
 
-operation Any toNanos(time) {
-// 	var Duration = Native("java.time.Duration");
-//	var ChronoUnit = Native("java.time.temporal.ChronoUnit");
-	switch (self) {
-		case UT!TimeUnit#NANOS:   return time;
-		case UT!TimeUnit#MICROS:  return time * 1000l;
-		case UT!TimeUnit#MILLIS:  return time * 1000000l;
-		case UT!TimeUnit#SECONDS: return time * 1000000000l;
-		default : throw "Unsupported Time Unit: " + self;
-	}
-}
+    // fail fast
+    if (not op.isDefined()) {
+        throw "Operation is not found" + self.operationName;
+    }
+    if (not source.isDefined()) {
+        throw "Source Component is not found" + self.sourceComponentName;
+    }
+    if (not target.isDefined()) {
+        throw "Target Component is not found: " + self.targetComponentName;
+    }
 
-/**
- * Converts an element to the native Java BigDecimal type
- * @return a java.math.BigInteger
- */
-operation Any asBigDecimal(): Native("java.math.BigDecimal") {
-	// Converts an element to the java native type BigDecimal
-	return new Native("java.math.BigDecimal")(self);
-}
+    // start working
 
-operation Any getString() {
-    switch (self) {
-        case UT!WorkloadType#OPEN:   return "open";
-        case UT!WorkloadType#CLOSED:  return "closed";
-        default : throw "Unsupported Workload Type: " + self;
+    // get interface relation
+    var ifRelSource = source.getInterfaceRealizations().selectOne(ir | ir.suppliers.one(s | s.name == op.name) ); // InterfaceRealization
+    var ifOp = ifRelSource.suppliers.get(0); // Interface for Operation
+
+    // create dependencies
+    target.getInterfaceRealization(ifOp.getName(), ifOp, false, true);
+    var targetOp = target.getOwnedOperation(ifOp.name, null, null, false, true);
+
+    // add metadata and stereotypes
+    copyStereotypeToElement(op, targetOp); // Copy metadata from "op" to "targetOp"
+
+    // get BES name
+    var besName = targetOp.getReference("BES");
+    if (not besName.isDefined() ) {
+        throw "BES name was not successfully copied.";
+    }
+
+    // move MOS for start and end to target Lifeline
+    // move MOS that originate on the source LF to the target LF
+    // only MOS are moved that are sequentially in between the start and finish MOS
+
+    for (inter in UML!Interaction.all) {
+
+        var beses = inter.fragments.select(f | f.name == besName);
+        var lf = inter.createLifeline(target.name + "-created");
+        for (bes in beses) {
+            var oldLf = bes.covered.first;
+            var ownedParam = inter.getOwnedParameter("Representation-" + target.getName(), target, false, true);
+            lf.setRepresents(ownedParam);
+            bes.setBesOnNewLifeline(lf);
+            oldLf.cleanup();
+        }
+    }
+
+    // destroy old objects
+    ifRelSource.destroy();
+    op.destroy();
+    if (source.ownedOperations.size() == 0) {
+        source.cleanup();
     }
 }
+
+operation UT!SetProcessingPowerForNode transformation(useCase : UT!Transformation) {
+    var node = UML!Node.all.selectOne(n | n.name == self.nodeName);
+    node.setValue(gaexechost, "resMult", self.resMult.toPlainString());
+}
+
+
+operation UT!CreateNode transformation(useCase : UT!Transformation) {
+    var node = getNode(self.nodeName, true);
+    var resMult = self.resMult.isDefined() ? self.resMult.toPlainString() : "1";
+    node.setValue(gaexechost, "resMult", resMult);
+    return node;
+}
+
+operation UT!CreateComponent transformation(useCase : UT!Transformation) {
+    return getComponent(self.componentName, true);
+}
+
+operation UT!DeployComponentOnNode transformation(useCase : UT!Transformation) {
+    var component = getComponent(self.componentName, false);
+    var node = getNode(self.nodeName, false);
+
+    // fail fast
+    if (not component.isDefined()) {
+        throw "Component not found: " + self.componentName;
+    }
+    if (not node.isDefined()) {
+        throw "Node is not defined: " + self.nodeName;
+    }
+
+    // apply GaExecHost is necessary
+    if (not node.isStereotypeApplied(gaexechost)) {
+        node.createStereotype(gaexechost);
+    }
+
+    // get artifact for component
+    var artifact = artifacts.select(a | a.getManifestations().one(m | m.utilizedElement.equals(component)));
+    if (artifact.size == 1) {
+        artifact = artifact.get(0);
+    } else if (artifact.size == 0) {
+        artifact = getArtifact(component.name + "-created", true);
+        artifact.getManifestation(component.getName(), component, false, true);
+    } else {
+        throw "Unexpected amount of artifacts for name: " + name + "\n - found: " + artifact.size() + "\n - expected: 1";
+    }
+
+    var depl = node.getDeployment("NodeDeployment-" + node.getName(), false, true);
+    if (not depl.getDeployedArtifacts().contains(artifact)) {
+        // ("artifact: " + artifact).println();
+        // ("depl: " + depl).println();
+        // ("depl.getDeployedArtifacts(): " + depl.getDeployedArtifacts()).println();
+        depl.getDeployedArtifacts().add(artifact);
+    }
+
+}
+
+// ----- End of Transformation rules -----

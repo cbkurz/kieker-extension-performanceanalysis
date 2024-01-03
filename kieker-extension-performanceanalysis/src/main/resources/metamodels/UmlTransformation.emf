@@ -10,7 +10,7 @@ class Transformation {
 }
 
 abstract class TransformationRule {
-	attr String[1] name;
+	attr String[1] info;
 }
 
 // --- Transformations ---
@@ -41,6 +41,41 @@ class SetWorkload extends TransformationRule {
 	attr String[*] interactions;
 	attr WorkloadType workloadType;
 	attr BigDecimal value;
+}
+
+class MoveOperation extends TransformationRule {
+    attr String operationName;
+    attr String sourceComponentName;
+    attr String targetComponentName;
+}
+
+class SetProcessingPowerForNode extends TransformationRule {
+    attr String nodeName;
+    attr BigDecimal resMult;
+}
+
+/*
+// set the <<GaExecHost>> "commRcvOvh" attribute
+// increases the think-time on the activities that call to this server
+class SetThinkTimeForNode extends TransformationRule {
+    attr String nodeName;
+    attr BigDecimal commRcvOvh;
+    attr TimeUnit commRcvOvhUnit;
+}
+*/
+
+class CreateNode extends TransformationRule {
+    attr String nodeName;
+    attr BigDecimal resMult;
+}
+
+class CreateComponent extends TransformationRule {
+    attr String componentName;
+}
+
+class DeployComponentOnNode extends TransformationRule {
+    attr String componentName;
+    attr String nodeName;
 }
 
 enum WorkloadType {

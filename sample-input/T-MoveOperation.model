@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<umlTransform:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlTransform="kieker.extension.umltransformation" xmi:id="_UbQSYJKHEe6_gN3QbIJ1FA" name="SimpleExample" umlUseCase="SimpleExample">
+  <transformationRules xsi:type="umlTransform:CreateNode" xmi:id="_4MAU0Ko0Ee65fqegD938qA" info="Create new Node &quot;MyNode&quot;" nodeName="MyNode" resMult="1"/>
+  <transformationRules xsi:type="umlTransform:CreateComponent" xmi:id="_3eP28Ko0Ee65fqegD938qA" info="Create new Component &quot;MyNewComponent&quot;" componentName="MyNewComponent"/>
+  <transformationRules xsi:type="umlTransform:DeployComponentOnNode" xmi:id="_7TDlUKo0Ee65fqegD938qA" info="Deploy Component &quot;MyNewComponent&quot; on Node &quot;MyNode&quot;" componentName="MyNewComponent" nodeName="MyNode"/>
+  <transformationRules xsi:type="umlTransform:MoveOperation" xmi:id="_oJFscKnUEe6aY9EqGuA0SA" info="Move Operation &quot;work3&quot; to &quot;MyNewComponent&quot;" operationName="public static work3():void" sourceComponentName="kurz.ma.examples.simple.Worker" targetComponentName="MyNewComponent"/>
+</umlTransform:Transformation>

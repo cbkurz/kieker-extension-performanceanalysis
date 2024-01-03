@@ -129,8 +129,7 @@ class UmlInteractions {
     }
 
     private static BehaviorExecutionSpecification getBES(final Interaction interaction, final Operation message) {
-        final BehaviorExecutionSpecification entryBes = (BehaviorExecutionSpecification) interaction.createFragment(getBesName(message), BEHAVIOUR_EXECUTION_E_CLASS);
-        return entryBes;
+        return (BehaviorExecutionSpecification) interaction.createFragment(getBesName(message), BEHAVIOUR_EXECUTION_E_CLASS);
     }
 
     /**

@@ -153,6 +153,22 @@ operation UML!BehaviorExecutionSpecification getMosesSendFromLifeline(): Collect
 	return result;
 }
 
+operation UML!BehaviorExecutionSpecification getMosesFromLifeline(): Collection {
+	var lifeline = self.covered.first;
+	var elements = lifeline.getElements("MessageOccurrenceSpecification"); // all MOS-elements of the lifeline!
+
+	var start = elements.indexOf(self.start);
+	var end = elements.indexOf(self.finish);
+
+	var result = new Sequence();
+	for (i in Sequence{start..end}) {
+		var e = elements.at(i);
+        result.add(e);
+	}
+
+	return result;
+}
+
 operation UML!BehaviorExecutionSpecification getStartFinnishIndex(): Sequence {
 	var lifeline = self.covered.first;
 	var elements = lifeline.getElements("MessageOccurrenceSpecification"); // all MOS-elements of the lifeline!

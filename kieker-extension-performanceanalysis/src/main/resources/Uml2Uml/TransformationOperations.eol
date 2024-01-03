@@ -1,0 +1,141 @@
+// ----- Start helper operations ---------
+
+operation getOpenWorkload(calls, observedTime): String {
+	var RoundingMode = Native("java.math.RoundingMode");
+	calls = calls.asBigDecimal();
+	observedTime = observedTime.asBigDecimal();
+	return calls.divide(observedTime, 20, RoundingMode.HALF_UP).toPlainString();
+}
+
+operation Any toNanos(time) {
+// 	var Duration = Native("java.time.Duration");
+//	var ChronoUnit = Native("java.time.temporal.ChronoUnit");
+	switch (self) {
+		case UT!TimeUnit#NANOS:   return time;
+		case UT!TimeUnit#MICROS:  return time * 1000l;
+		case UT!TimeUnit#MILLIS:  return time * 1000000l;
+		case UT!TimeUnit#SECONDS: return time * 1000000000l;
+		default : throw "Unsupported Time Unit: " + self;
+	}
+}
+
+/**
+ * Converts an element to the native Java BigDecimal type
+ * @return a java.math.BigInteger
+ */
+operation Any asBigDecimal(): Native("java.math.BigDecimal") {
+	// Converts an element to the java native type BigDecimal
+	return new Native("java.math.BigDecimal")(self);
+}
+
+operation Any getString() {
+    switch (self) {
+        case UT!WorkloadType#OPEN:   return "open";
+        case UT!WorkloadType#CLOSED:  return "closed";
+        default : throw "Unsupported Workload Type: " + self;
+    }
+}
+
+operation getOperation(operationName, componentName): UML!Operation {
+    return UML!Operation.all.selectOne(o | o.name == operationName and o.getOwner().name == componentName);
+}
+
+operation UML!BehaviorExecutionSpecification setBesOnNewLifeline(lf) {
+    // the sequence of the calls matters!
+    // first the start, then the other MOS, then finish!
+    // set the start first
+    var moses = self.getMosesFromLifeline();
+
+    self.getCovereds().clear();
+    self.getCovereds().add(lf);
+    self.start.covered.clear();
+    self.start.covered.add(lf);
+
+    // get Messages originating from BES and previous lifeline
+    for (mos in moses) {
+        mos.covered.clear();
+        mos.covered.add(lf);
+    }
+
+    // set bes with both ends on lf
+    self.finish.covered.clear();
+    self.finish.covered.add(lf);
+}
+
+operation getComponentView(): UML!Package {
+    return UML!Package.all.selectOne(p | p.name.equals("staticView-components"));
+}
+operation getDeploymentView(): UML!Package {
+    return UML!Package.all.selectOne(p | p.name.equals("deploymentView"));
+}
+operation getDynamicView(): UML!Package {
+    return UML!Package.all.selectOne(p | p.name.equals("dynamicView"));
+}
+
+// TODO: the following three methods are practically identical, find a way to make a generalization
+operation getNode(name, createOnDemand): UML!Node {
+    // setup
+    if (not createOnDemand.isDefined()) {
+        createOnDemand = false;
+    }
+
+    var node = nodes.selectOne(n | n.name == name);
+    if (node.isDefined()) {
+        return node;
+    }
+    if (createOnDemand) {
+        node = new UML!Node;
+        node.name = name;
+        getDeploymentView().getPackagedElements().add(node);
+        nodes.add(node);
+        return node;
+    }
+
+    return null;
+}
+
+operation getArtifact(name, createOnDemand): UML!Artifact {
+    // setup
+    if (not createOnDemand.isDefined()) {
+        createOnDemand = false;
+    }
+
+    var artifact = artifacts.select(n | n.name == name);
+    if (artifact.size() == 1) {
+        return artifact.get(0);
+    }
+    if (artifact.size() > 1) {
+        throw "Unexpected amount of artifacts for name: " + name + "\n - found: " + artifact.size() + "\n - expected: 1";
+    }
+    if (createOnDemand) {
+        artifact = new UML!Artifact;
+        artifact.name = name;
+        getDeploymentView().getPackagedElements().add(artifact);
+        artifacts.add(artifact);
+        return artifact;
+    }
+
+    return null;
+}
+
+
+operation getComponent(name, createOnDemand): UML!Component {
+    // setup
+    if (not createOnDemand.isDefined()) {
+        createOnDemand = false;
+    }
+
+    var component = components.selectOne(n | n.name == name);
+    if (component.isDefined()) {
+        return component;
+    }
+    if (createOnDemand) {
+        component = new UML!Component;
+        component.name = name;
+        getComponentView().getPackagedElements().add(component);
+        components.add(component);
+        return component;
+    }
+
+    return null;
+}

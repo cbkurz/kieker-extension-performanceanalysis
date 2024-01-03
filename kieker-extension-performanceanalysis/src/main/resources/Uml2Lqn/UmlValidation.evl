@@ -147,7 +147,7 @@ context UML!Lifeline {
 	
 	constraint EntryHasOneBehaviorExecutionSpecification {
 		guard : false
-		check : self.getCoveredBys().stream().filter(c|c.isTypeOf(UML!BehaviorExecutionSpecification)).count() == 1
+		check : self.getCoveredBys().isDefined() and self.getCoveredBys().size > 0 and self.getCoveredBys().stream().filter(c|c.isTypeOf(UML!BehaviorExecutionSpecification)).count() == 1
 	}
 	
 }
@@ -201,11 +201,26 @@ context UML!BehaviorExecutionSpecification {
     }
 
 	constraint ExactlyOneCovered {
-		check : self.getCovereds().size() == 1
+		check : self.getCovereds().isDefined() and self.getCovereds().size() == 1
+		message {
+		    var covs = self.getCovereds();
+		    if (not covs.isDefined()) {
+		        return "Covereds are not defined.";
+		    }
+		    return "The size of the Covereds for "  + self + " is: " + covs.size + "\n expected: 1\n Covereds: " + covs;
+		}
 	}
 	
 	constraint CoveredIsLifeline {
-		check : self.getCovereds().size() == 1 and self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+		check : self.getCovereds().isDefined() and self.getCovereds().size() == 1 and self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+		message {
+		    var covs = self.getCovereds();
+            if (not covs.isDefined()) {
+                return "Covereds are not defined.";
+            }
+
+            return "The type of the covereds for "  + self + " is not as expected: " + covs;
+		}
 	}
 	
 	constraint StartIsSet {
@@ -235,10 +250,27 @@ context UML!MessageOccurrenceSpecification {
 	
 	constraint ExactlyOneCovered {
 		check : self.getCovereds().size() == 1
+        message {
+            var covs = self.getCovereds();
+            if (not covs.isDefined()) {
+                return "Covereds are not defined.";
+            }
+            return "The size of the Covereds for" + self +  " is: " + covs.size + "\n expected: 1\n Covereds: " + covs;
+        }
+
 	}
 	
 	constraint CoveredIsLifeline {
-		check : self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+		check : self.getCovereds().isDefined() and self.getCovereds().size > 0 and self.getCovereds().get(0).isTypeOf(UML!Lifeline)
+        message {
+            var covs = self.getCovereds();
+            if (not covs.isDefined()) {
+                return "Covereds are not defined.";
+            }
+
+            return "The type of the covereds for " + self + " is not as expected: " + covs;
+        }
+
 	}
 	
 	constraint IsSendOrIsReceive {
@@ -250,7 +282,7 @@ context UML!MessageOccurrenceSpecification {
 context UML!Dependency {
 	
 	constraint ClientIsMOS {
-		check : self.getClients().get(0).isTypeOf(UML!MessageOccurrenceSpecification)
+		check : self.getClients().isDefined() and self.getClients().get(0).isTypeOf(UML!MessageOccurrenceSpecification)
 	}
 
 	constraint ExactlyOneClient {
@@ -277,12 +309,12 @@ context UML!Component {
     }
 
 	constraint ComponentIsManifestedInArtifact {
-		check : UML!Artifact.all.stream().flatMap(a|a.getManifestations().stream()).filter(m|m.getSupplier(self.name).isDefined()).findFirst().isPresent()
+		check : UML!Artifact.all.stream().filter(a | a.getManifestations().isDefined() and a.getManifestations().size() > 0).flatMap(a|a.getManifestations().stream()).filter(m|m.getSupplier(self.name).isDefined()).findFirst().isPresent()
 		message: "Component is not manifested in any artifact: " + self
 	}
 
 /*
-	constraint ComponentIsRepresentedAsLifeline {
+	constraint ComponentIsRepresentedInLifeline {
 	    guard : not (self.name == "'Entry'")
 		check : UML!Lifeline.all.stream().filter(l | l.represents.type == self).findFirst().isPresent()
 		message: "Component is not represented in any Lifeline: " + self
@@ -291,8 +323,8 @@ context UML!Component {
 */
 	constraint ComponentHasOperation {
 	    check : self.ownedOperations.isDefined() and self.ownedOperations.size() > 0
+	    message : "Component owns no Operations: " + self
 	}
-	
 }
 
 context UML!Operation {
@@ -342,10 +374,24 @@ context UML!Node {
 	}
 	
 	constraint NodeHasDeployedArtifacts {
-		check : self.getDeployments().notEmpty()
+	    guard : not (self.name == "'Entry'")
+		check {
+		    var depls = self.getDeployments();
+		    if (not depls.isDefined()) {
+		        return false;
+		    }
+		    if (depls.size == 0) {
+		        return false;
+		    }
+		    for (d in depls) {
+		        if (d.getDeployedArtifacts().size > 0) {
+		            return true;
+		        }
+		    }
+		    return false;
+		}
 		message : "No artifacts are deployed for node: " + self
 	}
-	
 }
 
 context UML!Artifact {
@@ -356,12 +402,12 @@ context UML!Artifact {
     }
 
 	constraint ArtifactIsDeployed {
-		check : UML!Node.all.stream().flatMap(n|n.getDeployments().stream()).filter(d|d.getDeployedArtifacts().contains(self)).findFirst().isPresent()
+		check : UML!Node.all.stream().filter(n|n.getDeployments().isDefined() and n.getDeployments().size > 0).flatMap(n|n.getDeployments().stream()).filter(d|d.getDeployedArtifacts().contains(self)).findFirst().isPresent()
 		message : "There is no Node found that deploys this artifact: " + self
 	}
 
 	constraint ArtifactIsManifestedInComponent {
-		check : self.getManifestations().stream().filter(m|m.getSuppliers().stream().filter(s|s.isTypeOf(UML!Component)).findFirst().isPresent()).findFirst().isPresent()
+		check : self.getManifestations().isDefined() and self.getManifestations().size > 0 and self.getManifestations().stream().filter(m|m.getSuppliers().stream().filter(s|s.isTypeOf(UML!Component)).findFirst().isPresent()).findFirst().isPresent()
 		message : "There was no manifestation found that is connected to a component for artifact: " + self + " -- manifestations: " + self.getManifestations()
 	}
 }
@@ -371,3 +417,12 @@ operation UML!NamedElement getMessageStereotypeNotApplied(stereotypeName : Strin
 }
 
 
+operation UML!UseCase hasInteraction() : Boolean {
+	var bs = self.getOwnedBehaviors();
+	for (b in bs) {
+		if (b.isTypeOf(UML!Interaction)) {
+			return true;
+		}
+	}
+	return false;
+}

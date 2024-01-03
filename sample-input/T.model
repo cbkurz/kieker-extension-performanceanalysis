@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="ASCII"?>
 <umlTransform:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlTransform="kieker.extension.umltransformation" xmi:id="_UbQSYJKHEe6_gN3QbIJ1FA" name="SimpleExample" umlUseCase="SimpleExample">
-  <transformationRules xsi:type="umlTransform:SetWorkloadByObservationTime" xmi:id="_MwQ9QKW6Ee65hc5O3iHo8g" name="Increase Time" time="10" unit="SECONDS"/>
+  <transformationRules xsi:type="umlTransform:SetWorkloadByObservationTime" xmi:id="_MwQ9QKW6Ee65hc5O3iHo8g" info="Increase Time" time="10" unit="SECONDS"/>
 </umlTransform:Transformation>

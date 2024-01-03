@@ -11,6 +11,7 @@ import org.eclipse.uml2.uml.Artifact;
 import org.eclipse.uml2.uml.Component;
 import org.eclipse.uml2.uml.Deployment;
 import org.eclipse.uml2.uml.Interface;
+import org.eclipse.uml2.uml.Manifestation;
 import org.eclipse.uml2.uml.MessageSort;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Node;
@@ -129,8 +130,8 @@ public class UmlStaticViews {
         return (Node) deploymentView.getPackagedElement(nodeName.getIdentifier(), false, UMLPackage.Literals.NODE, true);
     }
 
-    static Artifact getArtifact(final Package deploymentView, final AllocationComponent artifactName) {
-        return (Artifact) deploymentView.getPackagedElement(artifactName.getIdentifier(), false, UMLPackage.Literals.ARTIFACT, true);
+    static Artifact getArtifact(final Package deploymentView, final AllocationComponent allocationComponent) {
+        return (Artifact) deploymentView.getPackagedElement(allocationComponent.getIdentifier(), false, UMLPackage.Literals.ARTIFACT, true);
     }
 
     static Component getComponent(final Package staticView, final AssemblyComponent component) {
@@ -172,7 +173,7 @@ public class UmlStaticViews {
     private static void doConnections(final Node node, final Artifact artifact, final Component component, final Interface anInterface) {
         component.getInterfaceRealization(anInterface.getName(), anInterface, false, true);
 
-        artifact.getManifestation("ArtifactManifestation-" + component.getName(), component, false, true);
+        final Manifestation m = artifact.getManifestation(component.getName(), component, false, true);
         final Deployment deployment = node.getDeployment("NodeDeployment-" + node.getName(), false, true);
         if (!deployment.getDeployedArtifacts().contains(artifact)) {
             deployment.getDeployedArtifacts().add(artifact);

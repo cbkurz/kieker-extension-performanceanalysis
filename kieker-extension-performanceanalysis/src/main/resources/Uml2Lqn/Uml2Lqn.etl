@@ -64,7 +64,14 @@ rule Node2Processor
         var allTasksForProc = new Sequence(); // note this variable is used as a fall through in the rule "Operation2Task"
         var opTasks = operations.equivalent("Operation2Task");
         allTasksForProc.addAll(opTasks);
-        proc.multiplicity = "1".asBigInteger();
+
+        // set multiplicity
+        var multiplicity = currentNode.getValue(gaexechost, "resMult");
+        if (multiplicity.isDefined()) {
+            proc.multiplicity = multiplicity.asBigInteger();
+        } else {
+            proc.multiplicity = "1".asBigInteger();
+        }
 		proc.name = currentNode.name;
 		proc.task = allTasksForProc;
 	}

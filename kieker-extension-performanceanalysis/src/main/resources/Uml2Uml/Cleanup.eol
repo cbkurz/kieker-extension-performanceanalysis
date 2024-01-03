@@ -1,0 +1,96 @@
+operation UML!Lifeline cleanup() {
+    for (c : UML!BehaviorExecutionSpecification in self.coveredBy) {
+        return;
+    }
+
+    var component = self.getRepresents().getType();
+    // self.getRepresents().destroy();
+    ("Destroying Lifeline: " + self.name).println();
+    self.destroy();
+    component.cleanup();
+}
+
+operation UML!Component cleanup() {
+     for (l in lifelines) { // this variable must be set in the calling script as UML!Lifeline.all
+        var isRepresented = l.getRepresents()?.getType()?.equals(self);
+        if (isRepresented.isDefined() and isRepresented) {
+            return; // as long as the component is represented in one Lifeline it does not need to be destroyed
+        }
+     }
+
+     // find artifact that might need cleanup
+     var cleanupArtifacts = new Sequence();
+     for (a in artifacts) {
+        var isComponentManifestation = a.getManifestations().one(m | m.utilizedElement == self);
+        if (isComponentManifestation) {
+            cleanupArtifacts.add(a); // the only manifestation is the component and the artifact can get cleand up afterwards.
+        }
+     }
+
+     // destroy
+    ("Destroying Component: " + self.name).println();
+     self.destroy();
+
+     // cleanup artifacts
+     if (cleanupArtifacts.size == 0) {
+        return;
+     }
+     var until = cleanupArtifacts.size - 1;
+     for(i in Sequence{0..until}) {
+         cleanupArtifacts.get(i).cleanup();
+     }
+}
+
+operation UML!Artifact cleanup() {
+    // find all nodes that require cleanup
+    var maniForDestroy = new Sequence();
+    var doReturn = false;
+    for (m in self.getManifestations()) {
+        var manifested = m.utilizedElement.isDefined();
+        if (manifested) {
+            doReturn = true;
+        }
+        maniForDestroy.add(m);
+    }
+    if (maniForDestroy.size > 0) {
+        for (i in Sequence{0..(maniForDestroy.size - 1)}) {
+            maniForDestroy.get(i).destroy();
+        }
+    }
+    if (doReturn) {
+        return;
+    }
+
+    var cleanupNodes = new Sequence();
+    for (n in nodes) { // this variable must be set in the calling script as UML!Node.all
+        var depls = n.getDeployments();
+        for (d in depls) {
+            if (d.getDeployedArtifacts().size > 1) {
+                break; // the node has more than one artifact deployed
+            }
+            if (d.getDeployedArtifacts().contains(self)) {
+                cleanupNodes.add(n);
+            }
+        }
+    }
+
+    ("Destroying Artifact: " + self.name).println();
+    self.destroy();
+
+    // cleanup nodes
+    if (cleanupNodes.size > 0) {
+        for (i in Sequence{0..(cleanupNodes.size -1 )}) {
+            cleanupNodes.get(i).cleanup();
+        }
+    }
+}
+
+operation UML!Node cleanup() {
+    for (d in self.getDeployments()) {
+        if (d.getDeployedArtifacts().size > 0) {
+            return;
+        }
+    }
+    ("Destroying Node: " + self.name);
+    self.destroy();
+}
