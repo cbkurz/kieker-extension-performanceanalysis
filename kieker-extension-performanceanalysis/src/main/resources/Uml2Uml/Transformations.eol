@@ -32,12 +32,12 @@ for (t in transformation.transformationRules) {
 return;
 
 
-operation UT!NullTransformation transformation(useCase : UT!Transformation) {
+operation UT!NullTransformation transformation(transformation : UT!Transformation) {
 	// do nothing
 }
 
 // Increases the of all BES found for the operation in the component
-operation UT!IncreaseExecutionTime transformation(useCase : UT!Transformation) {
+operation UT!IncreaseExecutionTime transformation(transformation : UT!Transformation) {
 	var operations = UML!Operation.all.select(o | self.operationName.equals(o.name) and o.getOwner().name == self.componentName);
 	if (operations.size() == 0) {
 		throw "0 Operations were received for Transformation: IncreaseExecutionTime";
@@ -69,7 +69,7 @@ operation UT!IncreaseExecutionTime transformation(useCase : UT!Transformation) {
 }
 
 
-operation UT!SetWorkloadByObservationTime transformation(useCase : UT!Transformation) {
+operation UT!SetWorkloadByObservationTime transformation(transformation : UT!Transformation) {
 	
 	var nanosTimes = self.unit.toNanos(self.time);
 	
@@ -85,7 +85,7 @@ operation UT!SetWorkloadByObservationTime transformation(useCase : UT!Transforma
 	}
 }
 
-operation UT!SetWorkload transformation(useCase : UT!Transformation) {
+operation UT!SetWorkload transformation(transformation : UT!Transformation) {
     var lifelines = UML!Lifeline.all.select(l | l.isStereotypeApplied("GaWorkloadEvent") );
     if (self.interactions.size() > 0) {
         lifelines = lifelines.select(l | self.interactions.contains(l.getInteraction().name));
@@ -96,7 +96,7 @@ operation UT!SetWorkload transformation(useCase : UT!Transformation) {
     }
 }
 
-operation UT!MoveOperation transformation(useCase : UT!Transformation) {
+operation UT!MoveOperation transformation(transformation : UT!Transformation) {
     // setup
     var op = getOperation(self.operationName, self.sourceComponentName);
     var source = getComponent(self.sourceComponentName, false);
@@ -157,24 +157,24 @@ operation UT!MoveOperation transformation(useCase : UT!Transformation) {
     }
 }
 
-operation UT!SetProcessingPowerForNode transformation(useCase : UT!Transformation) {
+operation UT!SetProcessingPowerForNode transformation(transformation : UT!Transformation) {
     var node = UML!Node.all.selectOne(n | n.name == self.nodeName);
     node.setValue(gaexechost, "resMult", self.resMult.toPlainString());
 }
 
 
-operation UT!CreateNode transformation(useCase : UT!Transformation) {
+operation UT!CreateNode transformation(transformation : UT!Transformation) {
     var node = getNode(self.nodeName, true);
     var resMult = self.resMult.isDefined() ? self.resMult.toPlainString() : "1";
     node.setValue(gaexechost, "resMult", resMult);
     return node;
 }
 
-operation UT!CreateComponent transformation(useCase : UT!Transformation) {
+operation UT!CreateComponent transformation(transformation : UT!Transformation) {
     return getComponent(self.componentName, true);
 }
 
-operation UT!DeployComponentOnNode transformation(useCase : UT!Transformation) {
+operation UT!DeployComponentOnNode transformation(transformation : UT!Transformation) {
     var component = getComponent(self.componentName, false);
     var node = getNode(self.nodeName, false);
 

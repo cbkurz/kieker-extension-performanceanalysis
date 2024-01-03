@@ -9,8 +9,9 @@ class Transformation {
 	val TransformationRule[+] transformationRules; // This represents the rules that are applied to the elements in question
 }
 
+// extend this class to create a TransformationRule
 abstract class TransformationRule {
-	attr String[1] info;
+	attr String[1] info; // is printed at the beginning of the transformation
 }
 
 // --- Transformations ---
@@ -43,6 +44,8 @@ class SetWorkload extends TransformationRule {
 	attr BigDecimal value;
 }
 
+// move the operation from the source to the target component
+// this creates a new lifeline and can affect a wide variety of objects
 class MoveOperation extends TransformationRule {
     attr String operationName;
     attr String sourceComponentName;
@@ -73,6 +76,7 @@ class CreateComponent extends TransformationRule {
     attr String componentName;
 }
 
+// deploys the component on the node and creates an Artifact, if required.
 class DeployComponentOnNode extends TransformationRule {
     attr String componentName;
     attr String nodeName;
