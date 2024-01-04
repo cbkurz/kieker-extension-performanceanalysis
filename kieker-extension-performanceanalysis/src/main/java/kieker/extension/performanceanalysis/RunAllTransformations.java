@@ -8,7 +8,6 @@ import kieker.extension.performanceanalysis.kieker2uml.Kieker2Uml;
 import kieker.extension.performanceanalysis.uml2lqn.Uml2Lqn;
 import kieker.extension.performanceanalysis.uml2plantuml.Uml2PlantUml;
 import kieker.extension.performanceanalysis.uml2uml.UmlCopyAndFilter;
-import kieker.extension.performanceanalysis.uml2uml.UmlCopyAndFilter2;
 import kieker.extension.performanceanalysis.uml2uml.UmlTransformation;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -75,7 +74,7 @@ public class RunAllTransformations implements Runnable {
 
         // Uml2Uml
         LOGGER.debug("Running Uml2Uml transformation...");
-        final UmlCopyAndFilter2 umlCopyAndFilter = new UmlCopyAndFilter2(transformationModelPath, modelPath, futureUmlModel);
+        final UmlCopyAndFilter umlCopyAndFilter = new UmlCopyAndFilter(transformationModelPath, modelPath, futureUmlModel);
         umlCopyAndFilter.run();
         final UmlTransformation umlTransformation = new UmlTransformation(futureUmlModel, transformationModelPath);
         umlTransformation.run();

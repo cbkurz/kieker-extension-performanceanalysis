@@ -11,7 +11,6 @@ import kieker.extension.performanceanalysis.kieker2uml.Kieker2Uml;
 import kieker.extension.performanceanalysis.uml2lqn.Uml2Lqn;
 import kieker.extension.performanceanalysis.uml2plantuml.Uml2PlantUml;
 import kieker.extension.performanceanalysis.uml2uml.UmlCopyAndFilter;
-import kieker.extension.performanceanalysis.uml2uml.UmlCopyAndFilter2;
 import kieker.extension.performanceanalysis.uml2uml.UmlTransformation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +60,7 @@ public class Main {
                 break;
             case "Uml2Uml":
 //                new UmlCopyAndFilter(uml2UmlCli.getTransformationPath(), uml2UmlCli.getUmlPath(), uml2UmlCli.getUmlOutput()).run();
-                new UmlCopyAndFilter2(uml2UmlCli.getTransformationPath(), uml2UmlCli.getUmlPath(), uml2UmlCli.getUmlOutput()).run();
+                new UmlCopyAndFilter(uml2UmlCli.getTransformationPath(), uml2UmlCli.getUmlPath(), uml2UmlCli.getUmlOutput()).run();
                 new UmlTransformation(uml2UmlCli.getUmlOutput(), uml2UmlCli.getTransformationPath()).run();
                 break;
             case "Uml2Lqn":

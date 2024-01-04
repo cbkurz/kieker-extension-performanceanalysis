@@ -7,8 +7,6 @@ import org.eclipse.epsilon.eol.models.Model;
 
 import java.nio.file.Path;
 
-import static kieker.extension.performanceanalysis.uml2uml.UmlCopyAndFilter.getTransformationModel;
-
 public class UmlTransformation implements Runnable {
 
     private final Path script;
@@ -32,6 +30,16 @@ public class UmlTransformation implements Runnable {
                 .build();
     }
 
+    static Model getTransformationModel(final Path transformationModel) {
+        return EpsilonModelBuilder.getInstance()
+                .emfModel()
+                .modelName("UmlTransformation")
+                .modelAlias("UT")
+                .metaModel("UmlTransformation.ecore")
+                .modelPath(transformationModel)
+                .readOnly(true)
+                .build();
+    }
 
 
     @Override

@@ -2,67 +2,53 @@ package kieker.extension.performanceanalysis.uml2uml;
 
 import kieker.extension.performanceanalysis.epsilon.EpsilonModelBuilder;
 import kieker.extension.performanceanalysis.epsilon.Util;
+import org.apache.commons.io.FileUtils;
+import org.eclipse.epsilon.eol.launch.EolRunConfiguration;
 import org.eclipse.epsilon.eol.models.Model;
-import org.eclipse.epsilon.etl.launch.EtlRunConfiguration;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.file.Path;
+
+import static kieker.extension.performanceanalysis.uml2uml.UmlTransformation.getTransformationModel;
 
 public class UmlCopyAndFilter implements Runnable {
 
     private final Path script;
     private final Model transformationModel;
-    private final Model umlSourceModel;
-    private final Model umlTargetModel;
+    private final Path umlSourceModel;
+    private final Path umlTargetPath;
 
-    public UmlCopyAndFilter(final Path transformationModel, final Path umlSourceModel, final Path umlTargetPath) {
-        this.script = Util.getResource("Uml2Uml/Uml2Uml.etl");
-        this.umlSourceModel = getSourceUml(umlSourceModel);
+    public UmlCopyAndFilter(final Path transformationModel, final Path umlSourcePath, final Path umlTargetPath) {
+        this.script = Util.getResource("Uml2Uml/Filter.eol");
         this.transformationModel = getTransformationModel(transformationModel);
-        this.umlTargetModel = getTargetModel(umlTargetPath);
-    }
-
-    private static Model getSourceUml(final Path umlSourceModel) {
-        return EpsilonModelBuilder.getInstance()
-                .umlModel()
-                .modelName("UML")
-                .modelPath(umlSourceModel)
-                .readOnly(true)
-                .build();
-    }
-
-    private static Model getTargetModel(final Path targetPath) {
-        return EpsilonModelBuilder.getInstance()
-                .umlModel()
-                .modelName("FUML")
-                .modelPath(targetPath)
-                .readOnLoad(false)
-                .storeOnDisposal(true)
-                .build();
-    }
-
-    static Model getTransformationModel(final Path transformationModel) {
-        return EpsilonModelBuilder.getInstance()
-                .emfModel()
-                .modelName("UmlTransformation")
-                .modelAlias("UT")
-                .metaModel("UmlTransformation.ecore")
-                .modelPath(transformationModel)
-                .readOnly(true)
-                .build();
+        this.umlSourceModel = umlSourcePath;
+        this.umlTargetPath = umlTargetPath;
     }
 
     @Override
     public void run() {
-        final EtlRunConfiguration runConfiguration = EtlRunConfiguration.Builder()
-                .withScript(script)
-                .withModel(umlSourceModel)
-                .withModel(transformationModel)
-                .withModel(umlTargetModel)
-                .withProfiling()
+        try {
+            FileUtils.copyFile(umlSourceModel.toFile(), umlTargetPath.toFile());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        final Model targetModel = EpsilonModelBuilder.getInstance()
+                .umlModel()
+                .modelName("UML")
+                .modelPath(umlTargetPath)
+                .readOnLoad(true)
+                .storeOnDisposal(true)
                 .build();
-        Util.validateUmlModel(umlSourceModel);
-        runConfiguration.get();
-        Util.validateUmlModel(umlTargetModel);
-        umlTargetModel.dispose();
+
+        final EolRunConfiguration transformation = EolRunConfiguration.Builder()
+                .withProfiling()
+                .withScript(script)
+                .withModel(targetModel)
+                .withModel(transformationModel)
+                .build();
+        transformation.get();
+        Util.validateUmlModel(targetModel);
+        targetModel.dispose();
     }
 }

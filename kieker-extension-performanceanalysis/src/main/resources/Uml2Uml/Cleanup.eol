@@ -1,3 +1,18 @@
+/**
+  * The cleanup operations are there to have the uml model in a state where it conforms to the UmlValidation.evl The
+  * cleanup operations contain the information when a object conforms to the validation. The result of a cleanup can
+  * be the destruction of the element. When an element is destroyed, the cleanup operation finds the elements that are
+  * affected by the destruction and performs the cleanup action on them.
+  * This is implemented to ensure that the elements within the uml model are interacting, this means that the Lifeline
+  * they are connected to is covered by a BehaviorExecutionSpecification. The following elements have a cleanup
+  * operation implemented:
+  *   - Lifeline:  requires a BES
+  *   - Component: requires to be realized by a Lifeline
+  *   - Artifact:  requires to manifest a Component
+  *   - Node:      requires to deploy an Artifact
+  * If the conditions are not met the element gets destroyed.
+*/
+
 operation UML!Lifeline cleanup() {
     for (c : UML!BehaviorExecutionSpecification in self.coveredBy) {
         return;
