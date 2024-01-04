@@ -59,7 +59,6 @@ public class Main {
                 new Uml2PlantUml(uml2PlantUmlCli.getUmlPath(), uml2PlantUmlCli.getOutputPath()).run();
                 break;
             case "Uml2Uml":
-//                new UmlCopyAndFilter(uml2UmlCli.getTransformationPath(), uml2UmlCli.getUmlPath(), uml2UmlCli.getUmlOutput()).run();
                 new UmlCopyAndFilter(uml2UmlCli.getTransformationPath(), uml2UmlCli.getUmlPath(), uml2UmlCli.getUmlOutput()).run();
                 new UmlTransformation(uml2UmlCli.getUmlOutput(), uml2UmlCli.getTransformationPath()).run();
                 break;

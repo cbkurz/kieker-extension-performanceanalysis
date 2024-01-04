@@ -8,12 +8,14 @@ pre {
 	var allBes = UML!BehaviorExecutionSpecification.all;
 	
 	// the usage of this blacklist of bes only works because 
-	var recursiveIgnoreBesSet = new Set(); 
+	var recursiveIgnoreBesSet = new Set();
+	"Start...".println();
 }
 
 post {
-	"recursiveIgnoreBesSet: ".print();
-	recursiveIgnoreBesSet.println();
+//	"recursiveIgnoreBesSet: ".print();
+//	recursiveIgnoreBesSet.println();
+"Done!".println();
 }
 
 rule Model2Schema 
@@ -126,7 +128,7 @@ rule ClosedWorkloadLifeline2Entry
             return lifeline.getWorkload().get(0) == "closed";
 		}
 		
-		("ClosedWorkloadLifeline2Entry - Create entry for Lifeline: " + lifeline.name).println();
+//		("ClosedWorkloadLifeline2Entry - Create entry for Lifeline: " + lifeline.name).println();
 		
 		
 		var beses = lifeline.collect(l | l.getElements("BehaviorExecutionSpecification")).flatten;
@@ -163,7 +165,7 @@ rule OpenWorkloadLifeline2Entry
 			}
             return lifeline.getWorkload().get(0) == "open";
 		}
-		("OpenWorkloadLifeline2Entry - Create entry for Lifeline: " + lifeline.name).println();
+//		("OpenWorkloadLifeline2Entry - Create entry for Lifeline: " + lifeline.name).println();
 		
 	    var beses = lifeline.collect(l | l.getElements("BehaviorExecutionSpecification")).flatten;
 	    
@@ -399,7 +401,7 @@ rule Message2Request
 			return msgo.isSend(); // this asks if the MOS is at the sending (lifeline) end of the message and not at the receiving (lifeline) end.
 		}
 
-		("Create ActivityMakingCallType for MessageOccurrenceSpecification: " + msgo.name).println();
+//		("Create ActivityMakingCallType for MessageOccurrenceSpecification: " + msgo.name).println();
 
 		var message = msgo.message;
 		var rep = bes.getValue(gastep, "rep");
