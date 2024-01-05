@@ -53,6 +53,6 @@ public class UmlTransformation implements Runnable {
         Util.validateUmlModel(umlModel);
         transformUml.get();
         umlModel.dispose();
-        Util.validateUmlModel(umlModel);
+        Util.validateUmlModel(umlModel); // storing and the validating makes it easier to analyse the model in case of validation failure
     }
 }

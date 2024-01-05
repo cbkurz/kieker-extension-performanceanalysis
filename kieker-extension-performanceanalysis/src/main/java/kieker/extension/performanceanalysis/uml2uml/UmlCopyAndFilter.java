@@ -28,11 +28,14 @@ public class UmlCopyAndFilter implements Runnable {
 
     @Override
     public void run() {
+        Util.validateUmlModel(umlSourceModel);
         try {
+            // copy the model to the target location
             FileUtils.copyFile(umlSourceModel.toFile(), umlTargetPath.toFile());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+        // load the model from the target location
         final Model targetModel = EpsilonModelBuilder.getInstance()
                 .umlModel()
                 .modelName("UML")
@@ -41,6 +44,7 @@ public class UmlCopyAndFilter implements Runnable {
                 .storeOnDisposal(true)
                 .build();
 
+        // load the script Uml2Uml/Filter.eol and execute it on the model in the target location
         final EolRunConfiguration transformation = EolRunConfiguration.Builder()
                 .withProfiling()
                 .withScript(script)
@@ -48,7 +52,7 @@ public class UmlCopyAndFilter implements Runnable {
                 .withModel(transformationModel)
                 .build();
         transformation.get();
-        Util.validateUmlModel(targetModel);
-        targetModel.dispose();
+        targetModel.dispose(); // store model
+        Util.validateUmlModel(targetModel); // storing and the validating makes it easier to analyse the model in case of validation failure
     }
 }
