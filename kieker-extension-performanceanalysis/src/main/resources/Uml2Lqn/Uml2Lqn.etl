@@ -7,7 +7,10 @@ pre {
 	var entryCounter : Integer = 0;
 	var allBes = UML!BehaviorExecutionSpecification.all;
 	
-	// the usage of this blacklist of bes only works because 
+	// the usage of this blacklist of bes only works because the MOS are collected by numbering between start and end
+	// MOS of the respective BES. In a recursion the BES that is called first will collect all BES that it will call
+	// because the index of the start and end is wrapped around all the other sub BES and they are on the same LF.
+	// Variables, once initializes, are globally availably until the context is destroyed.
 	var recursiveIgnoreBesSet = new Set();
 	"Start...".println();
 }
@@ -197,9 +200,9 @@ rule Operation2Task
 			 if (not component.isDefined()) {
 			 	throw "There is no owning Component for Operation: " + op.name;
 			 }
-			 if(component.getArtifacts().isEmpty())
-				throw "Component " + component.name + 
-					" is not represented by any Artifact";
+			 if(component.getArtifacts().isEmpty()) {
+				throw "Component " + component.name + " is not represented by any Artifact";
+			 }
 			 return component.isInteracting();
 		}
 		// ("Create task for component: " + component.name).println();
@@ -207,23 +210,23 @@ rule Operation2Task
 		var component = op.getOwner();
 		var besName = op.getReference("BES");
 		var beses = allBes.select(b | b.name == besName);
-		var entries = (beses.equivalent("BES2Entry")).asSequence();
+		var entries = (beses.equivalent("BES2Entry")).asSequence(); // normally the equivalent would return a Bag
 		
 		// To entry interactions map
-		var entryMap = new Map(); // key: entry.name | value: Sequence{}
-		for (e : LQN!EntryType in entries) {
+		var entryMap = new Map(); // key: entry.name | value: Sequence<LQN!EntryType>()
+		for (e : LQN!EntryType in entries) { // accumulate all entries that have the same name into one list
 			if (not entryMap.containsKey(e.name)) {
 				entryMap.put(e.name, Sequence{e});
 				continue;
 			}
 			entryMap.get(e.name).add(e);
 		}
-		
+
 		/*
 		 * count the amount of elements
          * count the synch-calls attribute "calls-mean"
          * normalize calls calls-mean
-         * TODO: ignore subrecursions & Loop-BES
+         * Recursions and Loops are already accounted for in BES2Activity
 		*/
 		var newEntries = new Sequence();
 		for (es in entryMap.values()) {
@@ -282,7 +285,7 @@ rule Operation2Task
 
 		if (newEntries.size > 1) {
 		    var last = newEntries.size - 1;
-		    for (i in Sequence{1..last}) { // ignore first entry, it is handled beforehand
+		    for (i in Sequence{1..last}) { // ignore first EntryType, it is handled beforehand
 		        var e = newEntries.get(i);
 		        var next = new LQN!TaskType;
 		        next.name = e.name;
@@ -350,12 +353,19 @@ rule Bes2Activity
 		// Calls from the Activity
 		// TODO: separate between synch and asynch
 		if (not moses.isEmpty()) {
-			var recursiveBesList = new Sequence(); // gets filled in the rule "Message2Request"
-			var calls = moses.equivalent("Message2Request");
+		    /**
+		      * gets filled in the rule "MOS2Call" and will contain all subsequent recursive BES.
+		      * All recursive call occur on the Lifeline that has the recursive Operation.
+		      * This means all calls made by a recursive Operation to the recursive Operation are send from the same Lifeline.
+		      * Since the MOS are collected by index, all recursions are collected in between the start and end of the
+		      * first BES that is the recursion, for every recursion that occurs.
+		      */
+			var recursiveBesList = new Sequence();
+			var calls = moses.equivalent("MOS2Call");
 			
 			/* 
 			 * This is the loop recognition for the calls
-			 * For each call that has a dublicate the repetition is increased
+			 * For each call that has a duplicate the repetition is increased
 			 * calls that are recursive are excluded
 			*/
 			var filteredCalls = new Sequence();
@@ -391,9 +401,8 @@ rule Bes2Activity
  * required outside variables:
  *  - bes
 */
-
 @lazy
-rule Message2Request
+rule MOS2Call
 	transform msgo: UML!MessageOccurrenceSpecification // MOS
 	to call: LQN!ActivityMakingCallType
 	{
