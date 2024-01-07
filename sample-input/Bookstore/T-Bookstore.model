@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <umlTransform:Transformation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:umlTransform="kieker.extension.umltransformation" xmi:id="_UbQSYJKHEe6_gN3QbIJ1FA" name="SimpleExample" umlUseCase="SimpleExample">
   <transformationRules xsi:type="umlTransform:CreateNode" xmi:id="_4MAU0Ko0Ee65fqegD938qA" info="Create new Node &quot;CrmNode&quot;" nodeName="CrmNode" resMult="1"/>
-  <transformationRules xsi:type="umlTransform:CreateComponent" xmi:id="_3eP28Ko0Ee65fqegD938qA" info="Create new Component &quot;CrmWithREST&quot;" componentName="CrmWithREST"/>
-  <transformationRules xsi:type="umlTransform:DeployComponentOnNode" xmi:id="_7TDlUKo0Ee65fqegD938qA" info="Deploy Component &quot;CrmWithREST&quot; on Node &quot;CrmNode&quot;" componentName="CrmWithREST" nodeName="CrmNode"/>
-  <transformationRules xsi:type="umlTransform:MoveOperation" xmi:id="_oJFscKnUEe6aY9EqGuA0SA" info="Move Operation &quot;getOffers()&quot; to &quot;CrmWithREST&quot;" operationName="public getOffers():void" sourceComponentName="kieker.examples.monitoring.application.CRM" targetComponentName="CrmWithREST"/>
-  <transformationRules xsi:type="umlTransform:MoveOperation" xmi:id="_tUF20Kz3Ee65fqegD938qA" info="Move constructor to &quot;CrmWithREST&quot;" operationName="public CRM(kieker.examples.monitoring.application.Catalog)" sourceComponentName="kieker.examples.monitoring.application.CRM" targetComponentName="CrmWithREST"/>
+  <transformationRules xsi:type="umlTransform:CreateComponent" xmi:id="_3eP28Ko0Ee65fqegD938qA" info="Create new Component &quot;NewCRM&quot;" componentName="NewCRM"/>
+  <transformationRules xsi:type="umlTransform:DeployComponentOnNode" xmi:id="_7TDlUKo0Ee65fqegD938qA" info="Deploy Component &quot;NewCRM&quot; on Node &quot;CrmNode&quot;" componentName="NewCRM" nodeName="CrmNode"/>
+  <transformationRules xsi:type="umlTransform:MoveOperation" xmi:id="_oJFscKnUEe6aY9EqGuA0SA" info="Move Operation &quot;getOffers()&quot; to &quot;NewCRM&quot;" operationName="public getOffers():void" sourceComponentName="kieker.examples.monitoring.application.CRM" targetComponentName="NewCRM"/>
+  <transformationRules xsi:type="umlTransform:MoveOperation" xmi:id="_tUF20Kz3Ee65fqegD938qA" info="Move constructor to &quot;NewCRM&quot;" operationName="public CRM(kieker.examples.monitoring.application.Catalog)" sourceComponentName="kieker.examples.monitoring.application.CRM" targetComponentName="NewCRM"/>
 </umlTransform:Transformation>
