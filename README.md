@@ -61,12 +61,12 @@ After the installation the command to run the lqns is:
 
 Powershell:
 ````powershell
-lqns -P cycles=yes output/lqn.xml
+lqns output/lqn.xml
 ````
 
 Bash (untestet):
 ````bash
-lqns -P cycles=yes lqn.xml
+lqns output/lqn.xml
 ````
 
 Please provide the appropriate file path to the `lqn.xml` file.
@@ -90,7 +90,8 @@ For more information visit https://plantuml.com/
 
 ## Uml2Uml
 
-This transformation selects the use-cases in the UML model created from the ``Kieker2Uml`` and creates a reduced UML model.
+This transformation selects the use cases in the UML model created from the ``Kieker2Uml`` and 
+creates a reduced UML model.
 Furthermore, the UML model is changed as described in the UmlTransformation model.
 
 ## Uml2Lqn
