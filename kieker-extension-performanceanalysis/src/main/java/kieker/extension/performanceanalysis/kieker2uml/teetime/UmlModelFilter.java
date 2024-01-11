@@ -18,6 +18,7 @@ import static kieker.extension.performanceanalysis.kieker2uml.uml.Kieker2UmlUtil
 public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UmlModelFilter.class);
+    private static Integer counter = 0;
     private final Path modelPath;
     private final String useCaseName;
     private final Model model;
@@ -38,6 +39,7 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
 
     @Override
     protected void execute(final MessageTrace mt) throws Exception {
+        counter++;
         createUmlModel(mt);
         this.reportSuccess(mt.getTraceId());
     }
@@ -61,6 +63,7 @@ public class UmlModelFilter extends AbstractMessageTraceProcessingFilter {
     protected void onTerminating() {
         saveModel(model, modelPath);
         LOGGER.info("Model saved to: " + modelPath);
+        LOGGER.info("Total processed MessageTraces: " + counter);
         super.onTerminating();
     }
 }

@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
 
 public class RunAllTransformations implements Runnable {
 
@@ -39,6 +41,7 @@ public class RunAllTransformations implements Runnable {
     @Override
     public void run() {
         LOGGER.debug("Running RunAllTransformations");
+        final Instant startTotal = Instant.now();
         // setup
         final Uml2UmlCli uml2UmlCli = new Uml2UmlCli();
         final Uml2LqnCli uml2LqnCli = new Uml2LqnCli();
@@ -61,34 +64,57 @@ public class RunAllTransformations implements Runnable {
         // transformations
         // Kieker2Uml
         LOGGER.debug("Running Kieker2Uml transformation...");
+        final Instant kieker2umlStart = Instant.now();
         final Kieker2Uml kieker2Uml = new Kieker2Uml(args, new RunAllTransformationsCli(), false);
         kieker2Uml.run();
         LOGGER.debug("Successfully run Kieker2Uml transformation.");
+        final Instant kieker2umlEnd = Instant.now();
 
         // Uml2PlantUml
+        final Instant firstPlantStart = Instant.now();
         if (!cli.isOmitUml2PlantUml()) {
             LOGGER.debug("Running Uml2PlantUml transformation for present UML...");
             final Uml2PlantUml uml2PlantPresent = new Uml2PlantUml(modelPath, uml2PlantUmlCli.getOutputPath().resolve("present"));
             uml2PlantPresent.run();
         }
+        final Instant firstPlantEnd = Instant.now();
 
         // Uml2Uml
         LOGGER.debug("Running Uml2Uml transformation...");
+        final Instant uml2umlStart = Instant.now();
         final UmlCopyAndFilter umlCopyAndFilter = new UmlCopyAndFilter(transformationModelPath, modelPath, futureUmlModel);
         umlCopyAndFilter.run();
         final UmlTransformation umlTransformation = new UmlTransformation(futureUmlModel, transformationModelPath);
         umlTransformation.run();
+        final Instant uml2umlEnd = Instant.now();
 
         // Transform the future Uml2PlantUml
+        final Instant secondPlantStart = Instant.now();
         if (!cli.isOmitUml2PlantUml()) {
             LOGGER.debug("Running Uml2PlantUml transformation for future UML...");
             final Uml2PlantUml uml2PlantTransformed = new Uml2PlantUml(futureUmlModel, uml2PlantUmlCli.getOutputPath().resolve("transformed"));
             uml2PlantTransformed.run();
         }
+        final Instant secondPlantEnd = Instant.now();
 
         // Uml2Lqn
+        final Instant uml2lqnStart = Instant.now();
         LOGGER.debug("Running Uml2Lqn transformation...");
         final Uml2Lqn uml2Lqn = new Uml2Lqn(futureUmlModel, uml2LqnCli.getLqnPath());
         uml2Lqn.run();
+        final Instant uml2lqnEnd = Instant.now();
+        final Instant endTotal = Instant.now();
+        final Duration totalDuration = Duration.between(startTotal, endTotal);
+        final Duration kieker2umlDuration = Duration.between(kieker2umlStart, kieker2umlEnd);
+        final Duration firstPlantDuration = Duration.between(firstPlantStart, firstPlantEnd);
+        final Duration uml2umlDuration = Duration.between(uml2umlStart, uml2umlEnd);
+        final Duration secondPlantDuration = Duration.between(secondPlantStart, secondPlantEnd);
+        final Duration uml2lqnDuration = Duration.between(uml2lqnStart, uml2lqnEnd);
+        LOGGER.info("Total time for all transformations: " + totalDuration);
+        LOGGER.info("Time for kieker2uml: " + kieker2umlDuration);
+        LOGGER.info("Time for firstPlantTrafoDuration: " + firstPlantDuration);
+        LOGGER.info("Time for uml2uml: " + uml2umlDuration);
+        LOGGER.info("Time for secondPlantTrafoDuration: " + secondPlantDuration);
+        LOGGER.info("Time for uml2lqn: " + uml2lqnDuration);
     }
 }
